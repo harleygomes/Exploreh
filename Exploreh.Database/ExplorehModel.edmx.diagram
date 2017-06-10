@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4689278acdb84a7daf54891b79dcaa19" Name="Diagram1" >
+        <EntityTypeShape EntityType="ExplorehModel.Cidade" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExplorehModel.Cliente" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExplorehModel.ClienteEndereco" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExplorehModel.ClienteTelefone" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ExplorehModel.Estado" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="ExplorehModel.EstadoCidade" />
+        <AssociationConnector Association="ExplorehModel.ClienteClienteEndereco" />
+        <AssociationConnector Association="ExplorehModel.ClienteClienteTelefone" />
+        <AssociationConnector Association="ExplorehModel.CidadeClienteEndereco" />
+        <AssociationConnector Association="ExplorehModel.EstadoClienteEndereco" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

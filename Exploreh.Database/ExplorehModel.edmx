@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExplorehModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ExplorehModelStoreContainer">
+    <EntitySet Name="Cidade" EntityType="ExplorehModel.Store.Cidade" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cliente" EntityType="ExplorehModel.Store.Cliente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClienteEndereco" EntityType="ExplorehModel.Store.ClienteEndereco" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClienteTelefone" EntityType="ExplorehModel.Store.ClienteTelefone" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Estado" EntityType="ExplorehModel.Store.Estado" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EstadoCidade" Association="ExplorehModel.Store.EstadoCidade">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Cidade" EntitySet="Cidade" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteClienteEndereco" Association="ExplorehModel.Store.ClienteClienteEndereco">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteClienteTelefone" Association="ExplorehModel.Store.ClienteClienteTelefone">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ClienteTelefone" EntitySet="ClienteTelefone" />
+    </AssociationSet>
+    <AssociationSet Name="CidadeClienteEndereco" Association="ExplorehModel.Store.CidadeClienteEndereco">
+      <End Role="Cidade" EntitySet="Cidade" />
+      <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+    </AssociationSet>
+    <AssociationSet Name="EstadoClienteEndereco" Association="ExplorehModel.Store.EstadoClienteEndereco">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cidade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CEP" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="EstadoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nchar" Nullable="false" MaxLength="500" />
+    <Property Name="TipoPessoa" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Documento" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sexo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DataNascimento" Type="datetime" Nullable="true" />
+    <Property Name="Ocupacao" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="HomePage" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Ativo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClienteEndereco">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Logradouro" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Numero" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Complemento" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Bairro" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Ativo" Type="bit" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+    <Property Name="CidadeId" Type="int" Nullable="false" />
+    <Property Name="EstadoId" Type="int" Nullable="false" />
+    <Property Name="CEP" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClienteTelefone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ddd" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Telefone" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Ativo" Type="bit" Nullable="true" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sigla" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="EstadoCidade">
+    <End Role="Estado" Type="ExplorehModel.Store.Estado" Multiplicity="1" />
+    <End Role="Cidade" Type="ExplorehModel.Store.Cidade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cidade">
+        <PropertyRef Name="EstadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteClienteEndereco">
+    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
+    <End Role="ClienteEndereco" Type="ExplorehModel.Store.ClienteEndereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteEndereco">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteClienteTelefone">
+    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
+    <End Role="ClienteTelefone" Type="ExplorehModel.Store.ClienteTelefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteTelefone">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CidadeClienteEndereco">
+    <End Role="Cidade" Type="ExplorehModel.Store.Cidade" Multiplicity="1" />
+    <End Role="ClienteEndereco" Type="ExplorehModel.Store.ClienteEndereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cidade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteEndereco">
+        <PropertyRef Name="CidadeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EstadoClienteEndereco">
+    <End Role="Estado" Type="ExplorehModel.Store.Estado" Multiplicity="1" />
+    <End Role="ClienteEndereco" Type="ExplorehModel.Store.ClienteEndereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteEndereco">
+        <PropertyRef Name="EstadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExplorehModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ExplorehEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Cidade" EntityType="ExplorehModel.Cidade" />
+          <EntitySet Name="Cliente" EntityType="ExplorehModel.Cliente" />
+          <EntitySet Name="ClienteEndereco" EntityType="ExplorehModel.ClienteEndereco" />
+          <EntitySet Name="ClienteTelefone" EntityType="ExplorehModel.ClienteTelefone" />
+          <EntitySet Name="Estado" EntityType="ExplorehModel.Estado" />
+          <AssociationSet Name="EstadoCidade" Association="ExplorehModel.EstadoCidade">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteClienteEndereco" Association="ExplorehModel.ClienteClienteEndereco">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteClienteTelefone" Association="ExplorehModel.ClienteClienteTelefone">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteTelefone" EntitySet="ClienteTelefone" />
+          </AssociationSet>
+          <AssociationSet Name="CidadeClienteEndereco" Association="ExplorehModel.CidadeClienteEndereco">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="EstadoClienteEndereco" Association="ExplorehModel.EstadoClienteEndereco">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Estado" Relationship="ExplorehModel.EstadoCidade" FromRole="Cidade" ToRole="Estado" />
+          <Property Name="EstadoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.CidadeClienteEndereco" FromRole="Cidade" ToRole="ClienteEndereco" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="TipoPessoa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Documento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="Ocupacao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HomePage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="0" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.ClienteClienteEndereco" FromRole="Cliente" ToRole="ClienteEndereco" />
+          <NavigationProperty Name="ClienteTelefone" Relationship="ExplorehModel.ClienteClienteTelefone" FromRole="Cliente" ToRole="ClienteTelefone" />
+        </EntityType>
+        <EntityType Name="ClienteEndereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logradouro" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="0" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="ExplorehModel.ClienteClienteEndereco" FromRole="ClienteEndereco" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cidade" Relationship="ExplorehModel.CidadeClienteEndereco" FromRole="ClienteEndereco" ToRole="Cidade" />
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estado" Relationship="ExplorehModel.EstadoClienteEndereco" FromRole="ClienteEndereco" ToRole="Estado" />
+          <Property Name="EstadoId" Type="Int32" Nullable="false" />
+          <Property Name="CEP" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteTelefone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ddd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="0" />
+          <Property Name="Ativo" Type="Boolean" />
+          <NavigationProperty Name="Cliente" Relationship="ExplorehModel.ClienteClienteTelefone" FromRole="ClienteTelefone" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sigla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cidade" Relationship="ExplorehModel.EstadoCidade" FromRole="Estado" ToRole="Cidade" />
+          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.EstadoClienteEndereco" FromRole="Estado" ToRole="ClienteEndereco" />
+        </EntityType>
+        <Association Name="EstadoCidade">
+          <End Type="ExplorehModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="ExplorehModel.Cidade" Role="Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteClienteEndereco">
+          <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteClienteTelefone">
+          <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteTelefone" Role="ClienteTelefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteTelefone">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CidadeClienteEndereco">
+          <End Type="ExplorehModel.Cidade" Role="Cidade" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EstadoClienteEndereco">
+          <End Type="ExplorehModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExplorehModelStoreContainer" CdmEntityContainer="ExplorehEntities">
+    <EntitySetMapping Name="Cidade">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.Cidade)">
+        <MappingFragment StoreEntitySet="Cidade">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+          <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.Cliente)">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="TipoPessoa" ColumnName="TipoPessoa" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="Ocupacao" ColumnName="Ocupacao" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HomePage" ColumnName="HomePage" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteEndereco">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.ClienteEndereco)">
+        <MappingFragment StoreEntitySet="ClienteEndereco">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+          <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteTelefone">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.ClienteTelefone)">
+        <MappingFragment StoreEntitySet="ClienteTelefone">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ddd" ColumnName="Ddd" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estado">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.Estado)">
+        <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
