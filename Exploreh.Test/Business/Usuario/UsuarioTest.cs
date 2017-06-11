@@ -90,5 +90,13 @@ namespace Exploreh.Test.Business.Usuario
 
             Assert.AreEqual(true, retorno);
         }
+
+        [TestMethod]
+        public void TestMethod_Crud_Login()
+        {
+            var existe = _bus.Get(1);
+
+            Assert.AreEqual(true, existe != null);
+        }
     }
 }
