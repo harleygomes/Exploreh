@@ -50,9 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente\ClienteBusiness.cs" />
+    <Compile Include="Perfil\PerfilBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Exploreh.Database\Exploreh.Database.csproj">
+      <Project>{8395eb1c-87df-4f2f-8b7f-9721567c3ba6}</Project>
+      <Name>Exploreh.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Exploreh.Model\Exploreh.Model.csproj">
       <Project>{5505CDD4-B36A-498F-94E6-1F559F2D8A86}</Project>
       <Name>Exploreh.Model</Name>

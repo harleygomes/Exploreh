@@ -144,7 +144,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ativo" Type="bit" Nullable="false" />
-    <Property Name="DataCadatro" Type="datetime" Nullable="false" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="PerfilTelas">
@@ -477,7 +477,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" Nullable="false" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
-          <Property Name="DataCadatro" Type="DateTime" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
           <NavigationProperty Name="Perfil" Relationship="ExplorehModel.PerfilTelas" FromRole="Telas" ToRole="Perfil" />
         </EntityType>
@@ -592,7 +592,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
-          <ScalarProperty Name="DataCadatro" ColumnName="DataCadatro" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
         </MappingFragment>
       </EntityTypeMapping>

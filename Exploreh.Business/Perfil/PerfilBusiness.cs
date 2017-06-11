@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Exploreh.Model.Cliente;
+using Exploreh.Model.Perfil;
 using Exploreh.Repository.Repository;
 
-namespace Exploreh.Business.Cliente
+namespace Exploreh.Business.Perfil
 {
-    public class ClienteBusiness
+    public class PerfilBusiness 
     {
-        /*
-        * O tipo da entidade é passado nessa instância, o respositório esta prototipado para atender ao CRUD
-        * assim que dissermos o tipo de entidade no GenericRepository<> o implicit operator entrará em ação.
-        * 
-        * OBS: A idéia é daqui pra baixo não escrevermos mais nada!
-        * 
-        * Não precisa agradecer :)
-        */
-        private readonly GenericRepository<Database.Cliente> _rep = new GenericRepository<Database.Cliente>();
+        private readonly GenericRepository<Database.Perfil> _rep = new GenericRepository<Database.Perfil>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<ClienteModel> Get()
+        public List<PerfilModel> Get()
         {
-            return _rep.Get().Where(a=>a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
+            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<PerfilModel>(x => x);
         }
 
         /// <summary>
@@ -32,7 +28,7 @@ namespace Exploreh.Business.Cliente
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ClienteModel Get(int id)
+        public PerfilModel Get(int id)
         {
             return _rep.Get(id);
         }
@@ -42,13 +38,11 @@ namespace Exploreh.Business.Cliente
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Add(ClienteModel model)
+        public bool Add(PerfilModel model)
         {
             #region Regras
             model.DataCadastro = DateTime.Now;
             model.Ativo = true;
-            /*to do: model.UsuarioIdCriCliente = ?*/
-
             #endregion
 
             return _rep.Add(model);
@@ -70,13 +64,19 @@ namespace Exploreh.Business.Cliente
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(ClienteModel model)
+        public bool Update(PerfilModel model)
         {
             #region Regras
+
             var update = Get(model.Id);
+
+            update.Nome = model.Nome;
+            update.Ativo = model.Ativo;
+            update.DataAlteracao = DateTime.Now;
             #endregion
 
             return _rep.Update(update);
         }
+
     }
 }

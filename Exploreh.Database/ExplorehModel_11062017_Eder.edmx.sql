@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/11/2017 14:08:47
+-- Date Created: 06/11/2017 15:03:59
 -- Generated from EDMX file: C:\Projetos\Exploreh\Exploreh\Exploreh.Database\ExplorehModel.edmx
 -- --------------------------------------------------
 
@@ -32,6 +32,18 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EstadoClienteEndereco]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClienteEndereco] DROP CONSTRAINT [FK_EstadoClienteEndereco];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PerfilTelas_Perfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTelas] DROP CONSTRAINT [FK_PerfilTelas_Perfil];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PerfilTelas_Telas]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTelas] DROP CONSTRAINT [FK_PerfilTelas_Telas];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil_Usuario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioPerfil] DROP CONSTRAINT [FK_UsuarioPerfil_Usuario];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil_Perfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioPerfil] DROP CONSTRAINT [FK_UsuarioPerfil_Perfil];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -51,6 +63,21 @@ IF OBJECT_ID(N'[dbo].[ClienteTelefone]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Estado]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Estado];
+GO
+IF OBJECT_ID(N'[dbo].[Usuario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Usuario];
+GO
+IF OBJECT_ID(N'[dbo].[Perfil]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Perfil];
+GO
+IF OBJECT_ID(N'[dbo].[Telas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Telas];
+GO
+IF OBJECT_ID(N'[dbo].[PerfilTelas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PerfilTelas];
+GO
+IF OBJECT_ID(N'[dbo].[UsuarioPerfil]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsuarioPerfil];
 GO
 
 -- --------------------------------------------------
@@ -146,7 +173,7 @@ CREATE TABLE [dbo].[Telas] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
     [Ativo] bit  NOT NULL,
-    [DataCadatro] datetime  NOT NULL,
+    [DataCadastro] datetime  NOT NULL,
     [DataAlteracao] datetime  NULL
 );
 GO

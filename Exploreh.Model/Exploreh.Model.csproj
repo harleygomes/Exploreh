@@ -46,7 +46,10 @@
     <Compile Include="Cliente\ClienteEnderecoModel.cs" />
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
     <Compile Include="Estado\EstadoModel.cs" />
+    <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Telas\TelasModel.cs" />
+    <Compile Include="Usuario\UsuarioModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Database\Exploreh.Database.csproj">
