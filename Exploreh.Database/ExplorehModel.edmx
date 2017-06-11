@@ -13,7 +13,7 @@
     <EntitySet Name="Estado" EntityType="ExplorehModel.Store.Estado" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Usuario" EntityType="ExplorehModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Perfil" EntityType="ExplorehModel.Store.Perfil" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Telas" EntityType="ExplorehModel.Store.Telas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tela" EntityType="ExplorehModel.Store.Tela" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerfilTelas" EntityType="ExplorehModel.Store.PerfilTelas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioPerfil" EntityType="ExplorehModel.Store.UsuarioPerfil" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EstadoCidade" Association="ExplorehModel.Store.EstadoCidade">
@@ -41,7 +41,7 @@
       <End Role="PerfilTelas" EntitySet="PerfilTelas" />
     </AssociationSet>
     <AssociationSet Name="FK_PerfilTelas_Telas" Association="ExplorehModel.Store.FK_PerfilTelas_Telas">
-      <End Role="Telas" EntitySet="Telas" />
+      <End Role="Telas" EntitySet="Tela" />
       <End Role="PerfilTelas" EntitySet="PerfilTelas" />
     </AssociationSet>
     <AssociationSet Name="FK_UsuarioPerfil_Usuario" Association="ExplorehModel.Store.FK_UsuarioPerfil_Usuario">
@@ -138,7 +138,7 @@
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
   </EntityType>
-  <EntityType Name="Telas">
+  <EntityType Name="Tela">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -238,7 +238,7 @@
   </Association>
   <Association Name="FK_PerfilTelas_Telas">
     <End Role="PerfilTelas" Type="ExplorehModel.Store.PerfilTelas" Multiplicity="*" />
-    <End Role="Telas" Type="ExplorehModel.Store.Telas" Multiplicity="1" />
+    <End Role="Telas" Type="ExplorehModel.Store.Tela" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Telas">
         <PropertyRef Name="Id" />
@@ -304,10 +304,10 @@
           </AssociationSet>
           <EntitySet Name="Usuario" EntityType="ExplorehModel.Usuario" />
           <EntitySet Name="Perfil" EntityType="ExplorehModel.Perfil" />
-          <EntitySet Name="Telas" EntityType="ExplorehModel.Telas" />
+          <EntitySet Name="Tela" EntityType="ExplorehModel.Tela" />
           <AssociationSet Name="PerfilTelas" Association="ExplorehModel.PerfilTelas">
             <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="Telas" EntitySet="Telas" />
+            <End Role="Telas" EntitySet="Tela" />
           </AssociationSet>
           <AssociationSet Name="UsuarioPerfil" Association="ExplorehModel.UsuarioPerfil">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -472,7 +472,7 @@
           <NavigationProperty Name="Telas" Relationship="ExplorehModel.PerfilTelas" FromRole="Perfil" ToRole="Telas" />
           <NavigationProperty Name="Usuario" Relationship="ExplorehModel.UsuarioPerfil" FromRole="Perfil" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Telas">
+        <EntityType Name="Tela">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -485,7 +485,7 @@
         </EntityType>
         <Association Name="PerfilTelas">
           <End Type="ExplorehModel.Perfil" Role="Perfil" Multiplicity="*" />
-          <End Type="ExplorehModel.Telas" Role="Telas" Multiplicity="*" />
+          <End Type="ExplorehModel.Tela" Role="Telas" Multiplicity="*" />
         </Association>
         <Association Name="UsuarioPerfil">
           <End Type="ExplorehModel.Usuario" Role="Usuario" Multiplicity="*" />
@@ -589,9 +589,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Telas">
-      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.Telas)">
-        <MappingFragment StoreEntitySet="Telas">
+    <EntitySetMapping Name="Tela">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.Tela)">
+        <MappingFragment StoreEntitySet="Tela">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />

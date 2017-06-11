@@ -16,7 +16,7 @@ namespace Exploreh.Model.Telas
         public DateTime? DataAlteracao { get; set; }
         public virtual ICollection<PerfilModel> PerfilModel { get; set; }
 
-        public static implicit operator TelasModel(Database.Telas telas)
+        public static implicit operator TelasModel(Database.Tela telas)
         {
             return new TelasModel
             {
@@ -28,9 +28,9 @@ namespace Exploreh.Model.Telas
             };
         }
 
-        public static implicit operator Database.Telas(TelasModel telas)
+        public static implicit operator Database.Tela(TelasModel telas)
         {
-            return new Database.Telas
+            return new Database.Tela
             {
                 Id = telas.Id,
                 Nome = telas.Nome,

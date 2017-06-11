@@ -12,10 +12,10 @@ namespace Exploreh.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Telas
+    public partial class Tela
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Telas()
+        public Tela()
         {
             this.Perfil = new HashSet<Perfil>();
         }

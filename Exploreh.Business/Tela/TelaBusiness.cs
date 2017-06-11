@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Exploreh.Model.Crypt;
+using Exploreh.Model.Telas;
+using Exploreh.Model.Usuario;
+using Exploreh.Repository.Repository;
+
+namespace Exploreh.Business.Tela
+{
+    public class TelaBusiness
+    {
+        private readonly GenericRepository<Database.Tela> _rep = new GenericRepository<Database.Tela>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<TelasModel> Get()
+        {
+            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<TelasModel>(x => x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TelasModel Get(int id)
+        {
+            return _rep.Get(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Add(TelasModel model)
+        {
+            #region Regras
+            model.DataCadastro = DateTime.Now;
+            model.Ativo = true;
+            #endregion
+
+            return _rep.Add(model);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            return _rep.Delete(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(TelasModel model)
+        {
+            #region Regras
+            var update = Get(model.Id);
+
+            update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
+            update.Ativo = model.Ativo;
+            update.DataAlteracao = DateTime.Now;
+            #endregion
+
+            return _rep.Update(update);
+        }
+    }
+}

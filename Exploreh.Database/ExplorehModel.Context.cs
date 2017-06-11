@@ -32,6 +32,6 @@ namespace Exploreh.Database
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
-        public virtual DbSet<Telas> Telas { get; set; }
+        public virtual DbSet<Tela> Tela { get; set; }
     }
 }
