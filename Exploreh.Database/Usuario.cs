@@ -14,12 +14,6 @@ namespace Exploreh.Database
     
     public partial class Usuario
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
-        {
-            this.Perfil = new HashSet<Perfil>();
-        }
-    
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
@@ -27,8 +21,8 @@ namespace Exploreh.Database
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public string Senha { get; set; }
+        public int PerfilId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Perfil> Perfil { get; set; }
+        public virtual Perfil Perfil { get; set; }
     }
 }

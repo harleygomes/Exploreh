@@ -19,21 +19,49 @@ namespace Exploreh.Test.Business.Perfil
         {
             var retorno = _bus.Get();
 
-            Assert.AreEqual(true, retorno.Count >0);
+            Assert.AreEqual(true, retorno.Count > 0);
 
         }
 
         [TestMethod]
         public void TestMethod_Crud_Cadastro()
         {
-            var c = new PerfilModel
+
+            var lstPerfil = new List<PerfilModel>()
             {
-                Id = 0,
-                Nome = "Nome III",
-                Ativo = true
+                new PerfilModel()
+                {
+                    Id = 0,
+                    Nome = "Nome I",
+                    Ativo = true
+                },
+                new PerfilModel()
+                {
+                    Id = 0,
+                    Nome = "Nome II",
+                    Ativo = true
+                },
+                new PerfilModel()
+                {
+                    Id = 0,
+                    Nome = "Nome III",
+                    Ativo = true
+                },
+                new PerfilModel()
+                {
+                    Id = 0,
+                    Nome = "Nome IV",
+                    Ativo = true
+                }
+
             };
 
-            var retorno = _bus.Add(c);
+            bool retorno = true;
+            foreach (var add in lstPerfil)
+            {
+                var result = _bus.Add(add);
+                if (!result) retorno = false;
+            }
 
             Assert.AreEqual(true, retorno);
 

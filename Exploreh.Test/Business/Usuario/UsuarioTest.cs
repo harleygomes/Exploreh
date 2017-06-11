@@ -27,23 +27,46 @@ namespace Exploreh.Test.Business.Usuario
         [TestMethod]
         public void TestMethod_Crud_Cadastro()
         {
-            var c = new UsuarioModel
-            {
-                Id = 0,
-                Nome = "Jose Pederneiras",
-                Email = "josepederneiras@gmail.com"
 
-                //PerfilModel = new List<PerfilModel>()
-                //{
-                //    new PerfilModel()
-                //    {
-                //        Nome = "Externo",
-                //        DataCadastro = DateTime.Now
-                //    }
-                //}
+            var lstUsuario = new List<UsuarioModel>()
+            {
+                new UsuarioModel
+                {
+                    Nome = "Jose Pederneiras",
+                    Email = "josepederneiras@gmail.com",
+                    Senha = "123456",
+                    PerfilId = 1
+                },
+                new UsuarioModel()
+                {
+                    Nome = "Eder Carlos da Costa",
+                    Email = "edercarlosdacosta@gmail.com",
+                    Senha = "1234567",
+                    PerfilId = 1
+                },
+                new UsuarioModel()
+                {
+                    Nome = "João Dória",
+                    Email = "joaodoriaprapresidente@gmail.com",
+                    Senha = "12345678",
+                    PerfilId = 2
+                },
+                new UsuarioModel()
+                {
+                    Nome = "Pablo Picasso",
+                    Email = "pablitopricasso@gmail.com",
+                    Senha = "123456789",
+                    PerfilId = 3
+                }
+
             };
 
-            var retorno = _bus.Add(c);
+            bool retorno = true;
+            foreach (var add in lstUsuario)
+            {
+                var result = _bus.Add(add);
+                if (!result) retorno = false;
+            }
 
             Assert.AreEqual(true, retorno);
 
@@ -56,7 +79,8 @@ namespace Exploreh.Test.Business.Usuario
             {
                 Id = 2,
                 Nome = "Nome II (Editado)",
-                Ativo = true
+                Ativo = true,
+                PerfilId = 2
             };
 
             var retorno = _bus.Update(c);

@@ -14,8 +14,7 @@
     <EntitySet Name="Usuario" EntityType="ExplorehModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Perfil" EntityType="ExplorehModel.Store.Perfil" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tela" EntityType="ExplorehModel.Store.Tela" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PerfilTelas" EntityType="ExplorehModel.Store.PerfilTelas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UsuarioPerfil" EntityType="ExplorehModel.Store.UsuarioPerfil" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PerfilTela" EntityType="ExplorehModel.Store.PerfilTela" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EstadoCidade" Association="ExplorehModel.Store.EstadoCidade">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Cidade" EntitySet="Cidade" />
@@ -36,21 +35,17 @@
       <End Role="Estado" EntitySet="Estado" />
       <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
     </AssociationSet>
-    <AssociationSet Name="FK_PerfilTelas_Perfil" Association="ExplorehModel.Store.FK_PerfilTelas_Perfil">
-      <End Role="Perfil" EntitySet="Perfil" />
-      <End Role="PerfilTelas" EntitySet="PerfilTelas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PerfilTelas_Telas" Association="ExplorehModel.Store.FK_PerfilTelas_Telas">
-      <End Role="Telas" EntitySet="Tela" />
-      <End Role="PerfilTelas" EntitySet="PerfilTelas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsuarioPerfil_Usuario" Association="ExplorehModel.Store.FK_UsuarioPerfil_Usuario">
+    <AssociationSet Name="UsuarioPerfil" Association="ExplorehModel.Store.UsuarioPerfil">
       <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsuarioPerfil_Perfil" Association="ExplorehModel.Store.FK_UsuarioPerfil_Perfil">
       <End Role="Perfil" EntitySet="Perfil" />
-      <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PerfilTela_Perfil" Association="ExplorehModel.Store.FK_PerfilTela_Perfil">
+      <End Role="Perfil" EntitySet="Perfil" />
+      <End Role="PerfilTela" EntitySet="PerfilTela" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PerfilTela_Tela" Association="ExplorehModel.Store.FK_PerfilTela_Tela">
+      <End Role="Tela" EntitySet="Tela" />
+      <End Role="PerfilTela" EntitySet="PerfilTela" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cidade">
@@ -127,6 +122,7 @@
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
     <Property Name="Senha" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PerfilId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Perfil">
     <Key>
@@ -148,21 +144,13 @@
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
   </EntityType>
-  <EntityType Name="PerfilTelas">
+  <EntityType Name="PerfilTela">
     <Key>
       <PropertyRef Name="Perfil_Id" />
-      <PropertyRef Name="Telas_Id" />
+      <PropertyRef Name="Tela_Id" />
     </Key>
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
-    <Property Name="Telas_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UsuarioPerfil">
-    <Key>
-      <PropertyRef Name="Usuario_Id" />
-      <PropertyRef Name="Perfil_Id" />
-    </Key>
-    <Property Name="Usuario_Id" Type="int" Nullable="false" />
-    <Property Name="Perfil_Id" Type="int" Nullable="false" />
+    <Property Name="Tela_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="EstadoCidade">
     <End Role="Estado" Type="ExplorehModel.Store.Estado" Multiplicity="1" />
@@ -224,51 +212,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PerfilTelas_Perfil">
-    <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
-    <End Role="PerfilTelas" Type="ExplorehModel.Store.PerfilTelas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Perfil">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PerfilTelas">
-        <PropertyRef Name="Perfil_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PerfilTelas_Telas">
-    <End Role="PerfilTelas" Type="ExplorehModel.Store.PerfilTelas" Multiplicity="*" />
-    <End Role="Telas" Type="ExplorehModel.Store.Tela" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Telas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PerfilTelas">
-        <PropertyRef Name="Telas_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UsuarioPerfil_Usuario">
-    <End Role="Usuario" Type="ExplorehModel.Store.Usuario" Multiplicity="1" />
-    <End Role="UsuarioPerfil" Type="ExplorehModel.Store.UsuarioPerfil" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UsuarioPerfil">
-        <PropertyRef Name="Usuario_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UsuarioPerfil_Perfil">
-    <End Role="UsuarioPerfil" Type="ExplorehModel.Store.UsuarioPerfil" Multiplicity="*" />
+  <Association Name="UsuarioPerfil">
+    <End Role="Usuario" Type="ExplorehModel.Store.Usuario" Multiplicity="*" />
     <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Perfil">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="UsuarioPerfil">
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PerfilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PerfilTela_Perfil">
+    <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
+    <End Role="PerfilTela" Type="ExplorehModel.Store.PerfilTela" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PerfilTela">
         <PropertyRef Name="Perfil_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PerfilTela_Tela">
+    <End Role="PerfilTela" Type="ExplorehModel.Store.PerfilTela" Multiplicity="*" />
+    <End Role="Tela" Type="ExplorehModel.Store.Tela" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tela">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PerfilTela">
+        <PropertyRef Name="Tela_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -305,13 +281,13 @@
           <EntitySet Name="Usuario" EntityType="ExplorehModel.Usuario" />
           <EntitySet Name="Perfil" EntityType="ExplorehModel.Perfil" />
           <EntitySet Name="Tela" EntityType="ExplorehModel.Tela" />
-          <AssociationSet Name="PerfilTelas" Association="ExplorehModel.PerfilTelas">
-            <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="Telas" EntitySet="Tela" />
-          </AssociationSet>
           <AssociationSet Name="UsuarioPerfil" Association="ExplorehModel.UsuarioPerfil">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="PerfilTela" Association="ExplorehModel.PerfilTela">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Tela" EntitySet="Tela" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cidade">
@@ -457,8 +433,9 @@
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
-          <NavigationProperty Name="Perfil" Relationship="ExplorehModel.UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
           <Property Name="Senha" Type="String" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="ExplorehModel.UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
+          <Property Name="PerfilId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -469,8 +446,7 @@
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
-          <NavigationProperty Name="Telas" Relationship="ExplorehModel.PerfilTelas" FromRole="Perfil" ToRole="Telas" />
-          <NavigationProperty Name="Usuario" Relationship="ExplorehModel.UsuarioPerfil" FromRole="Perfil" ToRole="Usuario" />
+          <NavigationProperty Name="Tela" Relationship="ExplorehModel.PerfilTela" FromRole="Perfil" ToRole="Tela" />
         </EntityType>
         <EntityType Name="Tela">
           <Key>
@@ -481,15 +457,23 @@
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
-          <NavigationProperty Name="Perfil" Relationship="ExplorehModel.PerfilTelas" FromRole="Telas" ToRole="Perfil" />
+          <NavigationProperty Name="Perfil" Relationship="ExplorehModel.PerfilTela" FromRole="Tela" ToRole="Perfil" />
         </EntityType>
-        <Association Name="PerfilTelas">
-          <End Type="ExplorehModel.Perfil" Role="Perfil" Multiplicity="*" />
-          <End Type="ExplorehModel.Tela" Role="Telas" Multiplicity="*" />
-        </Association>
         <Association Name="UsuarioPerfil">
           <End Type="ExplorehModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="ExplorehModel.Perfil" Role="Perfil" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerfilTela">
           <End Type="ExplorehModel.Perfil" Role="Perfil" Multiplicity="*" />
+          <End Type="ExplorehModel.Tela" Role="Tela" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -575,6 +559,7 @@
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
           <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -600,20 +585,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PerfilTelas" TypeName="ExplorehModel.PerfilTelas" StoreEntitySet="PerfilTelas">
+    <AssociationSetMapping Name="PerfilTela" TypeName="ExplorehModel.PerfilTela" StoreEntitySet="PerfilTela">
       <EndProperty Name="Perfil">
         <ScalarProperty Name="Id" ColumnName="Perfil_Id" />
       </EndProperty>
-      <EndProperty Name="Telas">
-        <ScalarProperty Name="Id" ColumnName="Telas_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UsuarioPerfil" TypeName="ExplorehModel.UsuarioPerfil" StoreEntitySet="UsuarioPerfil">
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="Id" ColumnName="Usuario_Id" />
-      </EndProperty>
-      <EndProperty Name="Perfil">
-        <ScalarProperty Name="Id" ColumnName="Perfil_Id" />
+      <EndProperty Name="Tela">
+        <ScalarProperty Name="Id" ColumnName="Tela_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

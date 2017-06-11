@@ -18,8 +18,8 @@
         <EntityTypeShape EntityType="ExplorehModel.Usuario" Width="1.5" PointX="7.5" PointY="0.75" />
         <EntityTypeShape EntityType="ExplorehModel.Perfil" Width="1.5" PointX="9.625" PointY="0.75" />
         <EntityTypeShape EntityType="ExplorehModel.Tela" Width="1.5" PointX="7.5" PointY="4" />
-        <AssociationConnector Association="ExplorehModel.PerfilTelas" />
         <AssociationConnector Association="ExplorehModel.UsuarioPerfil" />
+        <AssociationConnector Association="ExplorehModel.PerfilTela" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

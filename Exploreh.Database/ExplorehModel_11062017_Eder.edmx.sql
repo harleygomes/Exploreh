@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/11/2017 18:18:13
+-- Date Created: 06/11/2017 19:10:27
 -- Generated from EDMX file: C:\Projetos\Exploreh\Exploreh\Exploreh.Database\ExplorehModel.edmx
 -- --------------------------------------------------
 
@@ -32,17 +32,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EstadoClienteEndereco]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClienteEndereco] DROP CONSTRAINT [FK_EstadoClienteEndereco];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PerfilTelas_Perfil]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PerfilTelas] DROP CONSTRAINT [FK_PerfilTelas_Perfil];
+IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Usuario] DROP CONSTRAINT [FK_UsuarioPerfil];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PerfilTelas_Telas]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PerfilTelas] DROP CONSTRAINT [FK_PerfilTelas_Telas];
+IF OBJECT_ID(N'[dbo].[FK_PerfilTela_Perfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTela] DROP CONSTRAINT [FK_PerfilTela_Perfil];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil_Usuario]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UsuarioPerfil] DROP CONSTRAINT [FK_UsuarioPerfil_Usuario];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil_Perfil]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UsuarioPerfil] DROP CONSTRAINT [FK_UsuarioPerfil_Perfil];
+IF OBJECT_ID(N'[dbo].[FK_PerfilTela_Tela]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTela] DROP CONSTRAINT [FK_PerfilTela_Tela];
 GO
 
 -- --------------------------------------------------
@@ -70,14 +67,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Perfil]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Perfil];
 GO
-IF OBJECT_ID(N'[dbo].[Telas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Telas];
+IF OBJECT_ID(N'[dbo].[Tela]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tela];
 GO
-IF OBJECT_ID(N'[dbo].[PerfilTelas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PerfilTelas];
-GO
-IF OBJECT_ID(N'[dbo].[UsuarioPerfil]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UsuarioPerfil];
+IF OBJECT_ID(N'[dbo].[PerfilTela]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PerfilTela];
 GO
 
 -- --------------------------------------------------
@@ -155,7 +149,8 @@ CREATE TABLE [dbo].[Usuario] (
     [Ativo] bit  NOT NULL,
     [DataCadastro] datetime  NOT NULL,
     [DataAlteracao] datetime  NULL,
-    [Senha] nvarchar(max)  NOT NULL
+    [Senha] nvarchar(max)  NOT NULL,
+    [PerfilId] int  NOT NULL
 );
 GO
 
@@ -179,17 +174,10 @@ CREATE TABLE [dbo].[Tela] (
 );
 GO
 
--- Creating table 'PerfilTelas'
-CREATE TABLE [dbo].[PerfilTelas] (
+-- Creating table 'PerfilTela'
+CREATE TABLE [dbo].[PerfilTela] (
     [Perfil_Id] int  NOT NULL,
-    [Telas_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'UsuarioPerfil'
-CREATE TABLE [dbo].[UsuarioPerfil] (
-    [Usuario_Id] int  NOT NULL,
-    [Perfil_Id] int  NOT NULL
+    [Tela_Id] int  NOT NULL
 );
 GO
 
@@ -245,16 +233,10 @@ ADD CONSTRAINT [PK_Tela]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Perfil_Id], [Telas_Id] in table 'PerfilTelas'
-ALTER TABLE [dbo].[PerfilTelas]
-ADD CONSTRAINT [PK_PerfilTelas]
-    PRIMARY KEY CLUSTERED ([Perfil_Id], [Telas_Id] ASC);
-GO
-
--- Creating primary key on [Usuario_Id], [Perfil_Id] in table 'UsuarioPerfil'
-ALTER TABLE [dbo].[UsuarioPerfil]
-ADD CONSTRAINT [PK_UsuarioPerfil]
-    PRIMARY KEY CLUSTERED ([Usuario_Id], [Perfil_Id] ASC);
+-- Creating primary key on [Perfil_Id], [Tela_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [PK_PerfilTela]
+    PRIMARY KEY CLUSTERED ([Perfil_Id], [Tela_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -336,52 +318,43 @@ ON [dbo].[ClienteEndereco]
     ([EstadoId]);
 GO
 
--- Creating foreign key on [Perfil_Id] in table 'PerfilTelas'
-ALTER TABLE [dbo].[PerfilTelas]
-ADD CONSTRAINT [FK_PerfilTelas_Perfil]
+-- Creating foreign key on [PerfilId] in table 'Usuario'
+ALTER TABLE [dbo].[Usuario]
+ADD CONSTRAINT [FK_UsuarioPerfil]
+    FOREIGN KEY ([PerfilId])
+    REFERENCES [dbo].[Perfil]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioPerfil'
+CREATE INDEX [IX_FK_UsuarioPerfil]
+ON [dbo].[Usuario]
+    ([PerfilId]);
+GO
+
+-- Creating foreign key on [Perfil_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [FK_PerfilTela_Perfil]
     FOREIGN KEY ([Perfil_Id])
     REFERENCES [dbo].[Perfil]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Telas_Id] in table 'PerfilTelas'
-ALTER TABLE [dbo].[PerfilTelas]
-ADD CONSTRAINT [FK_PerfilTelas_Telas]
-    FOREIGN KEY ([Telas_Id])
+-- Creating foreign key on [Tela_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [FK_PerfilTela_Tela]
+    FOREIGN KEY ([Tela_Id])
     REFERENCES [dbo].[Tela]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PerfilTelas_Telas'
-CREATE INDEX [IX_FK_PerfilTelas_Telas]
-ON [dbo].[PerfilTelas]
-    ([Telas_Id]);
-GO
-
--- Creating foreign key on [Usuario_Id] in table 'UsuarioPerfil'
-ALTER TABLE [dbo].[UsuarioPerfil]
-ADD CONSTRAINT [FK_UsuarioPerfil_Usuario]
-    FOREIGN KEY ([Usuario_Id])
-    REFERENCES [dbo].[Usuario]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Perfil_Id] in table 'UsuarioPerfil'
-ALTER TABLE [dbo].[UsuarioPerfil]
-ADD CONSTRAINT [FK_UsuarioPerfil_Perfil]
-    FOREIGN KEY ([Perfil_Id])
-    REFERENCES [dbo].[Perfil]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioPerfil_Perfil'
-CREATE INDEX [IX_FK_UsuarioPerfil_Perfil]
-ON [dbo].[UsuarioPerfil]
-    ([Perfil_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_PerfilTela_Tela'
+CREATE INDEX [IX_FK_PerfilTela_Tela]
+ON [dbo].[PerfilTela]
+    ([Tela_Id]);
 GO
 
 -- --------------------------------------------------

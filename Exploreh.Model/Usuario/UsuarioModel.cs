@@ -16,8 +16,8 @@ namespace Exploreh.Model.Usuario
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
         public string Senha { get; set; }
-
-        public virtual List<PerfilModel> PerfilModel { get; set; }
+        public int PerfilId { get; set; }
+        public virtual PerfilModel PerfilModel { get; set; }
 
         public static implicit operator UsuarioModel(Database.Usuario usuario)
         {
@@ -30,7 +30,7 @@ namespace Exploreh.Model.Usuario
                 DataCadastro = usuario.DataCadastro,
                 DataAlteracao = usuario.DataAlteracao,
                 Senha = usuario.Senha,
-                PerfilModel = usuario.Perfil?.ToList().ConvertAll<PerfilModel>(x => x)
+                PerfilId = usuario.PerfilId  
             };
         }
 
@@ -45,7 +45,7 @@ namespace Exploreh.Model.Usuario
                 DataCadastro = usuario.DataCadastro,
                 DataAlteracao = usuario.DataAlteracao,
                 Senha = usuario.Senha,
-                Perfil = usuario.PerfilModel?.ToList().ConvertAll<Database.Perfil>(x => x)
+                PerfilId = usuario.PerfilId
             };
         }
     }

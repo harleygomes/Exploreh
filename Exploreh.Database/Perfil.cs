@@ -17,8 +17,7 @@ namespace Exploreh.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Perfil()
         {
-            this.Telas = new HashSet<Tela>();
-            this.Usuario = new HashSet<Usuario>();
+            this.Tela = new HashSet<Tela>();
         }
     
         public int Id { get; set; }
@@ -28,8 +27,6 @@ namespace Exploreh.Database
         public Nullable<System.DateTime> DataAlteracao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tela> Telas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<Tela> Tela { get; set; }
     }
 }
