@@ -26,6 +26,7 @@ namespace Exploreh.Database
         public bool Ativo { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
+        public string Senha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Perfil> Perfil { get; set; }

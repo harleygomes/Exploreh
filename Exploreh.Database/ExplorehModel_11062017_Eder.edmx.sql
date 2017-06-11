@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/11/2017 15:03:59
+-- Date Created: 06/11/2017 18:04:34
 -- Generated from EDMX file: C:\Projetos\Exploreh\Exploreh\Exploreh.Database\ExplorehModel.edmx
 -- --------------------------------------------------
 
@@ -154,7 +154,8 @@ CREATE TABLE [dbo].[Usuario] (
     [Email] nvarchar(max)  NULL,
     [Ativo] bit  NOT NULL,
     [DataCadastro] datetime  NOT NULL,
-    [DataAlteracao] datetime  NULL
+    [DataAlteracao] datetime  NULL,
+    [Senha] nvarchar(max)  NOT NULL
 );
 GO
 

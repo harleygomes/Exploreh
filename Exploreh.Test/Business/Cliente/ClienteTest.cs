@@ -3,7 +3,7 @@ using Exploreh.Model.Cliente;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Exploreh.Business.Cliente;
 
-namespace Exploreh.Test.Business
+namespace Exploreh.Test.Business.Cliente
 {
     [TestClass]
     public class AreaTest

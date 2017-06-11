@@ -126,6 +126,7 @@
     <Property Name="Ativo" Type="bit" Nullable="false" />
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Senha" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Perfil">
     <Key>
@@ -457,6 +458,7 @@
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
           <NavigationProperty Name="Perfil" Relationship="ExplorehModel.UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
+          <Property Name="Senha" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -572,6 +574,7 @@
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

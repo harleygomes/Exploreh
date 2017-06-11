@@ -45,6 +45,7 @@
     <Compile Include="Cliente\ClienteModel.cs" />
     <Compile Include="Cliente\ClienteEnderecoModel.cs" />
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
+    <Compile Include="Crypt\Crypt.cs" />
     <Compile Include="Estado\EstadoModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

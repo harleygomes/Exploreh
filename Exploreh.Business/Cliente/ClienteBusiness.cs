@@ -9,7 +9,7 @@ namespace Exploreh.Business.Cliente
     public class ClienteBusiness
     {
         /*
-        * O tipo da entidade é passado nessa instância, o respositório esta prototipado para atender ao CRUD
+        * O tipo da entidade é passado nessa instância(GenericRepository<>), o respositório esta prototipado para atender ao CRUD
         * assim que dissermos o tipo de entidade no GenericRepository<> o implicit operator entrará em ação.
         * 
         * OBS: A idéia é daqui pra baixo não escrevermos mais nada!

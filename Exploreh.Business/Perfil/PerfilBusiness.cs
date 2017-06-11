@@ -70,7 +70,7 @@ namespace Exploreh.Business.Perfil
 
             var update = Get(model.Id);
 
-            update.Nome = model.Nome;
+            update.Nome = !string.IsNullOrEmpty(model.Nome)? model.Nome:update.Nome;
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
             #endregion

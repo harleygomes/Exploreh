@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exploreh.Model.Perfil;
 
 namespace Exploreh.Model.Usuario
 {
@@ -14,8 +15,9 @@ namespace Exploreh.Model.Usuario
         public bool Ativo { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
+        public string Senha { get; set; }
 
-        //public virtual ICollection<PerfilModel> PerfilModel { get; set; }
+        public virtual List<PerfilModel> PerfilModel { get; set; }
 
         public static implicit operator UsuarioModel(Database.Usuario usuario)
         {
@@ -26,7 +28,9 @@ namespace Exploreh.Model.Usuario
                 Email = usuario.Email,
                 Ativo = usuario.Ativo,
                 DataCadastro = usuario.DataCadastro,
-                DataAlteracao = usuario.DataAlteracao
+                DataAlteracao = usuario.DataAlteracao,
+                Senha = usuario.Senha,
+                PerfilModel = usuario.Perfil?.ToList().ConvertAll<PerfilModel>(x => x)
             };
         }
 
@@ -39,7 +43,9 @@ namespace Exploreh.Model.Usuario
                 Email = usuario.Email,
                 Ativo = usuario.Ativo,
                 DataCadastro = usuario.DataCadastro,
-                DataAlteracao = usuario.DataAlteracao
+                DataAlteracao = usuario.DataAlteracao,
+                Senha = usuario.Senha,
+                Perfil = usuario.PerfilModel?.ToList().ConvertAll<Database.Perfil>(x => x)
             };
         }
     }
