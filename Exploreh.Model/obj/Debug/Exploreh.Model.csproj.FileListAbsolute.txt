@@ -1,9 +1,0 @@
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\Exploreh.Model.dll
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\Exploreh.Model.pdb
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\obj\Debug\Exploreh.Model.dll
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\obj\Debug\Exploreh.Model.pdb
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\obj\Debug\Exploreh.Model.csprojResolveAssemblyReference.cache
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\Exploreh.Database.dll
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\EntityFramework.dll
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\Exploreh.Database.pdb
-C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Model\bin\Debug\EntityFramework.xml
