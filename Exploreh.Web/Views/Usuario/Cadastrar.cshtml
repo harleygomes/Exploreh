@@ -1,0 +1,82 @@
+﻿@model Exploreh.Model.Usuario.UsuarioModel
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UsuarioModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ativo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataCadastro)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataCadastro)
+            @Html.ValidationMessageFor(model => model.DataCadastro)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataAlteracao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataAlteracao)
+            @Html.ValidationMessageFor(model => model.DataAlteracao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Senha)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Senha)
+            @Html.ValidationMessageFor(model => model.Senha)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PerfilId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PerfilId)
+            @Html.ValidationMessageFor(model => model.PerfilId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

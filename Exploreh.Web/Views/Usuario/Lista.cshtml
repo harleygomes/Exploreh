@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Exploreh.Model.Usuario.UsuarioModel>
+
+@{
+    ViewBag.Title = "Lista de Usuários";
+}
+
+
+<div class="panel-body list">
+    <h2>Lista de Usuários Cadastrados</h2>
+   
+    <button onclick="location.href='@Url.Action("Cadastrar", "Usuario")'" class="btn w-xs btn-primary">Novo <i class="glyphicon glyphicon-plus"></i></button>
+
+    <div class="table-responsive project-list">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Ativo
+                </th>
+                <th>
+                    Data Cadastro
+                </th>
+                <th>
+                    Data Alteração
+                </th>
+
+                <th>
+                    Perfil
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCadastro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataAlteracao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PerfilId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @Html.ActionLink("Excluir", "Excluir", new {id = item.Id})
+                    </td>
+                </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+</div>

@@ -7,7 +7,7 @@ using Exploreh.Model.Perfil;
 
 namespace Exploreh.Model.Telas
 {
-    public class TelasModel
+    public class TelaModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -16,9 +16,9 @@ namespace Exploreh.Model.Telas
         public DateTime? DataAlteracao { get; set; }
         public virtual ICollection<PerfilModel> PerfilModel { get; set; }
 
-        public static implicit operator TelasModel(Database.Tela telas)
+        public static implicit operator TelaModel(Database.Tela telas)
         {
-            return new TelasModel
+            return new TelaModel
             {
                 Id = telas.Id,
                 Nome = telas.Nome,
@@ -28,7 +28,7 @@ namespace Exploreh.Model.Telas
             };
         }
 
-        public static implicit operator Database.Tela(TelasModel telas)
+        public static implicit operator Database.Tela(TelaModel telas)
         {
             return new Database.Tela
             {

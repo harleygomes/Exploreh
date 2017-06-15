@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exploreh.Business", "Explor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exploreh.Repository", "Exploreh.Repository\Exploreh.Repository.csproj", "{4D0C08C5-7C83-488E-B6F9-75B9FBCAC4E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exploreh.Web", "..\..\Users\harle\Desktop\HOMER\Homer_Seed_Project_ASP_MVC_5\Homer_MVC\Exploreh.Web.csproj", "{BE779B94-079D-4691-ABD9-3C3BF7735029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exploreh.Web", "Exploreh.Web\Exploreh.Web.csproj", "{BE779B94-079D-4691-ABD9-3C3BF7735029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

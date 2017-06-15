@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Exploreh.Model.Telas.TelaModel>
+
+@{
+    ViewBag.Title = "Lista de Telas";
+}
+
+
+<div class="panel-body list">
+    <h2>Lista de Telas Cadastrados</h2>
+
+    <button onclick="location.href='@Url.Action("Cadastrar", "Tela")'" class="btn w-xs btn-primary">Novo <i class="glyphicon glyphicon-plus"></i></button>
+
+    <div class="table-responsive project-list">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Ativo
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+                    </td>
+                </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+</div>

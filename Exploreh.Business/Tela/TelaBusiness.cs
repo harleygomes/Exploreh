@@ -18,9 +18,9 @@ namespace Exploreh.Business.Tela
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<TelasModel> Get()
+        public List<TelaModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<TelasModel>(x => x);
+            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<TelaModel>(x => x);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Exploreh.Business.Tela
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public TelasModel Get(int id)
+        public TelaModel Get(int id)
         {
             return _rep.Get(id);
         }
@@ -38,7 +38,7 @@ namespace Exploreh.Business.Tela
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Add(TelasModel model)
+        public bool Add(TelaModel model)
         {
             #region Regras
             model.DataCadastro = DateTime.Now;
@@ -64,7 +64,7 @@ namespace Exploreh.Business.Tela
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(TelasModel model)
+        public bool Update(TelaModel model)
         {
             #region Regras
             var update = Get(model.Id);
