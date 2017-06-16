@@ -15,62 +15,49 @@ namespace Exploreh.Test.Business.Cliente
         [TestMethod]
         public void TestMethod_Crud_Cadastro()
         {
-            var lstCliente = new List<ClienteModel>()
+            var c = new ClienteModel
             {
-                new ClienteModel
-                {
-                    Id = 0,
-                    Nome = "Carrefour",
-                    TipoPessoa = "J",
-                    Documento = "284.277.858-62",
-                    Sexo = "M",
-                    DataNascimento = Convert.ToDateTime("1981-08-06"),
-                    Ocupacao = "Ocupacao",
-                    Email = "Email",
-                    HomePage = "HomePage",
-                    DataCadastro = DateTime.Now,
-                    Ativo = true
-                },
-                new ClienteModel
-                {
-                    Id = 0,
-                    Nome = "Wall Mart",
-                    TipoPessoa = "J",
-                    Documento = "321.458.858-84",
-                    Sexo = "M",
-                    DataNascimento = Convert.ToDateTime("1987-08-09"),
-                    Ocupacao = "Ocupacao",
-                    Email = "Email",
-                    HomePage = "HomePage",
-                    DataCadastro = DateTime.Now,
-                    Ativo = true
-                },
-                new ClienteModel
-                {
-                    Id = 0,
-                    Nome = "Pão de Açucar",
-                    TipoPessoa = "J",
-                    Documento = "698.487.568-62",
-                    Sexo = "M",
-                    DataNascimento = Convert.ToDateTime("2000-08-06"),
-                    Ocupacao = "Ocupacao",
-                    Email = "Email",
-                    HomePage = "HomePage",
-                    DataCadastro = DateTime.Now,
-                    Ativo = true
-                }
-
+                Id = 0,
+                Nome = "Nome",
+                TipoPessoa = "F",
+                Documento = "284.277.858-62",
+                Sexo = "M",
+                DataNascimento = Convert.ToDateTime("1981-08-06"),
+                Ocupacao = "Ocupacao",
+                Email = "Email",
+                HomePage = "HomePage",
+                DataCadastro = DateTime.Now,
+                Ativo = true
             };
 
-            bool retorno = true;
-            foreach (var add in lstCliente.ToList())
+            c.ClienteEndereco = new List<ClienteEnderecoModel> { new ClienteEnderecoModel
+                {
+                    Logradouro = "Mateus Serrao",
+                    Numero = "30",
+                    Complemento = "Sem COmplemento",
+                    CEP = "04914-080",
+                    Bairro = "Jd. Klein",
+                    CidadeId = 1,
+                    EstadoId = 1,
+                    ClienteId = c.Id,
+                    DataCadastro = DateTime.Now,
+                    Ativo = true
+                } };
+
+            c.ClienteTelefone = new List<ClienteTelefoneModel> { new ClienteTelefoneModel
             {
-                var result = _bus.Add(add);
-                if (!result) retorno = false;
-            }
+                ClienteId = c.Id,
+                Ddd = "11",
+                Telefone="5514-6203",
+                TipoTelefone = "F",
+                DataCadastro= DateTime.Now,
+                Ativo= true
+            } };
+
+            var retorno = _bus.Add(c);
 
             Assert.AreEqual(true, retorno);
-            
+
         }
 
         [TestMethod]
