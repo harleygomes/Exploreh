@@ -49,7 +49,7 @@
     <Compile Include="Estado\EstadoModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Telas\TelasModel.cs" />
+    <Compile Include="Telas\TelaModel.cs" />
     <Compile Include="Usuario\UsuarioModel.cs" />
   </ItemGroup>
   <ItemGroup>

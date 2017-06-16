@@ -27,7 +27,7 @@ namespace Exploreh.Test.Business.Tela
         [TestMethod]
         public void TestMethod_Crud_Cadastro()
         {
-            var c = new TelasModel
+            var c = new TelaModel
             {
                 Id = 0,
                 Nome = "Tela I",
@@ -43,7 +43,7 @@ namespace Exploreh.Test.Business.Tela
         [TestMethod]
         public void TestMethod_Crud_Editar()
         {
-            var c = new TelasModel
+            var c = new TelaModel
             {
                 Id = 4,
                 Nome = "Externo",
@@ -58,7 +58,7 @@ namespace Exploreh.Test.Business.Tela
         [TestMethod]
         public void TestMethod_Crud_Inativar()
         {
-            var c = new TelasModel
+            var c = new TelaModel
             {
                 Id = 6,
                 Ativo = false
@@ -72,7 +72,7 @@ namespace Exploreh.Test.Business.Tela
         [TestMethod]
         public void TestMethod_Crud_Excluir()
         {
-            var c = new TelasModel
+            var c = new TelaModel
             {
                 Id = 4
             };

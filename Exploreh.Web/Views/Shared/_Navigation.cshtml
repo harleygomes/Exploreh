@@ -1,4 +1,5 @@
-﻿<div id="navigation">
+﻿@using Exploreh.Web.Helpers
+<div id="navigation">
     <div class="profile-picture">
 
         <div class="stats-label text-color">
@@ -18,11 +19,17 @@
     </div>
 
     <ul class="nav metismenu" id="side-menu">
-        <li class="@Html.IsSelected(action: "Index")">
-            <a href="@Url.Action("Index", "Main")"> <span class="nav-label">Page 1</span> <span class="label label-success pull-right">Start</span> </a>
+        <li class="@Html.IsSelected(action: "Lista")">
+            <a href="@Url.Action("Lista", "Usuario")"> <span class="nav-label">Usuários</span></a>
         </li>
-        <li class="@Html.IsSelected(action: "Page2")">
-            <a href="@Url.Action("Page2", "Main")"> <span class="nav-label">Page 2</span> </a>
+        <li class="@Html.IsSelected(action: "Lista")">
+            <a href="@Url.Action("Lista", "Cliente")"> <span class="nav-label">Clientes</span> </a>
+        </li>
+        <li class="@Html.IsSelected(action: "Lista")">
+            <a href="@Url.Action("Lista", "Perfil")"> <span class="nav-label">Perfil</span> </a>
+        </li>
+        <li class="@Html.IsSelected(action: "Lista")">
+            <a href="@Url.Action("Lista", "Tela")"> <span class="nav-label">Telas</span> </a>
         </li>
     </ul>
 </div>
