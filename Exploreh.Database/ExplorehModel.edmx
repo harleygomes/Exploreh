@@ -102,6 +102,7 @@
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
     <Property Name="Ativo" Type="bit" Nullable="true" />
     <Property Name="ClienteId" Type="int" Nullable="false" />
+    <Property Name="TipoTelefone" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Estado">
     <Key>
@@ -352,6 +353,7 @@
           <Property Name="Ativo" Type="Boolean" />
           <NavigationProperty Name="Cliente" Relationship="ExplorehModel.ClienteClienteTelefone" FromRole="ClienteTelefone" ToRole="Cliente" />
           <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="TipoTelefone" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -537,6 +539,7 @@
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
           <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="TipoTelefone" ColumnName="TipoTelefone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

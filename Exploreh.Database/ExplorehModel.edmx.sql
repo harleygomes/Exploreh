@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/09/2017 14:00:57
--- Generated from EDMX file: C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh\Exploreh.Database\ExplorehModel.edmx
+-- Date Created: 06/15/2017 10:23:26
+-- Generated from EDMX file: C:\01-PROJETOS HARLEY\02-Exploreh\Exploreh.Database\ExplorehModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -32,6 +32,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EstadoClienteEndereco]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClienteEndereco] DROP CONSTRAINT [FK_EstadoClienteEndereco];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Usuario] DROP CONSTRAINT [FK_UsuarioPerfil];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PerfilTela_Perfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTela] DROP CONSTRAINT [FK_PerfilTela_Perfil];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PerfilTela_Tela]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilTela] DROP CONSTRAINT [FK_PerfilTela_Tela];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -51,6 +60,18 @@ IF OBJECT_ID(N'[dbo].[ClienteTelefone]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Estado]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Estado];
+GO
+IF OBJECT_ID(N'[dbo].[Usuario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Usuario];
+GO
+IF OBJECT_ID(N'[dbo].[Perfil]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Perfil];
+GO
+IF OBJECT_ID(N'[dbo].[Tela]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tela];
+GO
+IF OBJECT_ID(N'[dbo].[PerfilTela]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PerfilTela];
 GO
 
 -- --------------------------------------------------
@@ -108,7 +129,8 @@ CREATE TABLE [dbo].[ClienteTelefone] (
     [DataCadastro] datetime  NOT NULL,
     [DataAlteracao] datetime  NULL,
     [Ativo] bit  NULL,
-    [ClienteId] int  NOT NULL
+    [ClienteId] int  NOT NULL,
+    [TipoTelefone] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -117,6 +139,46 @@ CREATE TABLE [dbo].[Estado] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Sigla] nvarchar(50)  NOT NULL,
     [Nome] nvarchar(100)  NOT NULL
+);
+GO
+
+-- Creating table 'Usuario'
+CREATE TABLE [dbo].[Usuario] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Nome] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NULL,
+    [Ativo] bit  NOT NULL,
+    [DataCadastro] datetime  NOT NULL,
+    [DataAlteracao] datetime  NULL,
+    [Senha] nvarchar(max)  NOT NULL,
+    [PerfilId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Perfil'
+CREATE TABLE [dbo].[Perfil] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Nome] nvarchar(max)  NOT NULL,
+    [Ativo] bit  NOT NULL,
+    [DataCadastro] datetime  NOT NULL,
+    [DataAlteracao] datetime  NULL
+);
+GO
+
+-- Creating table 'Tela'
+CREATE TABLE [dbo].[Tela] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Nome] nvarchar(max)  NOT NULL,
+    [Ativo] bit  NOT NULL,
+    [DataCadastro] datetime  NOT NULL,
+    [DataAlteracao] datetime  NULL
+);
+GO
+
+-- Creating table 'PerfilTela'
+CREATE TABLE [dbo].[PerfilTela] (
+    [Perfil_Id] int  NOT NULL,
+    [Tela_Id] int  NOT NULL
 );
 GO
 
@@ -152,6 +214,30 @@ GO
 ALTER TABLE [dbo].[Estado]
 ADD CONSTRAINT [PK_Estado]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Usuario'
+ALTER TABLE [dbo].[Usuario]
+ADD CONSTRAINT [PK_Usuario]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Perfil'
+ALTER TABLE [dbo].[Perfil]
+ADD CONSTRAINT [PK_Perfil]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Tela'
+ALTER TABLE [dbo].[Tela]
+ADD CONSTRAINT [PK_Tela]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Perfil_Id], [Tela_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [PK_PerfilTela]
+    PRIMARY KEY CLUSTERED ([Perfil_Id], [Tela_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -231,6 +317,45 @@ GO
 CREATE INDEX [IX_FK_EstadoClienteEndereco]
 ON [dbo].[ClienteEndereco]
     ([EstadoId]);
+GO
+
+-- Creating foreign key on [PerfilId] in table 'Usuario'
+ALTER TABLE [dbo].[Usuario]
+ADD CONSTRAINT [FK_UsuarioPerfil]
+    FOREIGN KEY ([PerfilId])
+    REFERENCES [dbo].[Perfil]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioPerfil'
+CREATE INDEX [IX_FK_UsuarioPerfil]
+ON [dbo].[Usuario]
+    ([PerfilId]);
+GO
+
+-- Creating foreign key on [Perfil_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [FK_PerfilTela_Perfil]
+    FOREIGN KEY ([Perfil_Id])
+    REFERENCES [dbo].[Perfil]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Tela_Id] in table 'PerfilTela'
+ALTER TABLE [dbo].[PerfilTela]
+ADD CONSTRAINT [FK_PerfilTela_Tela]
+    FOREIGN KEY ([Tela_Id])
+    REFERENCES [dbo].[Tela]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PerfilTela_Tela'
+CREATE INDEX [IX_FK_PerfilTela_Tela]
+ON [dbo].[PerfilTela]
+    ([Tela_Id]);
 GO
 
 -- --------------------------------------------------

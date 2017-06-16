@@ -2,6 +2,7 @@
 using Exploreh.Model.Cliente;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Exploreh.Business.Cliente;
+using System.Collections.Generic;
 
 namespace Exploreh.Test.Business.Cliente
 {
@@ -25,10 +26,32 @@ namespace Exploreh.Test.Business.Cliente
                 Email = "Email",
                 HomePage = "HomePage",
                 DataCadastro = DateTime.Now,
-                //ClienteEndereco = c.ClienteEndereco.ToList().ConvertAll<ClienteEnderecoModel>(x => x),
-                //ClienteTelefone = c.ClienteTelefone.ToList().ConvertAll<ClienteTelefoneModel>(x => x),
                 Ativo = true
             };
+
+            c.ClienteEndereco = new List<ClienteEnderecoModel> { new ClienteEnderecoModel
+                {
+                    Logradouro = "Mateus Serrao",
+                    Numero = "30",
+                    Complemento = "Sem COmplemento",
+                    CEP = "04914-080",
+                    Bairro = "Jd. Klein",
+                    CidadeId = 1,
+                    EstadoId = 1,
+                    ClienteId = c.Id,
+                    DataCadastro = DateTime.Now,
+                    Ativo = true
+                } };
+
+            c.ClienteTelefone = new List<ClienteTelefoneModel> { new ClienteTelefoneModel
+            {
+                ClienteId = c.Id,
+                Ddd = "11",
+                Telefone="5514-6203",
+                TipoTelefone = "F",
+                DataCadastro= DateTime.Now,
+                Ativo= true
+            } };
 
             var retorno = _bus.Add(c);
 

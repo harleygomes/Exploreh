@@ -18,6 +18,7 @@ namespace Exploreh.Model.Cliente
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public Nullable<bool> Ativo { get; set; }
         public int ClienteId { get; set; }
+        public string TipoTelefone { get; set; }
 
         public virtual ClienteModel Cliente { get; set; }
 
@@ -29,6 +30,7 @@ namespace Exploreh.Model.Cliente
                 ClienteId = ct.ClienteId,
                 Ddd = ct.Ddd,
                 Telefone = ct.Telefone,
+                TipoTelefone = ct.TipoTelefone,
                 DataCadastro = ct.DataCadastro,
                 DataAlteracao = ct.DataAlteracao,
                 Ativo = ct.Ativo
@@ -42,6 +44,7 @@ namespace Exploreh.Model.Cliente
                 ClienteId = ct.ClienteId,
                 Ddd = ct.Ddd,
                 Telefone = ct.Telefone,
+                TipoTelefone = ct.TipoTelefone,
                 DataCadastro = ct.DataCadastro,
                 DataAlteracao = ct.DataAlteracao,
                 Ativo = ct.Ativo

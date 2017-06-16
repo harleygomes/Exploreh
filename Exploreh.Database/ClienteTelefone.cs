@@ -21,6 +21,7 @@ namespace Exploreh.Database
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public Nullable<bool> Ativo { get; set; }
         public int ClienteId { get; set; }
+        public string TipoTelefone { get; set; }
     
         public virtual Cliente Cliente { get; set; }
     }
