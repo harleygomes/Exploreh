@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Homer_MVC
+namespace Exploreh.Web
 {
     public class BundleConfig
     {
