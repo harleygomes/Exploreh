@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Exploreh.Business.Perfil;
 using Exploreh.Model.Cliente;
 using Exploreh.Model.Usuario;
 
@@ -11,23 +12,30 @@ namespace Exploreh.Web.Controllers
 {
     public class UsuarioController : Controller
     {
-        private readonly UsuarioBusiness _bus = new UsuarioBusiness();
+        private readonly UsuarioBusiness _busUsuario;
+        private readonly PerfilBusiness _busPerfil;
+
+        public UsuarioController()
+        {
+            this._busUsuario = new UsuarioBusiness();
+            this._busPerfil = new PerfilBusiness();
+        }
 
         public ActionResult Lista()
         {
-            return View(_bus.Get());
+            return View(_busUsuario.Get().OrderBy(u => u.DataCadastro));
         }
 
 
         public ActionResult Detalhes(int id)
         {
-            return View(_bus.Get(id));
+            return View(_busUsuario.Get(id));
         }
 
 
         public ActionResult Cadastrar()
         {
-            return View();
+            return View(new UsuarioModel() { ddlPerfil = _busPerfil.Get() });
         }
 
 
@@ -36,9 +44,17 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    if (_busUsuario.Add(model))
+                        return RedirectToAction("Lista");
 
-                return RedirectToAction("Lista");
+                    model.ddlPerfil = _busPerfil.Get();
+                    return View(model);
+                }
+
+                model.ddlPerfil = _busPerfil.Get();
+                return View(model);
             }
             catch
             {
@@ -49,7 +65,10 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
-            return View();
+            var model = _busUsuario.Get(id);
+            model.ddlPerfil = _busPerfil.Get();
+
+            return View(model);
         }
 
 
@@ -58,9 +77,17 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    if(_busUsuario.Update(model))
+                    return RedirectToAction("Lista");
 
-                return RedirectToAction("Lista");
+                    model.ddlPerfil = _busPerfil.Get();
+                    return View(model);
+                }
+
+                model.ddlPerfil = _busPerfil.Get();
+                return View(model);
             }
             catch
             {

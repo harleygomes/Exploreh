@@ -1,85 +1,78 @@
 ﻿@model Exploreh.Model.Usuario.UsuarioModel
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Editar dados do Usuário";
+
+    List<SelectListItem> listPerfil = new List<SelectListItem>();
+
+    foreach (var item in Model.ddlPerfil)
+    {
+        listPerfil.Add(new SelectListItem
+        {
+            Text = item.Nome,
+            Value = Convert.ToString(item.Id)
+        });
+    }
 }
 
-<h2>Editar</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>UsuarioModel</legend>
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Edição de Usuário
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Nome</span>
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">E-mail</span>
+                            <input id="Email" type="text" class="form-control" name="Email" placeholder="Nome do usuário" value="@Model.Email">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Senha</span>
+                            <input id="Senha" type="password" class="form-control" name="Senha" placeholder="Senha do usuário" value="@Model.Senha">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Ativo</span>
+                            <div style="margin-left: 10px"> @Html.CheckBoxFor(model => model.Ativo)</div>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Perfil</span>
+                            @Html.DropDownListFor(model => model.PerfilId, listPerfil, "-- Selecione --", new { @class = "form-control" })
+                        </div>
+                        
+                        <div class="input-fields">
+                            <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+                        </div>
+                    </div>
 
-        @Html.HiddenFor(model => model.Id)
+                    <div class="input-fields">
+                        <button onclick="location.href='@Url.Action("Lista", "Usuario")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ativo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ativo)
-            @Html.ValidationMessageFor(model => model.Ativo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataCadastro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataCadastro)
-            @Html.ValidationMessageFor(model => model.DataCadastro)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataAlteracao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataAlteracao)
-            @Html.ValidationMessageFor(model => model.DataAlteracao)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Senha)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Senha)
-            @Html.ValidationMessageFor(model => model.Senha)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PerfilId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PerfilId)
-            @Html.ValidationMessageFor(model => model.PerfilId)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

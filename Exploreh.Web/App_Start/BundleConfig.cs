@@ -48,6 +48,14 @@ namespace Exploreh.Web
             bundles.Add(new ScriptBundle("~/bundles/validation/js").Include(
                       "~/Vendor/jquery-validation/jquery.validate.min.js"));
 
+            #region Toastr
+            //Toastr para popups
+            bundles.Add(new ScriptBundle("~/bundles/toastr/js").Include(
+                "~/Scripts/Toastr/toastr.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/toastr/css").Include(
+                "~/Content/Toast/toast.min.css"));
+            #endregion
         }
 
     }

@@ -20,7 +20,7 @@ namespace Exploreh.Business.Usuario
         /// <returns></returns>
         public List<UsuarioModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<UsuarioModel>(x => x);
+            return _rep.Get().ToList().ConvertAll<UsuarioModel>(x => x);
         }
 
         /// <summary>
@@ -73,6 +73,7 @@ namespace Exploreh.Business.Usuario
             update.Nome = !string.IsNullOrEmpty(model.Nome)?model.Nome:update.Nome;
             update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
             update.Ativo = model.Ativo;
+            update.PerfilId = model.PerfilId;
             update.DataAlteracao = DateTime.Now;
             if (!string.IsNullOrEmpty(model.Senha))
                 update.Senha = Crypt.Base64Encode(model.Senha);
