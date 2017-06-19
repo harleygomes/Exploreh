@@ -1,117 +1,92 @@
-﻿@model Exploreh.Model.Cliente.ClienteModel
+﻿@using System.Web.Mvc.Html
+@model Exploreh.Model.Cliente.ClienteModel
+
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Alterar Cliente";
+
 }
 
-<h2>Editar</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>ClienteModel</legend>
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Cadastro de Clientes
+                    </div>
+                    <div class="panel-body">
+                        <div style=""></div>
+                        <div class="input-group input-fields">
+                            @Html.HiddenFor(m => m.Id)
+                            <span class="input-group-addon">Nome</span>
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
+                        </div>
+                        <div class="input-group input-fields">
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="inlineRadio1" value="F" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("F")">
+                                <label for="inlineRadio1"> Pessoa física </label>
+                            </div>
 
-        @Html.HiddenFor(model => model.Id)
+                            <div class="radio radio-inline">
+                                <input type="radio" id="inlineRadio2" value="J" name="TipoPessoa"  checked="@Model.TipoPessoa.Equals("J")">
+                                <label for="inlineRadio2"> Pessoa jurídica </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <input type="radio" id="inlineRadio2" value="E" name="TipoPessoa"  checked="@Model.TipoPessoa.Equals("E")">
+                                <label for="inlineRadio2"> Estrangeiro </label>
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Documento</span>
+                                <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Sexo</span>
+                                <input id="Sexo" type="text" class="form-control" name="Sexo" placeholder="Sexo" value="@Model.Sexo">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Data de nascimento</span>
+                                <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Ocupação</span>
+                                <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação" value="@Model.Ocupacao">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">E-mail</span>
+                                <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail" value="@Model.Email">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Home page</span>
+                                <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page" value="@Model.HomePage">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+                        </div>
+                        <div class="input-fields">
+                            <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TipoPessoa)
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TipoPessoa)
-            @Html.ValidationMessageFor(model => model.TipoPessoa)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Documento)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Documento)
-            @Html.ValidationMessageFor(model => model.Documento)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Sexo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Sexo)
-            @Html.ValidationMessageFor(model => model.Sexo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataNascimento)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataNascimento)
-            @Html.ValidationMessageFor(model => model.DataNascimento)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ocupacao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ocupacao)
-            @Html.ValidationMessageFor(model => model.Ocupacao)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HomePage)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HomePage)
-            @Html.ValidationMessageFor(model => model.HomePage)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataCadastro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataCadastro)
-            @Html.ValidationMessageFor(model => model.DataCadastro)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataAlteracao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataAlteracao)
-            @Html.ValidationMessageFor(model => model.DataAlteracao)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ativo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ativo)
-            @Html.ValidationMessageFor(model => model.Ativo)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </div>
+    }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

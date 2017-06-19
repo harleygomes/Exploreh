@@ -35,7 +35,7 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                _bus.Add(model);
 
                 return RedirectToAction("Lista");
             }
@@ -48,7 +48,16 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
-            return View();
+            try
+            {
+                var model = _bus.Get(id);
+                return View(model);
+            }
+            catch
+            {
+                return View();
+            }
+            
         }
 
 
@@ -57,8 +66,7 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
+                _bus.Update(model);
                 return RedirectToAction("Lista");
             }
             catch

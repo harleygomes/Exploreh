@@ -74,6 +74,15 @@ namespace Exploreh.Business.Cliente
         {
             #region Regras
             var update = Get(model.Id);
+            update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
+            update.TipoPessoa = !string.IsNullOrEmpty(model.TipoPessoa) ? model.TipoPessoa : update.TipoPessoa;
+            update.Documento = !string.IsNullOrEmpty(model.Documento) ? model.Documento : update.Documento;
+            update.Sexo = !string.IsNullOrEmpty(model.Sexo) ? model.Sexo : update.Sexo;
+            update.DataNascimento = model.DataNascimento != null ? model.DataNascimento : update.DataNascimento;
+            update.Ocupacao = !string.IsNullOrEmpty(model.Ocupacao) ? model.Ocupacao : update.Ocupacao;
+            update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
+            update.HomePage = !string.IsNullOrEmpty(model.HomePage) ? model.HomePage : update.HomePage;
+            update.DataAlteracao = DateTime.Now;
             #endregion
 
             return _rep.Update(update);
