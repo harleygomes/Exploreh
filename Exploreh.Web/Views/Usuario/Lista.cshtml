@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Exploreh.Model.Usuario.UsuarioModel>
 
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
+
 @{
     ViewBag.Title = "Lista de Usuários";
 }
@@ -8,7 +14,7 @@
 
 <div class="panel-body list">
     <h2>Lista de Usuários Cadastrados</h2>
-   
+
     <button onclick="location.href='@Url.Action("Cadastrar", "Usuario")'" class="btn w-xs btn-primary"><i class="glyphicon glyphicon-plus"></i> Novo </button>
 
     <div class="table-responsive project-list">
@@ -24,7 +30,7 @@
                 <th>
                     Ativo
                 </th>
-                <th>
+                @*<th>
                     Data Cadastro
                 </th>
                 <th>
@@ -33,7 +39,7 @@
 
                 <th>
                     Perfil
-                </th>
+                </th>*@
                 <th></th>
             </tr>
             </thead>
@@ -50,7 +56,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Ativo)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.DataCadastro)
                     </td>
                     <td>
@@ -58,11 +64,27 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PerfilId)
-                    </td>
+                    </td>*@
                     <td>
-                        @Html.ActionLink("Editar", "Editar", new {id = item.Id}) |
-                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                        @Html.ActionLink("Excluir", "Excluir", new {id = item.Id})
+                        <button type="button"
+                                class="btn btn-xs btn-primary"
+                                onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">
+                            Editar
+                        </button>
+                       |
+                        <button type="button"
+                                class="btn btn-xs btn-info"
+                                data-toggle="modal"
+                                data-target="#myModal5"
+                                onclick="Detalhes('@item.Id', '@Url.Action("Detalhes", "Usuario")');">
+                            Detalhes
+                        </button>
+                        |
+                        <button type="button"
+                                class="btn btn-xs btn-danger"
+                                onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">
+                            Excluir
+                        </button>
                     </td>
                 </tr>
                 </tbody>
@@ -72,20 +94,49 @@
     </div>
 </div>
 
-@Scripts.Render("~/bundles/jquery/js")  
-@Scripts.Render("~/bundles/jqueryui/js")   
-@Scripts.Render("~/bundles/homer/js") 
-@Scripts.Render("~/bundles/toastr/js")   
+@* inicio modal*@ 
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Detalhes do Usuário</h4>
+                <small class="font-bold">Todos os detalhes cadastrados</small>
+            </div>
+            <div class="modal-body">
+                <p>
+                   
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@* fim modal *@ 
 
+@Scripts.Render("~/bundles/jquery/js")
+@Scripts.Render("~/bundles/jqueryui/js")
+@Scripts.Render("~/bundles/homer/js")
+@Scripts.Render("~/bundles/toastr/js")
 
+<script src="~/Scripts/AjaxCall.js"></script>
 <script type="text/javascript">
-    //teste popup
-    $(document).ready(function() {
-        alert();
+
+    $(document).ready(function () {
+
+        var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
+        if (notificacao === true) notificar();
+
+        //$('#Editar').click(function() {
+        //    Detalhes(this)
+        //});
     });
 
-    function alert() {
-        Command: toastr["success"]("Dados salvos com sucesso ", "Sucesso!");
+    function notificar() {
+        Command: toastr["success"]("Dados salvos com sucesso", "Sucesso!");
 
         toastr.options = {
             "closeButton": true,

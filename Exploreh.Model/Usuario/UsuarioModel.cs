@@ -7,7 +7,7 @@ using Exploreh.Model.Perfil;
 
 namespace Exploreh.Model.Usuario
 {
-    public class UsuarioModel
+    public class UsuarioModel 
     {
         public int Id { get; set; }
         public string Nome { get; set; }

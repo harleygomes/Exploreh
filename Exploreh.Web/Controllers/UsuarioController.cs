@@ -18,17 +18,21 @@ namespace Exploreh.Web.Controllers
             this._busPerfil = new PerfilBusiness();
         }
 
-        public ActionResult Lista()
+        public ActionResult Lista(bool notificacao = false)
         {
+            ViewBag.Notificacao = notificacao;
+
             return View(_busUsuario.Get().OrderBy(u => u.DataCadastro));
         }
 
-
-        public ActionResult Detalhes(int id)
+        [HttpPost]
+        public JsonResult Detalhes(int id)
         {
-            return View(_busUsuario.Get(id));
-        }
 
+            var result = new JsonResult { Data = _busUsuario.Get(id) };
+
+            return result;
+        }
 
         public ActionResult Cadastrar()
         {
@@ -44,7 +48,7 @@ namespace Exploreh.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     if (_busUsuario.Add(model))
-                        return RedirectToAction("Lista");
+                        return RedirectToAction("Lista", new { notificacao = true});
 
                     model.ddlPerfil = _busPerfil.Get();
                     return View(model);
@@ -77,7 +81,7 @@ namespace Exploreh.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     if(_busUsuario.Update(model))
-                    return RedirectToAction("Lista");
+                    return RedirectToAction("Lista", new { notificacao = true });
 
                     model.ddlPerfil = _busPerfil.Get();
                     return View(model);
