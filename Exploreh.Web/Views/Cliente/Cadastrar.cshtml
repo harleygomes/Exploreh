@@ -16,7 +16,6 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
@@ -29,6 +28,7 @@
                     </div>
                     <div class="panel-body">
                         <div style=""></div>
+                       
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Nome</span>
                             <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário">
@@ -43,7 +43,7 @@
                                 <label for="inlineRadio2"> Pessoa jurídica </label>
                             </div>
                             <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="E" name="TipoPessoa">
+                                <input type="radio" id="inlineRadio3" value="E" name="TipoPessoa">
                                 <label for="inlineRadio2"> Estrangeiro </label>
                             </div>
                             <div class="input-group input-fields">
@@ -70,19 +70,55 @@
                                 <span class="input-group-addon">Home page</span>
                                 <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page">
                             </div>
-                    </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Telefone</span>
+                                <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control" name="ClienteTelefone[0].Ddd" placeholder="DDD">
+                                <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
+                                <div class="radio radio-inline">
+                                    <input type="radio" id="ClienteTelefone[0]_TipoTelefone" value="F" name="ClienteTelefone[0].TipoTelefone">
+                                    <label for="inlineRadio2"> Fixo </label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <input type="radio" id="ClienteTelefone[0]_TipoTelefone" value="C" name="ClienteTelefone[0].TipoTelefone">
+                                    <label for="inlineRadio2"> Celular </label>
+                                </div>
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Telefone</span>
+                                <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" placeholder="DDD">
+                                <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
+                                <div class="radio radio-inline">
+                                    <input type="radio" id="ClienteTelefone[1]_TipoTelefone" value="F" name="ClienteTelefone[1].TipoTelefone">
+                                    <label for="ClienteTelefone[1]_TipoTelefone"> Fixo </label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <input type="radio" id="ClienteTelefone[1]_TipoTelefone" value="C" name="ClienteTelefone[1].TipoTelefone">
+                                    <label for="ClienteTelefone[1]_TipoTelefone"> Celular </label>
+                                </div>
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Endereço</span>
+                                <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro">
+                                <input id="ClienteEndereco[0]_Numero" type="text" class="form-control" name="ClienteEndereco[0].Numero" placeholder="Número">
+                                <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
+                                <input id="ClienteEndereco[0]_CEP" type="text" class="form-control" name="ClienteEndereco[0].CEP" placeholder="CEP">
+                                <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control" name="ClienteEndereco[0].Bairro" placeholder="Bairro">
+                                <input id="ClienteEndereco[0]_EstadoId" type="text" class="form-control" name="ClienteEndereco[0].EstadoId" placeholder="EstadoID">
+                                <input id="ClienteEndereco[0]_CidadeId" type="text" class="form-control" name="ClienteEndereco[0].CidadeId" placeholder="CidadeID">
+                            </div>
+                        </div>
                         <div class="input-fields">
                             <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
                         </div>
-                    <div class="input-fields">
-                        <button onclick="location.href='@Url.Action("Lista", "Usuario")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                        <div class="input-fields">
+                            <button onclick="location.href='@Url.Action("Lista", "Usuario")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                        </div>
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
     </div>
 }
 

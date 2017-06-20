@@ -47,6 +47,21 @@ namespace Exploreh.Business.Cliente
             #region Regras
             model.DataCadastro = DateTime.Now;
             model.Ativo = true;
+            model.ClienteTelefone.ToList().ForEach(t =>
+            {
+                t.DataCadastro = DateTime.Now;
+                t.Ativo = true;
+                if (string.IsNullOrEmpty(t.Ddd) && string.IsNullOrEmpty(t.TipoTelefone) &&
+                    string.IsNullOrEmpty(t.Telefone))
+                {
+                    model.ClienteTelefone.Remove(t);
+                }
+            });
+            model.ClienteEndereco.ToList().ForEach(t =>
+            {
+                t.DataCadastro = DateTime.Now;
+                t.Ativo = true;
+            });
             /*to do: model.UsuarioIdCriCliente = ?*/
 
             #endregion

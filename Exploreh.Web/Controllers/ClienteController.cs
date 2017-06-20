@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Exploreh.Business.Cliente;
 using Exploreh.Model.Cliente;
@@ -51,6 +48,7 @@ namespace Exploreh.Web.Controllers
             try
             {
                 var model = _bus.Get(id);
+                model.ClienteTelefone = new List<ClienteTelefoneModel> {new ClienteTelefoneModel {Ddd = "11",Telefone = "5551-98898",TipoTelefone = "F"} };
                 return View(model);
             }
             catch
