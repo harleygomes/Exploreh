@@ -19,6 +19,7 @@ namespace Exploreh.Database
         {
             this.ClienteEndereco = new HashSet<ClienteEndereco>();
             this.ClienteTelefone = new HashSet<ClienteTelefone>();
+            this.ClienteContato = new HashSet<ClienteContato>();
         }
     
         public int Id { get; set; }
@@ -38,5 +39,7 @@ namespace Exploreh.Database
         public virtual ICollection<ClienteEndereco> ClienteEndereco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteTelefone> ClienteTelefone { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteContato> ClienteContato { get; set; }
     }
 }

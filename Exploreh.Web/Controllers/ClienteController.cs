@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Web.Mvc;
 using Exploreh.Business.Cliente;
 using Exploreh.Model.Cliente;
@@ -9,8 +11,9 @@ namespace Exploreh.Web.Controllers
     {
        private readonly ClienteBusiness _bus = new ClienteBusiness();
 
-        public ActionResult Lista()
+        public ActionResult Lista(bool? notificar)
         {
+            ViewBag.Notificacao = notificar;
             return View(_bus.Get());
         }
 
@@ -32,9 +35,7 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                _bus.Add(model);
-
-                return RedirectToAction("Lista");
+                return RedirectToAction("Lista", new {notificar = _bus.Add(model)});
             }
             catch
             {

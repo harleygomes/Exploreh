@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Database;
@@ -24,6 +25,14 @@ namespace Exploreh.Model.Cliente
         public virtual List<ClienteEnderecoModel> ClienteEndereco { get; set; }
         public virtual List<ClienteTelefoneModel> ClienteTelefone { get; set; }
 
+        public virtual List<ClienteContatoModel> ClienteContato { get; set; }
+
+        public string[] ContatoNome { get; set; }
+        public string[] ContatoEmail { get; set; }
+
+
+
+
         public static implicit operator ClienteModel(Database.Cliente c)
         {
             return new ClienteModel
@@ -41,6 +50,7 @@ namespace Exploreh.Model.Cliente
                 DataAlteracao = c.DataAlteracao,
                 ClienteEndereco = c.ClienteEndereco?.ToList().ConvertAll<ClienteEnderecoModel>(x => x) ?? new List<ClienteEnderecoModel>(),
                 ClienteTelefone = c.ClienteTelefone?.ToList().ConvertAll<ClienteTelefoneModel>(x => x) ?? new List<ClienteTelefoneModel>(),
+                ClienteContato = c.ClienteContato?.ToList().ConvertAll<ClienteContatoModel>(x=>x) ?? new List<ClienteContatoModel>(),
                 Ativo = c.Ativo
              };
         }
@@ -62,6 +72,7 @@ namespace Exploreh.Model.Cliente
                 DataAlteracao = c.DataAlteracao,
                 ClienteEndereco = c.ClienteEndereco?.ToList().ConvertAll<ClienteEndereco>(x => x) ?? new List<ClienteEndereco>(),
                 ClienteTelefone = c.ClienteTelefone?.ToList().ConvertAll<ClienteTelefone>(x => x) ?? new List<ClienteTelefone>(),
+                ClienteContato = c.ClienteContato?.ToList().ConvertAll<ClienteContato>(x => x) ?? new List<ClienteContato>(),
                 Ativo = c.Ativo
             };
         }

@@ -62,6 +62,23 @@ namespace Exploreh.Business.Cliente
                 t.DataCadastro = DateTime.Now;
                 t.Ativo = true;
             });
+            var contatos = new List<ClienteContatoModel>();
+
+            for (int i = 0; i < model.ContatoNome.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]))
+                {
+                    ClienteContatoModel c = new ClienteContatoModel
+                    {
+                        Nome = model.ContatoNome[i],
+                        Email = model.ContatoEmail[i],
+                        Ativo = true,
+                        DataCadastro = DateTime.Now
+                    };
+                    contatos.Add(c);
+                }
+            }
+            model.ClienteContato = contatos;
             /*to do: model.UsuarioIdCriCliente = ?*/
 
             #endregion

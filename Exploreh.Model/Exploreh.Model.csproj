@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cidade\CidadeModel.cs" />
+    <Compile Include="Cliente\ClienteContatoModel.cs" />
     <Compile Include="Cliente\ClienteModel.cs" />
     <Compile Include="Cliente\ClienteEnderecoModel.cs" />
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />

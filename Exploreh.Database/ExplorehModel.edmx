@@ -14,6 +14,7 @@
     <EntitySet Name="Usuario" EntityType="ExplorehModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Perfil" EntityType="ExplorehModel.Store.Perfil" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tela" EntityType="ExplorehModel.Store.Tela" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClienteContatoSet" EntityType="ExplorehModel.Store.ClienteContatoSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerfilTela" EntityType="ExplorehModel.Store.PerfilTela" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EstadoCidade" Association="ExplorehModel.Store.EstadoCidade">
       <End Role="Estado" EntitySet="Estado" />
@@ -46,6 +47,10 @@
     <AssociationSet Name="FK_PerfilTela_Tela" Association="ExplorehModel.Store.FK_PerfilTela_Tela">
       <End Role="Tela" EntitySet="Tela" />
       <End Role="PerfilTela" EntitySet="PerfilTela" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteContatoCliente" Association="ExplorehModel.Store.ClienteContatoCliente">
+      <End Role="ClienteContato" EntitySet="ClienteContatoSet" />
+      <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cidade">
@@ -145,6 +150,18 @@
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
   </EntityType>
+  <EntityType Name="ClienteContatoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Ativo" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="PerfilTela">
     <Key>
       <PropertyRef Name="Perfil_Id" />
@@ -225,6 +242,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClienteContatoCliente">
+    <End Role="ClienteContato" Type="ExplorehModel.Store.ClienteContatoSet" Multiplicity="*" />
+    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteContato">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PerfilTela_Perfil">
     <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
     <End Role="PerfilTela" Type="ExplorehModel.Store.PerfilTela" Multiplicity="*" />
@@ -290,6 +319,11 @@
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Tela" EntitySet="Tela" />
           </AssociationSet>
+          <EntitySet Name="ClienteContatoSet" EntityType="ExplorehModel.ClienteContato" />
+          <AssociationSet Name="ClienteContatoCliente" Association="ExplorehModel.ClienteContatoCliente">
+            <End Role="ClienteContato" EntitySet="ClienteContatoSet" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cidade">
           <Key>
@@ -320,6 +354,7 @@
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.ClienteClienteEndereco" FromRole="Cliente" ToRole="ClienteEndereco" />
           <NavigationProperty Name="ClienteTelefone" Relationship="ExplorehModel.ClienteClienteTelefone" FromRole="Cliente" ToRole="ClienteTelefone" />
+          <NavigationProperty Name="ClienteContato" Relationship="ExplorehModel.ClienteContatoCliente" FromRole="Cliente" ToRole="ClienteContato" />
         </EntityType>
         <EntityType Name="ClienteEndereco">
           <Key>
@@ -477,6 +512,31 @@
           <End Type="ExplorehModel.Perfil" Role="Perfil" Multiplicity="*" />
           <End Type="ExplorehModel.Tela" Role="Tela" Multiplicity="*" />
         </Association>
+        <EntityType Name="ClienteContato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="ExplorehModel.ClienteContatoCliente" FromRole="ClienteContato" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="DateTime" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="ClienteContatoCliente">
+          <End Type="ExplorehModel.ClienteContato" Role="ClienteContato" Multiplicity="*" />
+          <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteContato">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -585,6 +645,19 @@
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteContatoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.ClienteContato)">
+        <MappingFragment StoreEntitySet="ClienteContatoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

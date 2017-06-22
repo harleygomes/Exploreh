@@ -5,60 +5,85 @@
 }
 
 <div class="panel-body list">
-    <h2>Lista de Clientes Cadastrados</h2>
+    <h2 id="test">Lista de Clientes Cadastrados</h2>
 
     <button onclick="location.href='@Url.Action("Cadastrar", "Cliente")'" class="btn w-xs btn-primary"><i class="glyphicon glyphicon-plus"></i> Novo </button>
 
     <div class="table-responsive project-list">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        Tipo Pessoa
-                    </th>
-                    <th>
-                        Documento
-                    </th>
-                    <th>
-                        E-mail
-                    </th>
-                    <th>
-                        Ativo
-                    </th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Tipo Pessoa
+                </th>
+                <th>
+                    Documento
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Ativo
+                </th>
+                <th></th>
+            </tr>
             </thead>
             @foreach (var item in Model)
             {
                 <tbody>
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoPessoa)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Documento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ativo)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                            @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoPessoa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Documento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+                    </td>
+                </tr>
                 </tbody>
             }
 
         </table>
     </div>
 </div>
+
+
+@section Styles {
+    @Styles.Render("~/bundles/sweetAlert/css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/sweetAlert/js")
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
+            if (notificacao === true) {
+                setTimeout(function() {
+                    swal({
+                        title: "Good job!",
+                        text: "Cliente cadastrado com sucesso!",
+                        type: "success"
+                    });
+                    },
+                    1000);
+            }
+        });
+    </script>
+}
