@@ -20,73 +20,58 @@
     <div class="table-responsive project-list">
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    E-mail
-                </th>
-                <th>
-                    Ativo
-                </th>
-                @*<th>
-                    Data Cadastro
-                </th>
-                <th>
-                    Data Alteração
-                </th>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        E-mail
+                    </th>
+                    <th>
+                        Ativo
+                    </th>
 
-                <th>
-                    Perfil
-                </th>*@
-                <th></th>
-            </tr>
+                    <th></th>
+                </tr>
             </thead>
             @foreach (var item in Model)
             {
                 <tbody>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ativo)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.DataCadastro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataAlteracao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PerfilId)
-                    </td>*@
-                    <td>
-                        <button type="button"
-                                class="btn btn-xs btn-primary"
-                                onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">
-                            Editar
-                        </button>
-                       |
-                        <button type="button"
-                                class="btn btn-xs btn-info"
-                                data-toggle="modal"
-                                data-target="#myModal5"
-                                onclick="Detalhes('@item.Id', '@Url.Action("Detalhes", "Usuario")');">
-                            Detalhes
-                        </button>
-                        |
-                        <button type="button"
-                                class="btn btn-xs btn-danger"
-                                onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">
-                            Excluir
-                        </button>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+
+                        <td>
+                            <button type="button"
+                                    class="btn btn-xs btn-primary"
+                                    onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">
+                                Editar
+                            </button>
+                            |
+                            <button type="button"
+                                    class="btn btn-xs btn-info"
+                                    data-toggle="modal"
+                                    data-target="#myModalDetalhes"
+                                    onclick="Detalhes('@item.Id', '@Url.Action("Detalhes", "Usuario")');">
+                                Detalhes
+                            </button>
+                            |
+                            <button type="button"
+                                    class="btn btn-xs btn-danger"
+                                    data-toggle="modal"
+                                    data-target="#myModalDelete"
+                                    onclick="Deletar('@item.Id', '@Url.Action("Excluir", "Usuario")');">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             }
 
@@ -94,8 +79,8 @@
     </div>
 </div>
 
-@* inicio modal*@ 
-<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+@* inicio modal*@
+<div class="modal fade" id="myModalDetalhes" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="color-line"></div>
@@ -105,17 +90,38 @@
             </div>
             <div class="modal-body">
                 <p>
-                   
+
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
 </div>
-@* fim modal *@ 
+
+
+<div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Deletar Usuário</h4>
+                <small class="font-bold">Todos os detalhes cadastrados</small>
+            </div>
+            <div class="modal-body">
+                <p>
+
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteModal">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@* fim modal *@
 
 @Scripts.Render("~/bundles/jquery/js")
 @Scripts.Render("~/bundles/jqueryui/js")
@@ -130,9 +136,12 @@
         var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
         if (notificacao === true) notificar();
 
-        //$('#Editar').click(function() {
-        //    Detalhes(this)
-        //});
+        $('#deleteModal').click(function() {
+            var url = '@Url.Action("ExcluirConfirmar", "Usuario")';
+            var model = { Id: $('#Id').val() };
+
+            ExcluirConfirmar(model, url);
+        });
     });
 
     function notificar() {

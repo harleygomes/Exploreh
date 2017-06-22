@@ -2673,7 +2673,6 @@
     <Content Include="Views\Tela\Lista.cshtml" />
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
-    <Content Include="Views\Usuario\Excluir.cshtml" />
     <Content Include="Views\Usuario\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
