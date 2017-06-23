@@ -121,6 +121,7 @@
       <LastGenOutput>ExplorehModel.cs</LastGenOutput>
     </Content>
     <Content Include="ExplorehModel_11062017_Eder.edmx.sql" />
+    <Content Include="ExplorehModel_Eder_2206.edmx.sql" />
     <Content Include="ExplorehModel_Harley.edmx.sql" />
     <Content Include="ExplorehModel_Harley_2106.edmx.sql" />
   </ItemGroup>

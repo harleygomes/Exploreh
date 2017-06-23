@@ -16,6 +16,8 @@ namespace Exploreh.Model.Telas
         public DateTime? DataAlteracao { get; set; }
         public virtual ICollection<PerfilModel> PerfilModel { get; set; }
 
+        public string Descricao { get; set; }
+
         public static implicit operator TelaModel(Database.Tela telas)
         {
             return new TelaModel
@@ -24,7 +26,8 @@ namespace Exploreh.Model.Telas
                 Nome = telas.Nome,
                 Ativo = telas.Ativo,
                 DataCadastro = telas.DataCadastro,
-                DataAlteracao = telas.DataAlteracao
+                DataAlteracao = telas.DataAlteracao,
+                Descricao = telas.Descricao
             };
         }
 
@@ -36,7 +39,8 @@ namespace Exploreh.Model.Telas
                 Nome = telas.Nome,
                 Ativo = telas.Ativo,
                 DataCadastro = telas.DataCadastro,
-                DataAlteracao = telas.DataAlteracao
+                DataAlteracao = telas.DataAlteracao,
+                Descricao = telas.Descricao
             };
         }
     }

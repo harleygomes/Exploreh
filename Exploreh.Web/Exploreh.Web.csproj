@@ -214,7 +214,9 @@
     <Content Include="Images\p1.jpg" />
     <Content Include="Images\p2.jpg" />
     <Content Include="Images\profile.jpg" />
-    <Content Include="Scripts\AjaxCall.js" />
+    <Content Include="Scripts\TelaAjaxCall.js" />
+    <Content Include="Scripts\PerfilAjaxCall.js" />
+    <Content Include="Scripts\UsuarioAjaxCall.js" />
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\homer.js" />
     <Content Include="Vendor\animate.css\animate.css" />
@@ -2664,16 +2666,14 @@
     <Content Include="Views\Cliente\Excluir.cshtml" />
     <Content Include="Views\Cliente\Lista.cshtml" />
     <Content Include="Views\Perfil\Cadastrar.cshtml" />
-    <Content Include="Views\Perfil\Editar.cshtml" />
-    <Content Include="Views\Perfil\Excluir.cshtml" />
     <Content Include="Views\Perfil\Lista.cshtml" />
-    <Content Include="Views\Tela\Cadastrar.cshtml" />
     <Content Include="Views\Tela\Editar.cshtml" />
-    <Content Include="Views\Tela\Excluir.cshtml" />
     <Content Include="Views\Tela\Lista.cshtml" />
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Usuario\Lista.cshtml" />
+    <Content Include="Views\Perfil\Editar.cshtml" />
+    <Content Include="Views\Tela\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">

@@ -149,6 +149,7 @@
     <Property Name="Ativo" Type="bit" Nullable="false" />
     <Property Name="DataCadastro" Type="datetime" Nullable="false" />
     <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
+    <Property Name="Descricao" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ClienteContatoSet">
     <Key>
@@ -495,6 +496,7 @@
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" />
           <Property Name="DataAlteracao" Type="DateTime" />
           <NavigationProperty Name="Perfil" Relationship="ExplorehModel.PerfilTela" FromRole="Tela" ToRole="Perfil" />
+          <Property Name="Descricao" Type="String" />
         </EntityType>
         <Association Name="UsuarioPerfil">
           <End Type="ExplorehModel.Usuario" Role="Usuario" Multiplicity="*" />
@@ -645,6 +647,7 @@
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

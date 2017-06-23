@@ -3,59 +3,63 @@
 @{
     ViewBag.Title = "Editar";
 }
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
 
-<h2>Editar</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>TelaModel</legend>
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Edição da Tela
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Nome</span>
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
 
-        @Html.HiddenFor(model => model.Id)
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Ativo</span>
+                            <div class="icheckbox_square-green" style="position: relative;margin-left: 10px">
+                                @Html.CheckBoxFor(model => model.Ativo, new {@class = "i-checks"})
+                            </div>
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ativo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ativo)
-            @Html.ValidationMessageFor(model => model.Ativo)
-        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Descrição da página</span>
+                            <textarea id="Descricao" type="text" class="form-control" name="Descricao" placeholder="Descrição da tela" rows="5">@Model.Descricao</textarea>
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataCadastro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataCadastro)
-            @Html.ValidationMessageFor(model => model.DataCadastro)
-        </div>
+                        <div class="input-fields">
+                            <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+                        </div>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataAlteracao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataAlteracao)
-            @Html.ValidationMessageFor(model => model.DataAlteracao)
-        </div>
+                    <div class="input-fields">
+                        <button onclick="location.href='@Url.Action("Lista", "Tela")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                    </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

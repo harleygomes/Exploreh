@@ -20,7 +20,7 @@ namespace Exploreh.Business.Tela
         /// <returns></returns>
         public List<TelaModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<TelaModel>(x => x);
+            return _rep.Get().ToList().ConvertAll<TelaModel>(x => x);
         }
 
         /// <summary>
@@ -72,6 +72,7 @@ namespace Exploreh.Business.Tela
             update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
+            update.Descricao = model.Descricao;
             #endregion
 
             return _rep.Update(update);

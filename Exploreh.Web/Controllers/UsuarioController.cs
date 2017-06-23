@@ -12,28 +12,35 @@ namespace Exploreh.Web.Controllers
         private readonly UsuarioBusiness _busUsuario;
         private readonly PerfilBusiness _busPerfil;
 
+        private static bool notificacao { get; set; }
+
         public UsuarioController()
         {
             this._busUsuario = new UsuarioBusiness();
             this._busPerfil = new PerfilBusiness();
+
         }
 
-        public ActionResult Lista(bool notificacao = false)
+        public ActionResult Lista()
         {
             ViewBag.Notificacao = notificacao;
+            notificacao = false;
 
-            return View(_busUsuario.Get().OrderBy(u => u.DataCadastro));
+            return View(_busUsuario.Get().OrderByDescending(u => u.DataCadastro));
         }
 
         [HttpPost]
         public JsonResult Detalhes(int id)
         {
-            return new JsonResult { Data = _busUsuario.Get(id) };
+            var result = _busUsuario.Get(id);
+            result.NomePerfil = _busPerfil.Get(result.PerfilId).Nome;
+
+            return new JsonResult { Data = result };
         }
 
         public ActionResult Cadastrar()
         {
-            return View(new UsuarioModel() { ddlPerfil = _busPerfil.Get() });
+            return View(new UsuarioModel() { Perfis = _busPerfil.Get() });
         }
 
 
@@ -45,13 +52,16 @@ namespace Exploreh.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     if (_busUsuario.Add(model))
-                        return RedirectToAction("Lista", new { notificacao = true });
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista");
+                    }
 
-                    model.ddlPerfil = _busPerfil.Get();
+                    model.Perfis = _busPerfil.Get();
                     return View(model);
                 }
 
-                model.ddlPerfil = _busPerfil.Get();
+                model.Perfis = _busPerfil.Get();
                 return View(model);
             }
             catch
@@ -64,7 +74,7 @@ namespace Exploreh.Web.Controllers
         public ActionResult Editar(int id)
         {
             var model = _busUsuario.Get(id);
-            model.ddlPerfil = _busPerfil.Get();
+            model.Perfis = _busPerfil.Get();
 
             return View(model);
         }
@@ -78,13 +88,15 @@ namespace Exploreh.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     if (_busUsuario.Update(model))
-                        return RedirectToAction("Lista", new { notificacao = true });
-
-                    model.ddlPerfil = _busPerfil.Get();
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista");
+                    }
+                    model.Perfis = _busPerfil.Get();
                     return View(model);
                 }
 
-                model.ddlPerfil = _busPerfil.Get();
+                model.Perfis = _busPerfil.Get();
                 return View(model);
             }
             catch
@@ -96,7 +108,10 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public JsonResult Excluir(int id)
         {
-            return new JsonResult { Data = _busUsuario.Get(id) };
+            var result = _busUsuario.Get(id);
+            result.NomePerfil = _busPerfil.Get(result.PerfilId).Nome;
+
+            return new JsonResult { Data = result };
         }
 
         [HttpPost]
@@ -105,7 +120,10 @@ namespace Exploreh.Web.Controllers
             try
             {
                 if (_busUsuario.Delete(model.Id))
+                {
+                    notificacao = true;
                     return RedirectToAction("Lista");
+                }
 
                 return View();
             }

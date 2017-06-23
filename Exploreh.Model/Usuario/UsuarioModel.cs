@@ -20,9 +20,11 @@ namespace Exploreh.Model.Usuario
         public virtual PerfilModel PerfilModel { get; set; }
 
         #region Atendendo aos Dropdowns apresentados nas telas 
-        public List<PerfilModel> ddlPerfil { get; set; }
-        #endregion
 
+        public string NomePerfil { get; set; }
+        public List<PerfilModel> Perfis { get; set; }
+        #endregion
+        
         public static implicit operator UsuarioModel(Database.Usuario usuario)
         {
             return new UsuarioModel

@@ -10,17 +10,26 @@ namespace Exploreh.Web.Controllers
 {
     public class PerfilController : Controller
     {
-        private readonly PerfilBusiness _bus = new PerfilBusiness();
+        private readonly PerfilBusiness _bus;
+        private static bool notificacao { get; set; }
+
+        public PerfilController()
+        {
+            this._bus = new PerfilBusiness();
+        }
 
         public ActionResult Lista()
         {
-            return View(_bus.Get());
+            ViewBag.Notificacao = notificacao;
+            notificacao = false;
+
+            return View(_bus.Get().OrderByDescending(p => p.DataCadastro));
         }
 
-
-        public ActionResult Detalhes(int id)
+        [HttpPost]
+        public JsonResult Detalhes(int id)
         {
-            return View(_bus.Get(id));
+            return new JsonResult { Data = _bus.Get(id) };
         }
 
 
@@ -35,9 +44,18 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Lista");
+                if (ModelState.IsValid)
+                {
+                    if (_bus.Add(model))
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista");
+                    }
+                    
+                    return View(model);
+                }
+                
+                return View(model);
             }
             catch
             {
@@ -48,7 +66,7 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
-            return View();
+            return View(_bus.Get(id));
         }
 
 
@@ -57,9 +75,18 @@ namespace Exploreh.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    if (_bus.Update(model))
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista");
+                    }
+                    
+                    return View(model);
+                }
 
-                return RedirectToAction("Lista");
+                return View(model);
             }
             catch
             {
@@ -68,20 +95,25 @@ namespace Exploreh.Web.Controllers
         }
 
 
-        public ActionResult Excluir(int id)
+        [HttpPost]
+        public JsonResult Excluir(int id)
         {
-            return View();
+            return new JsonResult { Data = _bus.Get(id) };
         }
 
 
         [HttpPost]
-        public ActionResult Excluir(PerfilModel model)
+        public ActionResult ExcluirConfirmar(PerfilModel model)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (_bus.Delete(model.Id))
+                {
+                    notificacao = true;
+                    return RedirectToAction("Lista");
+                }
 
-                return RedirectToAction("Lista");
+                return View();
             }
             catch
             {

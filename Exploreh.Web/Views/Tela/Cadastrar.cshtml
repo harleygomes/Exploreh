@@ -1,59 +1,58 @@
 ﻿@model Exploreh.Model.Telas.TelaModel
 
 @{
-    ViewBag.Title = "Cadastrar";
+    ViewBag.Title = "Cadastrar Telas";
 }
 
-<h2>Cadastrar</h2>
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>TelasModel</legend>
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Cadastro de Telas
+                    </div>
+                    <div class="panel-body">
+                        <div style=""></div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Nome</span>
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome da tela  Ex: /Usuarios/Contato">
+                        </div>
+                        
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Descrição da página</span>
+                            <textarea id="Descricao" type="text" class="form-control" name="Descricao" placeholder="Descrição da tela" rows="5"></textarea>
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
+                        <div class="input-fields">
+                            <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+                        </div>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ativo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ativo)
-            @Html.ValidationMessageFor(model => model.Ativo)
-        </div>
+                    <div class="input-fields">
+                        <button onclick="location.href='@Url.Action("Lista", "Perfil")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataCadastro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataCadastro)
-            @Html.ValidationMessageFor(model => model.DataCadastro)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataAlteracao)
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataAlteracao)
-            @Html.ValidationMessageFor(model => model.DataAlteracao)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Lista")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

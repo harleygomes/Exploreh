@@ -134,11 +134,12 @@
 @Scripts.Render("~/bundles/sweetAlert/js")
 
 
-<script src="~/Scripts/AjaxCall.js"></script>
+<script src="~/Scripts/UsuarioAjaxCall.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
-        //notificar();
+        
+        notificar();
 
         $('#deleteModal').click(function() {
             var url = '@Url.Action("ExcluirConfirmar", "Usuario")';
@@ -149,14 +150,14 @@
     });
 
     function notificar() {
-
+       
         var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
         if (notificacao === true) {
 
             setTimeout(function() {
                     swal({
                         title: "Good job!",
-                        text: "Usuário removido com sucesso!",
+                        text: "Ação concluida com sucesso!",
                         type: "success"
                     });
                 },
