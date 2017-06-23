@@ -10,7 +10,11 @@
     ViewBag.Title = "Lista de Usuários";
 }
 
-@Styles.Render("~/bundles/toastr/css")
+
+@section Styles {
+    @Styles.Render("~/bundles/toastr/css")
+    @Styles.Render("~/bundles/sweetAlert/css")
+}
 
 <div class="panel-body list">
     <h2>Lista de Usuários Cadastrados</h2>
@@ -127,14 +131,14 @@
 @Scripts.Render("~/bundles/jqueryui/js")
 @Scripts.Render("~/bundles/homer/js")
 @Scripts.Render("~/bundles/toastr/js")
+@Scripts.Render("~/bundles/sweetAlert/js")
+
 
 <script src="~/Scripts/AjaxCall.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function () {
-
-        var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
-        if (notificacao === true) notificar();
+    $(document).ready(function() {
+        //notificar();
 
         $('#deleteModal').click(function() {
             var url = '@Url.Action("ExcluirConfirmar", "Usuario")';
@@ -145,24 +149,18 @@
     });
 
     function notificar() {
-        Command: toastr["success"]("Dados salvos com sucesso", "Sucesso!");
 
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
+        var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
+        if (notificacao === true) {
+
+            setTimeout(function() {
+                    swal({
+                        title: "Good job!",
+                        text: "Usuário removido com sucesso!",
+                        type: "success"
+                    });
+                },
+                1000);
+        }
     }
 </script>

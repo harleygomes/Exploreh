@@ -53,7 +53,14 @@ function ExcluirConfirmar(model, url, urlafter) {
         data: JSON.stringify(model),
         contentType: "application/json",
         success: function (data) {
-
+            setTimeout(function () {
+                    swal({
+                        title: "Good job!",
+                        text: "Usuário removido com sucesso!",
+                        type: "success"
+                    });
+                },
+                1000);
         },
         error: function (xhr) { }
     });
