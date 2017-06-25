@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Exploreh.Business.Perfil;
-using Exploreh.Business.Permissao;
 using Exploreh.Business.Tela;
 using Exploreh.Model.Permissao;
+using Exploreh.Business.PerfilTela;
+using Exploreh.Model.PerfilTela;
+using Exploreh.Model.Telas;
 
 namespace Exploreh.Web.Controllers
 {
@@ -15,74 +17,167 @@ namespace Exploreh.Web.Controllers
 
         private readonly TelaBusiness _busTela;
         private readonly PerfilBusiness _busPerfil;
-        private readonly PermissaoBusiness _busPermissao;
+        private readonly PerfilTelaBusiness _busPerfilTela;
+        private static bool notificacao { get; set; }
 
         public PermissaoController()
         {
             this._busTela = new TelaBusiness();
             this._busPerfil = new PerfilBusiness();
-            this._busPermissao = new PermissaoBusiness();
+            this._busPerfilTela = new PerfilTelaBusiness();
+
         }
 
         public ActionResult Lista()
         {
-            var model = new PermissaoModel
-            {
-                Tela = _busTela.Get().Where(i => i.PerfilModel.Any(pm => pm.Perfil_Id == i.Id)).OrderByDescending(d => d.DataCadastro).ToList()
-            };
 
+            ViewBag.Notificacao = notificacao;
+            notificacao = false;
+
+            #region Join 
+            var telasPermissao = _busTela.Get()
+                .Join(
+                    _busPerfilTela.Get(),
+                    tela => tela.Id,
+                    perfilTela => perfilTela.Tela_Id,
+                    (tela, perfilTela) => new { tela, perfilTela }
+                )
+                .Join(
+                    _busPerfil.Get(),
+                    perfilTela => perfilTela.perfilTela.Perfil_Id,
+                    perfil => perfil.Id,
+                    (perfilTela, perfil) => new
+                    {
+                        Id = perfilTela.perfilTela.Id,
+                        Tela = perfilTela.tela.Nome,
+                        Ativo = perfilTela.tela.Ativo,
+                        Descricao = perfilTela.tela.Descricao,
+                        Perfil = perfil.Nome
+                    }
+                ).Where(tela => tela.Ativo).ToList();
+
+            var model = new List<PermissaoModel>();
+            foreach (var permissao in telasPermissao)
+            {
+                model.Add(new PermissaoModel
+                {
+                    Id = permissao.Id,
+                    Ativo = permissao.Ativo,
+                    Perfil = permissao.Perfil,
+                    Descricao = permissao.Descricao,
+                    Tela = permissao.Tela
+                });
+            }
+            #endregion
+
+            return View(model.OrderByDescending(i => i.Tela));
+        }
+
+        [HttpPost]
+        public JsonResult Detalhes(int id)
+        {
+            return new JsonResult { Data = ResultJoin(id) };
+
+        }
+
+
+        public ActionResult Cadastrar()
+        {
+            return View(new PerfilTelaModel
+            {
+                Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList(),
+                Perfil = _busPerfil.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList()
+            });
+        }
+
+
+        [HttpPost]
+        public ActionResult Cadastrar(PerfilTelaModel model)
+        {
+            try
+            {
+                var isExist = this._busPerfilTela.Get().Any(i => i.Perfil_Id == model.Perfil_Id && i.Tela_Id == model.Tela_Id);
+                if (model.Id == 0 && !isExist)
+                {
+                    notificacao = true;
+                    this._busPerfilTela.Add(model);
+                    return RedirectToAction("Lista");
+                }
+
+                if (model.Id == 0 && isExist)
+                {
+                    notificacao = true;
+                    return RedirectToAction("Lista");
+                }
+
+                this._busPerfilTela.Update(model);
+                return View(model);
+
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+        }
+
+
+        public ActionResult Editar(int id)
+        {
+            var model = _busPerfilTela.Get(id);
+            model.Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
+            model.Perfil = _busPerfil.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
 
             return View(model);
         }
 
-        
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-      
-        public ActionResult Cadastrar()
-        {
-            return View(new PermissaoModel
-            {
-                Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList(),
-                Perfil = _busPerfil.Get().Where(i=>i.Ativo).OrderByDescending(d => d.DataCadastro).ToList()
-            });
-        }
-
-       
         [HttpPost]
-        public ActionResult Cadastrar(PermissaoModel model)
+        public ActionResult Editar(PerfilTelaModel model)
         {
             try
             {
-                model.Perfil = _busPerfil.Get().Where(i => i.Id == model.PerfilId).ToList();
-                this._busPermissao.Add(model);
+                if (ModelState.IsValid)
+                {
+                    if (_busPerfilTela.Update(model))
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista");
+                    }
+                    else
+                    {
+                        model.Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
+                        model.Perfil = _busPerfil.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
+                        return View(model);
+                    }
+
+                }
 
                 return RedirectToAction("Lista");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
-        
-        public ActionResult Edit(int id)
+        public JsonResult Excluir(int id)
         {
-            return View();
+            return new JsonResult { Data = ResultJoin(id) };
         }
 
-        
+
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult ExcluirConfirmar(PerfilTelaModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (_busPerfilTela.Delete(model.Id))
+                {
+                    notificacao = true;
+                    return RedirectToAction("Lista");
+                }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Lista");
             }
             catch
             {
@@ -90,25 +185,45 @@ namespace Exploreh.Web.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public PermissaoModel ResultJoin(int id)
         {
-            return View();
+
+            #region Join 
+            var telasPermissao = _busTela.Get()
+                .Join(
+                    _busPerfilTela.Get(),
+                    tela => tela.Id,
+                    perfilTela => perfilTela.Tela_Id,
+                    (tela, perfilTela) => new { tela, perfilTela }
+                )
+                .Join(
+                    _busPerfil.Get(),
+                    perfilTela => perfilTela.perfilTela.Perfil_Id,
+                    perfil => perfil.Id,
+                    (perfilTela, perfil) => new
+                    {
+                        Id = perfilTela.perfilTela.Id,
+                        Tela = perfilTela.tela.Nome,
+                        Ativo = perfilTela.tela.Ativo,
+                        Descricao = perfilTela.tela.Descricao,
+                        Perfil = perfil.Nome
+                    }
+                ).FirstOrDefault(tela => tela.Id == id);
+
+            var model = new PermissaoModel();
+            if (telasPermissao != null)
+            {
+                model.Id = telasPermissao.Id;
+                model.Ativo = telasPermissao.Ativo;
+                model.Perfil = telasPermissao.Perfil;
+                model.Descricao = telasPermissao.Descricao;
+                model.Tela = telasPermissao.Tela;
+
+            }
+            #endregion
+
+            return model;
         }
 
-        
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

@@ -8,7 +8,7 @@
 
 
 @{
-    ViewBag.Title = "Cadastrar Permissão de Acesso";
+    ViewBag.Title = "Edição Permissão de Acesso";
 
     List<SelectListItem> listTela = new List<SelectListItem>();
 
@@ -31,11 +31,12 @@
             Value = Convert.ToString(item.Id)
         });
     }
+
 }
 
-<h2>Cadastrar</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -47,10 +48,12 @@
                         <div class="panel-tools">
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                         </div>
-                        Cadastro de Permissão de Acesso
+                        Edição de Permissão de Acesso
                     </div>
                     <div class="panel-body">
                         <div style=""></div>
+                        @Html.HiddenFor(model=>model.Id)
+
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Perfil</span>
                             @Html.DropDownListFor(model => model.Perfil_Id, listPerfil, "-- Selecione --", new { @class = "form-control" })
@@ -66,7 +69,7 @@
                     </div>
 
                     <div class="input-fields">
-                        <button onclick="location.href='@Url.Action("Lista", "Permissao")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                        <button onclick="location.href='@Url.Action("Lista", "Perfil")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
                     </div>
 
 

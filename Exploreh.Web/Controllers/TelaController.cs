@@ -52,7 +52,7 @@ namespace Exploreh.Web.Controllers
 
                 return RedirectToAction("Lista");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

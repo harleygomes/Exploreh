@@ -32,25 +32,25 @@ namespace Exploreh.Test.Business.Perfil
                 new PerfilModel()
                 {
                     Id = 0,
-                    Nome = "Nome I",
+                    Nome = "Administrador",
                     Ativo = true
                 },
                 new PerfilModel()
                 {
                     Id = 0,
-                    Nome = "Nome II",
+                    Nome = "Operação",
                     Ativo = true
                 },
                 new PerfilModel()
                 {
                     Id = 0,
-                    Nome = "Nome III",
+                    Nome = "Externo",
                     Ativo = true
                 },
                 new PerfilModel()
                 {
                     Id = 0,
-                    Nome = "Nome IV",
+                    Nome = "Parceiro",
                     Ativo = true
                 }
 

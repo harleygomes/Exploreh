@@ -10,7 +10,7 @@ using Exploreh.Repository.Repository;
 
 namespace Exploreh.Business.Permissao
 {
-    public class PermissaoBusiness
+    public class PerfilTelaBusiness
     {
         private readonly GenericRepository<Database.PerfilTela> _rep = new GenericRepository<Database.PerfilTela>();
         
@@ -20,13 +20,12 @@ namespace Exploreh.Business.Permissao
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Add(PermissaoModel model)
+        public bool Add(PerfilTelaModel model)
         {
-            
             return _rep.Add(new PerfilTelaModel
             {
-                Perfil_Id = model.PerfilId,
-                Tela_Id = model.TelaId,
+                Perfil_Id = model.Perfil_Id,
+                Tela_Id = model.Tela_Id,
                 DataCadastro = DateTime.Now
             });
         }

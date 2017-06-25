@@ -10,9 +10,10 @@ namespace Exploreh.Model.Permissao
 {
     public class PermissaoModel
     {
-        public int TelaId { get; set; }
-        public List<TelaModel> Tela { get; set; }
-        public int PerfilId { get; set; }
-        public List<PerfilModel> Perfil { get; set; }
+        public int Id { get; set; }
+        public bool Ativo { get; set; }
+        public string Descricao { get; set; }
+        public string Perfil { get; set; }
+        public string Tela { get; set; }
     }
 }

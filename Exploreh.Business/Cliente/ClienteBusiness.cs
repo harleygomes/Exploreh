@@ -64,18 +64,21 @@ namespace Exploreh.Business.Cliente
             });
             var contatos = new List<ClienteContatoModel>();
 
-            for (int i = 0; i < model.ContatoNome.Length; i++)
+            if (model.ContatoNome != null)
             {
-                if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]))
+                for (int i = 0; i < model.ContatoNome.Length; i++)
                 {
-                    ClienteContatoModel c = new ClienteContatoModel
+                    if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]))
                     {
-                        Nome = model.ContatoNome[i],
-                        Email = model.ContatoEmail[i],
-                        Ativo = true,
-                        DataCadastro = DateTime.Now
-                    };
-                    contatos.Add(c);
+                        ClienteContatoModel c = new ClienteContatoModel
+                        {
+                            Nome = model.ContatoNome[i],
+                            Email = model.ContatoEmail[i],
+                            Ativo = true,
+                            DataCadastro = DateTime.Now
+                        };
+                        contatos.Add(c);
+                    }
                 }
             }
             model.ClienteContato = contatos;

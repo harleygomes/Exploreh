@@ -141,8 +141,6 @@
   </EntityType>
   <EntityType Name="PerfilTela">
     <Key>
-      <PropertyRef Name="Perfil_Id" />
-      <PropertyRef Name="Tela_Id" />
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
@@ -436,8 +434,6 @@
         </EntityType>
         <EntityType Name="PerfilTela">
           <Key>
-            <PropertyRef Name="Perfil_Id" />
-            <PropertyRef Name="Tela_Id" />
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Perfil_Id" Type="Int32" Nullable="false" />
@@ -683,9 +679,9 @@
     <EntitySetMapping Name="PerfilTela">
       <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.PerfilTela)">
         <MappingFragment StoreEntitySet="PerfilTela">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Perfil_Id" ColumnName="Perfil_Id" />
           <ScalarProperty Name="Tela_Id" ColumnName="Tela_Id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
         </MappingFragment>
       </EntityTypeMapping>

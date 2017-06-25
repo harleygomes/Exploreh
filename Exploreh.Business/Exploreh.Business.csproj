@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente\ClienteBusiness.cs" />
+    <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />
     <Compile Include="Perfil\PerfilBusiness.cs" />
-    <Compile Include="Permissao\PermissaoBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tela\TelaBusiness.cs" />
     <Compile Include="Usuario\UsuarioBusiness.cs" />

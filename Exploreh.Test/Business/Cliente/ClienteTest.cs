@@ -54,52 +54,52 @@ namespace Exploreh.Test.Business.Cliente
                 Ativo= true
             } };
 
-            var retorno = _bus.Add(c);
+            var result = _bus.Add(c);
 
-            Assert.AreEqual(true, retorno);
+            Assert.AreEqual(true, result);
 
         }
 
         [TestMethod]
-    public void TestMethod_Crud_Edicao()
-    {
-        //var Area = new AreaModel
-        //{
-        //    Id = 3,
-        //    Nome = "Marketing",
-        //    Descricao = "ALT Ipsum Operacao Dolor Ahubn as Loren Ipsum Operacao Dolor Ahubn asLoren Ipsum Operacao Dolor Ahubn as",
-        //    UsuarioIdEdicao = 1,
-        //    Ativo = true
-        //};
+        public void TestMethod_Crud_Edicao()
+        {
+            //var Area = new AreaModel
+            //{
+            //    Id = 3,
+            //    Nome = "Marketing",
+            //    Descricao = "ALT Ipsum Operacao Dolor Ahubn as Loren Ipsum Operacao Dolor Ahubn asLoren Ipsum Operacao Dolor Ahubn as",
+            //    UsuarioIdEdicao = 1,
+            //    Ativo = true
+            //};
 
-        //var retorno = _bus.Update(Area);
+            //var retorno = _bus.Update(Area);
 
-        //Assert.AreEqual(true, retorno);
+            //Assert.AreEqual(true, retorno);
 
+        }
+
+        [TestMethod]
+        public void TestMethod_Crud_Deletar()
+        {
+            //var Area = new AreaModel
+            //{
+            //    Id = 3,
+            //    Ativo = false
+            //};
+
+            //var retorno = _bus.Update(Area);
+
+            //Assert.AreEqual(true, retorno);
+
+        }
+
+        [TestMethod]
+        public void TestMethod_Crud_Listar()
+        {
+            //var retorno = _bus.Get();
+
+            //Assert.AreEqual(true, retorno != null);
+
+        }
     }
-
-    [TestMethod]
-    public void TestMethod_Crud_Deletar()
-    {
-        //var Area = new AreaModel
-        //{
-        //    Id = 3,
-        //    Ativo = false
-        //};
-
-        //var retorno = _bus.Update(Area);
-
-        //Assert.AreEqual(true, retorno);
-
-    }
-
-    [TestMethod]
-    public void TestMethod_Crud_Listar()
-    {
-        //var retorno = _bus.Get();
-
-        //Assert.AreEqual(true, retorno != null);
-
-    }
-}
 }

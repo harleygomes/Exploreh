@@ -16,9 +16,13 @@ namespace Exploreh.Model.Telas
         public bool Ativo { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
-        public virtual List<PerfilTelaModel> PerfilModel { get; set; }
-
+        public virtual List<PerfilTelaModel> PerfilTelaModel { get; set; }
         public string Descricao { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<PerfilModel> PerfilModel { get; set; }
 
         public static implicit operator TelaModel(Database.Tela telas)
         {
@@ -32,7 +36,7 @@ namespace Exploreh.Model.Telas
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
                 Descricao = telas.Descricao,
-                PerfilModel = telas.PerfilTela.ToList().ConvertAll<PerfilTelaModel>(x => x) 
+                PerfilTelaModel = telas.PerfilTela?.ToList().ConvertAll<PerfilTelaModel>(x => x) 
             };
         }
 
@@ -48,7 +52,7 @@ namespace Exploreh.Model.Telas
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
                 Descricao = telas.Descricao,
-                PerfilTela = telas.PerfilModel.ToList().ConvertAll<Database.PerfilTela>(x => x)
+                PerfilTela = telas.PerfilTelaModel?.ToList().ConvertAll<Database.PerfilTela>(x => x)
             };
         }
     }

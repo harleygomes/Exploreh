@@ -215,6 +215,7 @@
     <Content Include="Images\p1.jpg" />
     <Content Include="Images\p2.jpg" />
     <Content Include="Images\profile.jpg" />
+    <Content Include="Scripts\PermissaoAjaxCall.js" />
     <Content Include="Scripts\TelaAjaxCall.js" />
     <Content Include="Scripts\PerfilAjaxCall.js" />
     <Content Include="Scripts\UsuarioAjaxCall.js" />
@@ -2677,6 +2678,7 @@
     <Content Include="Views\Tela\Cadastrar.cshtml" />
     <Content Include="Views\Permissao\Lista.cshtml" />
     <Content Include="Views\Permissao\Cadastrar.cshtml" />
+    <Content Include="Views\Permissao\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">
