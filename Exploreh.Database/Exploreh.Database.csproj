@@ -87,6 +87,9 @@
     <Compile Include="Perfil.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PerfilTela.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tela.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
@@ -122,6 +125,7 @@
     </Content>
     <Content Include="ExplorehModel_11062017_Eder.edmx.sql" />
     <Content Include="ExplorehModel_Eder_2206.edmx.sql" />
+    <Content Include="ExplorehModel_Eder_2406.edmx.sql" />
     <Content Include="ExplorehModel_Harley.edmx.sql" />
     <Content Include="ExplorehModel_Harley_2106.edmx.sql" />
   </ItemGroup>

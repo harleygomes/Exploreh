@@ -19,7 +19,7 @@ namespace Exploreh.Database
         public string Email { get; set; }
         public int ClienteId { get; set; }
         public System.DateTime DataCadastro { get; set; }
-        public Nullable<System.DateTime> DataAlteracao { get; set; }
+        public System.DateTime DataAlteracao { get; set; }
         public bool Ativo { get; set; }
     
         public virtual Cliente Cliente { get; set; }

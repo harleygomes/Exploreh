@@ -27,8 +27,8 @@ namespace Exploreh.Database
         public int EstadoId { get; set; }
         public string CEP { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual Cidade Cidade { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Estado Estado { get; set; }
     }
 }

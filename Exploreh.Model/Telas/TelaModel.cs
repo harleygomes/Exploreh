@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exploreh.Database;
 using Exploreh.Model.Perfil;
+using Exploreh.Model.PerfilTela;
 
 namespace Exploreh.Model.Telas
 {
@@ -14,12 +16,14 @@ namespace Exploreh.Model.Telas
         public bool Ativo { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
-        public virtual ICollection<PerfilModel> PerfilModel { get; set; }
+        public virtual List<PerfilTelaModel> PerfilModel { get; set; }
 
         public string Descricao { get; set; }
 
         public static implicit operator TelaModel(Database.Tela telas)
         {
+            if(telas == null) return new TelaModel();
+
             return new TelaModel
             {
                 Id = telas.Id,
@@ -27,12 +31,15 @@ namespace Exploreh.Model.Telas
                 Ativo = telas.Ativo,
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
-                Descricao = telas.Descricao
+                Descricao = telas.Descricao,
+                PerfilModel = telas.PerfilTela.ToList().ConvertAll<PerfilTelaModel>(x => x) 
             };
         }
 
         public static implicit operator Database.Tela(TelaModel telas)
         {
+            if(telas == null) return new Tela();
+
             return new Database.Tela
             {
                 Id = telas.Id,
@@ -40,7 +47,8 @@ namespace Exploreh.Model.Telas
                 Ativo = telas.Ativo,
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
-                Descricao = telas.Descricao
+                Descricao = telas.Descricao,
+                PerfilTela = telas.PerfilModel.ToList().ConvertAll<Database.PerfilTela>(x => x)
             };
         }
     }

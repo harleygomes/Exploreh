@@ -41,7 +41,7 @@ namespace Exploreh.Model.Cliente
                 Nome = c.Nome,
                 Email = c.Email,
                 DataCadastro = c.DataCadastro,
-                DataAlteracao = c.DataAlteracao,
+                DataAlteracao = c.DataAlteracao?? DateTime.Now,
                 Ativo = c.Ativo
             };
         }

@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[Tela] (
 GO
 
 -- Creating table 'ClienteContatoSet'
-CREATE TABLE [dbo].[ClienteContatoSet] (
+CREATE TABLE [dbo].[ClienteContato] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,

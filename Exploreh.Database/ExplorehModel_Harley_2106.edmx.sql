@@ -42,7 +42,7 @@ IF OBJECT_ID(N'[dbo].[FK_PerfilTela_Tela]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PerfilTela] DROP CONSTRAINT [FK_PerfilTela_Tela];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteContatoCliente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClienteContatoSet] DROP CONSTRAINT [FK_ClienteContatoCliente];
+    ALTER TABLE [dbo].[ClienteContato] DROP CONSTRAINT [FK_ClienteContatoCliente];
 GO
 
 -- --------------------------------------------------
@@ -73,8 +73,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Tela]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tela];
 GO
-IF OBJECT_ID(N'[dbo].[ClienteContatoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClienteContatoSet];
+IF OBJECT_ID(N'[dbo].[ClienteContato]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClienteContato];
 GO
 IF OBJECT_ID(N'[dbo].[PerfilTela]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerfilTela];
@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[Tela] (
 GO
 
 -- Creating table 'ClienteContatoSet'
-CREATE TABLE [dbo].[ClienteContatoSet] (
+CREATE TABLE [dbo].[ClienteContato] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
@@ -253,8 +253,8 @@ ADD CONSTRAINT [PK_Tela]
 GO
 
 -- Creating primary key on [Id] in table 'ClienteContatoSet'
-ALTER TABLE [dbo].[ClienteContatoSet]
-ADD CONSTRAINT [PK_ClienteContatoSet]
+ALTER TABLE [dbo].[ClienteContato]
+ADD CONSTRAINT [PK_ClienteContato]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -383,7 +383,7 @@ ON [dbo].[PerfilTela]
 GO
 
 -- Creating foreign key on [ClienteId] in table 'ClienteContatoSet'
-ALTER TABLE [dbo].[ClienteContatoSet]
+ALTER TABLE [dbo].[ClienteContato]
 ADD CONSTRAINT [FK_ClienteContatoCliente]
     FOREIGN KEY ([ClienteId])
     REFERENCES [dbo].[Cliente]
@@ -393,7 +393,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClienteContatoCliente'
 CREATE INDEX [IX_FK_ClienteContatoCliente]
-ON [dbo].[ClienteContatoSet]
+ON [dbo].[ClienteContato]
     ([ClienteId]);
 GO
 

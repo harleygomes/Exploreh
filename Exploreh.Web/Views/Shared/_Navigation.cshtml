@@ -38,10 +38,13 @@
             <a href="@Url.Action("Lista", "Cliente")"> <span class="nav-label">Clientes</span> </a>
         </li>
         <li class="@Html.IsSelected(action: "Lista")">
-            <a href="@Url.Action("Lista", "Perfil")"> <span class="nav-label">Perfil</span> </a>
+            <a href="@Url.Action("Lista", "Perfil")"> <span class="nav-label">Perfis</span> </a>
         </li>
         <li class="@Html.IsSelected(action: "Lista")">
             <a href="@Url.Action("Lista", "Tela")"> <span class="nav-label">Telas</span> </a>
+        </li>
+        <li class="@Html.IsSelected(action: "Lista")">
+            <a href="@Url.Action("Lista", "Permissao")"> <span class="nav-label">Permissões</span> </a>
         </li>
         <li class="@Html.IsSelected(controller: "Dashboard")">
             <a href="@Url.Action("Index", "Dashboard")"> <span class="nav-label">Dashboard</span> <span class="label label-success pull-right">v.1</span> </a>
