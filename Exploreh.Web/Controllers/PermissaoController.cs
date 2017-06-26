@@ -7,6 +7,7 @@ using Exploreh.Business.Perfil;
 using Exploreh.Business.Tela;
 using Exploreh.Model.Permissao;
 using Exploreh.Business.PerfilTela;
+using Exploreh.Model.Helper;
 using Exploreh.Model.PerfilTela;
 using Exploreh.Model.Telas;
 
@@ -30,6 +31,11 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Lista()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
 
             ViewBag.Notificacao = notificacao;
             notificacao = false;
@@ -83,6 +89,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Cadastrar()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             return View(new PerfilTelaModel
             {
                 Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList(),
@@ -94,6 +106,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(PerfilTelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 var isExist = this._busPerfilTela.Get().Any(i => i.Perfil_Id == model.Perfil_Id && i.Tela_Id == model.Tela_Id);
@@ -123,6 +141,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             var model = _busPerfilTela.Get(id);
             model.Tela = _busTela.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
             model.Perfil = _busPerfil.Get().Where(i => i.Ativo).OrderByDescending(d => d.DataCadastro).ToList();
@@ -134,6 +158,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Editar(PerfilTelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -169,6 +199,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult ExcluirConfirmar(PerfilTelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (_busPerfilTela.Delete(model.Id))

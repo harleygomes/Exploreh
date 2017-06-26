@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Exploreh.Business.Perfil;
 using Exploreh.Business.Usuario;
 using Exploreh.Model.Cliente;
+using Exploreh.Model.Helper;
 using Exploreh.Model.Usuario;
 
 namespace Exploreh.Web.Controllers
@@ -18,11 +19,16 @@ namespace Exploreh.Web.Controllers
         {
             this._busUsuario = new UsuarioBusiness();
             this._busPerfil = new PerfilBusiness();
-
         }
 
         public ActionResult Lista()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             ViewBag.Notificacao = notificacao;
             notificacao = false;
 
@@ -40,6 +46,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Cadastrar()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             return View(new UsuarioModel() { Perfis = _busPerfil.Get() });
         }
 
@@ -47,6 +59,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(UsuarioModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -73,6 +91,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             var model = _busUsuario.Get(id);
             model.Perfis = _busPerfil.Get();
 
@@ -83,6 +107,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Editar(UsuarioModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -117,6 +147,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult ExcluirConfirmar(ClienteModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (_busUsuario.Delete(model.Id))

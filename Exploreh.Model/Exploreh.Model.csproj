@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,7 @@
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
     <Compile Include="Crypt\Crypt.cs" />
     <Compile Include="Estado\EstadoModel.cs" />
+    <Compile Include="Helper\AutenticacaoProvider.cs" />
     <Compile Include="PerfilTela\PerfilTelaModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Permissao\PermissaoModel.cs" />

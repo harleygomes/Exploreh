@@ -215,6 +215,8 @@
     <Content Include="Images\p1.jpg" />
     <Content Include="Images\p2.jpg" />
     <Content Include="Images\profile.jpg" />
+    <Content Include="Images\user_logo.png" />
+    <Content Include="Images\venturas_logo.png" />
     <Content Include="Scripts\PermissaoAjaxCall.js" />
     <Content Include="Scripts\TelaAjaxCall.js" />
     <Content Include="Scripts\PerfilAjaxCall.js" />

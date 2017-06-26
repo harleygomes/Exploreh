@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Exploreh.Business.Tela;
+using Exploreh.Model.Helper;
 using Exploreh.Model.Telas;
 
 namespace Exploreh.Web.Controllers
@@ -15,6 +16,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Lista()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             ViewBag.Notificacao = notificacao;
             notificacao = false;
 
@@ -29,6 +36,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Cadastrar()
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             return View();
         }
 
@@ -36,6 +49,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(TelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -61,6 +80,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             return View(_bus.Get(id));
         }
 
@@ -68,6 +93,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Editar(TelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -100,6 +131,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult ExcluirConfirmar(TelaModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 if (_bus.Delete(model.Id))

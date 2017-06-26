@@ -13,7 +13,7 @@ namespace Exploreh.Business.Usuario
     public class UsuarioBusiness
     {
         private readonly GenericRepository<Database.Usuario> _rep = new GenericRepository<Database.Usuario>();
-
+        
         /// <summary>
         /// 
         /// </summary>

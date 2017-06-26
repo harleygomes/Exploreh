@@ -51,7 +51,9 @@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Ativo</span>
-                            <div style="margin-left: 10px"> @Html.CheckBoxFor(model => model.Ativo)</div>
+                            <div class="icheckbox_square-green" style="position: relative;margin-left: 10px">
+                                @Html.CheckBoxFor(model => model.Ativo, new {@class = "i-checks"})
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Perfil</span>

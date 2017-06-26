@@ -32,7 +32,7 @@
                         <div class="input-group input-fields">
                             @Html.HiddenFor(m => m.Id)
                             <span class="input-group-addon">Nome</span>
-                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome" required="">
                         </div>
                         <div class="input-group input-fields">
                             <div class="radio radio-info radio-inline">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="input-group input-fields">
                                 <span class="input-group-addon">Documento</span>
-                                <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento">
+                                <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento" required="">
                             </div>
                             <div class="input-group input-fields">
                                 <span class="input-group-addon">Sexo</span>

@@ -1,41 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.Mvc;
+using Exploreh.Business.Cidade;
 using Exploreh.Business.Cliente;
+using Exploreh.Business.Estado;
 using Exploreh.Model.Cliente;
+using Exploreh.Model.Helper;
 
 namespace Exploreh.Web.Controllers
 {
     public class ClienteController : Controller
     {
-       private readonly ClienteBusiness _bus = new ClienteBusiness();
+        private readonly ClienteBusiness _busCliente;
+        private readonly EstadoBusiness _busEstado;
+        private readonly CidadeBusiness _busCidade;
+
+        private static bool notificacao { get; set; }
+
+
+        public ClienteController()
+        {
+            this._busCliente = new ClienteBusiness();
+            this._busEstado = new EstadoBusiness();
+            this._busCidade = new CidadeBusiness();
+        }
 
         public ActionResult Lista(bool? notificar)
         {
-            ViewBag.Notificacao = notificar;
-            return View(_bus.Get());
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
+            ViewBag.Notificacao = notificacao;
+            notificacao = false;
+
+            return View(_busCliente.Get());
         }
 
 
         public ActionResult Detalhes(int id)
         {
-            return View(_bus.Get(id));
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
+            return View(_busCliente.Get(id));
         }
 
 
         public ActionResult Cadastrar()
         {
-            return View();
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+            
+            return View(new ClienteModel
+            {
+                Estado = _busEstado.Get().ToList()
+            });
         }
 
 
         [HttpPost]
         public ActionResult Cadastrar(ClienteModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
-                return RedirectToAction("Lista", new {notificar = _bus.Add(model)});
+                if (ModelState.IsValid)
+                {
+                    notificacao = true;   
+                    return RedirectToAction("Lista", new {notificar = _busCliente.Add(model)});
+                }
+
+                return View(model);
             }
             catch
             {
@@ -46,26 +97,38 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Editar(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
-                var model = _bus.Get(id);
-                model.ClienteTelefone = new List<ClienteTelefoneModel> {new ClienteTelefoneModel {Ddd = "11",Telefone = "5551-98898",TipoTelefone = "F"} };
+                var model = _busCliente.Get(id);
+                model.ClienteTelefone = new List<ClienteTelefoneModel> { new ClienteTelefoneModel { Ddd = "11", Telefone = "5551-98898", TipoTelefone = "F" } };
                 return View(model);
             }
             catch
             {
                 return View();
             }
-            
+
         }
 
 
         [HttpPost]
         public ActionResult Editar(ClienteModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
-                _bus.Update(model);
+                _busCliente.Update(model);
                 return RedirectToAction("Lista");
             }
             catch
@@ -77,6 +140,12 @@ namespace Exploreh.Web.Controllers
 
         public ActionResult Excluir(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             return View();
         }
 
@@ -84,6 +153,12 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public ActionResult Excluir(ClienteModel model)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
             try
             {
                 // TODO: Add delete logic here
@@ -94,6 +169,13 @@ namespace Exploreh.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult GetCidade(int id)
+        {
+            var result = new JsonResult { Data = this._busCidade.GetCidade(id) };
+            return result;
         }
     }
 }
