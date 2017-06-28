@@ -42,18 +42,6 @@ namespace Exploreh.Web.Controllers
         }
 
 
-        public ActionResult Detalhes(int id)
-        {
-            var usuario = AutenticacaoProvider.UsuarioAutenticado;
-            if (usuario == null)
-            {
-                return RedirectToAction("Login", "CommonViews");
-            }
-
-            return View(_busCliente.Get(id));
-        }
-
-
         public ActionResult Cadastrar()
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
@@ -61,7 +49,7 @@ namespace Exploreh.Web.Controllers
             {
                 return RedirectToAction("Login", "CommonViews");
             }
-            
+
             return View(new ClienteModel
             {
                 Estado = _busEstado.Get().ToList()
@@ -82,8 +70,8 @@ namespace Exploreh.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    notificacao = true;   
-                    return RedirectToAction("Lista", new {notificar = _busCliente.Add(model)});
+                    notificacao = true;
+                    return RedirectToAction("Lista", new { notificar = _busCliente.Add(model) });
                 }
 
                 return View(model);
@@ -138,20 +126,8 @@ namespace Exploreh.Web.Controllers
         }
 
 
-        public ActionResult Excluir(int id)
-        {
-            var usuario = AutenticacaoProvider.UsuarioAutenticado;
-            if (usuario == null)
-            {
-                return RedirectToAction("Login", "CommonViews");
-            }
-
-            return View();
-        }
-
-
         [HttpPost]
-        public ActionResult Excluir(ClienteModel model)
+        public ActionResult ExcluirConfirmar(ClienteModel model)
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -172,10 +148,36 @@ namespace Exploreh.Web.Controllers
         }
 
         [HttpPost]
+        public JsonResult Detalhes(int id)
+        {
+           
+            return new JsonResult { Data = _busCliente.Get(id) };
+        }
+
+        [HttpPost]
+        public JsonResult Excluir(int id)
+        {
+            
+            return new JsonResult { Data = _busCliente.Get(id) };
+        }
+
+        [HttpPost]
         public JsonResult GetCidade(int id)
         {
-            var result = new JsonResult { Data = this._busCidade.GetCidade(id) };
-            return result;
+            return new JsonResult { Data = this._busCidade.GetCidade(id) };
+            
+        }
+
+        [HttpPost]
+        public JsonResult GetCidadeByName(string cidade)
+        {
+            return new JsonResult { Data = this._busCidade.Get().FirstOrDefault(c => c.Nome.ToLower() == cidade.ToLower()) };
+        }
+
+        [HttpPost]
+        public JsonResult GetEstadoById(string uf)
+        {
+            return new JsonResult { Data = this._busEstado.Get().FirstOrDefault(c => c.Sigla.ToUpper() == uf.ToUpper()) };
         }
     }
 }

@@ -217,9 +217,11 @@
     <Content Include="Images\profile.jpg" />
     <Content Include="Images\user_logo.png" />
     <Content Include="Images\venturas_logo.png" />
+    <Content Include="Scripts\BuscaCep.js" />
     <Content Include="Scripts\PermissaoAjaxCall.js" />
     <Content Include="Scripts\TelaAjaxCall.js" />
     <Content Include="Scripts\PerfilAjaxCall.js" />
+    <Content Include="Scripts\ClienteAjaxCall.js" />
     <Content Include="Scripts\UsuarioAjaxCall.js" />
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\homer.js" />

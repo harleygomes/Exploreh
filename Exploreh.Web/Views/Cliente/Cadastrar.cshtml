@@ -10,16 +10,6 @@
 @{
     ViewBag.Title = "Cadastrar novo Cliente";
 
-    List<SelectListItem> listEstado = new List<SelectListItem>();
-
-    foreach (var item in Model.Estado)
-    {
-        listEstado.Add(new SelectListItem
-        {
-            Text = item.Nome,
-            Value = Convert.ToString(item.Id)
-        });
-    }
 }
 
 @using (Html.BeginForm())
@@ -115,15 +105,15 @@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Endereço</span>
-                            <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro">
-                            <input id="ClienteEndereco[0]_Numero" type="text" class="form-control" name="ClienteEndereco[0].Numero" placeholder="Número">
-                            <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
-                            <input id="ClienteEndereco[0]_CEP" type="text" class="form-control" name="ClienteEndereco[0].CEP" placeholder="CEP">
-                            <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control" name="ClienteEndereco[0].Bairro" placeholder="Bairro">
-                            @Html.DropDownListFor(model => model.EstadoId, listEstado, "Estado", new { @class = "form-control ddlEstado", id = "ClienteEndereco[0]_EstadoId", Name = "ClienteEndereco[0].EstadoId" })
-                            @*<input id="ClienteEndereco[0]_EstadoId" type="text" class="form-control" name="ClienteEndereco[0].EstadoId" placeholder="Estado">*@
-                            
-                            <input id="ClienteEndereco[0]_CidadeId" type="text" class="form-control" name="ClienteEndereco[0].CidadeId" placeholder="Cidade">
+                            <input id="ClienteEndereco[0]_CEP" type="text" class="form-control cep" name="ClienteEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos">
+                            <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control logradouro" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro">
+                            <input id="ClienteEndereco[0]_Numero" type="text" class="form-control numero" name="ClienteEndereco[0].Numero" placeholder="Número">
+                            <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
+                            <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control bairro" name="ClienteEndereco[0].Bairro" placeholder="Bairro">
+                            <input id="ClienteEndereco[0]_Estado" type="text" class="form-control estado" placeholder="Estado">
+                            <input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">
+                            <input name="ClienteEndereco[0].EstadoId" type="text" hidden="hidden" id="estadoId">
+                            <input name="ClienteEndereco[0].CidadeId" type="text" hidden="hidden" id="cidadeId">
                         </div>
                     </div>
                 </div>
@@ -166,8 +156,10 @@
 }
 
 
-@Scripts.Render("~/bundles/jquery/js")  
-@Scripts.Render("~/bundles/homer/js") 
+@Scripts.Render("~/bundles/jquery/js")
+@Scripts.Render("~/bundles/homer/js")
+
+<script src="~/Scripts/BuscaCep.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -178,6 +170,25 @@
         $("#Cidade").change(function (evt) {
             $('#CidadeId').val($(this).val());
 
+        });
+
+        $('.cep').focusout(function () {
+            var result = BuscaCep($(this).val());
+            
+            $('.logradouro').val(result.tipo_logradouro + ' ' + result.logradouro);
+            $('.numero').val();
+            $('.complemento').val();
+            $('.bairro').val(result.bairro);
+
+            var resultCidade = BuscaCidade('@Url.Action("GetCidadeByName", "Cliente")', result.cidade);
+            $('.cidade').val(resultCidade.Nome);
+            $('#cidadeId').val(resultCidade.Id);
+            
+
+            var resultEstado = BuscaEstado('@Url.Action("GetEstadoById", "Cliente")', result.uf);
+            $('.estado').val(resultEstado.Nome);
+            $('#estadoId').val(resultCidade.EstadoId);
+            
         });
 
     });
