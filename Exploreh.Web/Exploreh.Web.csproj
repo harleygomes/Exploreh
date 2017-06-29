@@ -222,6 +222,7 @@
     <Content Include="Scripts\TelaAjaxCall.js" />
     <Content Include="Scripts\PerfilAjaxCall.js" />
     <Content Include="Scripts\ClienteAjaxCall.js" />
+    <Content Include="Scripts\DashboardAjaxCall.js" />
     <Content Include="Scripts\UsuarioAjaxCall.js" />
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\homer.js" />

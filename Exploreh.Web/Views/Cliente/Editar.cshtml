@@ -16,7 +16,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    @Html.EditorForModel(Model.ClienteTelefone)
+
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
@@ -28,66 +28,207 @@
                         Cadastro de Clientes
                     </div>
                     <div class="panel-body">
-                        <div style=""></div>
                         <div class="input-group input-fields">
                             @Html.HiddenFor(m => m.Id)
                             <span class="input-group-addon">Nome</span>
-                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário" value="@Model.Nome" required="">
+                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do cliente" value="@Model.Nome" required="">
                         </div>
-                        <div class="input-group input-fields">
-                            <div class="radio radio-info radio-inline">
+                        <div class="radio radio-inline">
+                            <div class="radio radio-inline">
                                 <input type="radio" id="inlineRadio1" value="F" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("F")">
                                 <label for="inlineRadio1"> Pessoa física </label>
                             </div>
-
                             <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="J" name="TipoPessoa"  checked="@Model.TipoPessoa.Equals("J")">
+                                <input type="radio" id="inlineRadio2" value="J" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("J")">
                                 <label for="inlineRadio2"> Pessoa jurídica </label>
                             </div>
                             <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="E" name="TipoPessoa"  checked="@Model.TipoPessoa.Equals("E")">
+                                <input type="radio" id="inlineRadio2" value="E" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("E")">
                                 <label for="inlineRadio2"> Estrangeiro </label>
                             </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Documento</span>
-                                <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento" required="">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Sexo</span>
-                                <input id="Sexo" type="text" class="form-control" name="Sexo" placeholder="Sexo" value="@Model.Sexo">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Data de nascimento</span>
-                                <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Ocupação</span>
-                                <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação" value="@Model.Ocupacao">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">E-mail</span>
-                                <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail" value="@Model.Email">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Home page</span>
-                                <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page" value="@Model.HomePage">
-                            </div>
                         </div>
-                        <div class="input-fields">
-                            <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Documento</span>
+                            <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento" required="">
                         </div>
-                        <div class="input-fields">
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Sexo</span>
+                            <input id="Sexo" type="text" class="form-control" name="Sexo" placeholder="Sexo" value="@Model.Sexo">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Data de nascimento</span>
+                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Ocupação</span>
+                            <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação" value="@Model.Ocupacao">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">E-mail</span>
+                            <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail" value="@Model.Email">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Home page</span>
+                            <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page" value="@Model.HomePage">
+                        </div>
+
+                    </div>
+
+                    @*<div class="input-fields">
                             <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+                        </div>*@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                         </div>
-
-
+                        Cliente Telefones
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.ClienteTelefone != null)
+                        {
+                            foreach (var telefone in Model.ClienteTelefone)
+                            {
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">DDD</span>
+                                    <input id="@telefone.Ddd" type="text" class="form-control" name="@telefone.Ddd" placeholder="DDD" value="@telefone.Ddd">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Telefone</span>
+                                    <input id="@telefone.Telefone" type="text" class="form-control" name="@telefone.Telefone" placeholder="Telefone" value="@telefone.Telefone">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Tipo</span>
+                                    @if (telefone.TipoTelefone == "C")
+                                    {
+                                        <div class="radio radio-info radio-inline">
+                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="F">
+                                            <label for="@telefone.TipoTelefone"> Fixo </label>
+                                        </div>
+                                        <div class="radio radio-info radio-inline">
+                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="C" checked="checked">
+                                            <label for="@telefone.TipoTelefone"> Celular </label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="radio radio-info radio-inline">
+                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="F" checked="checked">
+                                            <label for="@telefone.TipoTelefone"> Fixo </label>
+                                        </div>
+                                        <div class="radio radio-info radio-inline">
+                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="C">
+                                            <label for="@telefone.TipoTelefone"> Celular </label>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Cliente Endereços
+                    </div>
+                    <div class="panel-body">
+
+                        @if (Model.ClienteEndereco != null)
+                        {
+                            foreach (var endereco in Model.ClienteEndereco)
+                            {
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Cep</span>
+                                    <input id="@endereco.CEP" type="text" class="form-control" name="@endereco.CEP" placeholder="Cep" value="@endereco.CEP">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Logradouro</span>
+                                    <input id="@endereco.Logradouro" type="text" class="form-control" name="@endereco.Logradouro" placeholder="Logradouro" value="@endereco.Logradouro">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Número</span>
+                                    <input id="@endereco.Numero" type="text" class="form-control" name="@endereco.Numero" placeholder="Número" value="@endereco.Numero">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Complemento</span>
+                                    <input id="@endereco.Complemento" type="text" class="form-control" name="@endereco.Complemento" placeholder="Complemento" value="@endereco.Complemento">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Bairro</span>
+                                    <input id="@endereco.Bairro" type="text" class="form-control" name="@endereco.Bairro" placeholder="Bairro" value="@endereco.Bairro">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Estado</span>
+                                    <input id="@endereco.Estado" type="text" class="form-control" name="@endereco.Estado" placeholder="Estado" value="@endereco.Estado">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Cidade</span>
+                                    <input id="@endereco.Cidade" type="text" class="form-control" name="@endereco.Cidade" placeholder="Cidade" value="@endereco.Cidade">
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Cliente Contatos
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.ClienteContato != null)
+                        {
+                            foreach (var contato in Model.ClienteContato)
+                            {
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Nome do Contato</span>
+                                    <input id="@contato.Nome" type="text" class="form-control" name="@contato.Nome" placeholder="Nome do contato" value="@contato.Nome">
+                                </div>
+
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">E-mail do Contato </span>
+                                    <input id="@contato.Email" type="text" class="form-control" name="@contato.Email" placeholder="E-mail do contato" value="@contato.Email">
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="input-fields">
+        <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+    </div>
+    <div class="input-fields">
+        <button onclick="location.href = '@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+    </div>
 }

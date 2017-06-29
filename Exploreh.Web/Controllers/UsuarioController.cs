@@ -168,5 +168,12 @@ namespace Exploreh.Web.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult GetUsuarioExternosDashboard()
+        {
+
+            return new JsonResult { Data = _busUsuario.Get().Count(i=>i.PerfilId == 3)};
+        }
     }
 }

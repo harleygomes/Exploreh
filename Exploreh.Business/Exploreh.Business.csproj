@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cidade\CidadeBusiness.cs" />
+    <Compile Include="ClienteContato\ClienteContatoBusiness.cs" />
     <Compile Include="Cliente\ClienteBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
     <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />

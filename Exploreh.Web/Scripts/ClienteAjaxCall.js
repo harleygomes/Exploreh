@@ -82,21 +82,49 @@ function HtmlBuildEditar(data) {
         '<div style="margin-left: 10px"> <input disabled type="checkbox" name="Ativo"' + (data.Ativo === true ? 'checked="checked"' : '') + '"></div>' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
+        '<span class="input-group-addon">Documento</span>' +
         '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.Documento + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.x + '">' +
+        '<span class="input-group-addon">' + (data.ClienteTelefone[0].TipoTelefone === "C" ? 'Celular ' : 'Fixo') + '</span>' +
+        '<input disabled id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" value="' + data.ClienteTelefone[1].Ddd + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.y + '">' +
+        '<span class="input-group-addon">Telefone</span>' +
+        '<input disabled id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" value="' + data.ClienteTelefone[1].Telefone + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.z + '">' +
+        '<span class="input-group-addon">Logradouro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Logradouro" type="text" class="form-control" name="ClienteEndereco[0].Logradouro" value="' + data.ClienteEndereco[0].Logradouro + '">' +
         '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Logradouro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Numero" type="text" class="form-control" name="ClienteEndereco[0].Numero" value="' + data.ClienteEndereco[0].Numero + '">' +
+        '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Complemento</span>' +
+        '<input disabled id="ClienteEndereco[0]_Complemento" type="text" class="form-control" name="ClienteEndereco[0].Complemento" value="' + data.ClienteEndereco[0].Complemento + '">' +
+        '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Bairro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Bairro" type="text" class="form-control" name="ClienteEndereco[0].Bairro" value="' + data.ClienteEndereco[0].Bairro + '">' +
+        '</div>' +
+        '<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Nome do Contato</span>' +
+        //'<input disabled id="ContatoNome" type="text" class="form-control" name="ContatoNome" value="' + data.ContatoNome + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">E-mail do Contato</span>' +
+        //'<input disabled id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" value="' + data.ContatoEmail + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Cidade</span>' +
+        //'<input disabled id="ClienteEndereco[0]_Cidade" type="text" class="form-control" name="ClienteEndereco[0].Cidade" value="' + data.Cidade[0].Nome + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Estado</span>' +
+        //'<input disabled id="ClienteEndereco[0]_Estado" type="text" class="form-control" name="ClienteEndereco[0].Estado" value="' + data.Estado[0].Nome + '">' +
+        //'</div>' +
         '</div>'
     ];
 
@@ -121,24 +149,51 @@ function HtmlBuildDelete(data) {
         '</div>' +
 
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
+        '<span class="input-group-addon">Documento</span>' +
         '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.Documento + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.x + '">' +
+        '<span class="input-group-addon">' + (data.ClienteTelefone[0].TipoTelefone === "C" ? 'Celular ' : 'Fixo') + '</span>' +
+        '<input disabled id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" value="' + data.ClienteTelefone[1].Ddd + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.y + '">' +
+        '<span class="input-group-addon">Telefone</span>' +
+        '<input disabled id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" value="' + data.ClienteTelefone[1].Telefone + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
-        '<span class="input-group-addon">Perfil</span>' +
-        '<input disabled id="Documento" type="text" class="form-control" name="Documento" value="' + data.z + '">' +
+        '<span class="input-group-addon">Logradouro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Logradouro" type="text" class="form-control" name="ClienteEndereco[0].Logradouro" value="' + data.ClienteEndereco[0].Logradouro + '">' +
         '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Logradouro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Numero" type="text" class="form-control" name="ClienteEndereco[0].Numero" value="' + data.ClienteEndereco[0].Numero + '">' +
+        '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Complemento</span>' +
+        '<input disabled id="ClienteEndereco[0]_Complemento" type="text" class="form-control" name="ClienteEndereco[0].Complemento" value="' + data.ClienteEndereco[0].Complemento + '">' +
+        '</div>' +
+        '<div class="input-group input-fields">' +
+        '<span class="input-group-addon">Bairro</span>' +
+        '<input disabled id="ClienteEndereco[0]_Bairro" type="text" class="form-control" name="ClienteEndereco[0].Bairro" value="' + data.ClienteEndereco[0].Bairro + '">' +
+        '</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Nome do Contato</span>' +
+        //'<input disabled id="ContatoNome" type="text" class="form-control" name="ContatoNome" value="' + data.ClienteContato.Nome + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">E-mail do Contato</span>' +
+        //'<input disabled id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" value="' + data.ContatoEmail + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Cidade</span>' +
+        //'<input disabled id="ClienteEndereco[0]_Cidade" type="text" class="form-control" name="ClienteEndereco[0].Cidade" value="' + data.Cidade[0].Nome + '">' +
+        //'</div>' +
+        //'<div class="input-group input-fields">' +
+        //'<span class="input-group-addon">Estado</span>' +
+        //'<input disabled id="ClienteEndereco[0]_Estado" type="text" class="form-control" name="ClienteEndereco[0].Estado" value="' + data.Estado[0].Nome + '">' +
+        //'</div>' +
         '</div>'
     ];
 
 }
-
 
