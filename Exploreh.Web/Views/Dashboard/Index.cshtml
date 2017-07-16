@@ -1,4 +1,6 @@
-﻿@{
+﻿
+<link href="~/Icons/Bootstrap Icons/Bootstrap-large-icons.css" rel="stylesheet" />
+@{
     ViewBag.Title = "Dashboard";
 }
 
@@ -75,6 +77,22 @@
                                 <i class="fa fa-clock-o"></i> Last active in 12.10.2015
                             </div>
                         </div>
+                        
+                        <div class="col-md-3 text-center">
+                            <div class="small">
+                                <i class="fa fa-clock-o"></i> Active duration
+                            </div>
+                            <div>
+                                <h1 class="font-extra-bold m-t-xl m-b-xs">
+                                    <i class="glyphicon glyphicon-usd"></i>  
+                                </h1>
+                                <b style="color: red">R$15.000,00</b>  Pagamentos programados
+                                <small></small>
+                            </div>
+                            <div class="small m-t-xl">
+                                <i class="fa fa-clock-o"></i> Last active in 12.10.2015
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -87,7 +105,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3">
+        @*<div class="col-lg-3">
             <div class="hpanel">
                 <div class="panel-body text-center h-200">
                     <i class="pe-7s-graph1 fa-4x"></i>
@@ -103,8 +121,8 @@
                     This is standard panel footer
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3">
+        </div>*@
+        @*<div class="col-lg-3">
             <div class="hpanel stats">
                 <div class="panel-body h-200">
                     <div class="stats-title pull-left">
@@ -198,9 +216,9 @@
                     This is standard panel footer
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
-    <div class="row">
+    @*<div class="row">
         <div class="col-lg-3">
             <div class="hpanel stats">
                 <div class="panel-heading">
@@ -385,7 +403,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
 
 @section Scripts {

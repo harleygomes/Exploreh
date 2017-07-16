@@ -165,6 +165,7 @@
     <Content Include="Content\img\green%402x.png" />
     <Content Include="Content\img\green.png" />
     <Content Include="Content\style.css" />
+    <Content Include="Icons\Bootstrap Icons\Bootstrap-large-icons.css" />
     <Content Include="Icons\pe-icon-7-stroke\css\helper.css" />
     <Content Include="Icons\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
     <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
