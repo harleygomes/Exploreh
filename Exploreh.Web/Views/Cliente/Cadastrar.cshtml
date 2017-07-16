@@ -21,7 +21,7 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                      
+
                         Cliente Dados Principais
                     </div>
                     <div class="panel-body">
@@ -86,35 +86,25 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                       
+
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone</span>
+                            <span class="input-group-addon">DDD</span>
                             <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control" name="ClienteTelefone[0].Ddd" placeholder="DDD">
-                            <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
-                            <div class="radio radio-info radio-inline">
-                                <input type="radio" id="ClienteTelefone[0]_TipoTelefone" value="F" name="ClienteTelefone[0].TipoTelefone">
-                                <label for="inlineRadio2"> Fixo </label>
-                            </div>
-                            <div class="radio radio-info radio-inline">
-                                <input type="radio" id="ClienteTelefone[0]_TipoTelefone" value="C" name="ClienteTelefone[0].TipoTelefone">
-                                <label for="inlineRadio2"> Celular </label>
-                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Telefone</span>
+                            <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">DDD</span>
                             <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" placeholder="DDD">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Telefone</span>
                             <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
-                            <div class="radio radio-info radio-inline">
-                                <input type="radio" id="ClienteTelefone[1]_TipoTelefone" value="F" name="ClienteTelefone[1].TipoTelefone">
-                                <label for="ClienteTelefone[1]_TipoTelefone"> Fixo </label>
-                            </div>
-                            <div class="radio radio-info radio-inline">
-                                <input type="radio" id="ClienteTelefone[1]_TipoTelefone" value="C" name="ClienteTelefone[1].TipoTelefone">
-                                <label for="ClienteTelefone[1]_TipoTelefone"> Celular </label>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,19 +119,35 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                        
+
                         Cliente Endereço
                     </div>
                     <div class="panel-body">
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Endereço</span>
+                            <span class="input-group-addon">CEP</span>
                             <input id="ClienteEndereco[0]_CEP" type="text" class="form-control cep" name="ClienteEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Logradouro</span>
                             <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control logradouro" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Número</span>
                             <input id="ClienteEndereco[0]_Numero" type="text" class="form-control numero" name="ClienteEndereco[0].Numero" placeholder="Número">
-                            <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Complemento</span><input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Bairro</span>
                             <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control bairro" name="ClienteEndereco[0].Bairro" placeholder="Bairro">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Estado</span>
                             <input id="ClienteEndereco[0]_Estado" type="text" class="form-control estado" placeholder="Estado">
-                            <input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Cidade</span><input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">
                             <input name="ClienteEndereco[0].EstadoId" type="text" hidden="hidden" id="estadoId">
                             <input name="ClienteEndereco[0].CidadeId" type="text" hidden="hidden" id="cidadeId">
                         </div>
@@ -156,8 +162,8 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                       
-                        Cliente Contatos 
+
+                        Cliente Contatos
                     </div>
                     <div class="panel-body">
                         <div id="ContatosParent">
@@ -183,9 +189,9 @@
     <div class="input-fields">
         <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
     </div>
-        <div class="input-fields">
-            <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
-        </div>
+    <div class="input-fields">
+        <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+    </div>
 
 }
 
@@ -213,19 +219,19 @@
         $('.cep').focusout(function () {
             var result = BuscaCep($(this).val());
 
-            $('.logradouro').val(result.tipo_logradouro + ' ' + result.logradouro);
+            $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             $('.numero').val();
             $('.complemento').val();
             $('.bairro').val(result.bairro);
 
-            var resultCidade = BuscaCidade('@Url.Action("GetCidadeByName", "Cliente")', result.cidade);
-            $('.cidade').val(resultCidade.Nome);
-            $('#cidadeId').val(resultCidade.Id);
+            //var resultCidade = BuscaCidade('@Url.Action("GetCidadeByName", "Cliente")', result.cidade);
+            //$('.cidade').val(resultCidade.Nome);
+            //$('#cidadeId').val(resultCidade.Id);
 
 
-            var resultEstado = BuscaEstado('@Url.Action("GetEstadoById", "Cliente")', result.uf);
-            $('.estado').val(resultEstado.Nome);
-            $('#estadoId').val(resultCidade.EstadoId);
+            //var resultEstado = BuscaEstado('@Url.Action("GetEstadoById", "Cliente")', result.uf);
+            //$('.estado').val(resultEstado.Nome);
+            //$('#estadoId').val(resultCidade.EstadoId);
 
         });
 

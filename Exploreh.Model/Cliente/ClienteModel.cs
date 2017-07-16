@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Database;
 using Exploreh.Model.Cidade;
-using Exploreh.Model.Estado;
 
 namespace Exploreh.Model.Cliente
 {
@@ -34,7 +33,6 @@ namespace Exploreh.Model.Cliente
 
         #region Cidade / Estado
         public int EstadoId { get; set; }
-        public List<EstadoModel> Estado { get; set; }
         public int CidadeId { get; set; }
         public List<CidadeModel> Cidade { get; set; }
         #endregion

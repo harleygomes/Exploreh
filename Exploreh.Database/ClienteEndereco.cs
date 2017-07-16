@@ -24,11 +24,9 @@ namespace Exploreh.Database
         public bool Ativo { get; set; }
         public int ClienteId { get; set; }
         public int CidadeId { get; set; }
-        public int EstadoId { get; set; }
         public string CEP { get; set; }
     
-        public virtual Cidade Cidade { get; set; }
         public virtual Cliente Cliente { get; set; }
-        public virtual Estado Estado { get; set; }
+        public virtual TblCidade TblCidade { get; set; }
     }
 }

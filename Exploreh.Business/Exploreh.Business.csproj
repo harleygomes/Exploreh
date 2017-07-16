@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bairro\BairroBusiness.cs" />
     <Compile Include="Cidade\CidadeBusiness.cs" />
     <Compile Include="ClienteContato\ClienteContatoBusiness.cs" />
     <Compile Include="Cliente\ClienteBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
+    <Compile Include="Logradouro\LogradouroBusiness.cs" />
     <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />
     <Compile Include="Perfil\PerfilBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

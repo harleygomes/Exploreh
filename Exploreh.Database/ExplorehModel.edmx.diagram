@@ -5,25 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4689278acdb84a7daf54891b79dcaa19" Name="Diagram1" >
-        <EntityTypeShape EntityType="ExplorehModel.Cidade" Width="1.5" PointX="3.75" PointY="0.875" />
-        <EntityTypeShape EntityType="ExplorehModel.Cliente" Width="1.5" PointX="0.75" PointY="5.125" />
-        <EntityTypeShape EntityType="ExplorehModel.ClienteContato" Width="1.5" PointX="3" PointY="12.125" />
-        <EntityTypeShape EntityType="ExplorehModel.ClienteEndereco" Width="1.5" PointX="6" PointY="5.125" />
-        <EntityTypeShape EntityType="ExplorehModel.ClienteTelefone" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="ExplorehModel.Estado" Width="1.5" PointX="1.5" PointY="0.75" />
-        <EntityTypeShape EntityType="ExplorehModel.Perfil" Width="1.5" PointX="8.75" PointY="3" />
-        <EntityTypeShape EntityType="ExplorehModel.PerfilTela" Width="1.5" PointX="11" PointY="2.125" />
-        <EntityTypeShape EntityType="ExplorehModel.Tela" Width="1.5" PointX="8.75" PointY="7" />
-        <EntityTypeShape EntityType="ExplorehModel.Usuario" Width="1.5" PointX="11" PointY="5.5" />
-        <AssociationConnector Association="ExplorehModel.FK_CidadeClienteEndereco" />
-        <AssociationConnector Association="ExplorehModel.FK_EstadoCidade" />
+        <EntityTypeShape EntityType="ExplorehModel.Cliente" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="ExplorehModel.ClienteContato" Width="1.5" PointX="3" PointY="12.25" />
+        <EntityTypeShape EntityType="ExplorehModel.ClienteEndereco" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="ExplorehModel.ClienteTelefone" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="ExplorehModel.Perfil" Width="1.5" PointX="5.75" PointY="4" />
+        <EntityTypeShape EntityType="ExplorehModel.PerfilTela" Width="1.5" PointX="8" PointY="3.125" />
+        <EntityTypeShape EntityType="ExplorehModel.TblBairro" Width="1.5" PointX="7.75" PointY="11" />
+        <EntityTypeShape EntityType="ExplorehModel.TblCidade" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExplorehModel.TblLogradouro" Width="1.5" PointX="9.75" PointY="11" />
+        <EntityTypeShape EntityType="ExplorehModel.TblPais" Width="1.5" PointX="1.5" PointY="20.75" />
+        <EntityTypeShape EntityType="ExplorehModel.TblUnidadeFederacao" Width="1.5" PointX="1.5" PointY="16.5" />
+        <EntityTypeShape EntityType="ExplorehModel.Tela" Width="1.5" PointX="5.75" PointY="8" />
+        <EntityTypeShape EntityType="ExplorehModel.Usuario" Width="1.5" PointX="8" PointY="6.75" />
         <AssociationConnector Association="ExplorehModel.FK_ClienteClienteEndereco" />
         <AssociationConnector Association="ExplorehModel.FK_ClienteClienteTelefone" />
         <AssociationConnector Association="ExplorehModel.FK_ClienteContatoCliente" />
-        <AssociationConnector Association="ExplorehModel.FK_EstadoClienteEndereco" />
+        <AssociationConnector Association="ExplorehModel.FK_CidadeClienteEndereco" />
         <AssociationConnector Association="ExplorehModel.FK_PerfilTela_Perfil" />
         <AssociationConnector Association="ExplorehModel.FK_UsuarioPerfil" />
         <AssociationConnector Association="ExplorehModel.FK_PerfilTela_Tela" />
+        <AssociationConnector Association="ExplorehModel.CidadeUnidadeFederacaoFK" />
+        <AssociationConnector Association="ExplorehModel.UnidadeFederacaoPaisFK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

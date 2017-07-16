@@ -9,6 +9,7 @@ using Exploreh.Business.ClienteContato;
 using Exploreh.Business.Estado;
 using Exploreh.Model.Cliente;
 using Exploreh.Model.Helper;
+using Exploreh.Business.Logradouro;
 
 namespace Exploreh.Web.Controllers
 {
@@ -18,6 +19,7 @@ namespace Exploreh.Web.Controllers
         private readonly EstadoBusiness _busEstado;
         private readonly CidadeBusiness _busCidade;
         private readonly ClienteContatoBusiness _busClienteContato;
+        private readonly LogradouroBusiness _busLogradoouro;
 
         private static bool notificacao { get; set; }
 
@@ -28,6 +30,7 @@ namespace Exploreh.Web.Controllers
             this._busEstado = new EstadoBusiness();
             this._busCidade = new CidadeBusiness();
             this._busClienteContato = new ClienteContatoBusiness();
+            this._busLogradoouro = new LogradouroBusiness();
         }
 
         public ActionResult Lista(bool? notificar)
@@ -55,7 +58,7 @@ namespace Exploreh.Web.Controllers
 
             return View(new ClienteModel
             {
-                Estado = _busEstado.Get().ToList()
+                //Estado = _busEstado.Get().ToList()
             });
         }
 
@@ -176,13 +179,13 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public JsonResult GetCidadeByName(string cidade)
         {
-            return new JsonResult { Data = this._busCidade.Get().FirstOrDefault(c => c.Nome.ToLower() == cidade.ToLower()) };
+            return new JsonResult { Data = this._busCidade.Get().FirstOrDefault(c => c.DcrNome.ToLower() == cidade.ToLower()) };
         }
 
         [HttpPost]
         public JsonResult GetEstadoById(string uf)
         {
-            return new JsonResult { Data = this._busEstado.Get().FirstOrDefault(c => c.Sigla.ToUpper() == uf.ToUpper()) };
+            return new JsonResult { Data = this._busEstado.Get().FirstOrDefault(c => c.DcrSigla.ToUpper() == uf.ToUpper()) };
         }
 
         [HttpPost]
@@ -190,6 +193,13 @@ namespace Exploreh.Web.Controllers
         {
 
             return new JsonResult { Data = _busCliente.Get().Count()};
+        }
+
+        [HttpPost]
+        public JsonResult GetCep(string cep)
+        {
+            var logradouro = _busLogradoouro.GetCep(cep);
+            return new JsonResult { Data = logradouro };
         }
     }
 }

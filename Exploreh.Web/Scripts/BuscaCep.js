@@ -14,13 +14,14 @@
 
 function BuscaCep(cep) {
 
-    var url = 'http://cep.republicavirtual.com.br/web_cep.php?cep=' + cep.replace('-', '').trim() + '&formato=json';
+    //var url = 'http://cep.republicavirtual.com.br/web_cep.php?cep=' + cep.replace('-', '').trim() + '&formato=json';
+    alert(cep);
 
     var result = "";
     $.ajax({
-        url: url,
+        url: 'GetCep/',
         type: 'POST',
-        //data: { id: cep },
+        data: { cep: cep.replace('-', '').trim() },
         async: false,
         success: function (data) {
             if (data == null) return false;
