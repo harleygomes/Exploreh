@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cidade.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cliente.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
@@ -61,6 +64,9 @@
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClienteTelefone.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estado.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ExplorehModel.Context.cs">

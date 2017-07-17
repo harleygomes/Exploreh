@@ -19,6 +19,8 @@ namespace Exploreh.Model.Telas
         public virtual List<PerfilTelaModel> PerfilTelaModel { get; set; }
         public string Descricao { get; set; }
 
+        public string Url { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,6 +38,7 @@ namespace Exploreh.Model.Telas
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
                 Descricao = telas.Descricao,
+                Url = telas.Url,
                 PerfilTelaModel = telas.PerfilTela?.ToList().ConvertAll<PerfilTelaModel>(x => x) 
             };
         }
@@ -52,6 +55,7 @@ namespace Exploreh.Model.Telas
                 DataCadastro = telas.DataCadastro,
                 DataAlteracao = telas.DataAlteracao,
                 Descricao = telas.Descricao,
+                Url = telas.Url,
                 PerfilTela = telas.PerfilTelaModel?.ToList().ConvertAll<Database.PerfilTela>(x => x)
             };
         }
