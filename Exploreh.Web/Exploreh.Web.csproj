@@ -621,7 +621,6 @@
     <Content Include="Vendor\eonasdan-bootstrap-datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Vendor\eonasdan-bootstrap-datetimepicker\Gruntfile.js" />
     <Content Include="Vendor\eonasdan-bootstrap-datetimepicker\src\js\bootstrap-datetimepicker.js" />
-    <Content Include="Vendor\eonasdan-bootstrap-datetimepicker\src\nuget\NuGet.exe" />
     <Content Include="Vendor\eonasdan-bootstrap-datetimepicker\tasks\bump_version.js" />
     <Content Include="Vendor\flot.curvedlines\curvedLines.js" />
     <Content Include="Vendor\flot.curvedlines\example.js" />
@@ -2668,6 +2667,7 @@
     <Content Include="Vendor\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\exploreh - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\homer.pubxml" />
     <Content Include="Views\Cliente\Cadastrar.cshtml" />
     <Content Include="Views\Cliente\Editar.cshtml" />

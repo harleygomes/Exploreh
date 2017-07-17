@@ -37,8 +37,7 @@ namespace Exploreh.Test.Business.Cliente
                     Complemento = "Sem COmplemento",
                     CEP = "04914-080",
                     Bairro = "Jd. Klein",
-                    CidadeId = 1,
-                    EstadoId = 1,
+                    IdCidade = 1,
                     ClienteId = c.Id,
                     DataCadastro = DateTime.Now,
                     Ativo = true

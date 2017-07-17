@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Database;
 using Exploreh.Model.Cidade;
-using Exploreh.Model.Estado;
 
 namespace Exploreh.Model.Cliente
 {
@@ -15,18 +14,17 @@ namespace Exploreh.Model.Cliente
         public string Logradouro { get; set; }
         public string Numero { get; set; }
         public string Complemento { get; set; }
-        public string CEP { get; set; }
         public string Bairro { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public bool Ativo { get; set; }
+        public int IdCidade { get; set; }
         public int ClienteId { get; set; }
-        public int CidadeId { get; set; }
-        public int EstadoId { get; set; }
+        public string CEP { get; set; }
 
         public virtual ClienteModel Cliente { get; set; }
         public virtual CidadeModel Cidade { get; set; }
-        public virtual EstadoModel Estado { get; set; }
+        
 
         public static implicit operator ClienteEnderecoModel(Database.ClienteEndereco ce)
         {
@@ -39,8 +37,7 @@ namespace Exploreh.Model.Cliente
                 Bairro = ce.Bairro,
                 Complemento = ce.Complemento,
                 CEP = ce.CEP,
-                CidadeId = ce.EstadoId,
-                EstadoId = ce.EstadoId,
+                IdCidade = ce.CidadeId,
                 DataCadastro = ce.DataCadastro,
                 DataAlteracao = ce.DataAlteracao,
                 Ativo = ce.Ativo,
@@ -58,8 +55,7 @@ namespace Exploreh.Model.Cliente
                 Bairro = ce.Bairro,
                 Complemento = ce.Complemento,
                 CEP = ce.CEP,
-                CidadeId = ce.EstadoId,
-                EstadoId = ce.EstadoId,
+                CidadeId = ce.IdCidade,
                 DataCadastro = ce.DataCadastro,
                 DataAlteracao = ce.DataAlteracao,
                 Ativo = ce.Ativo,

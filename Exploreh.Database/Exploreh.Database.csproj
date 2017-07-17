@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cidade.cs">
-      <DependentUpon>ExplorehModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Cliente.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
@@ -64,9 +61,6 @@
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClienteTelefone.cs">
-      <DependentUpon>ExplorehModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Estado.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ExplorehModel.Context.cs">
@@ -91,6 +85,21 @@
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TblBairro.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TblCidade.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TblLogradouro.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TblPais.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TblUnidadeFederacao.cs">
+      <DependentUpon>ExplorehModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tela.cs">
       <DependentUpon>ExplorehModel.tt</DependentUpon>
     </Compile>
@@ -127,6 +136,7 @@
     <Content Include="ExplorehModel_Eder_2206.edmx.sql" />
     <Content Include="ExplorehModel_Eder_2406.edmx.sql" />
     <Content Include="ExplorehModel_Harley.edmx.sql" />
+    <Content Include="ExplorehModel_Harley_1607.edmx.sql" />
     <Content Include="ExplorehModel_Harley_2106.edmx.sql" />
   </ItemGroup>
   <ItemGroup>

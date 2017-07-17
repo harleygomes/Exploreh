@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Exploreh.Database;
+using System.Linq.Expressions;
 
 namespace Exploreh.Repository.Base
 {
@@ -31,6 +32,7 @@ namespace Exploreh.Repository.Base
             return this.Entities.Find(id);
         }
 
+
         /// <summary>
         /// Método que retorna uma lista "T"
         /// </summary>
@@ -39,6 +41,11 @@ namespace Exploreh.Repository.Base
         public List<T> Get()
         {
             return this.Entities.ToList();
+        }
+
+        public IQueryable<T> Where(Expression<Func<T, bool>> expression)
+        {
+            return Entities.Where(expression);
         }
 
         /// <summary>

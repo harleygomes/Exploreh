@@ -12,16 +12,15 @@ namespace Exploreh.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class ClienteTelefone
+    public partial class TblBairro
     {
-        public int Id { get; set; }
-        public string Ddd { get; set; }
-        public string Telefone { get; set; }
-        public System.DateTime DataCadastro { get; set; }
-        public Nullable<System.DateTime> DataAlteracao { get; set; }
-        public Nullable<bool> Ativo { get; set; }
-        public int ClienteId { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
+        public int IdBairro { get; set; }
+        public Nullable<int> IdCidade { get; set; }
+        public string DcrChaveLocalidade { get; set; }
+        public string DcrChaveBairro { get; set; }
+        public string DcrNome { get; set; }
+        public string AbrevNome { get; set; }
+        public Nullable<System.DateTime> DataReg { get; set; }
+        public string EstReg { get; set; }
     }
 }

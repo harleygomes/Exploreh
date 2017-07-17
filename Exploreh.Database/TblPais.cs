@@ -12,21 +12,23 @@ namespace Exploreh.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Cidade
+    public partial class TblPais
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cidade()
+        public TblPais()
         {
-            this.ClienteEndereco = new HashSet<ClienteEndereco>();
+            this.TblUnidadeFederacao = new HashSet<TblUnidadeFederacao>();
         }
     
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string CEP { get; set; }
-        public int EstadoId { get; set; }
+        public int IdPais { get; set; }
+        public string DcrSigla { get; set; }
+        public string DcrSigla2 { get; set; }
+        public string DcrNome { get; set; }
+        public string AbrevNome { get; set; }
+        public Nullable<System.DateTime> DataReg { get; set; }
+        public string EstReg { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClienteEndereco> ClienteEndereco { get; set; }
-        public virtual Estado Estado { get; set; }
+        public virtual ICollection<TblUnidadeFederacao> TblUnidadeFederacao { get; set; }
     }
 }

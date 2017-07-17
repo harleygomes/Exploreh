@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Repository.Base;
 using Exploreh.Repository.IBase;
+using System.Linq.Expressions;
 
 namespace Exploreh.Repository.Repository
 {
@@ -33,6 +34,7 @@ namespace Exploreh.Repository.Repository
             return this.repository.Get().ConvertAll<T>(x => x);
         }
 
+       
         /// <summary>
         /// Retorna a entidade(objeto) desejada pelo id
         /// </summary>
@@ -43,6 +45,16 @@ namespace Exploreh.Repository.Repository
             return this.repository.Get(id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public IQueryable<T> Where(Expression<Func<T, bool>> expression)
+        {
+            return this.repository.Where(expression);
+        }
+        
         /// <summary>
         /// Atualiza um objeto
         /// </summary>

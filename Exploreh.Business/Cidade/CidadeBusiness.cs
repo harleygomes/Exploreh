@@ -10,11 +10,11 @@ namespace Exploreh.Business.Cidade
 {
     public class CidadeBusiness
     {
-        private readonly GenericRepository<Database.Cidade> _rep;
+        private readonly GenericRepository<Database.TblCidade> _rep;
 
         public CidadeBusiness()
         {
-            this._rep = new GenericRepository<Database.Cidade>();
+            this._rep = new GenericRepository<Database.TblCidade>();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Exploreh.Business.Cidade
 
         public List<CidadeModel> GetCidade(int id)
         {
-            return _rep.Get().Where(c => c.EstadoId == id).ToList().ConvertAll<CidadeModel>(x => x);
+            return _rep.Get().Where(c => c.IdUnidadeFederacao == id).ToList().ConvertAll<CidadeModel>(x => x);
         }
     }
 }

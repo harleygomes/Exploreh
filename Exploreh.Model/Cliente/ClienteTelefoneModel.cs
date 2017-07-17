@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Database;
 using Exploreh.Model.Cidade;
-using Exploreh.Model.Estado;
 
 namespace Exploreh.Model.Cliente
 {
@@ -30,7 +29,6 @@ namespace Exploreh.Model.Cliente
                 ClienteId = ct.ClienteId,
                 Ddd = ct.Ddd,
                 Telefone = ct.Telefone,
-                TipoTelefone = ct.TipoTelefone,
                 DataCadastro = ct.DataCadastro,
                 DataAlteracao = ct.DataAlteracao,
                 Ativo = ct.Ativo
@@ -44,7 +42,6 @@ namespace Exploreh.Model.Cliente
                 ClienteId = ct.ClienteId,
                 Ddd = ct.Ddd,
                 Telefone = ct.Telefone,
-                TipoTelefone = ct.TipoTelefone,
                 DataCadastro = ct.DataCadastro,
                 DataAlteracao = ct.DataAlteracao,
                 Ativo = ct.Ativo

@@ -30,6 +30,15 @@ namespace Exploreh.Business.Cliente
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public List<ClienteModel> GetCep()
+        {
+            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ClienteModel Get(int id)

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Model.Cliente;
-using Exploreh.Model.Estado;
 using Exploreh.Repository.Repository;
 
 namespace Exploreh.Business.ClienteContato
