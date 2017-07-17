@@ -73,6 +73,7 @@ namespace Exploreh.Business.Tela
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
             update.Descricao = model.Descricao;
+            update.Url = model.Url;
             #endregion
 
             return _rep.Update(update);
