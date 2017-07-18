@@ -28,6 +28,7 @@ namespace Exploreh.Database
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<ClienteContato> ClienteContato { get; set; }
+        public virtual DbSet<ClienteEndereco> ClienteEndereco { get; set; }
         public virtual DbSet<ClienteTelefone> ClienteTelefone { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
@@ -39,6 +40,5 @@ namespace Exploreh.Database
         public virtual DbSet<TblUnidadeFederacao> TblUnidadeFederacao { get; set; }
         public virtual DbSet<Tela> Tela { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<ClienteEndereco> ClienteEndereco { get; set; }
     }
 }
