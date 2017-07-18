@@ -12,23 +12,19 @@ namespace Exploreh.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Tela
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tela()
+        public Estado()
         {
-            this.PerfilTela = new HashSet<PerfilTela>();
+            this.Cidade = new HashSet<Cidade>();
         }
     
         public int Id { get; set; }
+        public string Sigla { get; set; }
         public string Nome { get; set; }
-        public bool Ativo { get; set; }
-        public System.DateTime DataCadastro { get; set; }
-        public Nullable<System.DateTime> DataAlteracao { get; set; }
-        public string Descricao { get; set; }
-        public string Url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PerfilTela> PerfilTela { get; set; }
+        public virtual ICollection<Cidade> Cidade { get; set; }
     }
 }

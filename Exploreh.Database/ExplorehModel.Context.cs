@@ -25,9 +25,11 @@ namespace Exploreh.Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<ClienteContato> ClienteContato { get; set; }
         public virtual DbSet<ClienteTelefone> ClienteTelefone { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<PerfilTela> PerfilTela { get; set; }
         public virtual DbSet<TblBairro> TblBairro { get; set; }
