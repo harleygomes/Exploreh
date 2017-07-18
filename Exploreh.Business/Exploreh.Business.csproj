@@ -55,6 +55,7 @@
     <Compile Include="Cliente\ClienteBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
     <Compile Include="Logradouro\LogradouroBusiness.cs" />
+    <Compile Include="Pais\PaisBusiness.cs" />
     <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />
     <Compile Include="Perfil\PerfilBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

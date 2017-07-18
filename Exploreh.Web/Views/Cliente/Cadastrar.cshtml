@@ -24,12 +24,7 @@
 
                         Cliente Dados Principais
                     </div>
-                    <div class="panel-body">
-
-                        <div class="input-group input-fields">
-                            <span class="input-group-addon">Nome</span>
-                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário">
-                        </div>
+                    <div class="panel-body">                        
                         <div class="input-group input-fields">
                             <div class="radio radio-info radio-inline">
                                 <input class="radio" type="radio" id="rpf" value="F" name="TipoPessoa" checked="">
@@ -44,25 +39,28 @@
                                 <label for="restr"> Estrangeiro </label>
                             </div>
                         </div>
-
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon lblNome">Nome</span>
+                            <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário">
+                        </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
                             <input type="text" class="form-control" name="Documento" placeholder="Número do documento">
                         </div>
 
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Sexo</span>
-                            <select class="form-control m-b" name="Sexo">
+                            <select class="form-control m-b" id="sexo" name="Sexo">
                                 <option value="M">Masculino</option>
                                 <option value="F">Feminino</option>
                                 <option value="N">Não declarado</option>
                             </select>
                         </div>
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPF" >
                             <span class="input-group-addon">Data de nascimento</span>
                             <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento">
                         </div>
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Ocupação</span>
                             <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação">
                         </div>
@@ -123,33 +121,40 @@
                         Cliente Endereço
                     </div>
                     <div class="panel-body">
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPfPj">
                             <span class="input-group-addon">CEP</span>
                             <input id="ClienteEndereco[0]_CEP" type="text" class="form-control cep" name="ClienteEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Logradouro</span>
+                            <span class="input-group-addon labelLogra">Logradouro</span>
                             <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control logradouro" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro">
                         </div>
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPfPj">
                             <span class="input-group-addon">Número</span>
                             <input id="ClienteEndereco[0]_Numero" type="text" class="form-control numero" name="ClienteEndereco[0].Numero" placeholder="Número">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Complemento</span><input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
+                            <span class="input-group-addon labelComp">Complemento</span>
+                            <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Bairro</span>
+                            <span class="input-group-addon labelBairro">Bairro</span>
                             <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control bairro" name="ClienteEndereco[0].Bairro" placeholder="Bairro">
+                        </div>
+                        <div class="input-group input-fields camposEstr">
+                            <span class="input-group-addon">País</span>
+                            <select id="ClienteEndereco[0]_Pais" class="form-control pais"></select>
+                            @*<input id="ClienteEndereco[0]_Estado" type="text"  placeholder="Estado">*@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Estado</span>
-                            <input id="ClienteEndereco[0]_Estado" type="text" class="form-control estado" placeholder="Estado">
+                            <select id="ClienteEndereco[0]_Estado" class="form-control estado"></select>
+                            @*<input id="ClienteEndereco[0]_Estado" type="text"  placeholder="Estado">*@
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Cidade</span><input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">
-                            <input name="ClienteEndereco[0].EstadoId" type="text" hidden="hidden" id="estadoId">
-                            <input name="ClienteEndereco[0].CidadeId" type="text" hidden="hidden" id="cidadeId">
+                            <span class="input-group-addon">Cidade</span>
+                            <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade"  class="form-control cidade"></select>
+                            @*<input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">*@
                         </div>
                     </div>
                 </div>
@@ -207,8 +212,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.ddlEstado').change(function () {
+        carregaPais();
+        
+        $('.estado').change(function () {
             carregaCidades($(this));
+        });
+
+        $('.pais').change(function () {
+            carregaEstados($(this).val());
         });
 
         $("#Cidade").change(function (evt) {
@@ -219,47 +230,41 @@
         $('.cep').focusout(function () {
             var result = BuscaCep($(this).val());
 
-            $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
-            $('.numero').val();
-            $('.complemento').val();
-            $('.bairro').val(result.bairro);
+            if (result.DcrTipoLogradouro != null) {
+                $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
+            }
+            $('.bairro').val(result.Bairro.DcrNome);
+            $('.pais').val(result.Pais.IdPais)
 
-            //var resultCidade = BuscaCidade('@Url.Action("GetCidadeByName", "Cliente")', result.cidade);
-            //$('.cidade').val(resultCidade.Nome);
-            //$('#cidadeId').val(resultCidade.Id);
-
-
-            //var resultEstado = BuscaEstado('@Url.Action("GetEstadoById", "Cliente")', result.uf);
-            //$('.estado').val(resultEstado.Nome);
-            //$('#estadoId').val(resultCidade.EstadoId);
-
+            carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
         });
 
     });
 
-    function carregaCidades(estado, id) {
-        var comboEstado = estado.val();
-        var comboCidade = estado.prev().empty();
+    function carregaCidades(estado,id) {
+       
+        var comboEstado = estado;
+        var comboCidade = $('.cidade');
 
         if (comboEstado != "-1") {
 
             $.ajax({
                 url: '@Url.Action("GetCidade","Cliente")',
                 type: 'POST',
-                data: { id: comboEstado },
+                data: { id: comboEstado.val() },
                 success: function (cidades) {
                     comboCidade.empty();
                     var $select = comboCidade;
-                    $select.append('<option value="">Cidade</option>');
+                    $select.append('<option value="0">--- Selecione a Cidade ---</option>');
                     $.each(cidades, function (i, cidade) {
                         $select.append(
                             $('<option/>')
-                            .attr('value', cidade.Id)
-                            .text(cidade.Nome)
+                            .attr('value', cidade.IdCidade)
+                            .text(cidade.DcrNome)
                         );
                     });
                     if (id != null) {
-                        $("#Cidade").val(id);
+                        comboCidade.val(id);
                     }
                 },
                 error: function (xhr) { }
@@ -267,6 +272,58 @@
         }
 
 
+    }
+
+    function carregaEstados(idPais,idEstado,idCidade) {
+        var comboEstado = $('.estado');
+            $.ajax({
+                url: '@Url.Action("GetEstado","Cliente")',
+                type: 'POST',
+                data: { idPais: idPais },
+                success: function (estados) {
+                    comboEstado.empty();
+                    var $select = comboEstado;
+                    $select.append('<option value="0">--- Selecione o Estado ---</option>');
+                    $.each(estados, function (i, estado) {
+                        $select.append(
+                            $('<option/>')
+                            .attr('value', estado.IdUnidadeFederacao)
+                            .text(estado.DcrSigla)
+                        );
+                    });
+                    if (idEstado != null) {
+                        comboEstado.val(idEstado);
+                        carregaCidades(comboEstado, idCidade);
+                    }
+                },
+                error: function (xhr) { }
+            });
+    }
+
+    function carregaPais() {
+        var comboPais = $('.pais');
+
+        $.ajax({
+            url: '@Url.Action("GetPais","Cliente")',
+            type: 'POST',
+            //data: { id: comboEstado },
+            success: function (paises) {
+                comboPais.empty();
+                var $select = comboPais;
+                $select.append('<option value="0">--- Selecione o Pais ---</option>');
+                $.each(paises, function (i, pais) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', pais.IdPais)
+                        .text(pais.DcrNome)
+                    );
+                });
+                //if (id != null) {
+                //    comboEstado.val(id);
+                //}
+            },
+            error: function (xhr) { }
+        });
     }
 
     // <![CDATA[
@@ -279,11 +336,42 @@
     $(".radio input[type='radio']").on('click', function () {
         if ($("#rpf").is(":checked")) {
             $("#DocLabel").html("CPF");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").show();
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
+            $(".labelNome").html("Razão Social");
+            $(".txtNome").attr("placeholder", "Razão social").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $("#sexo").val('N');
+            $(".camposPF").hide();
+            $(".camposPfPj").show();
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
-        }
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".logradouro").attr("placeholder", "Linha 1").blur();
+            $(".labelLogra").html("Linha 1");
+            $(".labelComp").html("Linha 2");
+            $(".complemento").attr("placeholder", "Linha 2").blur();
+            $(".labelBairro").html("Linha 3");
+            $(".bairro").attr("placeholder", "Linha 3").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").hide();
+            }
     });
 </script>
 

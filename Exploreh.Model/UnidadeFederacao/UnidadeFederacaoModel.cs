@@ -36,7 +36,7 @@ namespace Exploreh.Model.UnidadeFederacao
                 AbrevNome = estado.AbrevNome,
                 DataReg = estado.DataReg,
                 EstReg = estado.EstReg,
-                Cidade = estado.TblCidade.ToList().ConvertAll<CidadeModel>(c=>c),
+                //Cidade = estado.TblCidade.ToList().ConvertAll<CidadeModel>(c=>c),
                 Pais = estado.TblPais
             };
         }
@@ -53,7 +53,7 @@ namespace Exploreh.Model.UnidadeFederacao
                 AbrevNome = estado.AbrevNome,
                 DataReg = estado.DataReg,
                 EstReg = estado.EstReg,
-                TblCidade = estado.Cidade.ToList().ConvertAll<Database.TblCidade>(c => c),
+                //TblCidade = estado.Cidade.ToList().ConvertAll<Database.TblCidade>(c => c),
                 TblPais = estado.Pais
             };
         }

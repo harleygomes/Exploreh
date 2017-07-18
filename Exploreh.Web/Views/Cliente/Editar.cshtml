@@ -9,57 +9,57 @@
 
 @{
     ViewBag.Title = "Alterar Cliente";
-
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <div class="content animate-panel">
+    <div class="content">
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                        </div>
-                        Cadastro de Clientes
+                        Cliente Dados Principais
                     </div>
                     <div class="panel-body">
                         <div class="input-group input-fields">
-                            @Html.HiddenFor(m => m.Id)
-                            <span class="input-group-addon">Nome</span>
-                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do cliente" value="@Model.Nome" required="">
-                        </div>
-                        <div class="radio radio-inline">
-                            <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio1" value="F" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("F")">
-                                <label for="inlineRadio1"> Pessoa física </label>
+                            <div class="radio radio-info radio-inline">
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "F", new { @class = "radio", id = "rpf" })
+                                <label for="rpf"> Pessoa física </label>
                             </div>
-                            <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="J" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("J")">
-                                <label for="inlineRadio2"> Pessoa jurídica </label>
+                            <div class="radio radio-info radio-inline">
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "J", new { @class = "radio", id = "rpj" })
+                                <label for="rpj"> Pessoa jurídica </label>
                             </div>
-                            <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="E" name="TipoPessoa" checked="@Model.TipoPessoa.Equals("E")">
-                                <label for="inlineRadio2"> Estrangeiro </label>
+                            <div class="radio radio-info radio-inline">
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "E", new { @class = "radio", id = "restr" })
+                                <label for="restr"> Estrangeiro </label>
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Documento</span>
-                            <input id="Documento" type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento" required="">
+                            <span class="input-group-addon lblNome">Nome</span>
+                            <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
                         </div>
                         <div class="input-group input-fields">
+                            <span id="DocLabel" class="input-group-addon">Documento</span>
+                            <input type="text" class="form-control" name="Documento" placeholder="Número do documento" value="@Model.Documento">
+                        </div>
+
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Sexo</span>
-                            <input id="Sexo" type="text" class="form-control" name="Sexo" placeholder="Sexo" value="@Model.Sexo">
+                            <select class="form-control m-b" id="sexo" name="Sexo">
+                                <option value="M" @(Model.Sexo == "M" ? "selected" : "")>Masculino</option>
+                                <option value="F" @(Model.Sexo == "F" ? "selected" : "")>Feminino</option>
+                                <option value="N" @(Model.Sexo == "N" ? "selected" : "")>Não declarado</option>
+                            </select>
                         </div>
-                        <div class="input-group input-fields">
+
+                <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Data de nascimento</span>
-                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
+                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento"  value="@Model.DataNascimento">
                         </div>
-                        <div class="input-group input-fields">
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Ocupação</span>
                             <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação" value="@Model.Ocupacao">
                         </div>
@@ -71,15 +71,9 @@
                             <span class="input-group-addon">Home page</span>
                             <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page" value="@Model.HomePage">
                         </div>
-
                     </div>
-
-                    @*<div class="input-fields">
-                            <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
-                        </div>*@
-
-
                 </div>
+
             </div>
         </div>
     </div>
@@ -89,107 +83,77 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                        </div>
+
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
-                        @if (Model.ClienteTelefone != null)
+                        @foreach (var telefone in Model.ClienteTelefone)
                         {
-                            foreach (var telefone in Model.ClienteTelefone)
-                            {
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">DDD</span>
-                                    <input id="@telefone.Ddd" type="text" class="form-control" name="@telefone.Ddd" placeholder="DDD" value="@telefone.Ddd">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Telefone</span>
-                                    <input id="@telefone.Telefone" type="text" class="form-control" name="@telefone.Telefone" placeholder="Telefone" value="@telefone.Telefone">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Tipo</span>
-                                    @if (telefone.TipoTelefone == "C")
-                                    {
-                                        <div class="radio radio-info radio-inline">
-                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="F">
-                                            <label for="@telefone.TipoTelefone"> Fixo </label>
-                                        </div>
-                                        <div class="radio radio-info radio-inline">
-                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="C" checked="checked">
-                                            <label for="@telefone.TipoTelefone"> Celular </label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="radio radio-info radio-inline">
-                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="F" checked="checked">
-                                            <label for="@telefone.TipoTelefone"> Fixo </label>
-                                        </div>
-                                        <div class="radio radio-info radio-inline">
-                                            <input id="@telefone.TipoTelefone" type="radio" name="@telefone.TipoTelefone" value="C">
-                                            <label for="@telefone.TipoTelefone"> Celular </label>
-                                        </div>
-                                    }
-                                </div>
-                            }
+                            var i = 0;
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">DDD</span>
+                                <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Telefone</span>
+                                <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
+                            </div>
                         }
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
 
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                        </div>
-                        Cliente Endereços
+
+                        Cliente Endereço
                     </div>
                     <div class="panel-body">
-
-                        @if (Model.ClienteEndereco != null)
+                        @foreach (var endereco in Model.ClienteEndereco)
                         {
-                            foreach (var endereco in Model.ClienteEndereco)
-                            {
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Cep</span>
-                                    <input id="@endereco.CEP" type="text" class="form-control" name="@endereco.CEP" placeholder="Cep" value="@endereco.CEP">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Logradouro</span>
-                                    <input id="@endereco.Logradouro" type="text" class="form-control" name="@endereco.Logradouro" placeholder="Logradouro" value="@endereco.Logradouro">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Número</span>
-                                    <input id="@endereco.Numero" type="text" class="form-control" name="@endereco.Numero" placeholder="Número" value="@endereco.Numero">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Complemento</span>
-                                    <input id="@endereco.Complemento" type="text" class="form-control" name="@endereco.Complemento" placeholder="Complemento" value="@endereco.Complemento">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Bairro</span>
-                                    <input id="@endereco.Bairro" type="text" class="form-control" name="@endereco.Bairro" placeholder="Bairro" value="@endereco.Bairro">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Estado</span>
-                                    <input id="@endereco.Estado" type="text" class="form-control" name="@endereco.Estado" placeholder="Estado" value="@endereco.Estado">
-                                </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Cidade</span>
-                                    <input id="@endereco.Cidade" type="text" class="form-control" name="@endereco.Cidade" placeholder="Cidade" value="@endereco.Cidade">
-                                </div>
-                            }
+                            <div class="input-group input-fields camposPfPj">
+                                <span class="input-group-addon">CEP</span>
+                                <input id="ClienteEndereco[0]_CEP" type="text" class="form-control cep" name="ClienteEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos" value="@endereco.CEP">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon labelLogra">Logradouro</span>
+                                <input id="ClienteEndereco[0]_Logradouro" type="text" class="form-control logradouro" name="ClienteEndereco[0].Logradouro" placeholder="Lograduro" value="@endereco.Logradouro">
+                            </div>
+                            <div class="input-group input-fields camposPfPj">
+                                <span class="input-group-addon">Número</span>
+                                <input id="ClienteEndereco[0]_Numero" type="text" class="form-control numero" name="ClienteEndereco[0].Numero" placeholder="Número" value="@endereco.Numero">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon labelComp">Complemento</span>
+                                <input id="ClienteEndereco[0]_Complemento" type="text" class="form-control complemento" name="ClienteEndereco[0].Complemento" placeholder="Complemento" value="@endereco.Complemento">
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon labelBairro">Bairro</span>
+                                <input id="ClienteEndereco[0]_Bairro" type="text" class="form-control bairro" name="ClienteEndereco[0].Bairro" placeholder="Bairro" value="@endereco.Bairro">
+                            </div>
+                            <div class="input-group input-fields camposEstr">
+                                <span class="input-group-addon">País</span>
+                                <select id="ClienteEndereco[0]_Pais" class="form-control pais"></select>
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Estado</span>
+                                <select id="ClienteEndereco[0]_Estado" class="form-control estado"></select>
+                            </div>
+                            <div class="input-group input-fields">
+                                <span class="input-group-addon">Cidade</span>
+                                <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade" class="form-control cidade"></select>
+                            </div>
                         }
-                    </div>
+                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -198,37 +162,259 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                        </div>
+
                         Cliente Contatos
                     </div>
                     <div class="panel-body">
-                        @if (Model.ClienteContato != null)
-                        {
-                            foreach (var contato in Model.ClienteContato)
-                            {
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Nome do Contato</span>
-                                    <input id="@contato.Nome" type="text" class="form-control" name="@contato.Nome" placeholder="Nome do contato" value="@contato.Nome">
-                                </div>
+                        <div id="ContatosParent">
+                            <div id="ContatosCampos">
+                                @foreach (var contato in Model.ClienteContato)
+                                {
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Nome</span>
+                                        <input id="ContatoNome" type="text" class="form-control" name="ContatoNome" placeholder="Nome" value="@contato.Nome">
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Email</span>
+                                        <input id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" placeholder="Email" value="@contato.Email">
+                                    </div>
+                                }                               
+                            </div>
+                        </div>
+                        <a style="margin: 10px 0;" href="javascript:addRow();">+1 Contato</a>
 
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">E-mail do Contato </span>
-                                    <input id="@contato.Email" type="text" class="form-control" name="@contato.Email" placeholder="E-mail do contato" value="@contato.Email">
-                                </div>
-                            }
-                        }
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
     <div class="input-fields">
         <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
     </div>
     <div class="input-fields">
-        <button onclick="location.href = '@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+        <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
     </div>
+
 }
+
+@section Styles {
+    @Styles.Render("~/bundles/bootstrapCheckbox/css")
+}
+
+
+@Scripts.Render("~/bundles/jquery/js")
+@Scripts.Render("~/bundles/homer/js")
+
+<script src="~/Scripts/BuscaCep.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        exibeCampos("@Model.TipoPessoa");
+
+        carregaPais();
+
+        $('.estado').change(function () {
+            carregaCidades($(this));
+        });
+
+        $('.pais').change(function () {
+            carregaEstados($(this).val());
+        });
+
+        $("#Cidade").change(function (evt) {
+            $('#CidadeId').val($(this).val());
+
+        });
+
+        $('.cep').focusout(function () {
+            var result = BuscaCep($(this).val());
+
+            if (result.DcrTipoLogradouro != null) {
+                $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
+            }
+            $('.bairro').val(result.Bairro.DcrNome);
+            $('.pais').val(result.Pais.IdPais)
+
+            carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
+        });
+
+    });
+
+    function exibeCampos(tipoPessoa) {
+        if (tipoPessoa == "F") {
+            $("#DocLabel").html("CPF");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").show();
+        } else if(tipoPessoa == "J") {
+            $("#DocLabel").html("CNPJ");
+            $(".labelNome").html("Razão Social");
+            $(".txtNome").attr("placeholder", "Razão social").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $("#sexo").val('N');
+            $(".camposPF").hide();
+            $(".camposPfPj").show();
+        } else if (tipoPessoa == "E") {
+            $("#DocLabel").html("Passaporte");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".logradouro").attr("placeholder", "Linha 1").blur();
+            $(".labelLogra").html("Linha 1");
+            $(".labelComp").html("Linha 2");
+            $(".complemento").attr("placeholder", "Linha 2").blur();
+            $(".labelBairro").html("Linha 3");
+            $(".bairro").attr("placeholder", "Linha 3").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").hide();
+        }
+    }
+
+    function carregaCidades(estado,id) {
+
+        var comboEstado = estado;
+        var comboCidade = $('.cidade');
+
+        if (comboEstado != "-1") {
+
+            $.ajax({
+                url: '@Url.Action("GetCidade","Cliente")',
+                type: 'POST',
+                data: { id: comboEstado.val() },
+                success: function (cidades) {
+                    comboCidade.empty();
+                    var $select = comboCidade;
+                    $select.append('<option value="0">--- Selecione a Cidade ---</option>');
+                    $.each(cidades, function (i, cidade) {
+                        $select.append(
+                            $('<option/>')
+                            .attr('value', cidade.IdCidade)
+                            .text(cidade.DcrNome)
+                        );
+                    });
+                    if (id != null) {
+                        comboCidade.val(id);
+                    }
+                },
+                error: function (xhr) { }
+            });
+        }
+
+
+    }
+
+    function carregaEstados(idPais,idEstado,idCidade) {
+        var comboEstado = $('.estado');
+            $.ajax({
+                url: '@Url.Action("GetEstado","Cliente")',
+                type: 'POST',
+                data: { idPais: idPais },
+                success: function (estados) {
+                    comboEstado.empty();
+                    var $select = comboEstado;
+                    $select.append('<option value="0">--- Selecione o Estado ---</option>');
+                    $.each(estados, function (i, estado) {
+                        $select.append(
+                            $('<option/>')
+                            .attr('value', estado.IdUnidadeFederacao)
+                            .text(estado.DcrSigla)
+                        );
+                    });
+                    if (idEstado != null) {
+                        comboEstado.val(idEstado);
+                        carregaCidades(comboEstado, idCidade);
+                    }
+                },
+                error: function (xhr) { }
+            });
+    }
+
+    function carregaPais() {
+        var comboPais = $('.pais');
+
+        $.ajax({
+            url: '@Url.Action("GetPais","Cliente")',
+            type: 'POST',
+            //data: { id: comboEstado },
+            success: function (paises) {
+                comboPais.empty();
+                var $select = comboPais;
+                $select.append('<option value="0">--- Selecione o Pais ---</option>');
+                $.each(paises, function (i, pais) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', pais.IdPais)
+                        .text(pais.DcrNome)
+                    );
+                });
+                //if (id != null) {
+                //    comboEstado.val(id);
+                //}
+            },
+            error: function (xhr) { }
+        });
+    }
+
+    // <![CDATA[
+    function addRow() {
+        //copy the table row and clear the value of the input, then append the row to the end of the table
+        $("#ContatosCampos").clone().find("input").each(function () {
+            $(this).val('');
+        }).end().appendTo("#ContatosParent");
+    }
+    $(".radio input[type='radio']").on('click', function () {
+        if ($("#rpf").is(":checked")) {
+            $("#DocLabel").html("CPF");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").show();
+        } else if ($("#rpj").is(":checked")) {
+            $("#DocLabel").html("CNPJ");
+            $(".labelNome").html("Razão Social");
+            $(".txtNome").attr("placeholder", "Razão social").blur();
+            $(".labelLogra").html("Logradouro");
+            $(".logradouro").attr("placeholder", "Logradouro").blur();
+            $(".labelComp").html("Complemento");
+            $(".complemento").attr("placeholder", "Complemento").blur();
+            $(".labelBairro").html("Bairro");
+            $(".bairro").attr("placeholder", "Bairro").blur();
+            $("#sexo").val('N');
+            $(".camposPF").hide();
+            $(".camposPfPj").show();
+        } else if ($("#restr").is(":checked")) {
+            $("#DocLabel").html("Passaporte");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
+            $(".logradouro").attr("placeholder", "Linha 1").blur();
+            $(".labelLogra").html("Linha 1");
+            $(".labelComp").html("Linha 2");
+            $(".complemento").attr("placeholder", "Linha 2").blur();
+            $(".labelBairro").html("Linha 3");
+            $(".bairro").attr("placeholder", "Linha 3").blur();
+            $(".camposPF").show();
+            $(".camposPfPj").hide();
+            }
+    });
+</script>
+
+
