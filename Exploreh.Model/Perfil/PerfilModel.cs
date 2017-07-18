@@ -14,7 +14,7 @@ namespace Exploreh.Model.Perfil
         public bool Ativo { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
-        //public virtual ICollection<Telas> Telas { get; set; }
+        public bool IsChecked { get; set; }
         public virtual ICollection<UsuarioModel> UsuarioModel { get; set; }
 
         public static implicit operator PerfilModel(Database.Perfil perfil)
