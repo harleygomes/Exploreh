@@ -15,13 +15,14 @@
 @section Styles {
     @Styles.Render("~/bundles/toastr/css")
     @Styles.Render("~/bundles/sweetAlert/css")
+    @Styles.Render("~/bundles/peicon7stroke/css")
 }
 
 <div class="panel-body list">
     <h2>Lista de Permissões de acesso</h2>
 
     <button onclick="location.href='@Url.Action("Cadastrar", "Permissao")'" class="btn w-xs btn-primary">Novo <i class="glyphicon glyphicon-plus"></i></button>
-    
+
     @if (Model != null)
     {
         foreach (var tela in Model)
@@ -42,70 +43,64 @@
 
                                     <table class="table table-striped">
                                         <thead>
-                                        <tr>
-                                            <th>
-                                                Nome
-                                            </th>
-                                            <th>
-                                                Ativo
-                                            </th>
-                                            <th>
-                                                Perfil
-                                            </th>
-                                            <th></th>
-                                        </tr>
+                                            <tr>
+                                                <th>
+                                                    Nome
+                                                </th>
+                                                <th>
+                                                    Perfil
+                                                </th>
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => tela.Tela)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => tela.Ativo)
-                                            </td>
-                                            <td>
-                                                <button type="button"
-                                                        class="btn btn-xs btn-primary"
-                                                        onclick="location.href = '@Url.Action("Editar", "Permissao", new {id = tela.Id})'">
-                                                    Editar
-                                                </button>
-                                                |
-                                                <button type="button"
-                                                        class="btn btn-xs btn-info"
-                                                        data-toggle="modal"
-                                                        data-target="#myModalDetalhes"
-                                                        onclick="Detalhes('@tela.Id', '@Url.Action("Detalhes", "Permissao")');">
-                                                    Detalhes
-                                                </button>
-                                                |
-                                                <button type="button"
-                                                        class="btn btn-xs btn-danger"
-                                                        data-toggle="modal"
-                                                        data-target="#myModalDelete"
-                                                        onclick="Deletar('@tela.Id', '@Url.Action("Excluir", "Permissao")');">
-                                                    Excluir
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => tela.Tela)
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                            class="btn btn-xs btn-primary"
+                                                            onclick="location.href = '@Url.Action("Editar", "Permissao", new {id = tela.Id})'">
+                                                        Editar
+                                                    </button>
+                                                    |
+                                                    <button type="button"
+                                                            class="btn btn-xs btn-info"
+                                                            data-toggle="modal"
+                                                            data-target="#myModalDetalhes"
+                                                            onclick="Detalhes('@tela.Id', '@Url.Action("Detalhes", "Permissao")');">
+                                                        Detalhes
+                                                    </button>
+                                                    |
+                                                    <button type="button"
+                                                            class="btn btn-xs btn-danger"
+                                                            data-toggle="modal"
+                                                            data-target="#myModalDelete"
+                                                            onclick="Deletar('@tela.Id', '@Url.Action("Excluir", "Permissao")');">
+                                                        Excluir
+                                                    </button>
+                                                </td>
+                                            </tr>
 
                                         </tbody>
 
                                         <thead>
-                                        <tr>
-                                            <th>
-                                                Perfis Vinculados:
-                                            </th>
-                                        </tr>
+                                            <tr>
+                                                <th>
+                                                    Perfis Vinculados:
+                                                </th>
+                                            </tr>
                                         </thead>
-                                       
+
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => tela.Perfil)
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => tela.Perfil)  <i class="fa fa-check"></i>
+                                                </td>
+                                            </tr>
                                         </tbody>
-                                       
+
                                     </table>
                                 </div>
 
@@ -117,7 +112,7 @@
         }
     }
 </div>
-    
+
 
 @* inicio modal*@
 <div class="modal fade" id="myModalDetalhes" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -190,12 +185,12 @@
         if (notificacao === true) {
 
             setTimeout(function() {
-                    swal({
-                        title: "Good job!",
-                        text: "Ação concluida com sucesso!",
-                        type: "success"
-                    });
-                },
+                swal({
+                    title: "Good job!",
+                    text: "Ação concluida com sucesso!",
+                    type: "success"
+                });
+            },
                 1000);
         }
     }

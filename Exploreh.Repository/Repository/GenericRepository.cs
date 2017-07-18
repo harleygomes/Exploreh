@@ -75,6 +75,27 @@ namespace Exploreh.Repository.Repository
             return this.repository.Add(model);
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public T AddToReturnEntity(T model)
+        {
+            return this.repository.AddToReturnEntity(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public T UpdateToReturnEntity(T model)
+        {
+            return this.repository.UpdateToReturnEntity(model);
+        }
         /// <summary>
         /// Exclui um item
         /// </summary>

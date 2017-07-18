@@ -48,7 +48,20 @@ namespace Exploreh.Business.Perfil
             return _rep.Add(model);
         }
 
+        /// <summary>
+        /// Método para retornar o Id após cadastro
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public PerfilModel AddToReturnEntity(PerfilModel model)
+        {
+            #region Regras
+            model.DataCadastro = DateTime.Now;
+            model.Ativo = true;
+            #endregion
 
+            return _rep.AddToReturnEntity(model);
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -18,9 +18,8 @@ namespace Exploreh.Model.Telas
         public DateTime? DataAlteracao { get; set; }
         public virtual List<PerfilTelaModel> PerfilTelaModel { get; set; }
         public string Descricao { get; set; }
-
         public string Url { get; set; }
-
+       
         /// <summary>
         /// 
         /// </summary>

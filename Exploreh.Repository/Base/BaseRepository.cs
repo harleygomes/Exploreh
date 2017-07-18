@@ -95,6 +95,57 @@ namespace Exploreh.Repository.Base
 
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public T AddToReturnEntity(T entity)
+        {
+            try
+            {
+                if (entity == null) return entity;
+
+                this.Entities.Attach(entity);
+                this.Entities.Add(entity);
+
+                if (this._db.SaveChanges() > 0)
+                    return entity;
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                return entity;
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public T UpdateToReturnEntity(T entity)
+        {
+            try
+            {
+                if (entity == null) return entity;
+
+                this._db.Set<T>().AddOrUpdate(entity);
+                if (this._db.SaveChanges() > 0)
+                    return entity;
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                return entity;
+            }
+
+        }
+
         /// <summary>
         /// Método que deleta uma entidade
         /// </summary>
