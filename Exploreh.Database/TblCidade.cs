@@ -33,8 +33,8 @@ namespace Exploreh.Database
         public Nullable<System.DateTime> DataReg { get; set; }
         public string EstReg { get; set; }
     
+        public virtual TblUnidadeFederacao TblUnidadeFederacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteEndereco> ClienteEndereco { get; set; }
-        public virtual TblUnidadeFederacao TblUnidadeFederacao { get; set; }
     }
 }

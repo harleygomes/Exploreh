@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Model.Cliente;
 using Exploreh.Model.UnidadeFederacao;
+using Exploreh.Model.Bairro;
+using Exploreh.Model.Cidade;
+using Exploreh.Model.Pais;
 
 namespace Exploreh.Model.Logradouro
 {
@@ -23,6 +26,10 @@ namespace Exploreh.Model.Logradouro
         public string DcrCep { get; set; }
         public Nullable<System.DateTime> DataReg { get; set; }
         public string EstReg { get; set; }
+        public BairroModel Bairro { get; set; }
+        public CidadeModel Cidade { get; set; }
+        public UnidadeFederacaoModel UnidadeFederacao { get; set; }
+        public PaisModel Pais { get; set; }
 
         public static implicit operator LogradouroModel(Database.TblLogradouro logradouro)
         {
@@ -41,7 +48,7 @@ namespace Exploreh.Model.Logradouro
                 DcrNome = logradouro.DcrNome,
                 DcrCep = logradouro.DcrCep,
                 DataReg = logradouro.DataReg,
-                EstReg = logradouro.EstReg,
+                EstReg = logradouro.EstReg
             };
         }
 

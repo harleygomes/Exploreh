@@ -37,5 +37,16 @@ namespace Exploreh.Business.Estado
             return _rep.Get(id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<UnidadeFederacaoModel> GetByPais(int id)
+        {
+            var retorno =  _rep.Get().Where(e=>e.IdPais == id).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+            return retorno;
+        }
+
     }
 }

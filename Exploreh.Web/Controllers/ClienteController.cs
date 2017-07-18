@@ -10,16 +10,19 @@ using Exploreh.Business.Estado;
 using Exploreh.Model.Cliente;
 using Exploreh.Model.Helper;
 using Exploreh.Business.Logradouro;
+using Exploreh.Model.Logradouro;
+using Exploreh.Business.Pais;
 
 namespace Exploreh.Web.Controllers
 {
     public class ClienteController : Controller
     {
         private readonly ClienteBusiness _busCliente;
+        private readonly PaisBusiness _busPais;
         private readonly EstadoBusiness _busEstado;
         private readonly CidadeBusiness _busCidade;
         private readonly ClienteContatoBusiness _busClienteContato;
-        private readonly LogradouroBusiness _busLogradoouro;
+        private readonly LogradouroBusiness _busLogradouro;
 
         private static bool notificacao { get; set; }
 
@@ -27,10 +30,11 @@ namespace Exploreh.Web.Controllers
         public ClienteController()
         {
             this._busCliente = new ClienteBusiness();
+            this._busPais = new PaisBusiness();
             this._busEstado = new EstadoBusiness();
             this._busCidade = new CidadeBusiness();
             this._busClienteContato = new ClienteContatoBusiness();
-            this._busLogradoouro = new LogradouroBusiness();
+            this._busLogradouro = new LogradouroBusiness();
         }
 
         public ActionResult Lista(bool? notificar)
@@ -189,6 +193,18 @@ namespace Exploreh.Web.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetEstado(int idPais)
+        {
+            return new JsonResult { Data = this._busEstado.GetByPais(idPais) };
+        }
+
+        [HttpPost]
+        public JsonResult GetPais()
+        {
+            return new JsonResult { Data = this._busPais.Get() };
+        }
+
+        [HttpPost]
         public JsonResult GetClienteDashboard()
         {
 
@@ -198,7 +214,11 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public JsonResult GetCep(string cep)
         {
-            var logradouro = _busLogradoouro.GetCep(cep);
+            var logradouro = new LogradouroModel();
+
+            if (!string.IsNullOrEmpty(cep))
+                logradouro = _busLogradouro.GetCep(cep);
+                            
             return new JsonResult { Data = logradouro };
         }
     }

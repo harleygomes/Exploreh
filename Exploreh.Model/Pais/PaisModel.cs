@@ -31,7 +31,7 @@ namespace Exploreh.Model.Pais
                 AbrevNome = pais.AbrevNome,
                 DataReg = pais.DataReg,
                 EstReg = pais.EstReg,
-                TblUnidadeFederacao = pais.TblUnidadeFederacao.ToList().ConvertAll<UnidadeFederacaoModel>(u=>u)
+                //TblUnidadeFederacao = pais.TblUnidadeFederacao.ToList().ConvertAll<UnidadeFederacaoModel>(u=>u)
             };
         }
         public static implicit operator Database.TblPais(PaisModel pais)
@@ -45,7 +45,7 @@ namespace Exploreh.Model.Pais
                 AbrevNome = pais.AbrevNome,
                 DataReg = pais.DataReg,
                 EstReg = pais.EstReg,
-                TblUnidadeFederacao = pais.TblUnidadeFederacao.ToList().ConvertAll<Database.TblUnidadeFederacao>(u => u)
+                //TblUnidadeFederacao = pais.TblUnidadeFederacao.ToList().ConvertAll<Database.TblUnidadeFederacao>(u => u)
             };
         }
     }

@@ -4,348 +4,347 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExplorehModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ExplorehModelStoreContainer">
-    <EntitySet Name="Cliente" EntityType="ExplorehModel.Store.Cliente" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClienteContato" EntityType="ExplorehModel.Store.ClienteContato" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClienteEndereco" EntityType="ExplorehModel.Store.ClienteEndereco" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClienteTelefone" EntityType="ExplorehModel.Store.ClienteTelefone" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Perfil" EntityType="ExplorehModel.Store.Perfil" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PerfilTela" EntityType="ExplorehModel.Store.PerfilTela" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TblBairro" EntityType="ExplorehModel.Store.TblBairro" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TblCidade" EntityType="ExplorehModel.Store.TblCidade" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TblLogradouro" EntityType="ExplorehModel.Store.TblLogradouro" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TblPais" EntityType="ExplorehModel.Store.TblPais" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TblUnidadeFederacao" EntityType="ExplorehModel.Store.TblUnidadeFederacao" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Tela" EntityType="ExplorehModel.Store.Tela" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Usuario" EntityType="ExplorehModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_ClienteClienteEndereco" Association="ExplorehModel.Store.FK_ClienteClienteEndereco">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClienteClienteTelefone" Association="ExplorehModel.Store.FK_ClienteClienteTelefone">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="ClienteTelefone" EntitySet="ClienteTelefone" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClienteContatoCliente" Association="ExplorehModel.Store.FK_ClienteContatoCliente">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="ClienteContato" EntitySet="ClienteContato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CidadeClienteEndereco" Association="ExplorehModel.Store.FK_CidadeClienteEndereco">
-      <End Role="TblCidade" EntitySet="TblCidade" />
-      <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PerfilTela_Perfil" Association="ExplorehModel.Store.FK_PerfilTela_Perfil">
-      <End Role="Perfil" EntitySet="Perfil" />
-      <End Role="PerfilTela" EntitySet="PerfilTela" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsuarioPerfil" Association="ExplorehModel.Store.FK_UsuarioPerfil">
-      <End Role="Perfil" EntitySet="Perfil" />
-      <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PerfilTela_Tela" Association="ExplorehModel.Store.FK_PerfilTela_Tela">
-      <End Role="Tela" EntitySet="Tela" />
-      <End Role="PerfilTela" EntitySet="PerfilTela" />
-    </AssociationSet>
-    <AssociationSet Name="CidadeUnidadeFederacaoFK" Association="ExplorehModel.Store.CidadeUnidadeFederacaoFK">
-      <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
-      <End Role="TblCidade" EntitySet="TblCidade" />
-    </AssociationSet>
-    <AssociationSet Name="UnidadeFederacaoPaisFK" Association="ExplorehModel.Store.UnidadeFederacaoPaisFK">
-      <End Role="TblPais" EntitySet="TblPais" />
-      <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Cliente">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nchar" Nullable="false" MaxLength="500" />
-    <Property Name="TipoPessoa" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Documento" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Sexo" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="DataNascimento" Type="datetime" Nullable="true" />
-    <Property Name="Ocupacao" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="HomePage" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ClienteContato">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ClienteId" Type="int" Nullable="false" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="false" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ClienteEndereco">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Logradouro" Type="nvarchar" Nullable="false" MaxLength="500" />
-    <Property Name="Numero" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Complemento" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Bairro" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-    <Property Name="ClienteId" Type="int" Nullable="false" />
-    <Property Name="CidadeId" Type="int" Nullable="false" />
-    <Property Name="CEP" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ClienteTelefone">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Ddd" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Telefone" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-    <Property Name="Ativo" Type="bit" Nullable="true" />
-    <Property Name="ClienteId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Perfil">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PerfilTela">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Perfil_Id" Type="int" Nullable="false" />
-    <Property Name="Tela_Id" Type="int" Nullable="false" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TblBairro">
-    <Key>
-      <PropertyRef Name="IdBairro" />
-    </Key>
-    <Property Name="IdBairro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdCidade" Type="int" Nullable="true" />
-    <Property Name="DcrChaveLocalidade" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrChaveBairro" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="AbrevNome" Type="varchar" Nullable="true" MaxLength="36" />
-    <Property Name="DataReg" Type="datetime" Nullable="true" />
-    <Property Name="EstReg" Type="varchar" Nullable="true" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="TblCidade">
-    <Key>
-      <PropertyRef Name="IdCidade" />
-    </Key>
-    <Property Name="IdCidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUnidadeFederacao" Type="int" Nullable="true" />
-    <Property Name="DcrSiglaPais" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrSiglaUf" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrChaveLocalidade" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="DcrCep" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="AbrevNome" Type="varchar" Nullable="true" MaxLength="36" />
-    <Property Name="TipLocalidade" Type="varchar" Nullable="true" MaxLength="1" />
-    <Property Name="SituacaoLocalidade" Type="varchar" Nullable="true" MaxLength="1" />
-    <Property Name="DataReg" Type="datetime" Nullable="true" />
-    <Property Name="EstReg" Type="varchar" Nullable="true" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="TblLogradouro">
-    <Key>
-      <PropertyRef Name="IdLogradouro" />
-    </Key>
-    <Property Name="IdLogradouro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdBairro" Type="int" Nullable="true" />
-    <Property Name="DcrChaveBairroInicial" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrChaveBairroFinal" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrTipoLogradouro" Type="varchar" Nullable="true" MaxLength="26" />
-    <Property Name="DcrPreposicao" Type="varchar" Nullable="true" MaxLength="3" />
-    <Property Name="DcrTituloPatente" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="DcrChaveLogradouro" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DcrNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="AbrevNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="DcrCep" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="DataReg" Type="datetime" Nullable="true" />
-    <Property Name="EstReg" Type="varchar" Nullable="true" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="TblPais">
-    <Key>
-      <PropertyRef Name="IdPais" />
-    </Key>
-    <Property Name="IdPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DcrSigla" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrSigla2" Type="varchar" Nullable="true" MaxLength="3" />
-    <Property Name="DcrNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="AbrevNome" Type="varchar" Nullable="true" MaxLength="36" />
-    <Property Name="DataReg" Type="datetime" Nullable="true" />
-    <Property Name="EstReg" Type="varchar" Nullable="true" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="TblUnidadeFederacao">
-    <Key>
-      <PropertyRef Name="IdUnidadeFederacao" />
-    </Key>
-    <Property Name="IdUnidadeFederacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdPais" Type="int" Nullable="true" />
-    <Property Name="DcrSiglaPais" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrSigla" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrChaveUf" Type="varchar" Nullable="true" MaxLength="2" />
-    <Property Name="DcrNome" Type="varchar" Nullable="true" MaxLength="72" />
-    <Property Name="AbrevNome" Type="varchar" Nullable="true" MaxLength="36" />
-    <Property Name="DataReg" Type="datetime" Nullable="true" />
-    <Property Name="EstReg" Type="varchar" Nullable="true" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="Tela">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-    <Property Name="Descricao" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Usuario">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Ativo" Type="bit" Nullable="false" />
-    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
-    <Property Name="DataAlteracao" Type="datetime" Nullable="true" />
-    <Property Name="Senha" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PerfilId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_ClienteClienteEndereco">
-    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
-    <End Role="ClienteEndereco" Type="ExplorehModel.Store.ClienteEndereco" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClienteEndereco">
-        <PropertyRef Name="ClienteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ClienteClienteTelefone">
-    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
-    <End Role="ClienteTelefone" Type="ExplorehModel.Store.ClienteTelefone" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClienteTelefone">
-        <PropertyRef Name="ClienteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ClienteContatoCliente">
-    <End Role="Cliente" Type="ExplorehModel.Store.Cliente" Multiplicity="1" />
-    <End Role="ClienteContato" Type="ExplorehModel.Store.ClienteContato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClienteContato">
-        <PropertyRef Name="ClienteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CidadeClienteEndereco">
-    <End Role="TblCidade" Type="ExplorehModel.Store.TblCidade" Multiplicity="1" />
-    <End Role="ClienteEndereco" Type="ExplorehModel.Store.ClienteEndereco" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblCidade">
-        <PropertyRef Name="IdCidade" />
-      </Principal>
-      <Dependent Role="ClienteEndereco">
-        <PropertyRef Name="CidadeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PerfilTela_Perfil">
-    <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
-    <End Role="PerfilTela" Type="ExplorehModel.Store.PerfilTela" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Perfil">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PerfilTela">
-        <PropertyRef Name="Perfil_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UsuarioPerfil">
-    <End Role="Perfil" Type="ExplorehModel.Store.Perfil" Multiplicity="1" />
-    <End Role="Usuario" Type="ExplorehModel.Store.Usuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Perfil">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="PerfilId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PerfilTela_Tela">
-    <End Role="Tela" Type="ExplorehModel.Store.Tela" Multiplicity="1" />
-    <End Role="PerfilTela" Type="ExplorehModel.Store.PerfilTela" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tela">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PerfilTela">
-        <PropertyRef Name="Tela_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CidadeUnidadeFederacaoFK">
-    <End Role="TblUnidadeFederacao" Type="ExplorehModel.Store.TblUnidadeFederacao" Multiplicity="0..1" />
-    <End Role="TblCidade" Type="ExplorehModel.Store.TblCidade" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblUnidadeFederacao">
-        <PropertyRef Name="IdUnidadeFederacao" />
-      </Principal>
-      <Dependent Role="TblCidade">
-        <PropertyRef Name="IdUnidadeFederacao" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UnidadeFederacaoPaisFK">
-    <End Role="TblPais" Type="ExplorehModel.Store.TblPais" Multiplicity="0..1" />
-    <End Role="TblUnidadeFederacao" Type="ExplorehModel.Store.TblUnidadeFederacao" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblPais">
-        <PropertyRef Name="IdPais" />
-      </Principal>
-      <Dependent Role="TblUnidadeFederacao">
-        <PropertyRef Name="IdPais" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="TipoPessoa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Documento" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataNascimento" Type="datetime" />
+          <Property Name="Ocupacao" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="HomePage" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteContato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteEndereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logradouro" Type="nvarchar" MaxLength="500" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" />
+          <Property Name="Complemento" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bairro" Type="nvarchar" MaxLength="500" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="CidadeId" Type="int" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ClienteTelefone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ddd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PerfilTela">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Perfil_Id" Type="int" Nullable="false" />
+          <Property Name="Tela_Id" Type="int" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblBairro">
+          <Key>
+            <PropertyRef Name="IdBairro" />
+          </Key>
+          <Property Name="IdBairro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCidade" Type="int" />
+          <Property Name="DcrChaveLocalidade" Type="varchar" MaxLength="8" />
+          <Property Name="DcrChaveBairro" Type="varchar" MaxLength="8" />
+          <Property Name="DcrNome" Type="varchar" MaxLength="72" />
+          <Property Name="AbrevNome" Type="varchar" MaxLength="36" />
+          <Property Name="DataReg" Type="datetime" />
+          <Property Name="EstReg" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TblCidade">
+          <Key>
+            <PropertyRef Name="IdCidade" />
+          </Key>
+          <Property Name="IdCidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUnidadeFederacao" Type="int" />
+          <Property Name="DcrSiglaPais" Type="varchar" MaxLength="2" />
+          <Property Name="DcrSiglaUf" Type="varchar" MaxLength="2" />
+          <Property Name="DcrChaveLocalidade" Type="varchar" MaxLength="8" />
+          <Property Name="DcrNome" Type="varchar" MaxLength="72" />
+          <Property Name="DcrCep" Type="varchar" MaxLength="8" />
+          <Property Name="AbrevNome" Type="varchar" MaxLength="36" />
+          <Property Name="TipLocalidade" Type="varchar" MaxLength="1" />
+          <Property Name="SituacaoLocalidade" Type="varchar" MaxLength="1" />
+          <Property Name="DataReg" Type="datetime" />
+          <Property Name="EstReg" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TblLogradouro">
+          <Key>
+            <PropertyRef Name="IdLogradouro" />
+          </Key>
+          <Property Name="IdLogradouro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBairro" Type="int" />
+          <Property Name="DcrChaveBairroInicial" Type="varchar" MaxLength="8" />
+          <Property Name="DcrChaveBairroFinal" Type="varchar" MaxLength="8" />
+          <Property Name="DcrTipoLogradouro" Type="varchar" MaxLength="26" />
+          <Property Name="DcrPreposicao" Type="varchar" MaxLength="3" />
+          <Property Name="DcrTituloPatente" Type="varchar" MaxLength="72" />
+          <Property Name="DcrChaveLogradouro" Type="varchar" MaxLength="8" />
+          <Property Name="DcrNome" Type="varchar" MaxLength="72" />
+          <Property Name="AbrevNome" Type="varchar" MaxLength="72" />
+          <Property Name="DcrCep" Type="varchar" MaxLength="8" />
+          <Property Name="DataReg" Type="datetime" />
+          <Property Name="EstReg" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TblPais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DcrSigla" Type="varchar" MaxLength="2" />
+          <Property Name="DcrSigla2" Type="varchar" MaxLength="3" />
+          <Property Name="DcrNome" Type="varchar" MaxLength="72" />
+          <Property Name="AbrevNome" Type="varchar" MaxLength="36" />
+          <Property Name="DataReg" Type="datetime" />
+          <Property Name="EstReg" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TblUnidadeFederacao">
+          <Key>
+            <PropertyRef Name="IdUnidadeFederacao" />
+          </Key>
+          <Property Name="IdUnidadeFederacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPais" Type="int" />
+          <Property Name="DcrSiglaPais" Type="varchar" MaxLength="2" />
+          <Property Name="DcrSigla" Type="varchar" MaxLength="2" />
+          <Property Name="DcrChaveUf" Type="varchar" MaxLength="2" />
+          <Property Name="DcrNome" Type="varchar" MaxLength="72" />
+          <Property Name="AbrevNome" Type="varchar" MaxLength="36" />
+          <Property Name="DataReg" Type="datetime" />
+          <Property Name="EstReg" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Tela">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Senha" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PerfilId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="CidadeUnidadeFederacaoFK">
+          <End Role="TblUnidadeFederacao" Type="Self.TblUnidadeFederacao" Multiplicity="0..1" />
+          <End Role="TblCidade" Type="Self.TblCidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUnidadeFederacao">
+              <PropertyRef Name="IdUnidadeFederacao" />
+            </Principal>
+            <Dependent Role="TblCidade">
+              <PropertyRef Name="IdUnidadeFederacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CidadeClienteEndereco">
+          <End Role="TblCidade" Type="Self.TblCidade" Multiplicity="1" />
+          <End Role="ClienteEndereco" Type="Self.ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteClienteEndereco">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ClienteEndereco" Type="Self.ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteClienteTelefone">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ClienteTelefone" Type="Self.ClienteTelefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteTelefone">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteContatoCliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ClienteContato" Type="Self.ClienteContato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteContato">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilTela_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="PerfilTela" Type="Self.PerfilTela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerfilTela">
+              <PropertyRef Name="Perfil_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilTela_Tela">
+          <End Role="Tela" Type="Self.Tela" Multiplicity="1" />
+          <End Role="PerfilTela" Type="Self.PerfilTela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tela">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerfilTela">
+              <PropertyRef Name="Tela_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioPerfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnidadeFederacaoPaisFK">
+          <End Role="TblPais" Type="Self.TblPais" Multiplicity="0..1" />
+          <End Role="TblUnidadeFederacao" Type="Self.TblUnidadeFederacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="TblUnidadeFederacao">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExplorehModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteContato" EntityType="Self.ClienteContato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteEndereco" EntityType="Self.ClienteEndereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteTelefone" EntityType="Self.ClienteTelefone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerfilTela" EntityType="Self.PerfilTela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblBairro" EntityType="Self.TblBairro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblCidade" EntityType="Self.TblCidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblLogradouro" EntityType="Self.TblLogradouro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPais" EntityType="Self.TblPais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUnidadeFederacao" EntityType="Self.TblUnidadeFederacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tela" EntityType="Self.Tela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="CidadeUnidadeFederacaoFK" Association="Self.CidadeUnidadeFederacaoFK">
+            <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
+            <End Role="TblCidade" EntitySet="TblCidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CidadeClienteEndereco" Association="Self.FK_CidadeClienteEndereco">
+            <End Role="TblCidade" EntitySet="TblCidade" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteClienteEndereco" Association="Self.FK_ClienteClienteEndereco">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteClienteTelefone" Association="Self.FK_ClienteClienteTelefone">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteTelefone" EntitySet="ClienteTelefone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteContatoCliente" Association="Self.FK_ClienteContatoCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteContato" EntitySet="ClienteContato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilTela_Perfil" Association="Self.FK_PerfilTela_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="PerfilTela" EntitySet="PerfilTela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilTela_Tela" Association="Self.FK_PerfilTela_Tela">
+            <End Role="Tela" EntitySet="Tela" />
+            <End Role="PerfilTela" EntitySet="PerfilTela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioPerfil" Association="Self.FK_UsuarioPerfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="UnidadeFederacaoPaisFK" Association="Self.UnidadeFederacaoPaisFK">
+            <End Role="TblPais" EntitySet="TblPais" />
+            <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExplorehModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ExplorehEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Cliente" EntityType="ExplorehModel.Cliente" />
           <EntitySet Name="ClienteContato" EntityType="ExplorehModel.ClienteContato" />
-          <EntitySet Name="ClienteEndereco" EntityType="ExplorehModel.ClienteEndereco" />
           <EntitySet Name="ClienteTelefone" EntityType="ExplorehModel.ClienteTelefone" />
           <EntitySet Name="Perfil" EntityType="ExplorehModel.Perfil" />
           <EntitySet Name="PerfilTela" EntityType="ExplorehModel.PerfilTela" />
@@ -356,10 +355,6 @@
           <EntitySet Name="TblUnidadeFederacao" EntityType="ExplorehModel.TblUnidadeFederacao" />
           <EntitySet Name="Tela" EntityType="ExplorehModel.Tela" />
           <EntitySet Name="Usuario" EntityType="ExplorehModel.Usuario" />
-          <AssociationSet Name="FK_ClienteClienteEndereco" Association="ExplorehModel.FK_ClienteClienteEndereco">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClienteClienteTelefone" Association="ExplorehModel.FK_ClienteClienteTelefone">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ClienteTelefone" EntitySet="ClienteTelefone" />
@@ -367,10 +362,6 @@
           <AssociationSet Name="FK_ClienteContatoCliente" Association="ExplorehModel.FK_ClienteContatoCliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ClienteContato" EntitySet="ClienteContato" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CidadeClienteEndereco" Association="ExplorehModel.FK_CidadeClienteEndereco">
-            <End Role="TblCidade" EntitySet="TblCidade" />
-            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
           </AssociationSet>
           <AssociationSet Name="FK_PerfilTela_Perfil" Association="ExplorehModel.FK_PerfilTela_Perfil">
             <End Role="Perfil" EntitySet="Perfil" />
@@ -392,7 +383,16 @@
             <End Role="TblPais" EntitySet="TblPais" />
             <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="ClienteEndereco" EntityType="ExplorehModel.ClienteEndereco" />
+          <AssociationSet Name="FK_ClienteClienteEndereco" Association="ExplorehModel.FK_ClienteClienteEndereco">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CidadeClienteEndereco" Association="ExplorehModel.FK_CidadeClienteEndereco">
+            <End Role="TblCidade" EntitySet="TblCidade" />
+            <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -409,9 +409,9 @@
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.FK_ClienteClienteEndereco" FromRole="Cliente" ToRole="ClienteEndereco" />
           <NavigationProperty Name="ClienteTelefone" Relationship="ExplorehModel.FK_ClienteClienteTelefone" FromRole="Cliente" ToRole="ClienteTelefone" />
           <NavigationProperty Name="ClienteContato" Relationship="ExplorehModel.FK_ClienteContatoCliente" FromRole="Cliente" ToRole="ClienteContato" />
+          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.FK_ClienteClienteEndereco" FromRole="Cliente" ToRole="ClienteEndereco" />
         </EntityType>
         <EntityType Name="ClienteContato">
           <Key>
@@ -425,24 +425,6 @@
           <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="ExplorehModel.FK_ClienteContatoCliente" FromRole="ClienteContato" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="ClienteEndereco">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Logradouro" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
-          <Property Name="Ativo" Type="Boolean" Nullable="false" />
-          <Property Name="ClienteId" Type="Int32" Nullable="false" />
-          <Property Name="CidadeId" Type="Int32" Nullable="false" />
-          <Property Name="CEP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cliente" Relationship="ExplorehModel.FK_ClienteClienteEndereco" FromRole="ClienteEndereco" ToRole="Cliente" />
-          <NavigationProperty Name="TblCidade" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="ClienteEndereco" ToRole="TblCidade" />
         </EntityType>
         <EntityType Name="ClienteTelefone">
           <Key>
@@ -509,8 +491,8 @@
           <Property Name="SituacaoLocalidade" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="DataReg" Type="DateTime" Precision="3" />
           <Property Name="EstReg" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="TblCidade" ToRole="ClienteEndereco" />
           <NavigationProperty Name="TblUnidadeFederacao" Relationship="ExplorehModel.CidadeUnidadeFederacaoFK" FromRole="TblCidade" ToRole="TblUnidadeFederacao" />
+          <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="TblCidade" ToRole="ClienteEndereco" />
         </EntityType>
         <EntityType Name="TblLogradouro">
           <Key>
@@ -585,18 +567,6 @@
           <Property Name="PerfilId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Perfil" Relationship="ExplorehModel.FK_UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
         </EntityType>
-        <Association Name="FK_ClienteClienteEndereco">
-          <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClienteEndereco">
-              <PropertyRef Name="ClienteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClienteClienteTelefone">
           <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
           <End Type="ExplorehModel.ClienteTelefone" Role="ClienteTelefone" Multiplicity="*" />
@@ -618,18 +588,6 @@
             </Principal>
             <Dependent Role="ClienteContato">
               <PropertyRef Name="ClienteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CidadeClienteEndereco">
-          <End Type="ExplorehModel.TblCidade" Role="TblCidade" Multiplicity="1" />
-          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblCidade">
-              <PropertyRef Name="IdCidade" />
-            </Principal>
-            <Dependent Role="ClienteEndereco">
-              <PropertyRef Name="CidadeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,6 +651,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClienteEndereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logradouro" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bairro" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <Property Name="CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="ExplorehModel.FK_ClienteClienteEndereco" FromRole="ClienteEndereco" ToRole="Cliente" />
+          <NavigationProperty Name="TblCidade" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="ClienteEndereco" ToRole="TblCidade" />
+        </EntityType>
+        <Association Name="FK_ClienteClienteEndereco">
+          <End Type="ExplorehModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CidadeClienteEndereco">
+          <End Type="ExplorehModel.TblCidade" Role="TblCidade" Multiplicity="1" />
+          <End Type="ExplorehModel.ClienteEndereco" Role="ClienteEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -727,23 +727,6 @@
           <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
           <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClienteEndereco">
-      <EntityTypeMapping TypeName="IsTypeOf(ExplorehModel.ClienteEndereco)">
-        <MappingFragment StoreEntitySet="ClienteEndereco">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
-          <ScalarProperty Name="Numero" ColumnName="Numero" />
-          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
-          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
-          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
-          <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
-          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
-          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-          <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
-          <ScalarProperty Name="CEP" ColumnName="CEP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -886,6 +869,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="ClienteEndereco">
+            <EntityTypeMapping TypeName="ExplorehModel.ClienteEndereco">
+              <MappingFragment StoreEntitySet="ClienteEndereco">
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

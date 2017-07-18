@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Exploreh.Model.Logradouro;
 using Exploreh.Repository.Repository;
+using Exploreh.Business.Estado;
+using Exploreh.Business.Pais;
+using Exploreh.Model.Cidade;
+using Exploreh.Model.UnidadeFederacao;
+using Exploreh.Model.Pais;
 
 namespace Exploreh.Business.Logradouro
 {
@@ -43,7 +48,14 @@ namespace Exploreh.Business.Logradouro
 
         public LogradouroModel GetCep(string cep)
         {
-            return _rep.Where(i=>i.DcrCep == cep).AsQueryable().FirstOrDefault();
+            LogradouroModel logradouro = _rep.Where(i=>i.DcrCep == cep).AsQueryable().FirstOrDefault();
+
+            logradouro.Bairro = logradouro.IdBairro != null ? new Bairro.BairroBusiness().Get((int)logradouro.IdBairro) : new Model.Bairro.BairroModel();
+            logradouro.Cidade = logradouro.Bairro.IdCidade != null ? new Cidade.CidadeBusiness().Get((int)logradouro.Bairro.IdCidade) : new CidadeModel();
+            logradouro.UnidadeFederacao = logradouro.Cidade.IdUnidadeFederacao != null ? new EstadoBusiness().Get((int)logradouro.Cidade.IdUnidadeFederacao) : new UnidadeFederacaoModel();
+            logradouro.Pais = logradouro.UnidadeFederacao.IdPais != null ? new PaisBusiness().Get((int)logradouro.UnidadeFederacao.IdPais) : new PaisModel();
+
+            return logradouro;
         }
 
     }
