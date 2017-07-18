@@ -104,7 +104,6 @@ namespace Exploreh.Web.Controllers
             try
             {
                 var model = _busCliente.Get(id);
-                model.ClienteTelefone = new List<ClienteTelefoneModel> { new ClienteTelefoneModel { Ddd = "11", Telefone = "5551-98898", TipoTelefone = "F" } };
                 return View(model);
             }
             catch

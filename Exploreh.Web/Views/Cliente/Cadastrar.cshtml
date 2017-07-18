@@ -24,12 +24,7 @@
 
                         Cliente Dados Principais
                     </div>
-                    <div class="panel-body">
-
-                        <div class="input-group input-fields">
-                            <span class="input-group-addon">Nome</span>
-                            <input id="Nome" type="text" class="form-control" name="Nome" placeholder="Nome do usuário">
-                        </div>
+                    <div class="panel-body">                        
                         <div class="input-group input-fields">
                             <div class="radio radio-info radio-inline">
                                 <input class="radio" type="radio" id="rpf" value="F" name="TipoPessoa" checked="">
@@ -44,7 +39,10 @@
                                 <label for="restr"> Estrangeiro </label>
                             </div>
                         </div>
-
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon lblNome">Nome</span>
+                            <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário">
+                        </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
                             <input type="text" class="form-control" name="Documento" placeholder="Número do documento">
@@ -338,6 +336,8 @@
     $(".radio input[type='radio']").on('click', function () {
         if ($("#rpf").is(":checked")) {
             $("#DocLabel").html("CPF");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
             $(".labelLogra").html("Logradouro");
             $(".logradouro").attr("placeholder", "Logradouro").blur();
             $(".labelComp").html("Complemento");
@@ -348,6 +348,8 @@
             $(".camposPfPj").show();
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
+            $(".labelNome").html("Razão Social");
+            $(".txtNome").attr("placeholder", "Razão social").blur();
             $(".labelLogra").html("Logradouro");
             $(".logradouro").attr("placeholder", "Logradouro").blur();
             $(".labelComp").html("Complemento");
@@ -359,12 +361,15 @@
             $(".camposPfPj").show();
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
+            $(".labelNome").html("Nome");
+            $(".txtNome").attr("placeholder", "Nome do cliente").blur();
             $(".logradouro").attr("placeholder", "Linha 1").blur();
             $(".labelLogra").html("Linha 1");
             $(".labelComp").html("Linha 2");
             $(".complemento").attr("placeholder", "Linha 2").blur();
             $(".labelBairro").html("Linha 3");
             $(".bairro").attr("placeholder", "Linha 3").blur();
+            $(".camposPF").show();
             $(".camposPfPj").hide();
             }
     });
