@@ -19,6 +19,9 @@ namespace Exploreh.Model.Cliente
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public bool Ativo { get; set; }
         public int IdCidade { get; set; }
+        public int IdEstado { get; set; }
+        public int IdPais { get; set; }
+
         public int ClienteId { get; set; }
         public string CEP { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Exploreh.Model.Cliente;
 using Exploreh.Repository.Repository;
+using Exploreh.Business.Estado;
 
 namespace Exploreh.Business.Cliente
 {
@@ -43,7 +44,14 @@ namespace Exploreh.Business.Cliente
         /// <returns></returns>
         public ClienteModel Get(int id)
         {
-            return _rep.Get(id);
+            ClienteModel cliente = _rep.Get(id);
+            foreach(var clienteEndereco in cliente.ClienteEndereco)
+            {  
+                clienteEndereco.IdEstado = (int) new Cidade.CidadeBusiness().Get((int)clienteEndereco.IdCidade).IdUnidadeFederacao;
+                clienteEndereco.IdPais = (int)new Estado.EstadoBusiness().Get((int)clienteEndereco.IdEstado).IdPais;
+            }
+
+            return cliente;
         }
 
         /// <summary>
@@ -127,6 +135,28 @@ namespace Exploreh.Business.Cliente
             update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
             update.HomePage = !string.IsNullOrEmpty(model.HomePage) ? model.HomePage : update.HomePage;
             update.DataAlteracao = DateTime.Now;
+            var contatos = new List<ClienteContatoModel>();
+
+            if (model.ContatoNome != null)
+            {
+                for (int i = 0; i < model.ContatoNome.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]))
+                    {
+                        ClienteContatoModel c = new ClienteContatoModel
+                        {
+                            Nome = model.ContatoNome[i],
+                            Email = model.ContatoEmail[i],
+                            Ativo = true,
+                            DataCadastro = DateTime.Now
+                        };
+                        contatos.Add(c);
+                    }
+                }
+            }
+            update.ClienteContato = contatos != null ? model.ClienteContato : update.ClienteContato;
+            update.ClienteEndereco = model.ClienteEndereco != null ? model.ClienteEndereco : update.ClienteEndereco;
+            update.ClienteTelefone = model.ClienteTelefone != null ? model.ClienteTelefone : update.ClienteTelefone;
             #endregion
 
             return _rep.Update(update);

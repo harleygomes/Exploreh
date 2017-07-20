@@ -106,7 +106,7 @@ namespace Exploreh.Web.Controllers
                 var model = _busCliente.Get(id);
                 return View(model);
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
