@@ -37,5 +37,50 @@ namespace Exploreh.Business.ClienteContato
             return _rep.Get(id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(ClienteContatoModel model)
+        {
+            #region Regras
+
+            var update = Get(model.Id);
+
+            update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
+            update.Ativo = model.Ativo;
+            update.DataAlteracao = DateTime.Now;
+            #endregion
+
+            return _rep.Update(update);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(List<ClienteContatoModel> model)
+        {
+            var ok = false;
+            #region Regras
+            foreach (var item in model)
+            {
+                var update = Get(item.Id);
+
+                update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
+                update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;             
+                update.Ativo = item.Ativo;
+                update.DataAlteracao = DateTime.Now;
+
+                ok = _rep.Update(update);
+            }
+
+            #endregion
+
+            return ok;
+        }
+
     }
 }

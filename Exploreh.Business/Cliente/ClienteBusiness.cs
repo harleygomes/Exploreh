@@ -25,7 +25,7 @@ namespace Exploreh.Business.Cliente
         /// <returns></returns>
         public List<ClienteModel> Get()
         {
-            return _rep.Get().Where(a=>a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
+            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Exploreh.Business.Cliente
         public ClienteModel Get(int id)
         {
             ClienteModel cliente = _rep.Get(id);
-            foreach(var clienteEndereco in cliente.ClienteEndereco)
-            {  
-                clienteEndereco.IdEstado = (int) new Cidade.CidadeBusiness().Get((int)clienteEndereco.IdCidade).IdUnidadeFederacao;
+            foreach (var clienteEndereco in cliente.ClienteEndereco)
+            {
+                clienteEndereco.IdEstado = (int)new Cidade.CidadeBusiness().Get((int)clienteEndereco.IdCidade).IdUnidadeFederacao;
                 clienteEndereco.IdPais = (int)new Estado.EstadoBusiness().Get((int)clienteEndereco.IdEstado).IdPais;
             }
 
@@ -135,7 +135,25 @@ namespace Exploreh.Business.Cliente
             update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
             update.HomePage = !string.IsNullOrEmpty(model.HomePage) ? model.HomePage : update.HomePage;
             update.DataAlteracao = DateTime.Now;
+            if (model.ClienteTelefone != null)
+            {
+                var updateTelefoneOK = false;
+                foreach (var telefone in model.ClienteTelefone)
+                {
+                    updateTelefoneOK = new ClienteTelefoneBusiness().Update(telefone);
+                }
+
+                if (updateTelefoneOK)
+                    update.ClienteTelefone = null;
+            }
+
+            var updateEnderecoOK = new ClienteEnderecoBusiness().Update(model.ClienteEndereco.FirstOrDefault());
+
+            if (updateEnderecoOK)
+                update.ClienteEndereco = model.ClienteEndereco != null ? model.ClienteEndereco : update.ClienteEndereco;
+
             var contatos = new List<ClienteContatoModel>();
+
 
             if (model.ContatoNome != null)
             {
@@ -145,6 +163,7 @@ namespace Exploreh.Business.Cliente
                     {
                         ClienteContatoModel c = new ClienteContatoModel
                         {
+                            Id = Convert.ToInt32(model.ContatoId[i]),
                             Nome = model.ContatoNome[i],
                             Email = model.ContatoEmail[i],
                             Ativo = true,
@@ -153,10 +172,15 @@ namespace Exploreh.Business.Cliente
                         contatos.Add(c);
                     }
                 }
+
+                var contatoCliente = new ClienteContato.ClienteContatoBusiness().Update(contatos);
+
+                if (contatoCliente)
+                    update.ClienteContato = null;
             }
-            update.ClienteContato = contatos != null ? model.ClienteContato : update.ClienteContato;
-            update.ClienteEndereco = model.ClienteEndereco != null ? model.ClienteEndereco : update.ClienteEndereco;
-            update.ClienteTelefone = model.ClienteTelefone != null ? model.ClienteTelefone : update.ClienteTelefone;
+
+
+
             #endregion
 
             return _rep.Update(update);
