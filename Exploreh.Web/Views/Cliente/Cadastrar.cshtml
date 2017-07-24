@@ -167,9 +167,9 @@
                                     class="btn btn-xs btn-info"
                                     data-toggle="modal"
                                     data-target="#myModalCidade"
-                                    onclick="$('#IdEstado').val($('.estado').val()); $('#NomePais').val($('.estado option:selected').text());"
-                                    id="btnNovoEstado" style="display: none">
-                                Cadastrar Estado
+                                    onclick="$('#IdNomeEstadoSelecioando').val($('.estado').val()); $('#NomeEstadoSelecioando').val($('.estado option:selected').text());"
+                                    id="btnNovaCidade" style="display: none">
+                                Cadastrar Cidade
                             </button>
                         </div>
                     </div>
@@ -263,15 +263,16 @@
                 <input hidden="hidden" id="IdEstado" />
                 <div class="input-group input-fields">
                     <span class="input-group-addon">Cidade</span>
+                    <input id="IdNomeEstadoSelecioando" type="text" hidden="hidden">
                     <input id="NomeEstadoSelecioando" type="text" disabled="disabled" class="form-control">
                 </div>
                 <div class="input-group input-fields">
                     <span class="input-group-addon">Nome</span>
-                    <input id="NomeCidade" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome do estado">
+                    <input id="NomeCidade" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome da cidade">
                 </div>
                 <div class="input-group input-fields">
                     <span class="input-group-addon">Sigla</span>
-                    <input id="NomeSiglaCidade" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite o nome da sigla">
+                    <input id="NomeSiglaCidade" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite a sigla da sigla">
                 </div>
             </div>
             <div class="modal-footer">
@@ -473,6 +474,7 @@
             $(".camposPF").show();
             $(".camposPfPj").show();
             $("#btnNovoEstado").hide();
+            $("#btnNovaCidade").hide();
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
             $(".labelNome").html("Razão Social");
@@ -487,6 +489,7 @@
             $(".camposPF").hide();
             $(".camposPfPj").show();
             $("#btnNovoEstado").hide();
+            $("#btnNovaCidade").hide();
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
             $(".labelNome").html("Nome");
@@ -500,7 +503,8 @@
             $(".camposPF").show();
             $(".camposPfPj").hide();
             $("#btnNovoEstado").show();
-           
+            $("#btnNovaCidade").show();
+
         }
     });
 </script>

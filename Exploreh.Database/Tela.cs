@@ -26,6 +26,7 @@ namespace Exploreh.Database
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public string Descricao { get; set; }
+        public string Url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PerfilTela> PerfilTela { get; set; }
