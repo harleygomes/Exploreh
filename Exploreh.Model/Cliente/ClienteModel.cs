@@ -28,6 +28,7 @@ namespace Exploreh.Model.Cliente
 
         public virtual List<ClienteContatoModel> ClienteContato { get; set; }
 
+        public string[] ContatoId { get; set; }
         public string[] ContatoNome { get; set; }
         public string[] ContatoEmail { get; set; }
 

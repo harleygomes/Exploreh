@@ -25,6 +25,7 @@ namespace Exploreh.Model.Cliente
             return new ClienteContatoModel
             {
                 Id = c.Id,
+                ClienteId = c.ClienteId,
                 Nome = c.Nome,
                 Email = c.Email,
                 DataCadastro = c.DataCadastro,
@@ -38,6 +39,7 @@ namespace Exploreh.Model.Cliente
             return new ClienteContato
             {
                 Id = c.Id,
+                ClienteId = c.ClienteId,
                 Nome = c.Nome,
                 Email = c.Email,
                 DataCadastro = c.DataCadastro,

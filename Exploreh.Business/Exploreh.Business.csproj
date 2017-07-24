@@ -53,6 +53,8 @@
     <Compile Include="Cidade\CidadeBusiness.cs" />
     <Compile Include="ClienteContato\ClienteContatoBusiness.cs" />
     <Compile Include="Cliente\ClienteBusiness.cs" />
+    <Compile Include="Cliente\ClienteEnderecoBusiness.cs" />
+    <Compile Include="Cliente\ClienteTelefoneBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
     <Compile Include="Logradouro\LogradouroBusiness.cs" />
     <Compile Include="Pais\PaisBusiness.cs" />

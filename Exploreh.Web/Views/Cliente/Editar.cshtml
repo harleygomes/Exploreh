@@ -55,9 +55,9 @@
                             </select>
                         </div>
 
-                <div class="input-group input-fields camposPF">
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Data de nascimento</span>
-                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento"  value="@Model.DataNascimento">
+                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
                         </div>
                         <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Ocupação</span>
@@ -87,19 +87,23 @@
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
-                        @foreach (var telefone in Model.ClienteTelefone)
-                        {
+                        @{
                             var i = 0;
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">DDD</span>
-                                <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
-                            </div>
-                            <div class="input-group input-fields">
-                                <span class="input-group-addon">Telefone</span>
-                                <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
-                                <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" />
-                            </div>
-                            i++;
+                            foreach (var telefone in Model.ClienteTelefone)
+                            {
+
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">DDD</span>
+                                    <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Telefone</span>
+                                    <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
+                                    <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" value="@telefone.Id" />
+                                    <input type="hidden" id="ClienteTelefone[@i]_ClienteId" name="ClienteTelefone[@i].ClienteId" value="@telefone.ClienteId" />
+                                </div>
+                                i++;
+                            }
                         }
                     </div>
                 </div>
@@ -120,7 +124,7 @@
                     <div class="panel-body">
                         @foreach (var endereco in Model.ClienteEndereco)
                         {
-                            <input type="hidden" id="ClienteEndereco[0]_Id" name="ClienteEndereco[0]].Id" />
+                            <input type="hidden" id="ClienteEndereco[0]_Id" name="ClienteEndereco[0].Id" value="@endereco.Id" />
                             <div class="input-group input-fields camposPfPj">
                                 <span class="input-group-addon">CEP</span>
                                 <input id="ClienteEndereco[0]_CEP" type="text" class="form-control cep" name="ClienteEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos" value="@endereco.CEP">
@@ -154,7 +158,7 @@
                                 <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade" class="form-control cidade"></select>
                             </div>
                         }
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,9 +184,9 @@
                                     <div class="input-group input-fields">
                                         <span class="input-group-addon">Email</span>
                                         <input id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" placeholder="Email" value="@contato.Email">
-                                        <input type="hidden" name="idContato" value="@contato.Id" />
+                                        <input type="hidden" name="ContatoId" value="@contato.Id" />
                                     </div>
-                                }                               
+                                }
                             </div>
                         </div>
                         <a style="margin: 10px 0;" href="javascript:addRow();">+1 Contato</a>
@@ -200,7 +204,7 @@
         <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
     </div>
 
-}
+                            }
 
 @section Styles {
     @Styles.Render("~/bundles/bootstrapCheckbox/css")
@@ -322,28 +326,28 @@
 
     function carregaEstados(idPais,idEstado,idCidade) {
         var comboEstado = $('.estado');
-            $.ajax({
-                url: '@Url.Action("GetEstado","Cliente")',
-                type: 'POST',
-                data: { idPais: idPais },
-                success: function (estados) {
-                    comboEstado.empty();
-                    var $select = comboEstado;
-                    $select.append('<option value="0">--- Selecione o Estado ---</option>');
-                    $.each(estados, function (i, estado) {
-                        $select.append(
-                            $('<option/>')
-                            .attr('value', estado.IdUnidadeFederacao)
-                            .text(estado.DcrSigla)
-                        );
-                    });
-                    if (idEstado != null) {
-                        comboEstado.val(idEstado);
-                        carregaCidades(comboEstado, idCidade);
-                    }
-                },
-                error: function (xhr) { }
-            });
+        $.ajax({
+            url: '@Url.Action("GetEstado","Cliente")',
+            type: 'POST',
+            data: { idPais: idPais },
+            success: function (estados) {
+                comboEstado.empty();
+                var $select = comboEstado;
+                $select.append('<option value="0">--- Selecione o Estado ---</option>');
+                $.each(estados, function (i, estado) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', estado.IdUnidadeFederacao)
+                        .text(estado.DcrSigla)
+                    );
+                });
+                if (idEstado != null) {
+                    comboEstado.val(idEstado);
+                    carregaCidades(comboEstado, idCidade);
+                }
+            },
+            error: function (xhr) { }
+        });
     }
 
     function carregaPais(id,idEstado,idCidade) {
@@ -420,7 +424,7 @@
             $(".bairro").attr("placeholder", "Linha 3").blur();
             $(".camposPF").show();
             $(".camposPfPj").hide();
-            }
+        }
     });
 </script>
 

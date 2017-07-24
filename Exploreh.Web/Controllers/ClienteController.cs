@@ -128,7 +128,7 @@ namespace Exploreh.Web.Controllers
                 _busCliente.Update(model);
                 return RedirectToAction("Lista");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
