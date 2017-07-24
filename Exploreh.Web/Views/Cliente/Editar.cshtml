@@ -82,16 +82,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
-                    <div class="panel-heading">
+                    <div class="panel-heading">Cliente Telefones</div>
 
-                        Cliente Telefones
-                    </div>
-                    <div class="panel-body">
-                        @{
-                            var i = 0;
-                            foreach (var telefone in Model.ClienteTelefone)
-                            {
-
+                    @{
+                        var i = 0;
+                        foreach (var telefone in Model.ClienteTelefone)
+                        {
+                            <div class="panel-body clienteTelefones">
+                                <div style="padding-bottom: 10px;">
+                                    <input type="hidden" class="flgDelete" id="ClienteTelefone[@i]_flgDelete" name="ClienteTelefone[@i].flgDelete" value="false" />
+                                    <span class="pull-right clickableTelefone" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                </div>
                                 <div class="input-group input-fields">
                                     <span class="input-group-addon">DDD</span>
                                     <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
@@ -102,10 +103,11 @@
                                     <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" value="@telefone.Id" />
                                     <input type="hidden" id="ClienteTelefone[@i]_ClienteId" name="ClienteTelefone[@i].ClienteId" value="@telefone.ClienteId" />
                                 </div>
-                                i++;
-                            }
+                            </div>
+                            i++;
                         }
-                    </div>
+                    }
+
                 </div>
 
             </div>
@@ -168,30 +170,30 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
-                    <div class="panel-heading">
+                    <div class="panel-heading">Cliente Contatos</div>
+                    <div id="ContatosParent">
 
-                        Cliente Contatos
-                    </div>
-                    <div class="panel-body">
-                        <div id="ContatosParent">
-                            <div id="ContatosCampos">
-                                @foreach (var contato in Model.ClienteContato)
-                                {
-                                    <div class="input-group input-fields">
-                                        <span class="input-group-addon">Nome</span>
-                                        <input id="ContatoNome" type="text" class="form-control" name="ContatoNome" placeholder="Nome" value="@contato.Nome">
-                                    </div>
-                                    <div class="input-group input-fields">
-                                        <span class="input-group-addon">Email</span>
-                                        <input id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" placeholder="Email" value="@contato.Email">
-                                        <input type="hidden" name="ContatoId" value="@contato.Id" />
-                                    </div>
-                                }
+                        @foreach (var contato in Model.ClienteContato)
+                        {
+                            <div class="panel-body contatosCampos">
+                                <div style="padding-bottom: 10px;">
+                                    <input type="hidden" class="flgDelete" name="ContatoFlgDelete" value="false" />
+                                    <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Nome</span>
+                                    <input id="ContatoNome" type="text" class="form-control" name="ContatoNome" placeholder="Nome" value="@contato.Nome">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Email</span>
+                                    <input id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" placeholder="Email" value="@contato.Email">
+                                    <input type="hidden" name="ContatoId" value="@contato.Id" />
+                                </div>
                             </div>
-                        </div>
-                        <a style="margin: 10px 0;" href="javascript:addRow();">+1 Contato</a>
+                        }
 
                     </div>
+                    <a style="margin: 10px 0;" href="javascript:addRow();">+1 Contato</a>
                 </div>
             </div>
         </div>
@@ -204,7 +206,7 @@
         <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
     </div>
 
-                            }
+                        }
 
 @section Styles {
     @Styles.Render("~/bundles/bootstrapCheckbox/css")
@@ -217,7 +219,23 @@
 <script src="~/Scripts/BuscaCep.js"></script>
 
 <script type="text/javascript">
+    function addFechar(){
+        $('.clickable').on('click',function(){
+            var effect = $(this).data('effect');
+            $(this).closest('.contatosCampos')[effect]();
+            $(this).closest('.contatosCampos').find('.flgDelete').val('true');
+        });
+        $('.clickableTelefone').on('click',function(){
+            var effect = $(this).data('effect');
+            $(this).closest('.clienteTelefones')[effect]();
+            $(this).closest('.clienteTelefones').find('.flgDelete').val('true');
+        });
+    }
     $(document).ready(function () {
+
+        addFechar();
+        $('.clickableTelefone:first').hide()
+        $('.clickable:first').hide()
 
         exibeCampos("@Model.TipoPessoa");
 
@@ -382,9 +400,20 @@
     // <![CDATA[
     function addRow() {
         //copy the table row and clear the value of the input, then append the row to the end of the table
-        $("#ContatosCampos").clone().find("input").each(function () {
-            $(this).val('');
-        }).end().appendTo("#ContatosParent");
+        $(".contatosCampos:first")
+            .clone()
+            .find("input")
+            .each(function () {
+                $(this).val('');
+            })
+            .end()
+            .find(".clickable")
+            .each(function () {
+                $(this).show();
+            })
+            .end()
+            .appendTo("#ContatosParent");
+        addFechar();
     }
     $(".radio input[type='radio']").on('click', function () {
         if ($("#rpf").is(":checked")) {
@@ -427,5 +456,3 @@
         }
     });
 </script>
-
-
