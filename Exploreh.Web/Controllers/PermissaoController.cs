@@ -8,6 +8,7 @@ using Exploreh.Business.Tela;
 using Exploreh.Model.Permissao;
 using Exploreh.Business.PerfilTela;
 using Exploreh.Model.Helper;
+using Exploreh.Model.Perfil;
 using Exploreh.Model.PerfilTela;
 using Exploreh.Model.Telas;
 
@@ -58,25 +59,49 @@ namespace Exploreh.Web.Controllers
                         Tela = perfilTela.tela.Nome,
                         Ativo = perfilTela.tela.Ativo,
                         Descricao = perfilTela.tela.Descricao,
-                        Perfil = perfil.Nome
+                        //Perfil = perfil.Nome
+                        PerfilId = perfil.Id
                     }
                 ).Where(tela => tela.Ativo).ToList();
 
             var model = new List<PermissaoModel>();
+
+            #region Comment
+            //foreach (var permissao in telasPermissao)
+            //{
+            //    model.Add(new PermissaoModel
+            //    {
+            //        Id = permissao.Id,
+            //        Ativo = permissao.Ativo,
+            //        Perfil = permissao.Perfil,
+            //        Descricao = permissao.Descricao,
+            //        Tela = permissao.Tela
+            //    });
+            //}
+            #endregion
+
             foreach (var permissao in telasPermissao)
             {
-                model.Add(new PermissaoModel
+                var perfiltela = _busPerfilTela.Get().Where(i => i.Perfil_Id == permissao.PerfilId).ToList();
+
+                foreach (var itemPerfil in perfiltela)
                 {
-                    Id = permissao.Id,
-                    Ativo = permissao.Ativo,
-                    Perfil = permissao.Perfil,
-                    Descricao = permissao.Descricao,
-                    Tela = permissao.Tela
-                });
+                    var permi = new PermissaoModel
+                    {
+                        Id = permissao.Id,
+                        Nome = permissao.Tela,
+                        PerfilId = permissao.PerfilId,
+                        Perfis = _busPerfil.Get().Where(i => i.Id == itemPerfil.Perfil_Id).Select(n => new PerfilModel() { Id = n.Id, Nome = n.Nome }).ToList()
+                    };
+
+                    model.Add(permi);
+                }
+                
             }
             #endregion
 
-            return View(model.OrderByDescending(i => i.Tela));
+          
+             return View(model.OrderByDescending(i => i.Nome));
         }
 
         [HttpPost]
@@ -249,11 +274,11 @@ namespace Exploreh.Web.Controllers
             var model = new PermissaoModel();
             if (telasPermissao != null)
             {
-                model.Id = telasPermissao.Id;
-                model.Ativo = telasPermissao.Ativo;
-                model.Perfil = telasPermissao.Perfil;
-                model.Descricao = telasPermissao.Descricao;
-                model.Tela = telasPermissao.Tela;
+                //model.Id = telasPermissao.Id;
+                //model.Ativo = telasPermissao.Ativo;
+                //model.Perfil = telasPermissao.Perfil;
+                //model.Descricao = telasPermissao.Descricao;
+                //model.Tela = telasPermissao.Tela;
 
             }
             #endregion
