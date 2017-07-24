@@ -50,6 +50,7 @@
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
     <Compile Include="Crypt\Crypt.cs" />
     <Compile Include="Logradouro\LogradouroModel.cs" />
+    <Compile Include="Uf\UfModel.cs" />
     <Compile Include="UnidadeFederacao\UnidadeFederacaoModel.cs" />
     <Compile Include="Helper\AutenticacaoProvider.cs" />
     <Compile Include="Pais\PaisModel.cs" />

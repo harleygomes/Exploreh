@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cidade">
           <Key>
             <PropertyRef Name="Id" />
@@ -182,7 +182,6 @@
           <Property Name="DataCadastro" Type="datetime" Nullable="false" />
           <Property Name="DataAlteracao" Type="datetime" />
           <Property Name="Descricao" Type="nvarchar(max)" />
-          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -630,7 +629,6 @@
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PerfilTela" Relationship="ExplorehModel.FK_PerfilTela_Tela" FromRole="Tela" ToRole="PerfilTela" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -956,7 +954,6 @@
           <EntitySetMapping Name="Tela">
             <EntityTypeMapping TypeName="ExplorehModel.Tela">
               <MappingFragment StoreEntitySet="Tela">
-                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
                 <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />

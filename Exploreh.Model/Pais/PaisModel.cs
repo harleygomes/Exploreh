@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exploreh.Database;
 using Exploreh.Model.Cidade;
 using Exploreh.Model.Cliente;
 using Exploreh.Model.UnidadeFederacao;
@@ -22,6 +23,8 @@ namespace Exploreh.Model.Pais
 
         public static implicit operator PaisModel(Database.TblPais pais)
         {
+            if (pais == null) return new PaisModel();
+
             return new PaisModel
             {
                 IdPais = pais.IdPais,
@@ -36,6 +39,9 @@ namespace Exploreh.Model.Pais
         }
         public static implicit operator Database.TblPais(PaisModel pais)
         {
+
+            if (pais == null) return new TblPais();
+
             return new Database.TblPais
             {
                 IdPais = pais.IdPais,

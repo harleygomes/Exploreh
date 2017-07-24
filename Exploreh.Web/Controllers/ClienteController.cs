@@ -12,6 +12,9 @@ using Exploreh.Model.Helper;
 using Exploreh.Business.Logradouro;
 using Exploreh.Model.Logradouro;
 using Exploreh.Business.Pais;
+using Exploreh.Model.Cidade;
+using Exploreh.Model.Uf;
+using Exploreh.Model.UnidadeFederacao;
 
 namespace Exploreh.Web.Controllers
 {
@@ -20,6 +23,7 @@ namespace Exploreh.Web.Controllers
         private readonly ClienteBusiness _busCliente;
         private readonly PaisBusiness _busPais;
         private readonly EstadoBusiness _busEstado;
+        private readonly CidadeBusiness _CidadeBusiness;
         private readonly CidadeBusiness _busCidade;
         private readonly ClienteContatoBusiness _busClienteContato;
         private readonly LogradouroBusiness _busLogradouro;
@@ -35,6 +39,7 @@ namespace Exploreh.Web.Controllers
             this._busCidade = new CidadeBusiness();
             this._busClienteContato = new ClienteContatoBusiness();
             this._busLogradouro = new LogradouroBusiness();
+            this._CidadeBusiness = new CidadeBusiness();
         }
 
         public ActionResult Lista(bool? notificar)
@@ -106,7 +111,7 @@ namespace Exploreh.Web.Controllers
                 var model = _busCliente.Get(id);
                 return View(model);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -128,7 +133,7 @@ namespace Exploreh.Web.Controllers
                 _busCliente.Update(model);
                 return RedirectToAction("Lista");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -168,7 +173,7 @@ namespace Exploreh.Web.Controllers
         [HttpPost]
         public JsonResult Excluir(int id)
         {
-            
+
             return new JsonResult { Data = _busCliente.Get(id) };
         }
 
@@ -176,7 +181,7 @@ namespace Exploreh.Web.Controllers
         public JsonResult GetCidade(int id)
         {
             return new JsonResult { Data = this._busCidade.GetCidade(id) };
-            
+
         }
 
         [HttpPost]
@@ -197,6 +202,27 @@ namespace Exploreh.Web.Controllers
             return new JsonResult { Data = this._busEstado.GetByPais(idPais) };
         }
 
+        /// <summary>
+        /// Cadastro de estado pela modal
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult NovoEstado(UnidadeFederacaoModel model)
+        { 
+             var status = _busEstado.Add(model);
+
+            return new JsonResult { Data = status };
+        }
+
+        [HttpPost]
+        public JsonResult NovaCidade(CidadeModel model)
+        {
+            var status = _busCidade.Add(model);
+
+            return new JsonResult { Data = status };
+        }
+
         [HttpPost]
         public JsonResult GetPais()
         {
@@ -207,7 +233,7 @@ namespace Exploreh.Web.Controllers
         public JsonResult GetClienteDashboard()
         {
 
-            return new JsonResult { Data = _busCliente.Get().Count()};
+            return new JsonResult { Data = _busCliente.Get().Count() };
         }
 
         [HttpPost]
@@ -217,7 +243,7 @@ namespace Exploreh.Web.Controllers
 
             if (!string.IsNullOrEmpty(cep))
                 logradouro = _busLogradouro.GetCep(cep);
-                            
+
             return new JsonResult { Data = logradouro };
         }
     }

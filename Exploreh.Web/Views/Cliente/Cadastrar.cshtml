@@ -24,7 +24,7 @@
 
                         Cliente Dados Principais
                     </div>
-                    <div class="panel-body">                        
+                    <div class="panel-body">
                         <div class="input-group input-fields">
                             <div class="radio radio-info radio-inline">
                                 <input class="radio" type="radio" id="rpf" value="F" name="TipoPessoa" checked="">
@@ -56,7 +56,7 @@
                                 <option value="N">Não declarado</option>
                             </select>
                         </div>
-                        <div class="input-group input-fields camposPF" >
+                        <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Data de nascimento</span>
                             <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento">
                         </div>
@@ -111,7 +111,6 @@
         </div>
     </div>
 
-
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
@@ -150,11 +149,28 @@
                             <span class="input-group-addon">Estado</span>
                             <select id="ClienteEndereco[0]_Estado" class="form-control estado"></select>
                             @*<input id="ClienteEndereco[0]_Estado" type="text"  placeholder="Estado">*@
+                            <button type="button"
+                                    class="btn btn-xs btn-info"
+                                    data-toggle="modal"
+                                    data-target="#myModalEstado"
+                                    onclick="$('#IdPais').val($('.pais').val()); $('#NomePais').val($('.pais option:selected').text());"
+                                    id="btnNovoEstado" style="display: none">
+                                Cadastrar Estado
+                            </button>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Cidade</span>
-                            <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade"  class="form-control cidade"></select>
+                            <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade" class="form-control cidade"></select>
                             @*<input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">*@
+                            
+                            <button type="button"
+                                    class="btn btn-xs btn-info"
+                                    data-toggle="modal"
+                                    data-target="#myModalCidade"
+                                    onclick="$('#IdEstado').val($('.estado').val()); $('#NomePais').val($('.estado option:selected').text());"
+                                    id="btnNovoEstado" style="display: none">
+                                Cadastrar Estado
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -200,6 +216,72 @@
 
 }
 
+
+
+<div class="modal fade" id="myModalEstado" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Cadastrar novo Estado</h4>
+                <small class="font-bold">Cadastrar um estado não existente</small>
+            </div>
+            <div class="modal-body">
+                <input hidden="hidden" id="IdPais"/>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">País</span>
+                    <input id="NomePais" type="text" disabled="disabled" class="form-control">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Nome</span>
+                    <input id="NomeEstado" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome do estado">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Sigla</span>
+                    <input id="NomeSigla" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite o nome da sigla">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="salvarNovoEstado" onclick="NovoEstado();">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="myModalCidade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Cadastrar nova Cidade</h4>
+                <small class="font-bold">Cadastrar um cidade não existente</small>
+            </div>
+            <div class="modal-body">
+                <input hidden="hidden" id="IdEstado" />
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Cidade</span>
+                    <input id="NomeEstadoSelecioando" type="text" disabled="disabled" class="form-control">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Nome</span>
+                    <input id="NomeCidade" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome do estado">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Sigla</span>
+                    <input id="NomeSiglaCidade" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite o nome da sigla">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="salvarNovaCidade" onclick="NovaCidade();">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     @Styles.Render("~/bundles/bootstrapCheckbox/css")
 }
@@ -213,7 +295,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         carregaPais();
-        
+
         $('.estado').change(function () {
             carregaCidades($(this));
         });
@@ -241,8 +323,8 @@
 
     });
 
-    function carregaCidades(estado,id) {
-       
+    function carregaCidades(estado, id) {
+
         var comboEstado = estado;
         var comboCidade = $('.cidade');
 
@@ -274,30 +356,30 @@
 
     }
 
-    function carregaEstados(idPais,idEstado,idCidade) {
+    function carregaEstados(idPais, idEstado, idCidade) {
         var comboEstado = $('.estado');
-            $.ajax({
-                url: '@Url.Action("GetEstado","Cliente")',
-                type: 'POST',
-                data: { idPais: idPais },
-                success: function (estados) {
-                    comboEstado.empty();
-                    var $select = comboEstado;
-                    $select.append('<option value="0">--- Selecione o Estado ---</option>');
-                    $.each(estados, function (i, estado) {
-                        $select.append(
-                            $('<option/>')
-                            .attr('value', estado.IdUnidadeFederacao)
-                            .text(estado.DcrSigla)
-                        );
-                    });
-                    if (idEstado != null) {
-                        comboEstado.val(idEstado);
-                        carregaCidades(comboEstado, idCidade);
-                    }
-                },
-                error: function (xhr) { }
-            });
+        $.ajax({
+            url: '@Url.Action("GetEstado","Cliente")',
+            type: 'POST',
+            data: { idPais: idPais },
+            success: function (estados) {
+                comboEstado.empty();
+                var $select = comboEstado;
+                $select.append('<option value="0">--- Selecione o Estado ---</option>');
+                $.each(estados, function (i, estado) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', estado.IdUnidadeFederacao)
+                        .text(estado.DcrSigla)
+                    );
+                });
+                if (idEstado != null) {
+                    comboEstado.val(idEstado);
+                    carregaCidades(comboEstado, idCidade);
+                }
+            },
+            error: function (xhr) { }
+        });
     }
 
     function carregaPais() {
@@ -306,7 +388,6 @@
         $.ajax({
             url: '@Url.Action("GetPais","Cliente")',
             type: 'POST',
-            //data: { id: comboEstado },
             success: function (paises) {
                 comboPais.empty();
                 var $select = comboPais;
@@ -318,12 +399,57 @@
                         .text(pais.DcrNome)
                     );
                 });
-                //if (id != null) {
-                //    comboEstado.val(id);
-                //}
             },
             error: function (xhr) { }
         });
+    }
+
+    function NovoEstado() {
+        if ($('#IdPais').val() == "0") return false;
+
+
+        var model = {
+            DcrNome: $('#NomeEstado').val(),
+            DcrSigla: $('#NomeSigla').val(),
+            IdPais: $('#IdPais').val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("NovoEstado","Cliente")',
+            type: 'POST',
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            success: function (status) {
+                $('myModalEstado').hide();
+            },
+            error: function (xhr) { }
+        });
+      
+    }
+
+
+    function NovaCidade() {
+       // if ($('#IdPais').val() == "0") return false;
+
+
+        var model = {
+            DcrNome: $('#NomeCidade').val(),
+            DcrSigla: $('#NomeSiglaCidade').val(),
+            IdUnidadeFederacao: $('#IdEstado').val()
+            
+        };
+
+        $.ajax({
+            url: '@Url.Action("NovaCidade","Cliente")',
+            type: 'POST',
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            success: function (status) {
+                $('myModalEstado').hide();
+            },
+            error: function (xhr) { }
+        });
+
     }
 
     // <![CDATA[
@@ -346,6 +472,7 @@
             $(".bairro").attr("placeholder", "Bairro").blur();
             $(".camposPF").show();
             $(".camposPfPj").show();
+            $("#btnNovoEstado").hide();
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
             $(".labelNome").html("Razão Social");
@@ -359,6 +486,7 @@
             $("#sexo").val('N');
             $(".camposPF").hide();
             $(".camposPfPj").show();
+            $("#btnNovoEstado").hide();
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
             $(".labelNome").html("Nome");
@@ -371,7 +499,9 @@
             $(".bairro").attr("placeholder", "Linha 3").blur();
             $(".camposPF").show();
             $(".camposPfPj").hide();
-            }
+            $("#btnNovoEstado").show();
+           
+        }
     });
 </script>
 

@@ -56,6 +56,7 @@
     <Compile Include="Cliente\ClienteEnderecoBusiness.cs" />
     <Compile Include="Cliente\ClienteTelefoneBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
+    <Compile Include="Estado\UfBusiness.cs" />
     <Compile Include="Logradouro\LogradouroBusiness.cs" />
     <Compile Include="Pais\PaisBusiness.cs" />
     <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />
