@@ -52,9 +52,9 @@ namespace Exploreh.Business.Cliente
             update.Bairro = !string.IsNullOrEmpty(model.Bairro) ? model.Bairro : update.Bairro;
             update.Complemento = !string.IsNullOrEmpty(model.Complemento) ? model.Complemento : update.Complemento;
             update.CEP = !string.IsNullOrEmpty(model.CEP) ? model.CEP : update.CEP;
-            update.IdCidade = update.IdCidade;
+            update.IdCidade = model.IdCidade > 0? model.IdCidade: update.IdCidade;
             update.DataCadastro = update.DataCadastro;
-            update.DataAlteracao = update.DataAlteracao;
+            update.DataAlteracao = DateTime.Now;
             update.Ativo = update.Ativo;
 
             #endregion
