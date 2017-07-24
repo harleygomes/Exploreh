@@ -17,6 +17,7 @@ namespace Exploreh.Model.Cliente
         public System.DateTime DataCadastro { get; set; }
         public DateTime? DataAlteracao { get; set; }
         public bool Ativo { get; set; }
+        public bool flgDelete { get; set; }
 
         public virtual ClienteModel Cliente { get; set; }
 

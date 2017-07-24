@@ -166,6 +166,7 @@ namespace Exploreh.Business.Cliente
                             Id = Convert.ToInt32(model.ContatoId[i]),
                             Nome = model.ContatoNome[i],
                             Email = model.ContatoEmail[i],
+                            flgDelete = Convert.ToBoolean(model.ContatoFlgDelete[i]),
                             Ativo = true,
                             DataCadastro = DateTime.Now
                         };

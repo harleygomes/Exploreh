@@ -67,13 +67,16 @@ namespace Exploreh.Business.ClienteContato
             #region Regras
             foreach (var item in model)
             {
-                var update = Get(item.Id);
+                if (item.flgDelete)
+                    return _rep.Delete(item.Id);
 
+                var update = Get(item.Id);
                 update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
                 update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;             
                 update.Ativo = item.Ativo;
                 update.DataAlteracao = DateTime.Now;
 
+                
                 ok = _rep.Update(update);
             }
 

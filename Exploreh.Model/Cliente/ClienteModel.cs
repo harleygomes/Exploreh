@@ -32,6 +32,8 @@ namespace Exploreh.Model.Cliente
         public string[] ContatoNome { get; set; }
         public string[] ContatoEmail { get; set; }
 
+        public string[] ContatoFlgDelete { get; set; }
+
         #region Cidade / Estado
         public int EstadoId { get; set; }
         public int CidadeId { get; set; }
