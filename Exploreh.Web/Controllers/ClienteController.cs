@@ -42,7 +42,7 @@ namespace Exploreh.Web.Controllers
             this._CidadeBusiness = new CidadeBusiness();
         }
 
-        public ActionResult Lista(bool? notificar)
+        public ActionResult Lista(bool? notificar,string cliente = null)
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -53,7 +53,7 @@ namespace Exploreh.Web.Controllers
             ViewBag.Notificacao = notificacao;
             notificacao = false;
 
-            return View(_busCliente.Get());
+            return View(cliente != null ? _busCliente.FiltroClienteByName(cliente) : _busCliente.Get());
         }
 
 

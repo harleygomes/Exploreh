@@ -179,12 +179,20 @@ namespace Exploreh.Business.Cliente
                 if (contatoCliente)
                     update.ClienteContato = null;
             }
-
-
-
+            
             #endregion
 
             return _rep.Update(update);
+        }
+
+        /// <summary>
+        /// Capturar cliente pelo nome
+        /// </summary>
+        /// <param name="nome">Nome do cliente</param>
+        /// <returns></returns>
+        public List<ClienteModel> FiltroClienteByName(string nome)
+        {
+            return _rep.Where(n=>n.Nome.Contains(nome)).ToList().ConvertAll<ClienteModel>(x=>x);
         }
     }
 }
