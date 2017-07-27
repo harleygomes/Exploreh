@@ -19,6 +19,13 @@
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
+                <div class="alert alert-warning">
+                    <strong>Atenção!</strong> Os campos destacados com o asterísco (<b style="color: red">*</b>) são campos obrigatórios.
+                </div>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
 
@@ -40,8 +47,10 @@
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon lblNome">Nome</span>
+                            <span class="input-group-addon lblNome">Nome <span style="color: red">*</span> </span>
                             <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário">
+                            <div style="color: red;"><b> @Html.ValidationMessageFor(item => item.Nome)</b>
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
@@ -65,8 +74,10 @@
                             <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">E-mail</span>
+                            <span class="input-group-addon">E-mail <span style="color: red">*</span></span>
                             <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail">
+                            <div style="color: red"><b> @Html.ValidationMessageFor(item => item.Email)</b>
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Home page</span>
@@ -84,25 +95,28 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">DDD</span>
+                            <span class="input-group-addon">DDD <span style="color: red">*</span></span>
                             <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control" name="ClienteTelefone[0].Ddd" placeholder="DDD">
+                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[0].Ddd)</b></div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone</span>
+                            <span class="input-group-addon">Telefone <span style="color: red">*</span></span>
                             <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
+                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[0].Telefone)</b></div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">DDD</span>
+                            <span class="input-group-addon">DDD <span style="color: red">*</span></span>
                             <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" placeholder="DDD">
+                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[1].Telefone)</b></div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone</span>
+                            <span class="input-group-addon">Telefone <span style="color: red">*</span></span>
                             <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
+                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[1].Telefone)</b></div>
                         </div>
                     </div>
                 </div>
@@ -162,7 +176,7 @@
                             <span class="input-group-addon">Cidade</span>
                             <select id="ClienteEndereco[0]_IdCidade" name="ClienteEndereco[0].IdCidade" class="form-control cidade"></select>
                             @*<input id="ClienteEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">*@
-                            
+
                             <button type="button"
                                     class="btn btn-xs btn-info"
                                     data-toggle="modal"
@@ -227,7 +241,7 @@
                 <small class="font-bold">Cadastrar um estado não existente</small>
             </div>
             <div class="modal-body">
-                <input hidden="hidden" id="IdPais"/>
+                <input hidden="hidden" id="IdPais" />
                 <div class="input-group input-fields">
                     <span class="input-group-addon">País</span>
                     <input id="NomePais" type="text" disabled="disabled" class="form-control">
@@ -425,19 +439,19 @@
             },
             error: function (xhr) { }
         });
-      
+
     }
 
 
     function NovaCidade() {
-       // if ($('#IdPais').val() == "0") return false;
+        // if ($('#IdPais').val() == "0") return false;
 
 
         var model = {
             DcrNome: $('#NomeCidade').val(),
             DcrSigla: $('#NomeSiglaCidade').val(),
             IdUnidadeFederacao: $('#IdEstado').val()
-            
+
         };
 
         $.ajax({

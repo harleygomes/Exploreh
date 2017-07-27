@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -12,12 +13,14 @@ namespace Exploreh.Model.Cliente
     public class ClienteModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Ops! O campo Nome é obrigatório")]
         public string Nome { get; set; }
         public string TipoPessoa { get; set; }
         public string Documento { get; set; }
         public string Sexo { get; set; }
         public Nullable<System.DateTime> DataNascimento { get; set; }
         public string Ocupacao { get; set; }
+        [Required(ErrorMessage = "Ops! O campo E-mail é obrigatório")]
         public string Email { get; set; }
         public string HomePage { get; set; }
         public System.DateTime DataCadastro { get; set; }
