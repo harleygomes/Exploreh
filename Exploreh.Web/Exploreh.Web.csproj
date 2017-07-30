@@ -2106,6 +2106,7 @@
     <Folder Include="Vendor\moment\templates\" />
     <Folder Include="Vendor\pdfmake\libs\FileSaver.js\" />
     <Folder Include="Vendor\peity\bin\" />
+    <Folder Include="Vendor\peity\test\bin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2313,7 +2314,6 @@
     <Content Include="Vendor\peity\package.json" />
     <Content Include="Vendor\peity\peity.jquery.json" />
     <Content Include="Vendor\peity\README.markdown" />
-    <Content Include="Vendor\peity\test\bin\screenshot" />
     <Content Include="Vendor\peity\test\charts.json" />
     <Content Include="Vendor\peity\test\comparisons\.gitkeep" />
     <Content Include="Vendor\peity\test\images\.gitkeep" />
