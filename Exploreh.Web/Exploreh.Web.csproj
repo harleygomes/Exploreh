@@ -2107,6 +2107,7 @@
     <Folder Include="Vendor\pdfmake\libs\FileSaver.js\" />
     <Folder Include="Vendor\peity\bin\" />
     <Folder Include="Vendor\peity\test\bin\" />
+    <Folder Include="Vendor\sweetalert\lib\.sass-cache\7981e80cc38cc883c439302cccda55b50fb7fde4\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2332,7 +2333,6 @@
     <Content Include="Vendor\select2-3.5.2\select2_locale_en.js.template" />
     <Content Include="Vendor\sweetalert\bower.json" />
     <Content Include="Vendor\sweetalert\example\example.scss" />
-    <Content Include="Vendor\sweetalert\lib\.sass-cache\7981e80cc38cc883c439302cccda55b50fb7fde4\sweet-alert.scssc" />
     <Content Include="Vendor\sweetalert\lib\sweet-alert.scss" />
     <Content Include="Vendor\sweetalert\LICENSE" />
     <Content Include="Vendor\sweetalert\README.md" />
