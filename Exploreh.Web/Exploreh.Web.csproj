@@ -2105,6 +2105,7 @@
     <Folder Include="Vendor\moment\src\locale\" />
     <Folder Include="Vendor\moment\templates\" />
     <Folder Include="Vendor\pdfmake\libs\FileSaver.js\" />
+    <Folder Include="Vendor\peity\bin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2303,7 +2304,6 @@
     <Content Include="Vendor\moment\Moment.js.nuspec" />
     <Content Include="Vendor\moment\README.md" />
     <Content Include="Vendor\moment\scripts\npm_prepublish.sh" />
-    <Content Include="Vendor\peity\bin\update_docs" />
     <Content Include="Vendor\peity\bower.json" />
     <Content Include="Vendor\peity\CHANGELOG.md" />
     <Content Include="Vendor\peity\Gemfile" />
