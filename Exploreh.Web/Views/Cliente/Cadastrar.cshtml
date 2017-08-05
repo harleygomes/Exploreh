@@ -23,7 +23,7 @@
                     <strong>Atenção!</strong> Os campos destacados com o asterísco (<b style="color: red">*</b>) são campos obrigatórios.
                 </div>
             </div>
-            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
@@ -49,7 +49,8 @@
                         <div class="input-group input-fields">
                             <span class="input-group-addon lblNome">Nome <span style="color: red">*</span> </span>
                             <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário">
-                            <div style="color: red;"><b> @Html.ValidationMessageFor(item => item.Nome)</b>
+                            <div style="color: red;">
+                                <b> @Html.ValidationMessageFor(item => item.Nome)</b>
                             </div>
                         </div>
                         <div class="input-group input-fields">
@@ -76,7 +77,8 @@
                         <div class="input-group input-fields">
                             <span class="input-group-addon">E-mail <span style="color: red">*</span></span>
                             <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail">
-                            <div style="color: red"><b> @Html.ValidationMessageFor(item => item.Email)</b>
+                            <div style="color: red">
+                                <b> @Html.ValidationMessageFor(item => item.Email)</b>
                             </div>
                         </div>
                         <div class="input-group input-fields">
@@ -98,25 +100,26 @@
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
+                        <div class="alert alert-warning">
+                            <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red"> DDD + Telefone</b> abaixo.
+                        </div>
+                        <label> Obrigatoriedade em um dos campos</label>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">DDD <span style="color: red">*</span></span>
+                            <span class="input-group-addon">DDD</span>
                             <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control" name="ClienteTelefone[0].Ddd" placeholder="DDD">
-                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[0].Ddd)</b></div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone <span style="color: red">*</span></span>
+                            <span class="input-group-addon">Telefone</span>
                             <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
-                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[0].Telefone)</b></div>
+
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">DDD <span style="color: red">*</span></span>
+                            <span class="input-group-addon">DDD</span>
                             <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" placeholder="DDD">
-                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[1].Telefone)</b></div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone <span style="color: red">*</span></span>
+                            <span class="input-group-addon">Telefone</span>
                             <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
-                            <div style="color: red;"><b>@Html.ValidationMessageFor(item => item.ClienteTelefone[1].Telefone)</b></div>
                         </div>
                     </div>
                 </div>

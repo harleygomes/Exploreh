@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using Exploreh.Business.Cidade;
@@ -13,7 +11,6 @@ using Exploreh.Business.Logradouro;
 using Exploreh.Model.Logradouro;
 using Exploreh.Business.Pais;
 using Exploreh.Model.Cidade;
-using Exploreh.Model.Uf;
 using Exploreh.Model.UnidadeFederacao;
 
 namespace Exploreh.Web.Controllers
@@ -83,10 +80,15 @@ namespace Exploreh.Web.Controllers
 
             try
             {
-                if (ModelState.IsValid)
+                if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null))
                 {
-                    notificacao = true;
-                    return RedirectToAction("Lista", new { notificar = _busCliente.Add(model) });
+                    if (ModelState.IsValid)
+                    {
+                        notificacao = true;
+                        return RedirectToAction("Lista", new {notificar = _busCliente.Add(model)});
+                    }
+
+                    return View(model);
                 }
 
                 return View(model);
