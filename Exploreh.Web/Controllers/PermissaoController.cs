@@ -30,7 +30,7 @@ namespace Exploreh.Web.Controllers
 
         }
 
-        public ActionResult Lista()
+        public ActionResult Lista(string perm = "")
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -101,7 +101,8 @@ namespace Exploreh.Web.Controllers
             #endregion
 
           
-             return View(model.OrderByDescending(i => i.Nome));
+             //return View(model.OrderByDescending(i => i.Nome));
+            return View(perm != "" ? model.OrderByDescending(i=>i.Nome).Where(x=>x.Nome.Contains(perm)) : model.OrderByDescending(i => i.Nome));
         }
 
         [HttpPost]

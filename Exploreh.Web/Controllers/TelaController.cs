@@ -32,7 +32,7 @@ namespace Exploreh.Web.Controllers
 
         private static bool notificacao { get; set; }
 
-        public ActionResult Lista()
+        public ActionResult Lista(string tela = "")
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -42,8 +42,8 @@ namespace Exploreh.Web.Controllers
 
             ViewBag.Notificacao = notificacao;
             notificacao = false;
-
-            return View(_bus.Get().OrderByDescending(p => p.DataCadastro));
+            
+            return View(tela != "" ? _bus.FiltroClienteByName(tela) : _bus.Get());
         }
 
         [HttpPost]

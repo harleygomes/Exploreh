@@ -192,7 +192,7 @@ namespace Exploreh.Business.Cliente
         /// <returns></returns>
         public List<ClienteModel> FiltroClienteByName(string nome)
         {
-            return _rep.Where(n=>n.Nome.Contains(nome)).ToList().ConvertAll<ClienteModel>(x=>x);
+            return _rep.Where(n=>n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<ClienteModel>(x=>x);
         }
     }
 }

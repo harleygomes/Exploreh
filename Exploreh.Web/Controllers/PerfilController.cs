@@ -19,7 +19,7 @@ namespace Exploreh.Web.Controllers
             this._bus = new PerfilBusiness();
         }
 
-        public ActionResult Lista()
+        public ActionResult Lista(string perfil = "")
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -29,8 +29,8 @@ namespace Exploreh.Web.Controllers
 
             ViewBag.Notificacao = notificacao;
             notificacao = false;
-
-            return View(_bus.Get().OrderByDescending(p => p.DataCadastro));
+            
+            return View(perfil != "" ? _bus.FiltroClienteByName(perfil) : _bus.Get());
         }
 
         [HttpPost]

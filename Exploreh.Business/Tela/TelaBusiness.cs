@@ -23,6 +23,11 @@ namespace Exploreh.Business.Tela
             return _rep.Get().ToList().ConvertAll<TelaModel>(x => x);
         }
 
+        public List<TelaModel> FiltroClienteByName(string nome)
+        {
+            return _rep.Where(n => n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<TelaModel>(x => x);
+        }
+
         /// <summary>
         /// 
         /// </summary>

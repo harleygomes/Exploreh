@@ -23,6 +23,11 @@ namespace Exploreh.Business.Perfil
             return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<PerfilModel>(x => x);
         }
 
+        public List<PerfilModel> FiltroClienteByName(string nome)
+        {
+            return _rep.Where(n => n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<PerfilModel>(x => x);
+        }
+
         /// <summary>
         /// 
         /// </summary>

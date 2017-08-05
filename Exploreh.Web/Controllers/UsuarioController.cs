@@ -21,18 +21,18 @@ namespace Exploreh.Web.Controllers
             this._busPerfil = new PerfilBusiness();
         }
 
-        public ActionResult Lista()
+        public ActionResult Lista(string usuario = "")
         {
-            var usuario = AutenticacaoProvider.UsuarioAutenticado;
-            if (usuario == null)
+            var logged = AutenticacaoProvider.UsuarioAutenticado;
+            if (logged == null)
             {
                 return RedirectToAction("Login", "CommonViews");
             }
 
             ViewBag.Notificacao = notificacao;
             notificacao = false;
-
-            return View(_busUsuario.Get().OrderByDescending(u => u.DataCadastro));
+            
+            return View(usuario != "" ? _busUsuario.FiltroClienteByName(usuario) : _busUsuario.Get());
         }
 
         [HttpPost]

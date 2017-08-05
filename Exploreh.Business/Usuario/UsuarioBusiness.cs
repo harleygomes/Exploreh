@@ -24,6 +24,16 @@ namespace Exploreh.Business.Usuario
         }
 
         /// <summary>
+        /// Capturar usuario pelo nome
+        /// </summary>
+        /// <param name="nome">Nome do usuario</param>
+        /// <returns></returns>
+        public List<UsuarioModel> FiltroClienteByName(string nome)
+        {
+            return _rep.Where(n => n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<UsuarioModel>(x => x);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
