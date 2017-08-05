@@ -66,7 +66,7 @@ namespace Exploreh.Business.Estado
             if (model.IdPais.HasValue)
                 model.DcrSiglaPais = _busPais.Get(model.IdPais.Value).DcrSigla;
             
-            return _rep.Add(model);
+            return _rep.AddWithModifiedOrUnchanged(model);
         }
     }
 }

@@ -69,6 +69,23 @@ namespace Exploreh.Repository.Base
 
         }
 
+        public bool AddWithModifiedOrUnchanged(T entity, bool updateRootEntity)
+        {
+            try
+            {
+                if (entity == null) return false;
+                
+                this._db.Entry(entity).State = updateRootEntity ? EntityState.Modified : EntityState.Unchanged;
+
+                return this._db.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
         /// <summary>
         /// Método que atualiza uma entidade
         /// </summary>

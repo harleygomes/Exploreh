@@ -75,7 +75,10 @@ namespace Exploreh.Repository.Repository
             return this.repository.Add(model);
         }
 
-
+        public bool AddWithModifiedOrUnchanged(T model)
+        {
+            return this.repository.AddWithModifiedOrUnchanged(model,false);
+        }
 
         /// <summary>
         /// 
