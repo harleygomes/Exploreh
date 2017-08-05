@@ -16,6 +16,9 @@ namespace Exploreh.Model.Cliente
         [Required(ErrorMessage = "Ops! O campo Nome é obrigatório")]
         public string Nome { get; set; }
         public string TipoPessoa { get; set; }
+        public string DocumentoPj { get; set; }
+        public string DocumentoPf { get; set; }
+        public string DocumentoEst { get; set; }
         public string Documento { get; set; }
         public string Sexo { get; set; }
         public Nullable<System.DateTime> DataNascimento { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web.Mvc;
 using Exploreh.Business.Cidade;
@@ -39,7 +40,7 @@ namespace Exploreh.Web.Controllers
             this._CidadeBusiness = new CidadeBusiness();
         }
 
-        public ActionResult Lista(bool? notificar,string cliente = "")
+        public ActionResult Lista(bool? notificar, string cliente = "")
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -80,12 +81,25 @@ namespace Exploreh.Web.Controllers
 
             try
             {
+                #region identificando o tipo de documento
+                var pf = model.DocumentoPf;
+                var pj = model.DocumentoPj;
+                var est = model.DocumentoEst;
+
+                if (!string.IsNullOrEmpty(pf))
+                    model.Documento = pf;
+                else if (!string.IsNullOrEmpty(pj))
+                    model.Documento = pj;
+                else
+                    model.Documento = est;
+                #endregion
+
                 if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null))
                 {
                     if (ModelState.IsValid)
                     {
                         notificacao = true;
-                        return RedirectToAction("Lista", new {notificar = _busCliente.Add(model)});
+                        return RedirectToAction("Lista", new { notificar = _busCliente.Add(model) });
                     }
 
                     return View(model);
@@ -211,8 +225,8 @@ namespace Exploreh.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         public JsonResult NovoEstado(UnidadeFederacaoModel model)
-        { 
-             var status = _busEstado.Add(model);
+        {
+            var status = _busEstado.Add(model);
 
             return new JsonResult { Data = status };
         }
@@ -250,3 +264,4 @@ namespace Exploreh.Web.Controllers
         }
     }
 }
+

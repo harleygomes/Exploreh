@@ -9,7 +9,6 @@
 
 @{
     ViewBag.Title = "Cadastrar novo Cliente";
-
 }
 
 @using (Html.BeginForm())
@@ -55,7 +54,9 @@
                         </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
-                            <input type="text" class="form-control" name="Documento" placeholder="Número do documento">
+                            <input type="text" class="form-control documentoPf" name="DocumentoPf" placeholder="Número do documento" data-mask="000.000.000-00">
+                            <input type="text" class="form-control documentoPj" name="DocumentoPj" placeholder="Número do documento" data-mask="00.000.000/0000-00">
+                            <input type="text" class="form-control documentoEst" name="DocumentoEst" placeholder="Número do documento" maxlength="150">
                         </div>
 
                         <div class="input-group input-fields camposPF">
@@ -68,7 +69,7 @@
                         </div>
                         <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Data de nascimento</span>
-                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento">
+                            <input id="DataNascimento" type="date" class="form-control" name="DataNascimento" placeholder="Data de nascimento" data-mask="00/00/0000" />
                         </div>
                         <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Ocupação</span>
@@ -303,15 +304,37 @@
 @section Styles {
     @Styles.Render("~/bundles/bootstrapCheckbox/css")
 }
-
-
 @Scripts.Render("~/bundles/jquery/js")
 @Scripts.Render("~/bundles/homer/js")
 
 <script src="~/Scripts/BuscaCep.js"></script>
+<script src="~/Scripts/Mask/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
+        if ($("#rpj").is(":checked")) {
+            $('.documentoPf').hide();
+            $('.documentoEst').hide();
+            $('.documentoPf').val("");
+            $('.documentoEst').val("");
+
+            $('.documentoPj').show();
+        }else if ($("#rpf").is(":checked")) {
+            $('.documentoEst').hide();
+            $('.documentoPj').hide();
+            $('.documentoPf').val("");
+            $('.documentoEst').val("");
+
+            $('.documentoPf').show();
+        } else {
+            $('.documentoPj').hide();
+            $('.documentoPf').hide();
+            $('.documentoPj').val("");
+            $('.documentoPf').val("");
+
+            $('.documentoEst').show("");
+        }
+
         carregaPais();
 
         $('.estado').change(function () {
@@ -481,6 +504,11 @@
         if ($("#rpf").is(":checked")) {
             $("#DocLabel").html("CPF");
             $(".labelNome").html("Nome");
+            $(".documentoPf").show();
+            $(".documentoPj").hide();
+            $(".documentoEst").hide();
+            $(".documentoPj").val("");
+            $(".documentoEst").val("");
             $(".txtNome").attr("placeholder", "Nome do cliente").blur();
             $(".labelLogra").html("Logradouro");
             $(".logradouro").attr("placeholder", "Logradouro").blur();
@@ -495,6 +523,11 @@
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
             $(".labelNome").html("Razão Social");
+            $(".documentoPf").hide();
+            $(".documentoEst").hide();
+            $(".documentoPf").val("");
+            $(".documentoEst").val("");
+            $(".documentoPj").show();
             $(".txtNome").attr("placeholder", "Razão social").blur();
             $(".labelLogra").html("Logradouro");
             $(".logradouro").attr("placeholder", "Logradouro").blur();
@@ -510,6 +543,11 @@
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
             $(".labelNome").html("Nome");
+            $(".documentoPf").hide();
+            $(".documentoPj").hide();
+            $(".documentoPf").val("");
+            $(".documentoPj").val("");
+            $(".documentoEst").show();
             $(".txtNome").attr("placeholder", "Nome do cliente").blur();
             $(".logradouro").attr("placeholder", "Linha 1").blur();
             $(".labelLogra").html("Linha 1");
