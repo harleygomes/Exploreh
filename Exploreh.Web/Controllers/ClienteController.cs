@@ -95,7 +95,7 @@ namespace Exploreh.Web.Controllers
                     model.Documento = est;
                 #endregion
 
-                if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null))
+                if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null || i.DddEstrangeiro != null && i.TelefoneEstrangeiro != null))
                 {
                     // Normalizando todos campos estrangeiro para um único campo esperado na tabela
                     var telefones = model.ClienteTelefone.ToList();
