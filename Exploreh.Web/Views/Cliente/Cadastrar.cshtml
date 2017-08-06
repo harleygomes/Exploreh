@@ -101,27 +101,33 @@
                         Cliente Telefones
                     </div>
                     <div class="panel-body">
-                        <div class="alert alert-warning">
-                            <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red"> DDD + Telefone</b> abaixo.
-                        </div>
-                        <label> Obrigatoriedade em um dos campos</label>
-                        <div class="input-group input-fields">
-                            <span class="input-group-addon">DDD</span>
-                            <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control" name="ClienteTelefone[0].Ddd" placeholder="DDD">
-                        </div>
-                        <div class="input-group input-fields">
-                            <span class="input-group-addon">Telefone</span>
-                            <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
 
+                        <div class="input-group">
+                            <div class="alert alert-warning">
+                                <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red"> DDD + Telefone</b> abaixo.
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">DDD</span>
-                            <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" placeholder="DDD">
+                            <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control ddd" name="ClienteTelefone[0].Ddd" placeholder="DDD">
+                            <input id="ClienteTelefone[0]_Ddd" type="text" class="form-control dddEstrangeiro" name="ClienteTelefone[0].DddEstrangeiro" placeholder="DDD">
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Telefone</span>
-                            <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
+                            <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control telefone" name="ClienteTelefone[0].Telefone" placeholder="Telefone">
+                            <input id="ClienteTelefone[0]_Telefone" type="text" class="form-control telefoneEstrangeiro" name="ClienteTelefone[0].TelefoneEstrangeiro" placeholder="Telefone">
                         </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">DDD</span>
+                            <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control ddd" name="ClienteTelefone[1].Ddd" placeholder="DDD">
+                            <input id="ClienteTelefone[1]_Ddd" type="text" class="form-control dddEstrangeiro" name="ClienteTelefone[1].DddEstrangeiro" placeholder="DDD">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Telefone</span>
+                            <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control telefone" name="ClienteTelefone[1].Telefone" placeholder="Telefone">
+                            <input id="ClienteTelefone[1]_Telefone" type="text" class="form-control telefoneEstrangeiro" name="ClienteTelefone[1].TelefoneEstrangeiro" placeholder="Telefone">
+                        </div>
+
                     </div>
                 </div>
 
@@ -311,7 +317,9 @@
 <script src="~/Scripts/Mask/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
+
     $(document).ready(function () {
+
         if ($("#rpj").is(":checked")) {
             $('.documentoPf').hide();
             $('.documentoEst').hide();
@@ -319,13 +327,29 @@
             $('.documentoEst').val("");
 
             $('.documentoPj').show();
-        }else if ($("#rpf").is(":checked")) {
+
+            //Campos ddd + telefone
+            $(".ddd").show();
+            $(".telefone").show();
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").hide();
+            $(".telefoneEstrangeiro").hide();
+        } else if ($("#rpf").is(":checked")) {
             $('.documentoEst').hide();
             $('.documentoPj').hide();
             $('.documentoPf').val("");
             $('.documentoEst').val("");
 
             $('.documentoPf').show();
+
+            //Campos ddd + telefone
+            $(".ddd").show();
+            $(".telefone").show();
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").hide();
+            $(".telefoneEstrangeiro").hide();
         } else {
             $('.documentoPj').hide();
             $('.documentoPf').hide();
@@ -333,6 +357,14 @@
             $('.documentoPf').val("");
 
             $('.documentoEst').show("");
+
+            //Campos ddd + telefone
+            $(".ddd").hide();
+            $(".telefone").hide();
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").show();
+            $(".telefoneEstrangeiro").show();
         }
 
         carregaPais();
@@ -357,7 +389,7 @@
                 $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             }
             $('.bairro').val(result.Bairro.DcrNome);
-            $('.pais').val(result.Pais.IdPais)
+            $('.pais').val(result.Pais.IdPais);
 
             carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
         });
@@ -520,6 +552,15 @@
             $(".camposPfPj").show();
             $("#btnNovoEstado").hide();
             $("#btnNovaCidade").hide();
+            $(".ddd").val("");
+            $(".telefone").val("");
+            $(".ddd").show();
+            $(".telefone").show();
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").hide();
+            $(".telefoneEstrangeiro").hide();
+
         } else if ($("#rpj").is(":checked")) {
             $("#DocLabel").html("CNPJ");
             $(".labelNome").html("Razão Social");
@@ -540,6 +581,15 @@
             $(".camposPfPj").show();
             $("#btnNovoEstado").hide();
             $("#btnNovaCidade").hide();
+            $(".ddd").val("");
+            $(".telefone").val("");
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").hide();
+            $(".telefoneEstrangeiro").hide();
+            $(".ddd").show();
+            $(".telefone").show();
+
         } else if ($("#restr").is(":checked")) {
             $("#DocLabel").html("Passaporte");
             $(".labelNome").html("Nome");
@@ -559,9 +609,30 @@
             $(".camposPfPj").hide();
             $("#btnNovoEstado").show();
             $("#btnNovaCidade").show();
-
+            $(".ddd").val("");
+            $(".telefone").val("");
+            $(".ddd").hide();
+            $(".telefone").hide();
+            $(".dddEstrangeiro").val("");
+            $(".telefoneEstrangeiro").val("");
+            $(".dddEstrangeiro").show();
+            $(".telefoneEstrangeiro").show();
         }
     });
+
+    $('DataNascimento').mask('00/00/0000');
+    $('.ddd').mask('(00)');
+
+    var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '0000-0000' : '00009-0000';
+        },
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
+                
+    $('.telefone').mask(SPMaskBehavior, spOptions);
 </script>
 
 

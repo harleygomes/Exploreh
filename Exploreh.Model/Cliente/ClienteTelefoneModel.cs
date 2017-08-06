@@ -12,10 +12,10 @@ namespace Exploreh.Model.Cliente
     public class ClienteTelefoneModel
     {
         public int Id { get; set; }
-        //[Required(ErrorMessage = "Ops! O campo DDD é obrigatório")]
         public string Ddd { get; set; }
-        //[Required(ErrorMessage = "Ops! O campo Telefone é obrigatório")]
+        public string DddEstrangeiro { get; set; }
         public string Telefone { get; set; }
+        public string TelefoneEstrangeiro { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public Nullable<bool> Ativo { get; set; }

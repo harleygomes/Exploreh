@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web.Mvc;
@@ -81,7 +82,7 @@ namespace Exploreh.Web.Controllers
 
             try
             {
-                #region identificando o tipo de documento
+                #region Tratativas para PF/PJ/Estrangeiro 
                 var pf = model.DocumentoPf;
                 var pj = model.DocumentoPj;
                 var est = model.DocumentoEst;
@@ -96,6 +97,21 @@ namespace Exploreh.Web.Controllers
 
                 if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null))
                 {
+                    // Normalizando todos campos estrangeiro para um único campo esperado na tabela
+                    var telefones = model.ClienteTelefone.ToList();
+                    model.ClienteTelefone = new List<ClienteTelefoneModel>();
+
+                    foreach (var telefone in telefones)
+                    {
+                        if (!string.IsNullOrEmpty(telefone.DddEstrangeiro))
+                            telefone.Ddd = telefone.DddEstrangeiro;
+
+                        if (!string.IsNullOrEmpty(telefone.TelefoneEstrangeiro))
+                            telefone.Telefone = telefone.TelefoneEstrangeiro;
+
+                        model.ClienteTelefone.Add(telefone);
+                    }
+
                     if (ModelState.IsValid)
                     {
                         notificacao = true;
