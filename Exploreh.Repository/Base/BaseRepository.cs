@@ -74,9 +74,9 @@ namespace Exploreh.Repository.Base
             try
             {
                 if (entity == null) return false;
-                
-                this._db.Entry(entity).State = updateRootEntity ? EntityState.Modified : EntityState.Unchanged;
 
+                //this._db.Entry(entity).State = updateRootEntity ? EntityState.Modified : EntityState.Unchanged;
+                this.Entities.Add(entity);
                 return this._db.SaveChanges() > 0;
             }
             catch (Exception ex)

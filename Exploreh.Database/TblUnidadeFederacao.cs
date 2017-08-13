@@ -29,6 +29,7 @@ namespace Exploreh.Database
         public string AbrevNome { get; set; }
         public Nullable<System.DateTime> DataReg { get; set; }
         public string EstReg { get; set; }
+        public Nullable<int> IdPaisEstrangeiro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblCidade> TblCidade { get; set; }

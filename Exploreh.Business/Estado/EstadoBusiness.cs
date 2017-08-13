@@ -48,6 +48,10 @@ namespace Exploreh.Business.Estado
         public List<UnidadeFederacaoModel> GetByPais(int id)
         {
             var retorno = _rep.Get().Where(e => e.IdPais == id).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+
+            if (!retorno.Any())
+                retorno = _rep.Get().Where(e => e.IdPaisEstrangeiro == id).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+
             return retorno;
         }
 
@@ -62,6 +66,12 @@ namespace Exploreh.Business.Estado
             model.EstReg = "A";
             model.DataReg = DateTime.Now;
             model.DcrSigla = model.DcrSigla.ToUpper();
+            
+            /*
+             * O tipo de FK autoincrement nos obriga a passar o IdPais num campo adicional
+             * criado para esse propósito 
+             */
+            model.IdPaisEstrangeiro = model.IdPais;
             
             if (model.IdPais.HasValue)
                 model.DcrSiglaPais = _busPais.Get(model.IdPais.Value).DcrSigla;

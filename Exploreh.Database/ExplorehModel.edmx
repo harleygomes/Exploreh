@@ -171,6 +171,7 @@
           <Property Name="AbrevNome" Type="varchar" MaxLength="36" />
           <Property Name="DataReg" Type="datetime" />
           <Property Name="EstReg" Type="varchar" MaxLength="1" />
+          <Property Name="IdPaisEstrangeiro" Type="int" />
         </EntityType>
         <EntityType Name="Tela">
           <Key>
@@ -617,6 +618,7 @@
           <Property Name="AbrevNome" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="DataReg" Type="DateTime" Precision="3" />
           <Property Name="EstReg" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdPaisEstrangeiro" Type="Int32" />
           <NavigationProperty Name="TblCidade" Relationship="ExplorehModel.FK_CidadeUnidadeFederacaoFK" FromRole="TblUnidadeFederacao" ToRole="TblCidade" />
           <NavigationProperty Name="TblPais" Relationship="ExplorehModel.FK_UnidadeFederacaoPaisFK" FromRole="TblUnidadeFederacao" ToRole="TblPais" />
         </EntityType>
@@ -941,6 +943,7 @@
           <EntitySetMapping Name="TblUnidadeFederacao">
             <EntityTypeMapping TypeName="ExplorehModel.TblUnidadeFederacao">
               <MappingFragment StoreEntitySet="TblUnidadeFederacao">
+                <ScalarProperty Name="IdPaisEstrangeiro" ColumnName="IdPaisEstrangeiro" />
                 <ScalarProperty Name="EstReg" ColumnName="EstReg" />
                 <ScalarProperty Name="DataReg" ColumnName="DataReg" />
                 <ScalarProperty Name="AbrevNome" ColumnName="AbrevNome" />
