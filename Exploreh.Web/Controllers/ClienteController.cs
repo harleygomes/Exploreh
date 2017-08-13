@@ -83,22 +83,22 @@ namespace Exploreh.Web.Controllers
             try
             {
                 #region Tratativas para PF/PJ/Estrangeiro 
-                var pf = model.DocumentoPf;
-                var pj = model.DocumentoPj;
-                var est = model.DocumentoEst;
+                var pessoaFisica = model.DocumentoPf;
+                var pessoaJuridica = model.DocumentoPj;
+                var estrangeiro = model.DocumentoEst;
 
-                if (!string.IsNullOrEmpty(pf))
-                    model.Documento = pf;
-                else if (!string.IsNullOrEmpty(pj))
-                    model.Documento = pj;
+                if (!string.IsNullOrEmpty(pessoaFisica))
+                    model.Documento = pessoaFisica;
+                else if (!string.IsNullOrEmpty(pessoaJuridica))
+                    model.Documento = pessoaJuridica;
                 else
-                    model.Documento = est;
+                    model.Documento = estrangeiro;
                 #endregion
 
                 if (model.ClienteTelefone.Any(i => i.Ddd != null && i.Telefone != null || i.DddEstrangeiro != null && i.TelefoneEstrangeiro != null))
                 {
                     // Normalizando todos campos estrangeiro para um único campo esperado na tabela
-                    var telefones = model.ClienteTelefone.ToList();
+                    var telefones = model.ClienteTelefone.Where(i => i.Ddd != null && i.Telefone != null || i.DddEstrangeiro != null && i.TelefoneEstrangeiro != null).ToList();
                     model.ClienteTelefone = new List<ClienteTelefoneModel>();
 
                     foreach (var telefone in telefones)

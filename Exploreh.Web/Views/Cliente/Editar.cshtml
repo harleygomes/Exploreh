@@ -18,6 +18,13 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
+                <div class="alert alert-warning">
+                    <strong>Atenção!</strong> Os campos destacados com o asterísco (<b style="color: red">*</b>) são campos obrigatórios.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
                         Cliente Dados Principais
@@ -25,21 +32,24 @@
                     <div class="panel-body">
                         <div class="input-group input-fields">
                             <div class="radio radio-info radio-inline">
-                                @Html.RadioButtonFor(m => m.TipoPessoa, "F", new { @class = "radio", id = "rpf" })
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "F", new {@class = "radio", id = "rpf"})
                                 <label for="rpf"> Pessoa física </label>
                             </div>
                             <div class="radio radio-info radio-inline">
-                                @Html.RadioButtonFor(m => m.TipoPessoa, "J", new { @class = "radio", id = "rpj" })
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "J", new {@class = "radio", id = "rpj"})
                                 <label for="rpj"> Pessoa jurídica </label>
                             </div>
                             <div class="radio radio-info radio-inline">
-                                @Html.RadioButtonFor(m => m.TipoPessoa, "E", new { @class = "radio", id = "restr" })
+                                @Html.RadioButtonFor(m => m.TipoPessoa, "E", new {@class = "radio", id = "restr"})
                                 <label for="restr"> Estrangeiro </label>
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon lblNome">Nome</span>
+                            <span class="input-group-addon lblNome">Nome <span style="color: red">*</span></span>
                             <input id="Nome" type="text" class="form-control txtNome" name="Nome" placeholder="Nome do usuário" value="@Model.Nome">
+                            <div style="color: red;">
+                                <b> @Html.ValidationMessageFor(item => item.Nome)</b>
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
@@ -57,15 +67,18 @@
 
                         <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Data de nascimento</span>
-                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento">
+                            <input id="DataNascimento" type="text" class="form-control" name="DataNascimento" placeholder="Data de nascimento" value="@Model.DataNascimento" data-mask="00/00/0000"/>
                         </div>
                         <div class="input-group input-fields camposPF">
                             <span class="input-group-addon">Ocupação</span>
                             <input id="Ocupacao" type="text" class="form-control" name="Ocupacao" placeholder="Ocupação" value="@Model.Ocupacao">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">E-mail</span>
+                            <span class="input-group-addon">E-mail <span style="color: red">*</span></span>
                             <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail" value="@Model.Email">
+                            <div style="color: red">
+                                <b> @Html.ValidationMessageFor(item => item.Email)</b>
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Home page</span>
@@ -83,27 +96,55 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">Cliente Telefones</div>
+                    
+                    <div class="input-group">
+                        <div class="alert alert-warning">
+                            <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red"> DDD + Telefone</b> abaixo.
+                        </div>
+                    </div>
 
                     @{
                         var i = 0;
                         foreach (var telefone in Model.ClienteTelefone)
                         {
-                            <div class="panel-body clienteTelefones">
-                                <div style="padding-bottom: 10px;">
-                                    <input type="hidden" class="flgDelete" id="ClienteTelefone[@i]_flgDelete" name="ClienteTelefone[@i].flgDelete" value="false" />
-                                    <span class="pull-right clickableTelefone" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                            if (Model.TipoPessoa == "E")
+                            {
+                                <div class="panel-body clienteTelefones">
+                                    <div style="padding-bottom: 10px;">
+                                        <input type="hidden" class="flgDelete" id="ClienteTelefone[@i]_flgDelete" name="ClienteTelefone[@i].flgDelete" value="false"/>
+                                        <span class="pull-right clickableTelefone" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">DDD</span>
+                                        <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Telefone</span>
+                                        <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
+                                        <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" value="@telefone.Id"/>
+                                        <input type="hidden" id="ClienteTelefone[@i]_ClienteId" name="ClienteTelefone[@i].ClienteId" value="@telefone.ClienteId"/>
+                                    </div>
                                 </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">DDD</span>
-                                    <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
+                            }
+                            else
+                            {
+                                <div class="panel-body clienteTelefones">
+                                    <div style="padding-bottom: 10px;">
+                                        <input type="hidden" class="flgDelete" id="ClienteTelefone[@i]_flgDelete" name="ClienteTelefone[@i].flgDelete" value="false"/>
+                                        <span class="pull-right clickableTelefone" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">DDD</span>
+                                        <input id="ClienteTelefone[@i]_Ddd" type="text" class="form-control ddd" name="ClienteTelefone[@i].Ddd" placeholder="DDD" value="@telefone.Ddd">
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Telefone</span>
+                                        <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control telefone" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
+                                        <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" value="@telefone.Id"/>
+                                        <input type="hidden" id="ClienteTelefone[@i]_ClienteId" name="ClienteTelefone[@i].ClienteId" value="@telefone.ClienteId"/>
+                                    </div>
                                 </div>
-                                <div class="input-group input-fields">
-                                    <span class="input-group-addon">Telefone</span>
-                                    <input id="ClienteTelefone[@i]_Telefone" type="text" class="form-control" name="ClienteTelefone[@i].Telefone" placeholder="Telefone" value="@telefone.Telefone">
-                                    <input type="hidden" id="ClienteTelefone[@i]_Id" name="ClienteTelefone[@i].Id" value="@telefone.Id" />
-                                    <input type="hidden" id="ClienteTelefone[@i]_ClienteId" name="ClienteTelefone[@i].ClienteId" value="@telefone.ClienteId" />
-                                </div>
-                            </div>
+                            }
                             i++;
                         }
                     }
@@ -217,6 +258,7 @@
 @Scripts.Render("~/bundles/homer/js")
 
 <script src="~/Scripts/BuscaCep.js"></script>
+<script src="~/Scripts/Mask/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
     function addFechar(){
@@ -455,4 +497,18 @@
             $(".camposPfPj").hide();
         }
     });
+
+    $('DataNascimento').mask('00/00/0000');
+    $('.ddd').mask('(00)');
+
+    var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '0000-0000' : '00009-0000';
+        },
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
+                
+    $('.telefone').mask(SPMaskBehavior, spOptions);
 </script>

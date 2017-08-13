@@ -49,15 +49,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Logradouro" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="Numero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" />
           <Property Name="Complemento" Type="nvarchar" MaxLength="50" />
-          <Property Name="Bairro" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bairro" Type="nvarchar" MaxLength="50" />
           <Property Name="DataCadastro" Type="datetime" Nullable="false" />
           <Property Name="DataAlteracao" Type="datetime" />
           <Property Name="Ativo" Type="bit" Nullable="false" />
           <Property Name="ClienteId" Type="int" Nullable="false" />
           <Property Name="CidadeId" Type="int" Nullable="false" />
-          <Property Name="CEP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ClienteTelefone">
           <Key>
@@ -485,15 +485,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Logradouro" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <Property Name="ClienteId" Type="Int32" Nullable="false" />
           <Property Name="CidadeId" Type="Int32" Nullable="false" />
-          <Property Name="CEP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CEP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cliente" Relationship="ExplorehModel.FK_ClienteClienteEndereco" FromRole="ClienteEndereco" ToRole="Cliente" />
           <NavigationProperty Name="TblCidade" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="ClienteEndereco" ToRole="TblCidade" />
         </EntityType>
