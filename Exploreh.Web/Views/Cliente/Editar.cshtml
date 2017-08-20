@@ -82,7 +82,7 @@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Observações</span>
-                            <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home page" value="@Model.HomePage">
+                            <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Escreva aqui alguma observação sobre o cliente." value="@Model.HomePage">
                         </div>
                     </div>
                 </div>
@@ -502,7 +502,7 @@
     $('.ddd').mask('(00)');
 
     var SPMaskBehavior = function (val) {
-            return val.replace(/\D/g, '').length === 9 ? '0000-0000' : '00009-0000';
+        return val.replace(/\D/g, '').length === 9 ? '00000-0000' : '0000-00009';
         },
         spOptions = {
             onKeyPress: function (val, e, field, options) {
