@@ -502,7 +502,7 @@
     $('.ddd').mask('(00)');
 
     var SPMaskBehavior = function (val) {
-            return val.replace(/\D/g, '').length === 11 ? '0000-0000' : '00009-0000';
+            return val.replace(/\D/g, '').length === 9 ? '0000-0000' : '00009-0000';
         },
         spOptions = {
             onKeyPress: function (val, e, field, options) {
