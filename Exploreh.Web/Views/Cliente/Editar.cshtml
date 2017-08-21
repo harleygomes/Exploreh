@@ -310,13 +310,14 @@
         });
 
         $('.cep').focusout(function () {
-            var result = BuscaCep($(this).val());
+            var result = BuscaCepEdit('@Url.Action("GetCep","Cliente")',$(this).val());
 
+           // alert(result.DcrTipoLogradouro);
             if (result.DcrTipoLogradouro != null) {
                 $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             }
             $('.bairro').val(result.Bairro.DcrNome);
-            $('.pais').val(result.Pais.IdPais)
+            $('.pais').val(result.Pais.IdPais);
 
             carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
         });
@@ -523,6 +524,6 @@
                 field.mask(SPMaskBehavior.apply({}, arguments), options);
             }
         };
-                
+
     $('.telefone').mask(SPMaskBehavior, spOptions);
 </script>
