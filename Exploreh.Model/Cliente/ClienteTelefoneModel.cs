@@ -21,6 +21,7 @@ namespace Exploreh.Model.Cliente
         public Nullable<bool> Ativo { get; set; }
         public int ClienteId { get; set; }
         public string TipoTelefone { get; set; }
+        public bool flgDelete { get; set; }
 
         public virtual ClienteModel Cliente { get; set; }
 

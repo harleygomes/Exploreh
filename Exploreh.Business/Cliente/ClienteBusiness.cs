@@ -140,7 +140,14 @@ namespace Exploreh.Business.Cliente
                 var updateTelefoneOK = false;
                 foreach (var telefone in model.ClienteTelefone)
                 {
-                    updateTelefoneOK = new ClienteTelefoneBusiness().Update(telefone);
+                    if (telefone.flgDelete)
+                    {
+                        updateTelefoneOK = new ClienteTelefoneBusiness().Delete(telefone.Id);
+                    }
+                    else
+                    {
+                        updateTelefoneOK = new ClienteTelefoneBusiness().Update(telefone);
+                    }
                 }
 
                 if (updateTelefoneOK)

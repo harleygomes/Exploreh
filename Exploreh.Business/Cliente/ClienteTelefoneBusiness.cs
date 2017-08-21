@@ -57,5 +57,15 @@ namespace Exploreh.Business.Cliente
             return _rep.Update(update);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            return _rep.Delete(id);
+        }
+
     }
 }
