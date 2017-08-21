@@ -140,7 +140,14 @@ namespace Exploreh.Business.Cliente
                 var updateTelefoneOK = false;
                 foreach (var telefone in model.ClienteTelefone)
                 {
-                    updateTelefoneOK = new ClienteTelefoneBusiness().Update(telefone);
+                    if (telefone.flgDelete)
+                    {
+                        updateTelefoneOK = new ClienteTelefoneBusiness().Delete(telefone.Id);
+                    }
+                    else
+                    {
+                        updateTelefoneOK = new ClienteTelefoneBusiness().Update(telefone);
+                    }
                 }
 
                 if (updateTelefoneOK)
@@ -163,12 +170,13 @@ namespace Exploreh.Business.Cliente
                     {
                         ClienteContatoModel c = new ClienteContatoModel
                         {
-                            Id = Convert.ToInt32(model.ContatoId[i]),
+                            Id = string.IsNullOrEmpty(model.ContatoId[i])? 0 : Convert.ToInt32(model.ContatoId[i]),
                             Nome = model.ContatoNome[i],
                             Email = model.ContatoEmail[i],
-                            flgDelete = Convert.ToBoolean(model.ContatoFlgDelete[i]),
+                            flgDelete = string.IsNullOrEmpty(model.ContatoFlgDelete[i]) ? false : Convert.ToBoolean(model.ContatoFlgDelete[i]),
                             Ativo = true,
-                            DataCadastro = DateTime.Now
+                            DataCadastro = DateTime.Now,
+                            ClienteId = model.Id
                         };
                         contatos.Add(c);
                     }

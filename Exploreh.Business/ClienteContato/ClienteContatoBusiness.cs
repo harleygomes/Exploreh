@@ -67,17 +67,34 @@ namespace Exploreh.Business.ClienteContato
             #region Regras
             foreach (var item in model)
             {
-                if (item.flgDelete)
-                    return _rep.Delete(item.Id);
+                if (item.flgDelete && item.Id > 0)
+                    ok = _rep.Delete(item.Id);
 
-                var update = Get(item.Id);
-                update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
-                update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;             
-                update.Ativo = item.Ativo;
-                update.DataAlteracao = DateTime.Now;
+                if (item.Id == 0 && !item.flgDelete)
+                {
+                    var c = new ClienteContatoModel
+                    {
+                        Nome = item.Nome,
+                        Email = item.Email,
+                        Ativo = true,
+                        DataCadastro = DateTime.Now,
+                        ClienteId = item.ClienteId
+                    };
 
-                
-                ok = _rep.Update(update);
+                    ok = _rep.Add(c);
+                }
+                else if (item.Id > 0 && !item.flgDelete)
+                {
+
+                    var update = Get(item.Id);
+                    update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
+                    update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;
+                    update.Ativo = item.Ativo;
+                    update.DataAlteracao = DateTime.Now;
+
+
+                    ok = _rep.Update(update);
+                }
             }
 
             #endregion
