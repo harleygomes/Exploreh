@@ -16,15 +16,14 @@ function BuscaCep(cep) {
 
     //var url = 'http://cep.republicavirtual.com.br/web_cep.php?cep=' + cep.replace('-', '').trim() + '&formato=json';
     //alert(cep);
-
     var result = "";
     $.ajax({
         url: 'GetCep/',
         type: 'POST',
         data: { cep: cep.replace('-', '').trim() },
         async: false,
-        success: function (data) {
-            if (data == null) return false;
+        success: function (data) {            
+            if (data == null || data == 0) return false;
             
             result = data;
         },
@@ -34,6 +33,27 @@ function BuscaCep(cep) {
     return result;
 }
 
+
+function BuscaCepEdit(url,cep) {
+
+    //var url = 'http://cep.republicavirtual.com.br/web_cep.php?cep=' + cep.replace('-', '').trim() + '&formato=json';
+    //alert(url);
+    var result = "";
+    $.ajax({
+        url: url,//'GetCep/',
+        type: 'POST',
+        data: { cep: cep.replace('-', '').trim() },
+        async: false,
+        success: function (data) {
+            if (data == null || data == 0) return false;
+
+            result = data;
+        },
+        error: function (xhr) { alert('Erro!') }
+    });
+
+    return result;
+}
 
 function BuscaCidade(url, cidade) {
 

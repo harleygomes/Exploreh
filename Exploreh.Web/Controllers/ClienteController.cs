@@ -162,8 +162,11 @@ namespace Exploreh.Web.Controllers
 
             try
             {
+                if(model.Id == 0)
+                    return new JsonResult { Data = 0 };
+
                 _busCliente.Update(model);
-                return RedirectToAction("Lista");
+                return RedirectToAction("Lista");                
             }
             catch (Exception ex)
             {
