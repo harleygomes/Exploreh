@@ -311,8 +311,7 @@
 
         $('.cep').focusout(function () {
             var result = BuscaCepEdit('@Url.Action("GetCep","Cliente")',$(this).val());
-
-           // alert(result.DcrTipoLogradouro);
+            
             if (result.DcrTipoLogradouro != null) {
                 $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             }
