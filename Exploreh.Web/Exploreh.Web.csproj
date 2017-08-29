@@ -149,6 +149,7 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PermissaoController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\TelaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
@@ -2687,6 +2688,8 @@
     <Content Include="Views\Permissao\Lista.cshtml" />
     <Content Include="Views\Permissao\Cadastrar.cshtml" />
     <Content Include="Views\Permissao\Editar.cshtml" />
+    <Content Include="Views\Estado\Cadastrar.cshtml" />
+    <Content Include="Views\Estado\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">

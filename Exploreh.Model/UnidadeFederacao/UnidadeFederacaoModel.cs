@@ -57,7 +57,7 @@ namespace Exploreh.Model.UnidadeFederacao
                 DataReg = estado.DataReg,
                 EstReg = estado.EstReg,
                 //TblCidade = estado.Cidade.ToList().ConvertAll<Database.TblCidade>(c => c),
-                TblPais = estado.Pais,
+                //TblPais = estado.Pais,
                 IdPaisEstrangeiro = estado.IdPaisEstrangeiro
             };
         }
