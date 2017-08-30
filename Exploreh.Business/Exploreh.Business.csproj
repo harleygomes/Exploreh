@@ -63,6 +63,7 @@
     <Compile Include="Perfil\PerfilBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tela\TelaBusiness.cs" />
+    <Compile Include="UnidadeFederacao\UnidadeFederacaoBusiness.cs" />
     <Compile Include="Usuario\UsuarioBusiness.cs" />
   </ItemGroup>
   <ItemGroup>

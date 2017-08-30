@@ -33,6 +33,16 @@ namespace Exploreh.Business.Estado
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        public List<UnidadeFederacaoModel> FiltroEstadoByName(string nome)
+        {
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public UnidadeFederacaoModel Get(int id)
@@ -73,6 +83,22 @@ namespace Exploreh.Business.Estado
             model.Pais = null;
             
             return _rep.AddWithModifiedOrUnchanged(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(UnidadeFederacaoModel model)
+        {
+            var update = Get(model.IdUnidadeFederacao);
+
+            update.IdPais = model.IdPais;
+            update.DcrNome = model.DcrNome;
+            update.DcrSigla = model.DcrSigla;
+
+            return _rep.Update(update);
         }
     }
 }

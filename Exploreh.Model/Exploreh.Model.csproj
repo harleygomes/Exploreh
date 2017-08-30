@@ -49,6 +49,7 @@
     <Compile Include="Cliente\ClienteEnderecoModel.cs" />
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
     <Compile Include="Crypt\Crypt.cs" />
+    <Compile Include="Estado\EstadoModel.cs" />
     <Compile Include="Logradouro\LogradouroModel.cs" />
     <Compile Include="Uf\UfModel.cs" />
     <Compile Include="UnidadeFederacao\UnidadeFederacaoModel.cs" />

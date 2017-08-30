@@ -27,6 +27,8 @@ namespace Exploreh.Model.UnidadeFederacao
 
         public static implicit operator UnidadeFederacaoModel(Database.TblUnidadeFederacao estado)
         {
+            if (estado == null) return new UnidadeFederacaoModel();
+
             return new UnidadeFederacaoModel
             {
                 IdUnidadeFederacao = estado.IdUnidadeFederacao,
