@@ -66,13 +66,7 @@ namespace Exploreh.Business.Estado
             model.EstReg = "A";
             model.DataReg = DateTime.Now;
             model.DcrSigla = model.DcrSigla.ToUpper();
-            
-            /*
-             * O tipo de FK autoincrement nos obriga a passar o IdPais num campo adicional
-             * criado para esse propósito 
-             */
-            ///model.IdPaisEstrangeiro = model.IdPais;
-            
+                       
             if (model.IdPais.HasValue)
                 model.DcrSiglaPais = _busPais.Get(model.IdPais.Value).DcrSigla;
 
