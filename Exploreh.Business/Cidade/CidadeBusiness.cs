@@ -33,6 +33,26 @@ namespace Exploreh.Business.Cidade
         }
 
         /// <summary>
+        /// Recupera cidade pelo nome
+        /// </summary>
+        /// <param name="nome">string</param>
+        /// <returns>Um ou muitos registros </returns>
+        public List<CidadeModel> FiltroCidadeByEstado(int estado)
+        {
+            return _rep.Where(n => n.IdUnidadeFederacao == estado).ToList().ConvertAll<CidadeModel>(x => x);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        public List<CidadeModel> FiltroCidadeByCidadeNome(string nome)
+        {
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<CidadeModel>(x => x);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>

@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AppViewsController.cs" />
     <Compile Include="Controllers\BoxTransitionsController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\CidadeController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CommonViewsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -2692,6 +2693,8 @@
     <Content Include="Views\Estado\Cadastrar.cshtml" />
     <Content Include="Views\Estado\Lista.cshtml" />
     <Content Include="Views\Estado\Editar.cshtml" />
+    <Content Include="Views\Cidade\Lista.cshtml" />
+    <Content Include="Views\Cidade\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">
