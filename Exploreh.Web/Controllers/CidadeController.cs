@@ -29,13 +29,10 @@ namespace Exploreh.Web.Controllers
                 return RedirectToAction("Login", "CommonViews");
             }
 
-            /*
+            
             ViewBag.Notificacao = notificacao;
             notificacao = false;
-
-            return View(cidade != "" ? _CidadeBusiness.FiltroCidadeByName(cidade) : _CidadeBusiness.Get());
-            */
-
+            
             var estadoId = 0;
             if (!string.IsNullOrEmpty(estado))
             {

@@ -136,7 +136,7 @@
 
     $(document).ready(function() {
 
-       // notificar();
+        notificar();
 
         carregaPais();
 
@@ -148,21 +148,19 @@
         });
     });
 
-    @*function notificar() {
+    function notificar() {
 
        var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
         if (notificacao === true) {
 
-            setTimeout(function() {
                 swal({
                     title: "Good job!",
                     text: "Ação concluida com sucesso!",
                     type: "success"
                 });
-            },
-                1000);
+
         }
-    }*@
+    }
 
 
     $('.pais').change(function () {
