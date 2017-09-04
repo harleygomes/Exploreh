@@ -2695,6 +2695,7 @@
     <Content Include="Views\Estado\Editar.cshtml" />
     <Content Include="Views\Cidade\Lista.cshtml" />
     <Content Include="Views\Cidade\Cadastrar.cshtml" />
+    <Content Include="Views\Cidade\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">

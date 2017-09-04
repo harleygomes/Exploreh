@@ -191,7 +191,7 @@
                             '<td>' +
                             '<button type="button"' +
                             'class="btn btn-xs btn-primary"' +
-                            'onclick="location.href = /Cidade/Editar/id ='+ cidade.IdCidade +'">' +
+                            'onclick=location.href="@Url.Action("Editar","Cidade")' + "/"+ cidade.IdCidade + '">' +
                             'Editar' +
                             '</button>' +
                                                     @*|
@@ -225,7 +225,7 @@
           $.ajax({
             url: '@Url.Action("ListaFiltroNomeCidade", "Cidade")',
             type: 'POST',
-            data: { cidade: $('#DcrNome').val() },
+            data: { estado: $('#Estado').val(), cidade: $('#DcrNome').val() },
             success: function (cidades) {
                 var $select = $('#lista');
                 $select.html('');
@@ -234,9 +234,10 @@
                 $('#buscarCidade').show();
 
                 $.each(cidades, function (i, cidade) {
+                    alert("/Cidade/Editar /" + cidade.IdCidade);
                     $select.append(
-                        $(  '<tr>' +
-                            '<td>'+
+                        $('<tr>' +
+                            '<td>' +
                             cidade.DcrNome +
                             '</td>' +
                             '<td>' +
@@ -245,7 +246,7 @@
                             '<td>' +
                             '<button type="button"' +
                             'class="btn btn-xs btn-primary"' +
-                            'onclick="location.href = /Cidade/Editar/id ='+ cidade.IdCidade +'">' +
+                            'onclick="location.href='@Url.Action("Detalhes", "Perfil") + cidade.IdCidade + '">' +
                             'Editar' +
                             '</button>' +
                                                     @*|
@@ -313,10 +314,10 @@
                             .text(estado.DcrNome + ' - ' + estado.DcrSigla )
                     );
                 });
-                if (idEstado != null) {
-                    comboEstado.val(idEstado);
-                    carregaCidades(comboEstado, idCidade);
-                }
+                //if (idEstado != null) {
+                //    comboEstado.val(idEstado);
+                //    carregaCidades(comboEstado, idCidade);
+                //}
             },
             error: function (xhr) { }
           });

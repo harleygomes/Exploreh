@@ -51,7 +51,7 @@ namespace Exploreh.Web.Controllers
 
 
         [System.Web.Http.HttpPost]
-        public ActionResult CadastrarCidade(CidadeModel model)
+        public ActionResult CadastrarPost(CidadeModel model)
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -77,6 +77,39 @@ namespace Exploreh.Web.Controllers
             return View(model);
         }
 
+
+        public ActionResult Editar(int id)
+        {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
+            return View(_CidadeBusiness.Get(id));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [System.Web.Http.HttpPost]
+        public ActionResult EditarPost(CidadeModel model)
+        {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
+            if (_CidadeBusiness.Update(model))
+                return RedirectToAction("Lista");
+
+            return View(model);
+
+        }
+
         [System.Web.Http.HttpPost]
         public JsonResult ListaFiltro(string estado = "")
         {
@@ -93,12 +126,14 @@ namespace Exploreh.Web.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public JsonResult ListaFiltroNomeCidade(string cidade = "")
+        public JsonResult ListaFiltroNomeCidade(string estado = "", string cidade = "")
         {
 
-            if (!string.IsNullOrEmpty(cidade))
-                return new JsonResult { Data = _CidadeBusiness.FiltroCidadeByCidadeNome(cidade) };
-
+            if (!string.IsNullOrEmpty(cidade) && !string.IsNullOrEmpty(estado))
+            {
+                var estadoId = Convert.ToInt32(estado);
+                return new JsonResult { Data = _CidadeBusiness.FiltroCidadeByCidadeNome(estadoId, cidade) };
+            }
 
 
             return new JsonResult { Data = null };

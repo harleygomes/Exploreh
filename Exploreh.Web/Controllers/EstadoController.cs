@@ -110,11 +110,11 @@ namespace Exploreh.Web.Controllers
             return View(_bus.Get(id));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="model"></param>
+       /// <returns></returns>
         [HttpPost]
         public ActionResult Editar(UnidadeFederacaoModel model)
         {
