@@ -138,6 +138,7 @@
     <Compile Include="Controllers\AppViewsController.cs" />
     <Compile Include="Controllers\BoxTransitionsController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CommonViewsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -2690,6 +2691,8 @@
     <Content Include="Views\Permissao\Editar.cshtml" />
     <Content Include="Views\Estado\Cadastrar.cshtml" />
     <Content Include="Views\Estado\Lista.cshtml" />
+    <Content Include="Views\Fornecedor\Cadastrar.cshtml" />
+    <Content Include="Views\Fornecedor\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">

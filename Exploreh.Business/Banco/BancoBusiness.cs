@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using Exploreh.Repository.Repository;
 using Exploreh.Model.Fornecedor;
-using Exploreh.Model.Perfil;
+using Exploreh.Model.Banco;
 
-namespace Exploreh.Business.Perfil
+namespace Exploreh.Business.Banco
 {
-    public class PerfilBusiness 
+    public class BancoBusiness 
     {
-        private readonly GenericRepository<Database.Perfil> _rep = new GenericRepository<Database.Perfil>();
+        private readonly GenericRepository<Database.Banco> _rep = new GenericRepository<Database.Banco>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<PerfilModel> Get()
+        public List<BancoModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<PerfilModel>(x => x);
+            //return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<BancoModel>(x => x);
+            return _rep.Get().ToList().ConvertAll<BancoModel>(x => x);
         }
 
-        public List<PerfilModel> FiltroClienteByName(string nome)
+        public List<BancoModel> FiltroClienteByName(string nome)
         {
-            return _rep.Where(n => n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<PerfilModel>(x => x);
+            return _rep.Where(n => n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<BancoModel>(x => x);
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Exploreh.Business.Perfil
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PerfilModel Get(int id)
+        public BancoModel Get(int id)
         {
             return _rep.Get(id);
         }
@@ -40,7 +41,7 @@ namespace Exploreh.Business.Perfil
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Add(PerfilModel model)
+        public bool Add(BancoModel model)
         {
             #region Regras
             model.DataCadastro = DateTime.Now;
@@ -55,7 +56,7 @@ namespace Exploreh.Business.Perfil
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public PerfilModel AddToReturnEntity(PerfilModel model)
+        public BancoModel AddToReturnEntity(BancoModel model)
         {
             #region Regras
             model.DataCadastro = DateTime.Now;
@@ -79,7 +80,7 @@ namespace Exploreh.Business.Perfil
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(PerfilModel model)
+        public bool Update(BancoModel model)
         {
             #region Regras
 
@@ -87,7 +88,7 @@ namespace Exploreh.Business.Perfil
 
             update.Nome = !string.IsNullOrEmpty(model.Nome)? model.Nome:update.Nome;
             update.Ativo = model.Ativo;
-            update.DataAlteracao = DateTime.Now;
+            update.DataAtualizacao = DateTime.Now;
             #endregion
 
             return _rep.Update(update);

@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Exploreh.Model.Cliente;
+using Exploreh.Model.Fornecedor;
 using Exploreh.Repository.Repository;
 
-namespace Exploreh.Business.ClienteContato
+namespace Exploreh.Business.FornecedorContato
 {
-    public class ClienteContatoBusiness
+    public class FornecedorContatoBusiness
     {
-        private readonly GenericRepository<Database.ClienteContato> _rep;
+        private readonly GenericRepository<Database.FornecedorContato> _rep;
 
 
-        public ClienteContatoBusiness()
+        public FornecedorContatoBusiness()
         {
-            this._rep = new GenericRepository<Database.ClienteContato>();
+            this._rep = new GenericRepository<Database.FornecedorContato>();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<ClienteContatoModel> Get()
+        public List<FornecedorContatoModel> Get()
         {
-            return _rep.Get().ToList().ConvertAll<ClienteContatoModel>(x => x);
+            return _rep.Get().ToList().ConvertAll<FornecedorContatoModel>(x => x);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ClienteContatoModel Get(int id)
+        public FornecedorContatoModel Get(int id)
         {
             return _rep.Get(id);
         }
@@ -42,7 +42,7 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(ClienteContatoModel model)
+        public bool Update(FornecedorContatoModel model)
         {
             #region Regras
 
@@ -50,6 +50,7 @@ namespace Exploreh.Business.ClienteContato
 
             update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
             update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
+            update.Skype = !string.IsNullOrEmpty(model.Skype) ? model.Skype : update.Skype;
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
             #endregion
@@ -62,7 +63,7 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(List<ClienteContatoModel> model)
+        public bool Update(List<FornecedorContatoModel> model)
         {
             var ok = false;
             #region Regras
@@ -73,13 +74,14 @@ namespace Exploreh.Business.ClienteContato
 
                 if (item.Id == 0 && !item.flgDelete)
                 {
-                    var c = new ClienteContatoModel
+                    var c = new FornecedorContatoModel
                     {
                         Nome = item.Nome,
                         Email = item.Email,
+                        Skype = item.Skype,
                         Ativo = true,
                         DataCadastro = DateTime.Now,
-                        ClienteId = item.ClienteId
+                        FornecedorId = item.FornecedorId
                     };
 
                     ok = _rep.Add(c);
@@ -90,6 +92,7 @@ namespace Exploreh.Business.ClienteContato
                     var update = Get(item.Id);
                     update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
                     update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;
+                    update.Skype = !string.IsNullOrEmpty(item.Skype) ? item.Skype : update.Skype;
                     update.Ativo = item.Ativo;
                     update.DataAlteracao = DateTime.Now;
 

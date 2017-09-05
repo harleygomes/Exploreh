@@ -40,5 +40,12 @@ namespace Exploreh.Database
         public virtual DbSet<TblUnidadeFederacao> TblUnidadeFederacao { get; set; }
         public virtual DbSet<Tela> Tela { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Fornecedor> Fornecedor { get; set; }
+        public virtual DbSet<FornecedorContato> FornecedorContato { get; set; }
+        public virtual DbSet<FornecedorEndereco> FornecedorEndereco { get; set; }
+        public virtual DbSet<FornecedorTelefone> FornecedorTelefone { get; set; }
+        public virtual DbSet<RamoAtividade> RamoAtividade { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<FornecedorDadosBancarios> FornecedorDadosBancarios { get; set; }
     }
 }

@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Exploreh.Model.Cliente;
+using Exploreh.Model.Fornecedor;
 using Exploreh.Repository.Repository;
 
-namespace Exploreh.Business.ClienteContato
+namespace Exploreh.Business.FornecedoresDadosBancarios
 {
-    public class ClienteContatoBusiness
+    public class FornecedorDadosBancariosBusiness
     {
-        private readonly GenericRepository<Database.ClienteContato> _rep;
+        private readonly GenericRepository<Database.FornecedorDadosBancarios> _rep;
 
 
-        public ClienteContatoBusiness()
+        public FornecedorDadosBancariosBusiness()
         {
-            this._rep = new GenericRepository<Database.ClienteContato>();
+            this._rep = new GenericRepository<Database.FornecedorDadosBancarios>();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<ClienteContatoModel> Get()
+        public List<FornecedorDadosBancariosModel> Get()
         {
-            return _rep.Get().ToList().ConvertAll<ClienteContatoModel>(x => x);
+            return _rep.Get().ToList().ConvertAll<FornecedorDadosBancariosModel>(x => x);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ClienteContatoModel Get(int id)
+        public FornecedorDadosBancariosModel Get(int id)
         {
             return _rep.Get(id);
         }
@@ -42,14 +42,16 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(ClienteContatoModel model)
+        public bool Update(FornecedorDadosBancariosModel model)
         {
             #region Regras
 
             var update = Get(model.Id);
 
-            update.Nome = !string.IsNullOrEmpty(model.Nome) ? model.Nome : update.Nome;
-            update.Email = !string.IsNullOrEmpty(model.Email) ? model.Email : update.Email;
+            update.Agencia = !string.IsNullOrEmpty(model.Agencia) ? model.Agencia : update.Agencia;
+            update.Conta = !string.IsNullOrEmpty(model.Conta) ? model.Conta : update.Conta;
+            update.Tipo = !string.IsNullOrEmpty(model.Tipo) ? model.Tipo : update.Tipo;
+            update.BancoId = model.BancoId > 0 ? model.BancoId : update.BancoId;
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
             #endregion
@@ -62,7 +64,7 @@ namespace Exploreh.Business.ClienteContato
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(List<ClienteContatoModel> model)
+        public bool Update(List<FornecedorDadosBancariosModel> model)
         {
             var ok = false;
             #region Regras
@@ -73,13 +75,15 @@ namespace Exploreh.Business.ClienteContato
 
                 if (item.Id == 0 && !item.flgDelete)
                 {
-                    var c = new ClienteContatoModel
+                    var c = new FornecedorDadosBancariosModel
                     {
-                        Nome = item.Nome,
-                        Email = item.Email,
+                        Agencia = item.Agencia,
+                        Conta = item.Conta,
+                        Tipo = item.Tipo,
+                        BancoId = item.BancoId,
                         Ativo = true,
                         DataCadastro = DateTime.Now,
-                        ClienteId = item.ClienteId
+                        FornecedorId = item.FornecedorId
                     };
 
                     ok = _rep.Add(c);
@@ -88,8 +92,10 @@ namespace Exploreh.Business.ClienteContato
                 {
 
                     var update = Get(item.Id);
-                    update.Nome = !string.IsNullOrEmpty(item.Nome) ? item.Nome : update.Nome;
-                    update.Email = !string.IsNullOrEmpty(item.Email) ? item.Email : update.Email;
+                    update.Agencia = !string.IsNullOrEmpty(item.Agencia) ? item.Agencia : update.Agencia;
+                    update.Conta = !string.IsNullOrEmpty(item.Conta) ? item.Conta : update.Conta;
+                    update.Tipo = !string.IsNullOrEmpty(item.Tipo) ? item.Tipo : update.Tipo;
+                    update.BancoId = item.BancoId > 0 ? item.BancoId : update.BancoId;
                     update.Ativo = item.Ativo;
                     update.DataAlteracao = DateTime.Now;
 
