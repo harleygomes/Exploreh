@@ -9,14 +9,7 @@ namespace Exploreh.Business.Cliente
 {
     public class ClienteBusiness
     {
-        /*
-        * O tipo da entidade é passado nessa instância(GenericRepository<>), o respositório esta prototipado para atender ao CRUD
-        * assim que dissermos o tipo de entidade no GenericRepository<> o implicit operator entrará em ação.
-        * 
-        * OBS: A idéia é daqui pra baixo não escrevermos mais nada!
-        * 
-        * Não precisa agradecer :)
-        */
+        
         private readonly GenericRepository<Database.Cliente> _rep = new GenericRepository<Database.Cliente>();
 
         /// <summary>
@@ -201,6 +194,16 @@ namespace Exploreh.Business.Cliente
         public List<ClienteModel> FiltroClienteByName(string nome)
         {
             return _rep.Where(n=>n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<ClienteModel>(x=>x);
+        }
+
+        /// <summary>
+        /// Validando se já existe um documento cadastrado
+        /// </summary>
+        /// <param name="documento">RG / CNPJ / Extrangeiro </param>
+        /// <returns>Boleano Any()</returns>
+        public bool ExisteDcumento(string documento)
+        {
+            return _rep.Where(n => n.Documento.Replace(".", "").Replace("/", "").Replace("-", "") == documento).Any();
         }
     }
 }

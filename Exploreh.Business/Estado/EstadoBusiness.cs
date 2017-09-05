@@ -33,6 +33,16 @@ namespace Exploreh.Business.Estado
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        public List<UnidadeFederacaoModel> FiltroEstadoByName(string nome)
+        {
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public UnidadeFederacaoModel Get(int id)
@@ -66,19 +76,29 @@ namespace Exploreh.Business.Estado
             model.EstReg = "A";
             model.DataReg = DateTime.Now;
             model.DcrSigla = model.DcrSigla.ToUpper();
-            
-            /*
-             * O tipo de FK autoincrement nos obriga a passar o IdPais num campo adicional
-             * criado para esse propósito 
-             */
-            ///model.IdPaisEstrangeiro = model.IdPais;
-            
+                       
             if (model.IdPais.HasValue)
                 model.DcrSiglaPais = _busPais.Get(model.IdPais.Value).DcrSigla;
 
             model.Pais = null;
             
             return _rep.AddWithModifiedOrUnchanged(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(UnidadeFederacaoModel model)
+        {
+            var update = Get(model.IdUnidadeFederacao);
+
+            update.IdPais = model.IdPais;
+            update.DcrNome = model.DcrNome;
+            update.DcrSigla = model.DcrSigla;
+
+            return _rep.Update(update);
         }
     }
 }

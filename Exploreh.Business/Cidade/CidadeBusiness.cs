@@ -33,6 +33,26 @@ namespace Exploreh.Business.Cidade
         }
 
         /// <summary>
+        /// Recupera cidade pelo nome
+        /// </summary>
+        /// <param name="nome">string</param>
+        /// <returns>Um ou muitos registros </returns>
+        public List<CidadeModel> FiltroCidadeByEstado(int estado)
+        {
+            return _rep.Where(n => n.IdUnidadeFederacao == estado).ToList().ConvertAll<CidadeModel>(x => x);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        public List<CidadeModel> FiltroCidadeByCidadeNome(int estado, string nome)
+        {
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower()) && n.IdUnidadeFederacao == estado).ToList().ConvertAll<CidadeModel>(x => x);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
@@ -59,6 +79,22 @@ namespace Exploreh.Business.Cidade
             model.DataReg = DateTime.Now;
 
             return _rep.Add(model);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(CidadeModel model)
+        {
+            var update = Get(model.IdCidade);
+
+            update.DcrNome = model.DcrNome;
+            update.IdUnidadeFederacao = model.IdUnidadeFederacao;            
+
+            return _rep.Update(update);
         }
     }
 }

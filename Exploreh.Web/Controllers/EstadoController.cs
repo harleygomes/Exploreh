@@ -30,7 +30,7 @@ namespace Exploreh.Web.Controllers
 
         private static bool notificacao { get; set; }
 
-        public ActionResult Lista(string tela = "")
+        public ActionResult Lista(string DcrNome = "")
         {
             var usuario = AutenticacaoProvider.UsuarioAutenticado;
             if (usuario == null)
@@ -40,9 +40,11 @@ namespace Exploreh.Web.Controllers
 
             ViewBag.Notificacao = notificacao;
             notificacao = false;
+                        
+            if(DcrNome != "")
+                return View(_bus.FiltroEstadoByName(DcrNome));
 
-            //return View(tela != "" ? _bus.FiltroClienteByName(tela) : _bus.Get());
-            return View();
+            return View(_bus.Get());
         }
 
         //[HttpPost]
@@ -97,17 +99,37 @@ namespace Exploreh.Web.Controllers
         }
 
 
-        //public ActionResult Editar(int id)
-        //{
-        //    var usuario = AutenticacaoProvider.UsuarioAutenticado;
-        //    if (usuario == null)
-        //    {
-        //        return RedirectToAction("Login", "CommonViews");
-        //    }
+        public ActionResult Editar(int id)
+        {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
 
-        //    return View(_bus.Get(id));
-        //}
+            return View(_bus.Get(id));
+        }
 
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="model"></param>
+       /// <returns></returns>
+        [HttpPost]
+        public ActionResult Editar(UnidadeFederacaoModel model)
+        {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
+
+            if(_bus.Update(model))
+                return RedirectToAction("Lista");
+
+            return View(model);
+
+        }
 
         //[HttpPost]
         //public ActionResult Editar(TelaModel model)

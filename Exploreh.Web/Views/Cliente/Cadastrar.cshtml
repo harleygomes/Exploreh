@@ -54,9 +54,9 @@
                         </div>
                         <div class="input-group input-fields">
                             <span id="DocLabel" class="input-group-addon">Documento</span>
-                            <input type="text" class="form-control documentoPf" name="DocumentoPf" placeholder="Número do documento" data-mask="000.000.000-00">
-                            <input type="text" class="form-control documentoPj" name="DocumentoPj" placeholder="Número do documento" data-mask="00.000.000/0000-00">
-                            <input type="text" class="form-control documentoEst" name="DocumentoEst" placeholder="Número do documento" maxlength="150">
+                            <input type="text" class="form-control documentoPf docs" name="DocumentoPf" placeholder="Número do documento" data-mask="000.000.000-00">
+                            <input type="text" class="form-control documentoPj docs" name="DocumentoPj" placeholder="Número do documento" data-mask="00.000.000/0000-00">
+                            <input type="text" class="form-control documentoEst docs" name="DocumentoEst" placeholder="Número do documento" maxlength="150">
                         </div>
 
                         <div class="input-group input-fields camposPF">
@@ -309,16 +309,39 @@
 
 @section Styles {
     @Styles.Render("~/bundles/bootstrapCheckbox/css")
+    @Styles.Render("~/bundles/sweetAlert/css")
 }
+
 @Scripts.Render("~/bundles/jquery/js")
 @Scripts.Render("~/bundles/homer/js")
+@Scripts.Render("~/bundles/sweetAlert/js")
 
 <script src="~/Scripts/BuscaCep.js"></script>
 <script src="~/Scripts/Mask/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    $(document).ready(function () {       
+        $('.docs').focusout(function () {
+            $.ajax({
+            url: '@Url.Action("ExisteDocumento", "Cliente")',
+            type: 'POST',
+            data: { documento: $(this).val()},           
+            success: function (status) {
+                if (status == true) {                   
+                    swal({
+                        title: "Ops!",
+                        text: "Identificamos que este documento já existe!",
+                        type: "warning"
+                    }, function () {
+                        $('.docs').val(''); 
+                    });
+                     
+                }
+            },
+            error: function (xhr) { }
+        });
+        });
 
         if ($("#rpj").is(":checked")) {
             $('.documentoPf').hide();
@@ -631,7 +654,7 @@
                 field.mask(SPMaskBehavior.apply({}, arguments), options);
             }
         };
-                
+
     $('.telefone').mask(SPMaskBehavior, spOptions);
 </script>
 
