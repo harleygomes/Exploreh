@@ -18,6 +18,7 @@ namespace Exploreh.Database
         public TblCidade()
         {
             this.ClienteEndereco = new HashSet<ClienteEndereco>();
+            this.FornecedorEndereco = new HashSet<FornecedorEndereco>();
         }
     
         public int IdCidade { get; set; }
@@ -36,5 +37,7 @@ namespace Exploreh.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteEndereco> ClienteEndereco { get; set; }
         public virtual TblUnidadeFederacao TblUnidadeFederacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FornecedorEndereco> FornecedorEndereco { get; set; }
     }
 }

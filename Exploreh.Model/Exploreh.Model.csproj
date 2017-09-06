@@ -43,13 +43,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bairro\BairroModel.cs" />
+    <Compile Include="Banco\BancoModel.cs" />
     <Compile Include="Cidade\CidadeModel.cs" />
     <Compile Include="Cliente\ClienteContatoModel.cs" />
     <Compile Include="Cliente\ClienteModel.cs" />
     <Compile Include="Cliente\ClienteEnderecoModel.cs" />
     <Compile Include="Cliente\ClienteTelefoneModel.cs" />
     <Compile Include="Crypt\Crypt.cs" />
-    <Compile Include="Estado\EstadoModel.cs" />
+    <Compile Include="Fornecedor\FornecedorDadosBancariosModel.cs" />
+    <Compile Include="Fornecedor\FornecedorContatoModel.cs" />
+    <Compile Include="Fornecedor\FornecedorEnderecoModel.cs" />
+    <Compile Include="Fornecedor\FornecedorModel.cs" />
+    <Compile Include="Fornecedor\RamoAtividadeModel.cs" />
+    <Compile Include="Fornecedor\FornecedorTelefoneModel.cs" />
     <Compile Include="Logradouro\LogradouroModel.cs" />
     <Compile Include="Uf\UfModel.cs" />
     <Compile Include="UnidadeFederacao\UnidadeFederacaoModel.cs" />

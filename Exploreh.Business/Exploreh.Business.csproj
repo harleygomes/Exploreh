@@ -50,13 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bairro\BairroBusiness.cs" />
+    <Compile Include="Banco\BancoBusiness.cs" />
     <Compile Include="Cidade\CidadeBusiness.cs" />
     <Compile Include="ClienteContato\ClienteContatoBusiness.cs" />
+    <Compile Include="Fornecedor\FornecedorDadosBancariosBusiness.cs" />
+    <Compile Include="Fornecedor\FornecedorContatoBusiness.cs" />
     <Compile Include="Cliente\ClienteBusiness.cs" />
     <Compile Include="Cliente\ClienteEnderecoBusiness.cs" />
     <Compile Include="Cliente\ClienteTelefoneBusiness.cs" />
     <Compile Include="Estado\EstadoBusiness.cs" />
     <Compile Include="Estado\UfBusiness.cs" />
+    <Compile Include="Fornecedor\FornecedorBusiness.cs" />
+    <Compile Include="Fornecedor\FornecedorEnderecoBusiness.cs" />
+    <Compile Include="Fornecedor\FornecedorTelefoneBusiness.cs" />
+    <Compile Include="Fornecedor\RamoAtividadeBusiness.cs" />
     <Compile Include="Logradouro\LogradouroBusiness.cs" />
     <Compile Include="Pais\PaisBusiness.cs" />
     <Compile Include="PerfilTela\PerfilTelaBusiness.cs" />
@@ -84,6 +91,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

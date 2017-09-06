@@ -1,0 +1,569 @@
+﻿@using System.Web.Mvc.Html
+@model Exploreh.Model.Fornecedor.FornecedorModel
+
+<style>
+    .input-fields {
+        margin: 10px;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Cadastrar novo Fornecedor";
+
+    List<SelectListItem> listRamoAtividade = new List<SelectListItem>();
+
+    foreach (var item in Model.RamosAtividade)
+    {
+        listRamoAtividade.Add(new SelectListItem
+        {
+            Text = item.Nome,
+            Value = Convert.ToString(item.Id)
+        });
+    }
+
+    List<SelectListItem> listBanco = new List<SelectListItem>();
+
+    foreach (var item in Model.Bancos)
+    {
+        listBanco.Add(new SelectListItem
+        {
+            Text = item.Nome,
+            Value = Convert.ToString(item.Id)
+        });
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-warning">
+                    <strong>Atenção!</strong> Os campos destacados com o asterísco (<b style="color: red">*</b>) são campos obrigatórios.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+
+                        Fornecedor - Dados Principais
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon lblNome">Razão Social <span style="color: red">*</span> </span>
+                            <input id="RazaoSocial" type="text" class="form-control" name="RazaoSocial" placeholder="Razão Social">
+                            <div style="color: red;">
+                                <b> @Html.ValidationMessageFor(item => item.RazaoSocial)</b>
+                            </div>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon lblNome">Nome Fantasia <span style="color: red">*</span> </span>
+                            <input id="NomeFantasia" type="text" class="form-control" name="NomeFantasia" placeholder="NomeFantasia">
+                            <div style="color: red;">
+                                <b> @Html.ValidationMessageFor(item => item.NomeFantasia)</b>
+                            </div>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span id="DocLabel" class="input-group-addon">Documento</span>
+                            <input type="text" class="form-control documento" name="Documento" placeholder="Número do documento" maxlength="18">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">E-mail <span style="color: red">*</span></span>
+                            <input id="Email" type="text" class="form-control" name="Email" placeholder="E-mail">
+                            <div style="color: red">
+                                <b> @Html.ValidationMessageFor(item => item.Email)</b>
+                            </div>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Home Page</span>
+                            <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Home Page">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Observações</span>
+                            <input id="Observacao" type="text" class="form-control" name="observacao" placeholder="Escreva aqui alguma obseervação relacionada ao fornecedor">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Ramo de Atividade</span>
+                            @Html.DropDownListFor(model => model.RamoAtividadeId, listRamoAtividade, "-- Selecione --", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        Fornecedor - Dados bancários
+                    </div>
+                    <div class="panel-body">
+                        <div id="DadosBancariosParent">
+                            <div id="DadosBancariosCampos">
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Banco</span>
+                                    @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Agência</span>
+                                    <input id="Agencia" type="text" class="form-control" name="Agencia" placeholder="Agência">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Conta</span>
+                                    <input id="Conta" type="text" class="form-control" name="Conta" placeholder="Número da conta com dígito">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Tipo de conta</span>
+                                    <select id="TipoConta" name="TipoConta" class="form-control">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="C">Conta corrente</option>
+                                        <option value="P">Poupança</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
+                            </div>
+                        </div>
+
+                        <a style="margin: 10px 0;" href="javascript:addRowBanco();">+1 Conta</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        Fornecedor Telefones
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="input-group">
+                            <div class="alert alert-warning">
+                                <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red"> DDD + Telefone</b> abaixo.
+                            </div>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">DDD</span>
+                            <input id="FornecedorTelefone[0]_Ddd" type="text" class="form-control ddd" name="FornecedorTelefone[0].Ddd" placeholder="DDD">
+                            <input id="FornecedorTelefone[0]_Ddd" type="text" class="form-control dddEstrangeiro" name="FornecedorTelefone[0].DddEstrangeiro" placeholder="DDD">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Telefone</span>
+                            <input id="FornecedorTelefone[0]_Telefone" type="text" class="form-control telefone" name="FornecedorTelefone[0].Telefone" placeholder="Telefone">
+                            <input id="FornecedorTelefone[0]_Telefone" type="text" class="form-control telefoneEstrangeiro" name="FornecedorTelefone[0].TelefoneEstrangeiro" placeholder="Telefone">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">DDD</span>
+                            <input id="FornecedorTelefone[1]_Ddd" type="text" class="form-control ddd" name="FornecedorTelefone[1].Ddd" placeholder="DDD">
+                            <input id="FornecedorTelefone[1]_Ddd" type="text" class="form-control dddEstrangeiro" name="FornecedorTelefone[1].DddEstrangeiro" placeholder="DDD">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Telefone</span>
+                            <input id="FornecedorTelefone[1]_Telefone" type="text" class="form-control telefone" name="FornecedorTelefone[1].Telefone" placeholder="Telefone">
+                            <input id="FornecedorTelefone[1]_Telefone" type="text" class="form-control telefoneEstrangeiro" name="FornecedorTelefone[1].TelefoneEstrangeiro" placeholder="Telefone">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+
+                        Fornecedor Endereço
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-fields camposPfPj">
+                            <span class="input-group-addon">CEP</span>
+                            <input id="FornecedorEndereco[0]_CEP" type="text" class="form-control cep" name="FornecedorEndereco[0].CEP" placeholder="Digite o CEP para carregar os demais campos">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon labelLogra">Logradouro</span>
+                            <input id="FornecedorEndereco[0]_Logradouro" type="text" class="form-control logradouro" name="FornecedorEndereco[0].Logradouro" placeholder="Lograduro">
+                        </div>
+                        <div class="input-group input-fields camposPfPj">
+                            <span class="input-group-addon">Número</span>
+                            <input id="FornecedorEndereco[0]_Numero" type="text" class="form-control numero" name="FornecedorEndereco[0].Numero" placeholder="Número">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon labelComp">Complemento</span>
+                            <input id="FornecedorEndereco[0]_Complemento" type="text" class="form-control complemento" name="FornecedorEndereco[0].Complemento" placeholder="Complemento">
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon labelBairro">Bairro</span>
+                            <input id="FornecedorEndereco[0]_Bairro" type="text" class="form-control bairro" name="FornecedorEndereco[0].Bairro" placeholder="Bairro">
+                        </div>
+                        <div class="input-group input-fields camposEstr">
+                            <span class="input-group-addon">País</span>
+                            <select id="FornecedorEndereco[0]_Pais" class="form-control pais"></select>
+                            @*<input id="FornecedorEndereco[0]_Estado" type="text"  placeholder="Estado">*@
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Estado</span>
+                            <select id="FornecedorEndereco[0]_Estado" class="form-control estado"></select>
+                            @*<input id="FornecedorEndereco[0]_Estado" type="text"  placeholder="Estado">*@
+                            <button type="button"
+                                    class="btn btn-xs btn-info"
+                                    data-toggle="modal"
+                                    data-target="#myModalEstado"
+                                    onclick="$('#IdPais').val($('.pais').val()); $('#NomePais').val($('.pais option:selected').text());"
+                                    id="btnNovoEstado" style="display: none">
+                                Cadastrar Estado
+                            </button>
+                        </div>
+                        <div class="input-group input-fields">
+                            <span class="input-group-addon">Cidade</span>
+                            <select id="FornecedorEndereco[0]_IdCidade" name="FornecedorEndereco[0].IdCidade" class="form-control cidade"></select>
+                            @*<input id="FornecedorEndereco[0]_Cidade" type="text" class="form-control cidade" placeholder="Cidade">*@
+
+                            <button type="button"
+                                    class="btn btn-xs btn-info"
+                                    data-toggle="modal"
+                                    data-target="#myModalCidade"
+                                    onclick="$('#IdNomeEstadoSelecioando').val($('.estado').val()); $('#NomeEstadoSelecioando').val($('.estado option:selected').text());"
+                                    id="btnNovaCidade" style="display: none">
+                                Cadastrar Cidade
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+
+                        Fornecedor Contatos
+                    </div>
+                    <div class="panel-body">
+                        <div id="ContatosParent">
+                            <div id="ContatosCampos">
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Nome</span>
+                                    <input id="ContatoNome" type="text" class="form-control" name="ContatoNome" placeholder="Nome">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Skype</span>
+                                    <input id="ContatoSkype" type="text" class="form-control" name="ContatoSkype" placeholder="Skype">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Email</span>
+                                    <input id="ContatoEmail" type="text" class="form-control" name="ContatoEmail" placeholder="Email">
+                                </div>
+                            </div>
+                            <input type="hidden" class="flgDelete" name="ContatoFlgDelete" value="false" />
+                        </div>
+                        <a style="margin: 10px 0;" href="javascript:addRow();">+1 Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-fields">
+        <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+    </div>
+    <div class="input-fields">
+        <button onclick="location.href='@Url.Action("Lista", "Fornecedor")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+    </div>
+
+}
+
+
+
+<div class="modal fade" id="myModalEstado" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Cadastrar novo Estado</h4>
+                <small class="font-bold">Cadastrar um estado não existente</small>
+            </div>
+            <div class="modal-body">
+                <input hidden="hidden" id="IdPais" />
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">País</span>
+                    <input id="NomePais" type="text" disabled="disabled" class="form-control">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Nome</span>
+                    <input id="NomeEstado" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome do estado">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Sigla</span>
+                    <input id="NomeSigla" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite o nome da sigla">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="salvarNovoEstado" onclick="NovoEstado();">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalCidade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Cadastrar nova Cidade</h4>
+                <small class="font-bold">Cadastrar um cidade não existente</small>
+            </div>
+            <div class="modal-body">
+                <input hidden="hidden" id="IdEstado" />
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Cidade</span>
+                    <input id="IdNomeEstadoSelecioando" type="text" hidden="hidden">
+                    <input id="NomeEstadoSelecioando" type="text" disabled="disabled" class="form-control">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Nome</span>
+                    <input id="NomeCidade" type="text" class="form-control" name="NomeEstado" placeholder="Digite o nome da cidade">
+                </div>
+                <div class="input-group input-fields">
+                    <span class="input-group-addon">Sigla</span>
+                    <input id="NomeSiglaCidade" type="text" class="form-control" name="NomeSigla" maxlength="2" placeholder="Digite a sigla da sigla">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="salvarNovaCidade" onclick="NovaCidade();">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/bootstrapCheckbox/css")
+}
+@Scripts.Render("~/bundles/jquery/js")
+@Scripts.Render("~/bundles/homer/js")
+
+<script src="~/Scripts/BuscaCep.js"></script>
+<script src="~/Scripts/Mask/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        carregaPais();
+
+        $('.estado').change(function () {
+            carregaCidades($(this));
+        });
+
+        $('.pais').change(function () {
+            carregaEstados($(this).val());
+        });
+
+        $("#Cidade").change(function (evt) {
+            $('#CidadeId').val($(this).val());
+
+        });
+
+        $('.cep').focusout(function () {
+            var result = BuscaCep($(this).val());
+
+            if (result.DcrTipoLogradouro != null) {
+                $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
+            }
+            $('.bairro').val(result.Bairro.DcrNome);
+            $('.pais').val(result.Pais.IdPais);
+
+            carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
+        });
+
+    });
+
+    function carregaCidades(estado, id) {
+
+        var comboEstado = estado;
+        var comboCidade = $('.cidade');
+
+        if (comboEstado != "-1") {
+
+            $.ajax({
+                url: '@Url.Action("GetCidade","Fornecedor")',
+                type: 'POST',
+                data: { id: comboEstado.val() },
+                success: function (cidades) {
+                    comboCidade.empty();
+                    var $select = comboCidade;
+                    $select.append('<option value="0">--- Selecione a Cidade ---</option>');
+                    $.each(cidades, function (i, cidade) {
+                        $select.append(
+                            $('<option/>')
+                            .attr('value', cidade.IdCidade)
+                            .text(cidade.DcrNome)
+                        );
+                    });
+                    if (id != null) {
+                        comboCidade.val(id);
+                    }
+                },
+                error: function (xhr) { }
+            });
+        }
+
+
+    }
+
+    function carregaEstados(idPais, idEstado, idCidade) {
+        var comboEstado = $('.estado');
+        $.ajax({
+            url: '@Url.Action("GetEstado","Fornecedor")',
+            type: 'POST',
+            data: { idPais: idPais },
+            success: function (estados) {
+                comboEstado.empty();
+                var $select = comboEstado;
+                $select.append('<option value="0">--- Selecione o Estado ---</option>');
+                $.each(estados, function (i, estado) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', estado.IdUnidadeFederacao)
+                        .text(estado.DcrSigla)
+                    );
+                });
+                if (idEstado != null) {
+                    comboEstado.val(idEstado);
+                    carregaCidades(comboEstado, idCidade);
+                }
+            },
+            error: function (xhr) { }
+        });
+    }
+
+    function carregaPais() {
+        var comboPais = $('.pais');
+
+        $.ajax({
+            url: '@Url.Action("GetPais","Fornecedor")',
+            type: 'POST',
+            success: function (paises) {
+                comboPais.empty();
+                var $select = comboPais;
+                $select.append('<option value="0">--- Selecione o Pais ---</option>');
+                $.each(paises, function (i, pais) {
+                    $select.append(
+                        $('<option/>')
+                        .attr('value', pais.IdPais)
+                        .text(pais.DcrNome)
+                    );
+                });
+            },
+            error: function (xhr) { }
+        });
+    }
+
+    function NovoEstado() {
+        if ($('#IdPais').val() == "0") return false;
+
+
+        var model = {
+            DcrNome: $('#NomeEstado').val(),
+            DcrSigla: $('#NomeSigla').val(),
+            IdPais: $('#IdPais').val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("NovoEstado","Fornecedor")',
+            type: 'POST',
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            success: function (status) {
+                $('myModalEstado').hide();
+            },
+            error: function (xhr) { }
+        });
+
+    }
+
+
+    function NovaCidade() {
+        // if ($('#IdPais').val() == "0") return false;
+
+
+        var model = {
+            DcrNome: $('#NomeCidade').val(),
+            DcrSigla: $('#NomeSiglaCidade').val(),
+            IdUnidadeFederacao: $('#IdNomeEstadoSelecioando').val()
+
+        };
+
+        $.ajax({
+            url: '@Url.Action("NovaCidade","Fornecedor")',
+            type: 'POST',
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            success: function (status) {
+                $('myModalEstado').hide();
+            },
+            error: function (xhr) { }
+        });
+
+    }
+
+    // <![CDATA[
+    function addRow() {
+        //copy the table row and clear the value of the input, then append the row to the end of the table
+        $("#ContatosCampos").clone().find("input").each(function () {
+            $(this).val('');
+        }).end().appendTo("#ContatosParent");
+    }
+    function addRowBanco() {
+        //copy the table row and clear the value of the input, then append the row to the end of the table
+        $("#DadosBancariosCampos").clone().find("input").each(function () {
+            $(this).val('');
+        }).end().appendTo("#DadosBancariosParent");
+    }
+
+    $('.ddd').mask('(00)');
+
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 9 ? '00000-0000' : '0000-00009';
+    },
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
+    $('.telefone').mask(SPMaskBehavior, spOptions);
+
+    var cpfCnpj = function (val) {
+        return val.length > 14 ? '00.000.000/0000-00' : '000.000.000-009';
+    },
+optionsDocumento = {
+    onKeyPress: function (val, e, field, options) {
+        field.mask(cpfCnpj(val), options);
+    }
+};
+
+    /*
+    Aplicações das máscaras
+    */
+    $(".documento").mask(cpfCnpj, optionsDocumento);
+</script>
+
+

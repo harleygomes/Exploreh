@@ -28,7 +28,6 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
     <TargetFrameworkProfile />
-    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -139,7 +138,7 @@
     <Compile Include="Controllers\AppViewsController.cs" />
     <Compile Include="Controllers\BoxTransitionsController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
-    <Compile Include="Controllers\CidadeController.cs" />
+    <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CommonViewsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -2692,10 +2691,8 @@
     <Content Include="Views\Permissao\Editar.cshtml" />
     <Content Include="Views\Estado\Cadastrar.cshtml" />
     <Content Include="Views\Estado\Lista.cshtml" />
-    <Content Include="Views\Estado\Editar.cshtml" />
-    <Content Include="Views\Cidade\Lista.cshtml" />
-    <Content Include="Views\Cidade\Cadastrar.cshtml" />
-    <Content Include="Views\Cidade\Editar.cshtml" />
+    <Content Include="Views\Fornecedor\Cadastrar.cshtml" />
+    <Content Include="Views\Fornecedor\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exploreh.Business\Exploreh.Business.csproj">

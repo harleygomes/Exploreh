@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAtualizacao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cidade">
           <Key>
             <PropertyRef Name="Id" />
@@ -79,6 +90,77 @@
           <Property Name="Sigla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RazaoSocial" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomeFantasia" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Documento" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="RamoAtividadeId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomePage" Type="nvarchar" MaxLength="100" />
+          <Property Name="Observacao" Type="nvarchar(max)" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FornecedorContato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Skype" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FornecedorId" Type="int" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FornecedorDadosBancarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Agencia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Conta" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BancoId" Type="int" Nullable="false" />
+          <Property Name="FornecedorId" Type="int" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FornecedorEndereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logradouro" Type="nvarchar" MaxLength="500" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" />
+          <Property Name="Complemento" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bairro" Type="nvarchar" MaxLength="500" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="FornecedorId" Type="int" Nullable="false" />
+          <Property Name="CidadeId" Type="int" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FornecedorTelefone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ddd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAlteracao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" />
+          <Property Name="FornecedorId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Perfil">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,6 +179,16 @@
           <Property Name="Tela_Id" Type="int" Nullable="false" />
           <Property Name="DataCadastro" Type="datetime" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RamoAtividade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="DataAtualizacao" Type="datetime" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblBairro">
           <Key>
@@ -183,7 +275,7 @@
           <Property Name="DataCadastro" Type="datetime" Nullable="false" />
           <Property Name="DataAlteracao" Type="datetime" />
           <Property Name="Descricao" Type="nvarchar(max)" />
-          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -206,6 +298,18 @@
               <PropertyRef Name="IdCidade" />
             </Principal>
             <Dependent Role="ClienteEndereco">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CidadeFornecedorEndereco">
+          <End Role="TblCidade" Type="Self.TblCidade" Multiplicity="1" />
+          <End Role="FornecedorEndereco" Type="Self.FornecedorEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="FornecedorEndereco">
               <PropertyRef Name="CidadeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -270,6 +374,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FornecedorContatoFornecedor">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="FornecedorContato" Type="Self.FornecedorContato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorContato">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorDadosBancariosBanco">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+          <End Role="FornecedorDadosBancarios" Type="Self.FornecedorDadosBancarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorDadosBancarios">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorDadosBancarios">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="FornecedorDadosBancarios" Type="Self.FornecedorDadosBancarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorDadosBancarios">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorEndereco">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="FornecedorEndereco" Type="Self.FornecedorEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorEndereco">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorTelefone">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="FornecedorTelefone" Type="Self.FornecedorTelefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorTelefone">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorRamoAtividade">
+          <End Role="RamoAtividade" Type="Self.RamoAtividade" Multiplicity="1" />
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RamoAtividade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fornecedor">
+              <PropertyRef Name="RamoAtividadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PerfilTela_Perfil">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
           <End Role="PerfilTela" Type="Self.PerfilTela" Multiplicity="*" />
@@ -319,14 +495,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ExplorehModelStoreContainer">
+          <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClienteContato" EntityType="Self.ClienteContato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClienteEndereco" EntityType="Self.ClienteEndereco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClienteTelefone" EntityType="Self.ClienteTelefone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FornecedorContato" EntityType="Self.FornecedorContato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FornecedorDadosBancarios" EntityType="Self.FornecedorDadosBancarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FornecedorEndereco" EntityType="Self.FornecedorEndereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FornecedorTelefone" EntityType="Self.FornecedorTelefone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PerfilTela" EntityType="Self.PerfilTela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RamoAtividade" EntityType="Self.RamoAtividade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblBairro" EntityType="Self.TblBairro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCidade" EntityType="Self.TblCidade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblLogradouro" EntityType="Self.TblLogradouro" Schema="dbo" store:Type="Tables" />
@@ -337,6 +520,10 @@
           <AssociationSet Name="FK_CidadeClienteEndereco" Association="Self.FK_CidadeClienteEndereco">
             <End Role="TblCidade" EntitySet="TblCidade" />
             <End Role="ClienteEndereco" EntitySet="ClienteEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CidadeFornecedorEndereco" Association="Self.FK_CidadeFornecedorEndereco">
+            <End Role="TblCidade" EntitySet="TblCidade" />
+            <End Role="FornecedorEndereco" EntitySet="FornecedorEndereco" />
           </AssociationSet>
           <AssociationSet Name="FK_CidadeUnidadeFederacaoFK" Association="Self.FK_CidadeUnidadeFederacaoFK">
             <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
@@ -357,6 +544,30 @@
           <AssociationSet Name="FK_EstadoCidade" Association="Self.FK_EstadoCidade">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorContatoFornecedor" Association="Self.FK_FornecedorContatoFornecedor">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorContato" EntitySet="FornecedorContato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorDadosBancariosBanco" Association="Self.FK_FornecedorDadosBancariosBanco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="FornecedorDadosBancarios" EntitySet="FornecedorDadosBancarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorDadosBancarios" Association="Self.FK_FornecedorFornecedorDadosBancarios">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorDadosBancarios" EntitySet="FornecedorDadosBancarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorEndereco" Association="Self.FK_FornecedorFornecedorEndereco">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorEndereco" EntitySet="FornecedorEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorTelefone" Association="Self.FK_FornecedorFornecedorTelefone">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorTelefone" EntitySet="FornecedorTelefone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorRamoAtividade" Association="Self.FK_FornecedorRamoAtividade">
+            <End Role="RamoAtividade" EntitySet="RamoAtividade" />
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
           </AssociationSet>
           <AssociationSet Name="FK_PerfilTela_Perfil" Association="Self.FK_PerfilTela_Perfil">
             <End Role="Perfil" EntitySet="Perfil" />
@@ -434,6 +645,41 @@
           <AssociationSet Name="FK_UnidadeFederacaoPaisFK" Association="ExplorehModel.FK_UnidadeFederacaoPaisFK">
             <End Role="TblPais" EntitySet="TblPais" />
             <End Role="TblUnidadeFederacao" EntitySet="TblUnidadeFederacao" />
+          </AssociationSet>
+          <EntitySet Name="Fornecedor" EntityType="ExplorehModel.Fornecedor" />
+          <EntitySet Name="FornecedorContato" EntityType="ExplorehModel.FornecedorContato" />
+          <EntitySet Name="FornecedorEndereco" EntityType="ExplorehModel.FornecedorEndereco" />
+          <EntitySet Name="FornecedorTelefone" EntityType="ExplorehModel.FornecedorTelefone" />
+          <AssociationSet Name="FK_FornecedorContatoFornecedor" Association="ExplorehModel.FK_FornecedorContatoFornecedor">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorContato" EntitySet="FornecedorContato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorEndereco" Association="ExplorehModel.FK_FornecedorFornecedorEndereco">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorEndereco" EntitySet="FornecedorEndereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorTelefone" Association="ExplorehModel.FK_FornecedorFornecedorTelefone">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorTelefone" EntitySet="FornecedorTelefone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CidadeFornecedorEndereco" Association="ExplorehModel.FK_CidadeFornecedorEndereco">
+            <End Role="TblCidade" EntitySet="TblCidade" />
+            <End Role="FornecedorEndereco" EntitySet="FornecedorEndereco" />
+          </AssociationSet>
+          <EntitySet Name="RamoAtividade" EntityType="ExplorehModel.RamoAtividade" />
+          <AssociationSet Name="FK_FornecedorRamoAtividade" Association="ExplorehModel.FK_FornecedorRamoAtividade">
+            <End Role="RamoAtividade" EntitySet="RamoAtividade" />
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+          </AssociationSet>
+          <EntitySet Name="Banco" EntityType="ExplorehModel.Banco" />
+          <EntitySet Name="FornecedorDadosBancarios" EntityType="ExplorehModel.FornecedorDadosBancarios" />
+          <AssociationSet Name="FK_FornecedorDadosBancariosBanco" Association="ExplorehModel.FK_FornecedorDadosBancariosBanco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="FornecedorDadosBancarios" EntitySet="FornecedorDadosBancarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FornecedorFornecedorDadosBancarios" Association="ExplorehModel.FK_FornecedorFornecedorDadosBancarios">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="FornecedorDadosBancarios" EntitySet="FornecedorDadosBancarios" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cidade">
@@ -573,6 +819,7 @@
           <Property Name="EstReg" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ClienteEndereco" Relationship="ExplorehModel.FK_CidadeClienteEndereco" FromRole="TblCidade" ToRole="ClienteEndereco" />
           <NavigationProperty Name="TblUnidadeFederacao" Relationship="ExplorehModel.FK_CidadeUnidadeFederacaoFK" FromRole="TblCidade" ToRole="TblUnidadeFederacao" />
+          <NavigationProperty Name="FornecedorEndereco" Relationship="ExplorehModel.FK_CidadeFornecedorEndereco" FromRole="TblCidade" ToRole="FornecedorEndereco" />
         </EntityType>
         <EntityType Name="TblLogradouro">
           <Key>
@@ -632,7 +879,7 @@
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PerfilTela" Relationship="ExplorehModel.FK_PerfilTela_Tela" FromRole="Tela" ToRole="PerfilTela" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -766,6 +1013,195 @@
             </Principal>
             <Dependent Role="TblUnidadeFederacao">
               <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazaoSocial" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NomeFantasia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Documento" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="RamoAtividadeId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomePage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FornecedorContato" Relationship="ExplorehModel.FK_FornecedorContatoFornecedor" FromRole="Fornecedor" ToRole="FornecedorContato" />
+          <NavigationProperty Name="FornecedorEndereco" Relationship="ExplorehModel.FK_FornecedorFornecedorEndereco" FromRole="Fornecedor" ToRole="FornecedorEndereco" />
+          <NavigationProperty Name="FornecedorTelefone" Relationship="ExplorehModel.FK_FornecedorFornecedorTelefone" FromRole="Fornecedor" ToRole="FornecedorTelefone" />
+          <NavigationProperty Name="RamoAtividade" Relationship="ExplorehModel.FK_FornecedorRamoAtividade" FromRole="Fornecedor" ToRole="RamoAtividade" />
+          <NavigationProperty Name="FornecedorDadosBancarios" Relationship="ExplorehModel.FK_FornecedorFornecedorDadosBancarios" FromRole="Fornecedor" ToRole="FornecedorDadosBancarios" />
+        </EntityType>
+        <EntityType Name="FornecedorContato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Skype" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Fornecedor" Relationship="ExplorehModel.FK_FornecedorContatoFornecedor" FromRole="FornecedorContato" ToRole="Fornecedor" />
+        </EntityType>
+        <EntityType Name="FornecedorEndereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logradouro" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bairro" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <Property Name="CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fornecedor" Relationship="ExplorehModel.FK_FornecedorFornecedorEndereco" FromRole="FornecedorEndereco" ToRole="Fornecedor" />
+          <NavigationProperty Name="TblCidade" Relationship="ExplorehModel.FK_CidadeFornecedorEndereco" FromRole="FornecedorEndereco" ToRole="TblCidade" />
+        </EntityType>
+        <EntityType Name="FornecedorTelefone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ddd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" />
+          <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fornecedor" Relationship="ExplorehModel.FK_FornecedorFornecedorTelefone" FromRole="FornecedorTelefone" ToRole="Fornecedor" />
+        </EntityType>
+        <Association Name="FK_FornecedorContatoFornecedor">
+          <End Type="ExplorehModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorContato" Role="FornecedorContato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorContato">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorEndereco">
+          <End Type="ExplorehModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorEndereco" Role="FornecedorEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorEndereco">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorTelefone">
+          <End Type="ExplorehModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorTelefone" Role="FornecedorTelefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorTelefone">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CidadeFornecedorEndereco">
+          <End Type="ExplorehModel.TblCidade" Role="TblCidade" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorEndereco" Role="FornecedorEndereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="FornecedorEndereco">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RamoAtividade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAtualizacao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Fornecedor" Relationship="ExplorehModel.FK_FornecedorRamoAtividade" FromRole="RamoAtividade" ToRole="Fornecedor" />
+        </EntityType>
+        <Association Name="FK_FornecedorRamoAtividade">
+          <End Type="ExplorehModel.RamoAtividade" Role="RamoAtividade" Multiplicity="1" />
+          <End Type="ExplorehModel.Fornecedor" Role="Fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RamoAtividade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fornecedor">
+              <PropertyRef Name="RamoAtividadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAtualizacao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FornecedorDadosBancarios" Relationship="ExplorehModel.FK_FornecedorDadosBancariosBanco" FromRole="Banco" ToRole="FornecedorDadosBancarios" />
+        </EntityType>
+        <EntityType Name="FornecedorDadosBancarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Agencia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Conta" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BancoId" Type="Int32" Nullable="false" />
+          <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Banco" Relationship="ExplorehModel.FK_FornecedorDadosBancariosBanco" FromRole="FornecedorDadosBancarios" ToRole="Banco" />
+          <NavigationProperty Name="Fornecedor" Relationship="ExplorehModel.FK_FornecedorFornecedorDadosBancarios" FromRole="FornecedorDadosBancarios" ToRole="Fornecedor" />
+        </EntityType>
+        <Association Name="FK_FornecedorDadosBancariosBanco">
+          <End Type="ExplorehModel.Banco" Role="Banco" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorDadosBancarios" Role="FornecedorDadosBancarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorDadosBancarios">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FornecedorFornecedorDadosBancarios">
+          <End Type="ExplorehModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="ExplorehModel.FornecedorDadosBancarios" Role="FornecedorDadosBancarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FornecedorDadosBancarios">
+              <PropertyRef Name="FornecedorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -979,6 +1415,105 @@
                 <ScalarProperty Name="Ativo" ColumnName="Ativo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedor">
+            <EntityTypeMapping TypeName="ExplorehModel.Fornecedor">
+              <MappingFragment StoreEntitySet="Fornecedor">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="HomePage" ColumnName="HomePage" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RamoAtividadeId" ColumnName="RamoAtividadeId" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FornecedorContato">
+            <EntityTypeMapping TypeName="ExplorehModel.FornecedorContato">
+              <MappingFragment StoreEntitySet="FornecedorContato">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+                <ScalarProperty Name="Skype" ColumnName="Skype" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FornecedorEndereco">
+            <EntityTypeMapping TypeName="ExplorehModel.FornecedorEndereco">
+              <MappingFragment StoreEntitySet="FornecedorEndereco">
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FornecedorTelefone">
+            <EntityTypeMapping TypeName="ExplorehModel.FornecedorTelefone">
+              <MappingFragment StoreEntitySet="FornecedorTelefone">
+                <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Ddd" ColumnName="Ddd" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RamoAtividade">
+            <EntityTypeMapping TypeName="ExplorehModel.RamoAtividade">
+              <MappingFragment StoreEntitySet="RamoAtividade">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAtualizacao" ColumnName="DataAtualizacao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banco">
+            <EntityTypeMapping TypeName="ExplorehModel.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAtualizacao" ColumnName="DataAtualizacao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FornecedorDadosBancarios">
+            <EntityTypeMapping TypeName="ExplorehModel.FornecedorDadosBancarios">
+              <MappingFragment StoreEntitySet="FornecedorDadosBancarios">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+                <ScalarProperty Name="BancoId" ColumnName="BancoId" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Conta" ColumnName="Conta" />
+                <ScalarProperty Name="Agencia" ColumnName="Agencia" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
