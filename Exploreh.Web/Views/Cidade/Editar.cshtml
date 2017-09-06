@@ -13,7 +13,7 @@
 
 <h2>Editar Cidade</h2>
 
-@using (Html.BeginForm("CadastrarCidade", "Cidade"))
+@using (Html.BeginForm("EditarPost", "Cidade"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -25,7 +25,8 @@
                     <div class="panel-heading">
                         Editar nova Cidade
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body">     
+                        <input name="IdCidade" hidden="hidden" value="@(Model.IdCidade)"/>
                         <div class="input-group input-fields camposEstr">
                             <span class="input-group-addon">País</span>
                             <select id="IdPais" name="IdPais" class="form-control pais"></select>
@@ -38,7 +39,7 @@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Cidade</span>
-                            <input id="DcrNome" name="DcrNome" type="text" class="form-control" placeholder="Informe o nome da Cidade" value="@(Model.DcrNome)" >
+                            <input id="DcrNome" name="DcrNome" type="text" class="form-control" placeholder="Informe o nome da Cidade" value="@(Model.DcrNome)">
                         </div>
 
                         <div class="input-fields">
@@ -50,9 +51,9 @@
         </div>
     </div>
 
-        <div class="input-fields">
-            <button onclick="location.href='@Url.Action("Lista", "Cidade")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
-        </div>
+    <div class="input-fields">
+        <button onclick="location.href='@Url.Action("Lista", "Cidade")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
+    </div>
 }
 
 
@@ -66,11 +67,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        carregaPais();
+        $('#Estado').html('');
+        $('#Estado').append('<option value="0">Carregando ... </option>');
 
-        $('.pais').change(function () {
-            carregaEstados($(this).val())
-        });
+        carregaPais();
+        setTimeout(function () {            
+            carregaEstados($('.pais').val());
+        }, 4000)
+        
     });
 
 
@@ -85,11 +89,19 @@
                 var $select = comboPais;
                 $select.append('<option value="0">--- Selecione o Pais ---</option>');
                 $.each(paises, function (i, pais) {
-                    $select.append(
-                        $('<option/>')
-                        .attr('value', pais.IdPais)
-                        .text(pais.DcrNome)
-                    );
+                    if (pais.DcrSigla == '@(Model.DcrSiglaPais)') {
+                        $select.append(
+                            $('<option selected/>')
+                                .attr('value', pais.IdPais)
+                                .text(pais.DcrNome)
+                        );
+                    } else {
+                        $select.append(
+                            $('<option/>')
+                                .attr('value', pais.IdPais)
+                                .text(pais.DcrNome)
+                        );
+                    }
                 });
             },
             error: function (xhr) { }
@@ -98,7 +110,7 @@
 
       function carregaEstados(idPais) {
           var comboEstado = $('.estado');
-
+          
         $.ajax({
             url: '@Url.Action("GetEstado","Cliente")',
             type: 'POST',
@@ -106,7 +118,7 @@
             success: function (estados) {
                 comboEstado.empty();
                 var $select = comboEstado;
-                $.each(estados, function (i, estado) {
+                $.each(estados, function (i, estado) {                    
                     if (estado.IdUnidadeFederacao == @(Model.IdUnidadeFederacao)){
                         $select.append(
                             $('<option selected/>')
@@ -126,7 +138,7 @@
                     comboEstado.val(idEstado);
                     carregaCidades(comboEstado, idCidade);
                 }
-                
+
             },
             error: function (xhr) { }
           });
