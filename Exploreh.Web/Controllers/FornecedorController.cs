@@ -110,14 +110,19 @@ namespace Exploreh.Web.Controllers
                         return RedirectToAction("Lista", new { notificar = _busFornecedor.Add(model) });
                     }
 
-                    return View(model);
-                }
+                 }
+
+                model.RamosAtividade = new RamoAtividadeBusiness().Get().ToList();
+                model.Bancos = new BancoBusiness().Get().ToList();
 
                 return View(model);
             }
             catch (Exception ex)
             {
-                return View();
+                model.RamosAtividade = new RamoAtividadeBusiness().Get().ToList();
+                model.Bancos = new BancoBusiness().Get().ToList();
+
+                return View(model);
             }
         }
 

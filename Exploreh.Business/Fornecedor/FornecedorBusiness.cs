@@ -223,7 +223,7 @@ namespace Exploreh.Business.Fornecedor
         /// <returns></returns>
         public List<FornecedorModel> FiltroFornecedorByName(string nome)
         {
-            return _rep.Where(n => n.RazaoSocial.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<FornecedorModel>(x => x);
+            return _rep.Where(n => n.RazaoSocial.ToLower().Contains(nome.ToLower()) || n.NomeFantasia.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<FornecedorModel>(x => x);
         }
     }
 }
