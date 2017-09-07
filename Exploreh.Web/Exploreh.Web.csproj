@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AppViewsController.cs" />
     <Compile Include="Controllers\BoxTransitionsController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\CidadeController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CommonViewsController.cs" />
