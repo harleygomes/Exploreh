@@ -83,9 +83,13 @@ namespace Exploreh.Business.Fornecedor
 
             if (model.ContatoNome != null)
             {
+
                 for (int i = 0; i < model.ContatoNome.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]))
+                    if (string.IsNullOrEmpty(model.ContatoFlgDelete[i]))
+                        model.ContatoFlgDelete[i] = "false";
+
+                    if (!string.IsNullOrEmpty(model.ContatoNome[i]) && !string.IsNullOrEmpty(model.ContatoEmail[i]) && Convert.ToBoolean(model.ContatoFlgDelete[i]) == false)
                     {
                         FornecedorContatoModel c = new FornecedorContatoModel
                         {
@@ -107,6 +111,9 @@ namespace Exploreh.Business.Fornecedor
             {
                 for (int i = 0; i < model.Conta.Length; i++)
                 {
+                    if (string.IsNullOrEmpty(model.ContaFlgDelete[i]))
+                        model.ContaFlgDelete[i] = "false";
+
                     if (!string.IsNullOrEmpty(model.Conta[i]) && !string.IsNullOrEmpty(model.Agencia[i]) && Convert.ToBoolean(model.ContaFlgDelete[i]) == false)
                     {
                         FornecedorDadosBancariosModel c = new FornecedorDadosBancariosModel
