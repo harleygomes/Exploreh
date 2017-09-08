@@ -104,11 +104,42 @@
                     <div class="panel-heading">
                         Fornecedor - Dados bancários
                     </div>
-                    <div class="panel-body">
-                        <div id="DadosBancariosParent">
+                        <div  id="DadosBancariosParent">
+                            <div class="panel-body DadosBancariosCampos" id="DadosBancariosCampos" style="display:none">
+                                <div style="padding-bottom: 10px;">
+                                    <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
+                                    <span class="pull-right clickableConta" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Banco</span>
+                                    @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Agência</span>
+                                    <input id="Agencia" type="text" class="form-control" name="Agencia" placeholder="Agência">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Conta</span>
+                                    <input id="Conta" type="text" class="form-control" name="Conta" placeholder="Número da conta com dígito">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Tipo de conta</span>
+                                    <select id="TipoConta" name="TipoConta" class="form-control">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="C">Conta corrente</option>
+                                        <option value="P">Poupança</option>
+                                    </select>
+
+                                </div>
+                                <input type="hidden" name="ContaId" value="0" />
+                            </div>
                             @foreach (var banco in Model.FornecedorDadosBancarios)
                             {
-                                <div id="DadosBancariosCampos">
+                                <div class="panel-body DadosBancariosCampos" id="DadosBancariosCampos">
+                                    <div style="padding-bottom: 10px;">
+                                        <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
+                                        <span class="pull-right clickableConta" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                                    </div>
                                     <div class="input-group input-fields">
                                         <span class="input-group-addon">Banco</span>
                                         @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text", banco.BancoId), new { @class = "form-control" })
@@ -131,14 +162,12 @@
 
                                     </div>
                                     <input type="hidden" name="ContaId" value="@banco.Id" />
-                                    <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
                                 </div>
                             }
                         </div>
 
                         <a style="margin: 10px 0;" href="javascript:addRowBanco();">+1 Conta</a>
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -379,7 +408,27 @@
 
 <script type="text/javascript">
 
+    function addFechar(){
+        $('.clickable').on('click',function(){
+            var effect = $(this).data('effect');
+            $(this).closest('.contatosCampos')[effect]();
+            $(this).closest('.contatosCampos').find('.flgDelete').val('true');
+        });
+        $('.clickableTelefone').on('click',function(){
+            var effect = $(this).data('effect');
+            $(this).closest('.FornecedorTelefones')[effect]();
+            $(this).closest('.FornecedorTelefones').find('.flgDelete').val('true');
+        });
+        $('.clickableConta').on('click',function(){
+            var effect = $(this).data('effect');
+            $(this).closest('.DadosBancariosCampos')[effect]();
+            $(this).closest('.DadosBancariosCampos').find('.flgDelete').val('true');
+        });
+    }
+
     $(document).ready(function () {
+
+        addFechar();
 
         carregaPais(@Model.FornecedorEndereco[0].IdPais,@Model.FornecedorEndereco[0].IdEstado,@Model.FornecedorEndereco[0].IdCidade);
 
@@ -398,8 +447,8 @@
         });
 
         $('.cep').focusout(function () {
-            var result = BuscaCep($(this).val());
-
+            var result = BuscaCepEdit('@Url.Action("GetCep","Cliente")',$(this).val());
+            
             if (result.DcrTipoLogradouro != null) {
                 $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             }
@@ -408,7 +457,6 @@
 
             carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
         });
-
     });
 
     function carregaCidades(estado, id) {
@@ -549,15 +597,39 @@
     // <![CDATA[
     function addRow() {
         //copy the table row and clear the value of the input, then append the row to the end of the table
-        $("#ContatosCampos").clone().find("input").each(function () {
-            $(this).val('');
-        }).end().appendTo("#ContatosParent");
+        $(".contatosCampos:first")
+            .clone()
+            .show()
+            .find("input")
+            .each(function () {
+                $(this).val('');
+            })
+            .end()
+            .find(".clickable")
+            .each(function () {
+                $(this).show();
+            })
+            .end()
+            .appendTo("#ContatosParent");
+        addFechar();
     }
     function addRowBanco() {
         //copy the table row and clear the value of the input, then append the row to the end of the table
-        $("#DadosBancariosCampos").clone().find("input").each(function () {
-            $(this).val('');
-        }).end().appendTo("#DadosBancariosParent");
+        $("#DadosBancariosCampos:first")
+            .clone()
+            .show()
+            .find("input")
+            .each(function () {
+                $(this).val('');
+            })
+            .end()
+            .find(".clickableConta")
+            .each(function () {
+                $(this).show();
+            })
+            .end()
+            .appendTo("#DadosBancariosParent");
+        addFechar();
     }
 
     $('.ddd').mask('(00)');

@@ -228,7 +228,10 @@ namespace Exploreh.Business.Fornecedor
                     if (string.IsNullOrEmpty(model.ContaFlgDelete[i]))
                         model.ContaFlgDelete[i] = "false";
 
-                    if (!string.IsNullOrEmpty(model.Conta[i]) && !string.IsNullOrEmpty(model.Agencia[i]) && Convert.ToBoolean(model.ContaFlgDelete[i]) == false)
+                    if (string.IsNullOrEmpty(model.ContaId[i]))
+                        model.ContaId[i] = "0";
+
+                    if (!string.IsNullOrEmpty(model.Conta[i]) && !string.IsNullOrEmpty(model.Agencia[i]))
                     {
                         FornecedorDadosBancariosModel c = new FornecedorDadosBancariosModel
                         {
@@ -240,6 +243,7 @@ namespace Exploreh.Business.Fornecedor
                             Ativo = true,
                             DataCadastro = DateTime.Now,
                             flgDelete = string.IsNullOrEmpty(model.ContaFlgDelete[i]) ? false : Convert.ToBoolean(model.ContaFlgDelete[i]),
+                            FornecedorId = model.Id
 
                         };
                         dadosBancarios.Add(c);
