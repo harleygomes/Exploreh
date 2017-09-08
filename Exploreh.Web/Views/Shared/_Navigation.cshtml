@@ -189,6 +189,12 @@
             <li class="@Html.IsSelected(controller: "Dashboard")">
                 <a href="@Url.Action("Index", "Dashboard")"> <span class="nav-label">Dashboard</span> </a>
             </li>
+            <li class="@Html.IsSelected(controller: "Estado")">
+                <a href="@Url.Action("Lista", "Estado")"> <span class="nav-label">Estados</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Cidade")">
+                <a href="@Url.Action("Lista", "Cidade")"> <span class="nav-label">Cidades</span> </a>
+            </li>
         </ul>
     }
 
