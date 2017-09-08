@@ -255,7 +255,7 @@
     </div>
 
     <div class="input-fields">
-        <button type="submit" class="btn w-xs btn-primary"> <i class="fa fa-check"></i> Salvar </button>
+        <button type="submit" class="btn w-xs btn-primary btnSalvar"> <i class="fa fa-check"></i> Salvar </button>
     </div>
     <div class="input-fields">
         <button onclick="location.href='@Url.Action("Lista", "Cliente")'" class="btn w-xs btn-danger"> <i class="glyphicon glyphicon-chevron-left"></i> Voltar </button>
@@ -312,6 +312,7 @@
         });
 
         $('.cep').focusout(function () {
+            $('.btnSalvar').attr("disabled", true);
             var result = BuscaCepEdit('@Url.Action("GetCep","Cliente")',$(this).val());
             
             if (result.DcrTipoLogradouro != null) {
@@ -321,6 +322,7 @@
             $('.pais').val(result.Pais.IdPais);
 
             carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
+            $('.btnSalvar').attr("disabled", false);
         });
 
     });

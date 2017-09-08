@@ -379,6 +379,7 @@
         });
 
         $('.cep').focusout(function () {
+            $('.btnSalvar').attr("disabled", true);
             var result = BuscaCep($(this).val());
 
             if (result.DcrTipoLogradouro != null) {
@@ -388,6 +389,7 @@
             $('.pais').val(result.Pais.IdPais);
 
             carregaEstados(result.Pais.IdPais, result.UnidadeFederacao.IdUnidadeFederacao, result.Cidade.IdCidade);
+            $('.btnSalvar').attr("disabled", false);
         });
 
     });
