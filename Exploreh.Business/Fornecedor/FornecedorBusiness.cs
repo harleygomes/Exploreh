@@ -203,6 +203,7 @@ namespace Exploreh.Business.Fornecedor
                             Id = string.IsNullOrEmpty(model.ContatoId[i]) ? 0 : Convert.ToInt32(model.ContatoId[i]),
                             Nome = model.ContatoNome[i],
                             Email = model.ContatoEmail[i],
+                            Skype = model.ContatoSkype[i],
                             flgDelete = string.IsNullOrEmpty(model.ContatoFlgDelete[i]) ? false : Convert.ToBoolean(model.ContatoFlgDelete[i]),
                             Ativo = true,
                             DataCadastro = DateTime.Now,
@@ -217,6 +218,39 @@ namespace Exploreh.Business.Fornecedor
                 if (contatoFornecedor)
                     update.FornecedorContato = null;
             }
+
+            var dadosBancarios = new List<FornecedorDadosBancariosModel>();
+
+            if (model.Conta != null)
+            {
+                for (int i = 0; i < model.Conta.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(model.ContaFlgDelete[i]))
+                        model.ContaFlgDelete[i] = "false";
+
+                    if (!string.IsNullOrEmpty(model.Conta[i]) && !string.IsNullOrEmpty(model.Agencia[i]) && Convert.ToBoolean(model.ContaFlgDelete[i]) == false)
+                    {
+                        FornecedorDadosBancariosModel c = new FornecedorDadosBancariosModel
+                        {
+                            Id = Convert.ToInt16(model.ContaId[i]),
+                            Agencia = model.Agencia[i],
+                            Conta = model.Conta[i],
+                            BancoId = Convert.ToInt16(model.BancoId[i]),
+                            Tipo = model.TipoConta[i],
+                            Ativo = true,
+                            DataCadastro = DateTime.Now,
+                            flgDelete = string.IsNullOrEmpty(model.ContaFlgDelete[i]) ? false : Convert.ToBoolean(model.ContaFlgDelete[i]),
+
+                        };
+                        dadosBancarios.Add(c);
+                    }
+                }
+            }
+            var dadosBancariosFornecedor = new FornecedoresDadosBancarios.FornecedorDadosBancariosBusiness().Update(dadosBancarios);
+
+            if(dadosBancariosFornecedor)
+                update.FornecedorDadosBancarios = dadosBancarios;
+
 
             #endregion
 

@@ -134,10 +134,11 @@ namespace Exploreh.Web.Controllers
             {
                 return RedirectToAction("Login", "CommonViews");
             }
-
             try
             {
                 var model = _busFornecedor.Get(id);
+                model.RamosAtividade = new RamoAtividadeBusiness().Get().ToList();
+                model.Bancos = new BancoBusiness().Get().ToList();
                 return View(model);
             }
             catch (Exception ex)

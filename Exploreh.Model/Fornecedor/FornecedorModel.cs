@@ -41,6 +41,8 @@ namespace Exploreh.Model.Fornecedor
         public string[] ContatoSkype { get; set; }
         public string[] ContatoFlgDelete { get; set; }
 
+
+        public string[] ContaId { get; set; }
         public string[] BancoId { get; set; }
         public string[] Agencia { get; set; }
         public string[] Conta { get; set; }
