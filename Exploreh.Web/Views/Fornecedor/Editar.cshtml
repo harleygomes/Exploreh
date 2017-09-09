@@ -429,6 +429,7 @@
     $(document).ready(function () {
 
         addFechar();
+        $('.clickableTelefone:first').hide();
 
         carregaPais(@Model.FornecedorEndereco[0].IdPais,@Model.FornecedorEndereco[0].IdEstado,@Model.FornecedorEndereco[0].IdCidade);
 
