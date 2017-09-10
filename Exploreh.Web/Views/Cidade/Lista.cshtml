@@ -233,10 +233,10 @@
                 $('#buscarCidade').show();
 
                 $.each(cidades, function (i, cidade) {
-                   
+
                     $select.append(
-                        $('<tr>' +
-                            '<td>' +
+                         $(  '<tr>' +
+                            '<td>'+
                             cidade.DcrNome +
                             '</td>' +
                             '<td>' +
@@ -245,7 +245,7 @@
                             '<td>' +
                             '<button type="button"' +
                             'class="btn btn-xs btn-primary"' +
-                            'onclick="location.href='@Url.Action("Detalhes", "Perfil") + cidade.IdCidade + '">' +
+                            'onclick=location.href="@Url.Action("Editar","Cidade")' + "/"+ cidade.IdCidade + '">' +
                             'Editar' +
                             '</button>' +
                                                     @*|

@@ -100,5 +100,26 @@ namespace Exploreh.Business.Estado
 
             return _rep.Update(update);
         }
+
+        /// <summary>
+        /// Recupera estado pelo nome
+        /// </summary>
+        /// <param name="nome">string</param>
+        /// <returns>Um ou muitos registros </returns>
+        public List<UnidadeFederacaoModel> FiltroByEstado(int pais)
+        {
+            return _rep.Where(n => n.IdPais == pais).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        public List<UnidadeFederacaoModel> FiltroCidadeByNome(string nome)
+        {
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+        }
+
     }
 }

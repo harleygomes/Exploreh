@@ -130,6 +130,33 @@ namespace Exploreh.Web.Controllers
             return View(model);
 
         }
-              
+
+        [System.Web.Http.HttpPost]
+        public JsonResult ListaFiltro(string pais = "")
+        {
+            var paisId = 0;
+            if (!string.IsNullOrEmpty(pais))
+            {
+                paisId = Convert.ToInt32(pais);
+
+                return new JsonResult { Data = _bus.FiltroByEstado(paisId) };
+            }
+
+
+            return new JsonResult { Data = null };
+        }
+
+        [System.Web.Http.HttpPost]
+        public JsonResult ListaFiltroNome(string estado = "")
+        {
+
+            if (!string.IsNullOrEmpty(estado))
+            {          
+                return new JsonResult { Data = _bus.FiltroCidadeByNome(estado) };
+            }
+
+
+            return new JsonResult { Data = null };
+        }
     }
 }
