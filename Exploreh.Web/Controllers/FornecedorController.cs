@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Web.Mvc;
+﻿using Exploreh.Business.Banco;
 using Exploreh.Business.Cidade;
+using Exploreh.Business.Estado;
 using Exploreh.Business.Fornecedor;
 using Exploreh.Business.FornecedorContato;
-using Exploreh.Business.Estado;
+using Exploreh.Business.Logradouro;
+using Exploreh.Business.Pais;
+using Exploreh.Business.RamoAtividade;
+using Exploreh.Model.Cidade;
 using Exploreh.Model.Fornecedor;
 using Exploreh.Model.Helper;
-using Exploreh.Business.Logradouro;
 using Exploreh.Model.Logradouro;
-using Exploreh.Business.Pais;
-using Exploreh.Model.Cidade;
 using Exploreh.Model.UnidadeFederacao;
-using Exploreh.Business.RamoAtividade;
-using Exploreh.Business.Banco;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Exploreh.Web.Controllers
 {

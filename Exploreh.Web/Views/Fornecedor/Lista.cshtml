@@ -11,7 +11,7 @@
 }
 
 <div class="panel-body list">
-    <h2 id="test">Lista de Clientes Cadastrados</h2>
+    <h2 id="test">Lista de Fornecedores Cadastrados</h2>
 
     <button onclick="location.href='@Url.Action("Cadastrar", "Fornecedor")'" class="btn w-xs btn-primary"><i class="glyphicon glyphicon-plus"></i> Novo </button>
     <div class="content animate-panel">
@@ -19,27 +19,27 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-heading">
-                    @using (Html.BeginForm("Lista","Fornecedor"))
-                    {
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="hpanel">
-                                    <div class="panel-body">
-                                        <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Buscar fornecedores.." name="Fornecedor">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        @using (Html.BeginForm("Lista", "Fornecedor"))
+                        {
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="hpanel">
+                                        <div class="panel-body">
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" placeholder="Buscar fornecedores.." name="Fornecedor">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
                         <div class="panel-tools">
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                         </div>
-                        Todos os Clientes cadastrados
+                        Todos os Fornecedores cadastrados
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive project-list">
@@ -84,29 +84,29 @@
                                                 @Html.DisplayFor(modelItem => item.Ativo)
                                             </td>
                                             <td>
-                                                <td>
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-primary"
-                                                            onclick="location.href='@Url.Action("Editar", "Fornecedor", new { id = item.Id })'">
-                                                        Editar
-                                                    </button>
-                                                    |
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-info"
-                                                            data-toggle="modal"
-                                                            data-target="#myModalDetalhes"
-                                                            onclick="Detalhes('@item.Id', '@Url.Action("Detalhes", "Fornecedor")');">
-                                                        Detalhes
-                                                    </button>
-                                                    |
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-danger"
-                                                            data-toggle="modal"
-                                                            data-target="#myModalDelete"
-                                                            onclick="Deletar('@item.Id', '@Url.Action("Excluir", "Fornecedor")');">
-                                                        Inativar
-                                                    </button>
-                                                </td>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-xs btn-primary"
+                                                        onclick="location.href='@Url.Action("Editar", "Fornecedor", new { id = item.Id })'">
+                                                    Editar
+                                                </button>
+                                                |
+                                                <button type="button"
+                                                        class="btn btn-xs btn-info"
+                                                        data-toggle="modal"
+                                                        data-target="#myModalDetalhes"
+                                                        onclick="Detalhes('@item.Id', '@Url.Action("Detalhes", "Fornecedor")');">
+                                                    Detalhes
+                                                </button>
+                                                |
+                                                <button type="button"
+                                                        class="btn btn-xs btn-danger"
+                                                        data-toggle="modal"
+                                                        data-target="#myModalDelete"
+                                                        onclick="Deletar('@item.Id', '@Url.Action("Excluir", "Fornecedor")');">
+                                                    Inativar
+                                                </button>
+                                            </td>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -127,13 +127,18 @@
         <div class="modal-content">
             <div class="color-line"></div>
             <div class="modal-header">
-                <h4 class="modal-title">Detalhes do Cliente</h4>
+                <h4 class="modal-title">Detalhes do Fornecedor</h4>
                 <small class="font-bold">Todos os detalhes cadastrados</small>
             </div>
             <div class="modal-body">
-                <p>
-
-                </p>
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Static control</label>
+                            <div class="col-lg-10"><p class="form-control-static">email@example.com</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
@@ -148,13 +153,18 @@
         <div class="modal-content">
             <div class="color-line"></div>
             <div class="modal-header">
-                <h4 class="modal-title">Deletar Cliente</h4>
+                <h4 class="modal-title">Deletar Fornecedor</h4>
                 <small class="font-bold">Todos os detalhes cadastrados</small>
             </div>
             <div class="modal-body">
-                <p>
-
-                </p>
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Static control</label>
+                            <div class="col-lg-10"><p class="form-control-static">email@example.com</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
@@ -193,12 +203,12 @@
         if (notificacao === true) {
 
             setTimeout(function() {
-                    swal({
-                        title: "Good job!",
-                        text: "Ação concluida com sucesso!",
-                        type: "success"
-                    });
-                },
+                swal({
+                    title: "Good job!",
+                    text: "Ação concluida com sucesso!",
+                    type: "success"
+                });
+            },
                 1000);
         }
 
