@@ -41,10 +41,10 @@
         <EntityTypeShape EntityType="ExplorehModel.RamoAtividade" Width="1.5" PointX="11.375" PointY="18.625" />
         <AssociationConnector Association="ExplorehModel.FK_FornecedorRamoAtividade" />
         <EntityTypeShape EntityType="ExplorehModel.Banco" Width="1.5" PointX="11.375" PointY="12" />
-        <EntityTypeShape EntityType="ExplorehModel.FornecedorDadosBancarios" Width="1.5" PointX="15.875" PointY="15.25" />
+        <EntityTypeShape EntityType="ExplorehModel.FornecedorDadosBancarios" Width="1.5" PointX="15.875" PointY="15" />
         <AssociationConnector Association="ExplorehModel.FK_FornecedorDadosBancariosBanco" />
         <AssociationConnector Association="ExplorehModel.FK_FornecedorFornecedorDadosBancarios" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

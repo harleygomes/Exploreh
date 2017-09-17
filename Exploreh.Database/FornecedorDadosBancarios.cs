@@ -20,6 +20,9 @@ namespace Exploreh.Database
         public string Tipo { get; set; }
         public int BancoId { get; set; }
         public int FornecedorId { get; set; }
+        public string Titular { get; set; }
+        public string DocumentoTitular { get; set; }
+        public string Observacoes { get; set; }
         public System.DateTime DataCadastro { get; set; }
         public Nullable<System.DateTime> DataAlteracao { get; set; }
         public bool Ativo { get; set; }

@@ -14,11 +14,13 @@ namespace Exploreh.Model.Fornecedor
     public class FornecedorModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Ops! O campo Nome é obrigatório")]
+        [Required(ErrorMessage = "Ops! O campo razão social é obrigatório")]
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
+        [Required(ErrorMessage = "Ops! O campo documento é obrigatório")]
         public string Documento { get; set; }
         public int RamoAtividadeId { get; set; }
+        [Required(ErrorMessage = "Ops! O campo e-mail é obrigatório")]
         public string Email { get; set; }
         public string HomePage { get; set; }
         public string Observacao { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ExplorehModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Banco">
           <Key>
             <PropertyRef Name="Id" />
@@ -129,6 +129,9 @@
           <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="BancoId" Type="int" Nullable="false" />
           <Property Name="FornecedorId" Type="int" Nullable="false" />
+          <Property Name="Titular" Type="nvarchar" MaxLength="100" />
+          <Property Name="DocumentoTitular" Type="nvarchar" MaxLength="20" />
+          <Property Name="Observacoes" Type="nvarchar" MaxLength="500" />
           <Property Name="DataCadastro" Type="datetime" Nullable="false" />
           <Property Name="DataAlteracao" Type="datetime" />
           <Property Name="Ativo" Type="bit" Nullable="false" />
@@ -681,7 +684,7 @@
             <End Role="Fornecedor" EntitySet="Fornecedor" />
             <End Role="FornecedorDadosBancarios" EntitySet="FornecedorDadosBancarios" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Cidade">
           <Key>
             <PropertyRef Name="Id" />
@@ -1175,6 +1178,9 @@
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="BancoId" Type="Int32" Nullable="false" />
           <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <Property Name="Titular" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentoTitular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Observacoes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
@@ -1509,6 +1515,9 @@
                 <ScalarProperty Name="Ativo" ColumnName="Ativo" />
                 <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
                 <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="DocumentoTitular" ColumnName="DocumentoTitular" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
                 <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
                 <ScalarProperty Name="BancoId" ColumnName="BancoId" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
