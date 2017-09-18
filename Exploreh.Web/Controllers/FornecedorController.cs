@@ -203,10 +203,23 @@ namespace Exploreh.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Excluir(int id)
+        public ActionResult Excluir(int id)
         {
+            var usuario = AutenticacaoProvider.UsuarioAutenticado;
+            if (usuario == null)
+            {
+                return RedirectToAction("Login", "CommonViews");
+            }
 
-            return new JsonResult { Data = _busFornecedor.Get(id) };
+            try
+            {
+                var fornecedorModel = new FornecedorModel { Id = id };
+                return RedirectToAction("Lista", new { notificar = _busFornecedor.Delete(fornecedorModel) });
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         [HttpPost]

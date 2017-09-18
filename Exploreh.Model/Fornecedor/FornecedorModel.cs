@@ -19,6 +19,7 @@ namespace Exploreh.Model.Fornecedor
         public string NomeFantasia { get; set; }
         [Required(ErrorMessage = "Ops! O campo documento é obrigatório")]
         public string Documento { get; set; }
+        [Required(ErrorMessage = "Ops! O campo ramo de atividade é obrigatório")]
         public int RamoAtividadeId { get; set; }
         [Required(ErrorMessage = "Ops! O campo e-mail é obrigatório")]
         public string Email { get; set; }
@@ -32,6 +33,7 @@ namespace Exploreh.Model.Fornecedor
         public virtual List<FornecedorContatoModel> FornecedorContato { get; set; }
 
         public virtual List<FornecedorDadosBancariosModel> FornecedorDadosBancarios { get; set; }
+        
         public virtual RamoAtividade RamoAtividade { get; set; }
 
         public List<RamoAtividadeModel> RamosAtividade { get; set; }
@@ -49,6 +51,9 @@ namespace Exploreh.Model.Fornecedor
         public string[] Agencia { get; set; }
         public string[] Conta { get; set; }
         public string[] TipoConta { get; set; }
+        public string[] Titular { get; set; }
+        public string[] DocumentoTitular { get; set; }
+        public string[] Observacoes { get; set; }
         public string[] ContaFlgDelete { get; set; }
 
         #region Cidade / Estado
