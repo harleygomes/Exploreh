@@ -69,7 +69,7 @@
                                     </tr>
                                 </thead>
                                 @foreach (var item in Model)
-            {
+                                {
                                     <tbody>
                                         <tr>
                                             <td>
@@ -102,11 +102,15 @@
                                                     Detalhes
                                                 </button>
                                                 |
-                                                <button type="button"
+                                                @{ if (item.Ativo)
+                                                    {
+                                                 <button type = "button"
                                                         class="btn btn-xs btn-danger"
                                                         onclick="Deletar('@item.Id', '@Url.Action("Excluir", "Fornecedor")');">
                                                     Inativar
                                                 </button>
+                                                        }
+                                                    }
                                             </td>
                                         </tr>
                                     </tbody>
