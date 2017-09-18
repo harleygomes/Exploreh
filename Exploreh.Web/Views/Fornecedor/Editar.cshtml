@@ -23,7 +23,13 @@
     }
 
     List<SelectListItem> listBanco = new List<SelectListItem>();
-
+    SelectListItem bancoDefault = new SelectListItem()
+    {
+        Text = "--- Selecione um banco ---",
+        Value = "",
+        Selected = true
+    };
+    listBanco.Add(bancoDefault);
     foreach (var item in Model.Bancos)
     {
         listBanco.Add(new SelectListItem
@@ -62,14 +68,14 @@
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon lblNome">Nome Fantasia <span style="color: red">*</span> </span>
+                            <span class="input-group-addon lblNome">Nome Fantasia</span>
                             <input id="NomeFantasia" type="text" class="form-control" name="NomeFantasia" placeholder="NomeFantasia" value="@Model.NomeFantasia">
                             <div style="color: red;">
                                 <b> @Html.ValidationMessageFor(item => item.NomeFantasia)</b>
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span id="DocLabel" class="input-group-addon">Documento</span>
+                            <span id="DocLabel" class="input-group-addon">Documento<span style="color: red">*</span> </span>
                             <input type="text" class="form-control documento" name="Documento" placeholder="Número do documento" maxlength="18" value="@Model.Documento">
                         </div>
                         <div class="input-group input-fields">
@@ -104,32 +110,51 @@
                     <div class="panel-heading">
                         Fornecedor - Dados bancários
                     </div>
-                        <div  id="DadosBancariosParent">
+
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <div class="alert alert-warning">
+                                <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red">dado bancário</b> abaixo.
+                            </div>
+                        </div>
+                        <div id="DadosBancariosParent">
                             <div class="panel-body DadosBancariosCampos" id="DadosBancariosCampos" style="display:none">
                                 <div style="padding-bottom: 10px;">
                                     <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
                                     <span class="pull-right clickableConta" data-effect="fadeOut"><i class="fa fa-times"></i></span>
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Banco</span>
+                                    <span class="input-group-addon">Banco<span style="color: red">*</span></span>
                                     @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text"), new { @class = "form-control" })
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Agência</span>
+                                    <span class="input-group-addon">Agência<span style="color: red">*</span></span>
                                     <input id="Agencia" type="text" class="form-control" name="Agencia" placeholder="Agência">
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Conta</span>
+                                    <span class="input-group-addon">Conta<span style="color: red">*</span></span>
                                     <input id="Conta" type="text" class="form-control" name="Conta" placeholder="Número da conta com dígito">
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Tipo de conta</span>
+                                    <span class="input-group-addon">Tipo de conta<span style="color: red">*</span></span>
                                     <select id="TipoConta" name="TipoConta" class="form-control">
                                         <option value="">-- Selecione --</option>
                                         <option value="C">Conta corrente</option>
                                         <option value="P">Poupança</option>
                                     </select>
 
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Titular</span>
+                                    <input id="Titular" type="text" class="form-control" name="Titular" placeholder="Nome do titular da conta" />
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Documento</span>
+                                    <input id="DocumentoTitular" type="text" class="form-control documento" name="DocumentoTitular" placeholder="CPF/CNPJ do Titular da conta" />
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Observações</span>
+                                    <input id="Observacoes" type="text" class="form-control" name="Observacoes" placeholder="Observações" />
                                 </div>
                                 <input type="hidden" name="ContaId" value="0" />
                             </div>
@@ -141,25 +166,37 @@
                                         <span class="pull-right clickableConta" data-effect="fadeOut"><i class="fa fa-times"></i></span>
                                     </div>
                                     <div class="input-group input-fields">
-                                        <span class="input-group-addon">Banco</span>
+                                        <span class="input-group-addon">Banco<span style="color: red">*</span></span>
                                         @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text", banco.BancoId), new { @class = "form-control" })
                                     </div>
                                     <div class="input-group input-fields">
-                                        <span class="input-group-addon">Agência</span>
+                                        <span class="input-group-addon">Agência<span style="color: red">*</span></span>
                                         <input id="Agencia" type="text" class="form-control" name="Agencia" placeholder="Agência" value="@banco.Agencia">
                                     </div>
                                     <div class="input-group input-fields">
-                                        <span class="input-group-addon">Conta</span>
+                                        <span class="input-group-addon">Conta<span style="color: red">*</span></span>
                                         <input id="Conta" type="text" class="form-control" name="Conta" placeholder="Número da conta com dígito" value="@banco.Conta">
                                     </div>
                                     <div class="input-group input-fields">
-                                        <span class="input-group-addon">Tipo de conta</span>
+                                        <span class="input-group-addon">Tipo de conta<span style="color: red">*</span></span>
                                         <select id="TipoConta" name="TipoConta" class="form-control">
                                             <option value="">-- Selecione --</option>
                                             <option value="C" @(banco.Tipo.ToUpper() == "C" ? "Selected" : "")>Conta corrente</option>
-                                            <option value="P" @(banco.Tipo.ToUpper() == "P" ? "Selected" : "") >Poupança</option>
+                                            <option value="P" @(banco.Tipo.ToUpper() == "P" ? "Selected" : "")>Poupança</option>
                                         </select>
 
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Titular</span>
+                                        <input id="Titular" type="text" class="form-control" name="Titular" placeholder="Nome do titular da conta" value="@banco.Titular">
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Documento</span>
+                                        <input id="DocumentoTitular" type="text" class="form-control documento" name="DocumentoTitular" placeholder="CPF/CNPJ do Titular da conta" value="@banco.DocumentoTitular">
+                                    </div>
+                                    <div class="input-group input-fields">
+                                        <span class="input-group-addon">Observações</span>
+                                        <input id="Observacoes" type="text" class="form-control" name="Observacoes" placeholder="Observações" value="@banco.Observacoes">
                                     </div>
                                     <input type="hidden" name="ContaId" value="@banco.Id" />
                                 </div>
@@ -167,7 +204,7 @@
                         </div>
 
                         <a style="margin: 10px 0;" href="javascript:addRowBanco();">+1 Conta</a>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -450,7 +487,7 @@
         $('.cep').focusout(function () {
             $('.btnSalvar').attr("disabled", true);
             var result = BuscaCepEdit('@Url.Action("GetCep","Cliente")',$(this).val());
-            
+
             if (result.DcrTipoLogradouro != null) {
                 $('.logradouro').val(result.DcrTipoLogradouro + ' ' + result.DcrNome);
             }

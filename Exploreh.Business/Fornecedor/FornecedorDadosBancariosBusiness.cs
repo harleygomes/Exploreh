@@ -54,6 +54,10 @@ namespace Exploreh.Business.FornecedoresDadosBancarios
             update.BancoId = model.BancoId > 0 ? model.BancoId : update.BancoId;
             update.Ativo = model.Ativo;
             update.DataAlteracao = DateTime.Now;
+            update.Titular = !string.IsNullOrEmpty(model.Titular) ? model.Titular : update.Titular;
+            update.DocumentoTitular = !string.IsNullOrEmpty(model.DocumentoTitular) ? model.DocumentoTitular : update.DocumentoTitular;
+            update.Observacoes = !string.IsNullOrEmpty(model.Observacoes) ? model.Observacoes : update.Observacoes;
+
             #endregion
 
             return _rep.Update(update);
@@ -83,7 +87,10 @@ namespace Exploreh.Business.FornecedoresDadosBancarios
                         BancoId = item.BancoId,
                         Ativo = true,
                         DataCadastro = DateTime.Now,
-                        FornecedorId = item.FornecedorId
+                        FornecedorId = item.FornecedorId,
+                        Titular = item.Titular,
+                        DocumentoTitular = item.DocumentoTitular,
+                        Observacoes = item.Observacoes
                     };
 
                     ok = _rep.Add(c);
@@ -98,7 +105,9 @@ namespace Exploreh.Business.FornecedoresDadosBancarios
                     update.BancoId = item.BancoId > 0 ? item.BancoId : update.BancoId;
                     update.Ativo = item.Ativo;
                     update.DataAlteracao = DateTime.Now;
-
+                    update.Titular = !string.IsNullOrEmpty(item.Titular) ? item.Titular : update.Titular;
+                    update.DocumentoTitular = !string.IsNullOrEmpty(item.DocumentoTitular) ? item.DocumentoTitular : update.DocumentoTitular;
+                    update.Observacoes = !string.IsNullOrEmpty(item.Observacoes) ? item.Observacoes : update.Observacoes;
 
                     ok = _rep.Update(update);
                 }

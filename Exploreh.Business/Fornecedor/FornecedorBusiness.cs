@@ -123,7 +123,10 @@ namespace Exploreh.Business.Fornecedor
                             BancoId = Convert.ToInt16(model.BancoId[i]),
                             Tipo = model.TipoConta[i],
                             Ativo = true,
-                            DataCadastro = DateTime.Now
+                            DataCadastro = DateTime.Now,
+                            Titular = model.Titular[i],
+                            DocumentoTitular = model.DocumentoTitular[i],
+                            Observacoes = model.Observacoes[i]
                         };
                         dadosBancarios.Add(c);
                     }
@@ -142,9 +145,16 @@ namespace Exploreh.Business.Fornecedor
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public bool Delete(FornecedorModel model)
         {
-            return _rep.Delete(id);
+            #region Regras
+            var update = Get(model.Id);
+            update.Ativo = false;
+            update.DataAlteracao = DateTime.Now;
+
+            #endregion
+
+            return _rep.Update(update);
         }
 
         /// <summary>
@@ -207,7 +217,7 @@ namespace Exploreh.Business.Fornecedor
                             flgDelete = string.IsNullOrEmpty(model.ContatoFlgDelete[i]) ? false : Convert.ToBoolean(model.ContatoFlgDelete[i]),
                             Ativo = true,
                             DataCadastro = DateTime.Now,
-                            FornecedorId = model.Id
+                            FornecedorId = model.Id,
                         };
                         contatos.Add(c);
                     }
@@ -243,8 +253,10 @@ namespace Exploreh.Business.Fornecedor
                             Ativo = true,
                             DataCadastro = DateTime.Now,
                             flgDelete = string.IsNullOrEmpty(model.ContaFlgDelete[i]) ? false : Convert.ToBoolean(model.ContaFlgDelete[i]),
-                            FornecedorId = model.Id
-
+                            FornecedorId = model.Id,
+                            Titular = model.Titular[i],
+                            DocumentoTitular = model.DocumentoTitular[i],
+                            Observacoes = model.Observacoes[i]
                         };
                         dadosBancarios.Add(c);
                     }

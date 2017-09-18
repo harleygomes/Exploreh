@@ -22,6 +22,12 @@
     }
 
     List<SelectListItem> listBanco = new List<SelectListItem>();
+    SelectListItem bancoDefault = new SelectListItem() {
+        Text = "--- Selecione um banco ---",
+        Value = "",
+        Selected = true
+    };
+    listBanco.Add(bancoDefault);
 
     foreach (var item in Model.Bancos)
     {
@@ -61,15 +67,16 @@
                             </div>
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon lblNome">Nome Fantasia <span style="color: red">*</span> </span>
+                            <span class="input-group-addon lblNome">Nome Fantasia </span>
                             <input id="NomeFantasia" type="text" class="form-control" name="NomeFantasia" placeholder="NomeFantasia">
-                            <div style="color: red;">
-                                <b> @Html.ValidationMessageFor(item => item.NomeFantasia)</b>
-                            </div>
+                            
                         </div>
                         <div class="input-group input-fields">
-                            <span id="DocLabel" class="input-group-addon">Documento</span>
+                            <span id="DocLabel" class="input-group-addon">Documento <span style="color: red">*</span></span>
                             <input type="text" class="form-control documento" name="Documento" placeholder="Número do documento" maxlength="18">
+                            <div style="color: red;">
+                                <b> @Html.ValidationMessageFor(item => item.Documento)</b>
+                            </div>
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">E-mail <span style="color: red">*</span></span>
@@ -87,8 +94,11 @@
                             <input id="Observacao" type="text" class="form-control" name="observacao" placeholder="Escreva aqui alguma obseervação relacionada ao fornecedor">
                         </div>
                         <div class="input-group input-fields">
-                            <span class="input-group-addon">Ramo de Atividade</span>
+                            <span class="input-group-addon">Ramo de Atividade <span style="color: red">*</span></span>
                             @Html.DropDownListFor(model => model.RamoAtividadeId, listRamoAtividade, "-- Selecione --", new { @class = "form-control" })
+                            <div style="color: red">
+                                <b> @Html.ValidationMessageFor(item => item.RamoAtividadeId)</b>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,27 +114,45 @@
                         Fornecedor - Dados bancários
                     </div>
                     <div class="panel-body">
+                        <div class="input-group">
+                            <div class="alert alert-warning">
+                                <strong><b style="color: red">Atenção!</b></strong> É obrigatório o preenchimento de ao menos um <b style="color: red">dado bancário</b> abaixo.
+                            </div>
+                        </div>
                         <div id="DadosBancariosParent">
                             <div id="DadosBancariosCampos">
+
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Banco</span>
+                                    <span class="input-group-addon">Banco<span style="color: red">*</span></span>
                                     @Html.DropDownList("BancoId", new SelectList(listBanco, "Value", "Text"), new { @class = "form-control" })
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Agência</span>
+                                    <span class="input-group-addon">Agência<span style="color: red">*</span></span>
                                     <input id="Agencia" type="text" class="form-control" name="Agencia" placeholder="Agência">
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Conta</span>
+                                    <span class="input-group-addon">Conta<span style="color: red">*</span></span>
                                     <input id="Conta" type="text" class="form-control" name="Conta" placeholder="Número da conta com dígito">
                                 </div>
                                 <div class="input-group input-fields">
-                                    <span class="input-group-addon">Tipo de conta</span>
+                                    <span class="input-group-addon">Tipo de conta<span style="color: red">*</span></span>
                                     <select id="TipoConta" name="TipoConta" class="form-control">
                                         <option value="">-- Selecione --</option>
                                         <option value="C">Conta corrente</option>
                                         <option value="P">Poupança</option>
                                     </select>
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Titular</span>
+                                    <input id="Titular" type="text" class="form-control" name="Titular" placeholder="Nome do titular da conta">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Documento</span>
+                                    <input id="DocumentoTitular" type="text" class="form-control" name="DocumentoTitular" placeholder="CPF/CNPJ do Titular da conta">
+                                </div>
+                                <div class="input-group input-fields">
+                                    <span class="input-group-addon">Observações</span>
+                                    <input id="Observacoes" type="text" class="form-control" name="Observacoes" placeholder="Observações">
                                 </div>
                                 <input type="hidden" class="flgDelete" name="ContaFlgDelete" value="false" />
                             </div>

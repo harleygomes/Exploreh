@@ -9,6 +9,10 @@
 @{
     ViewBag.Title = "Lista de Fornecedores";
 }
+@section Styles {
+    @Styles.Render("~/bundles/toastr/css")
+    @Styles.Render("~/bundles/sweetAlert/css")
+}
 
 <div class="panel-body list">
     <h2 id="test">Lista de Fornecedores Cadastrados</h2>
@@ -84,7 +88,6 @@
                                                 @Html.DisplayFor(modelItem => item.Ativo)
                                             </td>
                                             <td>
-                                            <td>
                                                 <button type="button"
                                                         class="btn btn-xs btn-primary"
                                                         onclick="location.href='@Url.Action("Editar", "Fornecedor", new { id = item.Id })'">
@@ -101,12 +104,9 @@
                                                 |
                                                 <button type="button"
                                                         class="btn btn-xs btn-danger"
-                                                        data-toggle="modal"
-                                                        data-target="#myModalDelete"
                                                         onclick="Deletar('@item.Id', '@Url.Action("Excluir", "Fornecedor")');">
                                                     Inativar
                                                 </button>
-                                            </td>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -131,14 +131,9 @@
                 <small class="font-bold">Todos os detalhes cadastrados</small>
             </div>
             <div class="modal-body">
-                <div class="hpanel">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Static control</label>
-                            <div class="col-lg-10"><p class="form-control-static">email@example.com</p></div>
-                        </div>
-                    </div>
-                </div>
+                <p>
+
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
@@ -157,14 +152,9 @@
                 <small class="font-bold">Todos os detalhes cadastrados</small>
             </div>
             <div class="modal-body">
-                <div class="hpanel">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Static control</label>
-                            <div class="col-lg-10"><p class="form-control-static">email@example.com</p></div>
-                        </div>
-                    </div>
-                </div>
+                <p>
+
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
@@ -181,8 +171,7 @@
 @Scripts.Render("~/bundles/toastr/js")
 @Scripts.Render("~/bundles/sweetAlert/js")
 
-
-<script src="~/Scripts/ClienteAjaxCall.js"></script>
+<script src="~/Scripts/FornecedorAjaxCall.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -195,6 +184,8 @@
 
             ExcluirConfirmar(model, url);
         });
+
+      
     });
 
     function notificar() {
@@ -212,5 +203,49 @@
                 1000);
         }
 
+    }
+
+    function Deletar(value, url) {
+        swal({
+            title: "Tem certeza que deseja inativar?",
+            text: "Esta ação irá inativar o registro selecionado!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sim, inative!",
+            cancelButtonText: "Não, cancele!",
+            closeOnConfirm: false,
+            closeOnCancel: false },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            DeletarConfirmado(value, url)
+                        } else {
+                            swal("Cancelado", "Não inativamos nada!  :)", "error");
+                        }
+                    });
+
+    }
+
+    function DeletarConfirmado(value, url) {
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { id: value },
+            success: function (data) {
+                swal({
+                    title: "Good job!",
+                    text: "Fornecedor Inativado com sucesso",
+                    type: "success",
+                    confirmButtonText: "Fechar"
+
+                },function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href =  '@Url.Action("Lista", "Fornecedor")';
+                    }
+                });
+            },
+            error: function (xhr) { }
+        });
     }
 </script>
