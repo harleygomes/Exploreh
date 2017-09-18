@@ -27,7 +27,7 @@ namespace Exploreh.Business.Estado
         /// <returns></returns>
         public List<UnidadeFederacaoModel> Get()
         {
-            return _rep.Get().ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+            return _rep.Get().Where(n=> n.EstReg.Contains("A")).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Exploreh.Business.Estado
         /// <returns></returns>
         public List<UnidadeFederacaoModel> FiltroEstadoByName(string nome)
         {
-            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower()) && n.EstReg.Contains("A")).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
         }
 
         /// <summary>
@@ -57,11 +57,8 @@ namespace Exploreh.Business.Estado
         /// <returns></returns>
         public List<UnidadeFederacaoModel> GetByPais(int id)
         {
-            var retorno = _rep.Get().Where(e => e.IdPais == id).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
-
-            //if (!retorno.Any())
-            //    retorno = _rep.Get().Where(e => e.IdPaisEstrangeiro == id).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
-
+            var retorno = _rep.Get().Where(e => e.IdPais == id && e.EstReg.Contains("A")).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+            
             return retorno;
         }
 
@@ -102,13 +99,26 @@ namespace Exploreh.Business.Estado
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Delete(UnidadeFederacaoModel model)
+        {
+            var update = Get(model.IdUnidadeFederacao);
+            update.EstReg = "N";
+
+            return _rep.Update(update);
+        }
+
+        /// <summary>
         /// Recupera estado pelo nome
         /// </summary>
         /// <param name="nome">string</param>
         /// <returns>Um ou muitos registros </returns>
         public List<UnidadeFederacaoModel> FiltroByEstado(int pais)
         {
-            return _rep.Where(n => n.IdPais == pais).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
+            return _rep.Where(n => n.IdPais == pais && n.EstReg.Contains("A")).ToList().ConvertAll<UnidadeFederacaoModel>(x => x);
         }
 
         /// <summary>

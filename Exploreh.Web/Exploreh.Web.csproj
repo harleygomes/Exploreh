@@ -225,6 +225,7 @@
     <Content Include="Scripts\BuscaCep.js" />
     <Content Include="Scripts\Mask\jquery.mask.js" />
     <Content Include="Scripts\Mask\jquery.mask.min.js" />
+    <Content Include="Scripts\EstadoAjaxCall.js" />
     <Content Include="Scripts\PermissaoAjaxCall.js" />
     <Content Include="Scripts\TelaAjaxCall.js" />
     <Content Include="Scripts\PerfilAjaxCall.js" />

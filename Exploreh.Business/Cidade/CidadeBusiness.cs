@@ -29,7 +29,7 @@ namespace Exploreh.Business.Cidade
         /// <returns></returns>
         public List<CidadeModel> Get()
         {
-            return _rep.Get().ToList().ConvertAll<CidadeModel>(x => x);
+            return _rep.Get().Where(n=>n.EstReg.Contains("A")).ToList().ConvertAll<CidadeModel>(x => x);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Exploreh.Business.Cidade
         /// <returns>Um ou muitos registros </returns>
         public List<CidadeModel> FiltroCidadeByEstado(int estado)
         {
-            return _rep.Where(n => n.IdUnidadeFederacao == estado).ToList().ConvertAll<CidadeModel>(x => x);
+            return _rep.Where(n => n.IdUnidadeFederacao == estado && n.EstReg.Contains("A")).ToList().ConvertAll<CidadeModel>(x => x);
         }
         
         /// <summary>
@@ -49,7 +49,7 @@ namespace Exploreh.Business.Cidade
         /// <returns></returns>
         public List<CidadeModel> FiltroCidadeByCidadeNome(int estado, string nome)
         {
-            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower()) && n.IdUnidadeFederacao == estado).ToList().ConvertAll<CidadeModel>(x => x);
+            return _rep.Where(n => n.DcrNome.ToLower().Contains(nome.ToLower()) && n.IdUnidadeFederacao == estado && n.EstReg.Contains("A")).ToList().ConvertAll<CidadeModel>(x => x);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Exploreh.Business.Cidade
 
         public List<CidadeModel> GetCidade(int id)
         {
-            return _rep.Get().Where(c => c.IdUnidadeFederacao == id).ToList().ConvertAll<CidadeModel>(x => x);
+            return _rep.Get().Where(c => c.IdUnidadeFederacao == id && c.EstReg.Contains("A")).ToList().ConvertAll<CidadeModel>(x => x);
         }
 
         public bool Add(CidadeModel model)
@@ -93,6 +93,20 @@ namespace Exploreh.Business.Cidade
 
             update.DcrNome = model.DcrNome;
             update.IdUnidadeFederacao = model.IdUnidadeFederacao;            
+
+            return _rep.Update(update);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Delete(CidadeModel model)
+        {
+            var update = Get(model.IdCidade);
+
+            update.EstReg = "N";
 
             return _rep.Update(update);
         }

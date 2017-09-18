@@ -138,5 +138,23 @@ namespace Exploreh.Web.Controllers
 
             return new JsonResult { Data = null };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [System.Web.Http.HttpPost]
+        public JsonResult Delete(string IdCidade)
+        {
+            var model = new CidadeModel();
+            if (!string.IsNullOrEmpty(IdCidade))
+            {
+                model.IdCidade = Convert.ToInt32(IdCidade);
+                return new JsonResult { Data = _CidadeBusiness.Delete(model) };
+            }
+
+            return new JsonResult { Data = false };
+        }
     }
 }

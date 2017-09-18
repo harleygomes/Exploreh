@@ -106,13 +106,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="color-line"></div>
+            <input type="text" id="hdnId" hidden="hidden"/>
             <div class="modal-header">
-                <h4 class="modal-title">Deletar Perfil</h4>
-                <small class="font-bold">Todos os detalhes cadastrados</small>
+                <h4 class="modal-title">Deletar Cidade</h4>
+                <small class="font-bold"></small>
             </div>
             <div class="modal-body">
                 <p>
-
+                    Deseja realmente excluir esse registro?
                 </p>
             </div>
             <div class="modal-footer">
@@ -140,30 +141,53 @@
         carregaPais();
 
         $('#deleteModal').click(function() {
-            var url = '@Url.Action("ExcluirConfirmar", "Perfil")';
-            var model = { Id: $('#Id').val() };
+            var url = '@Url.Action("Delete", "Cidade")';
 
-            ExcluirConfirmar(model, url);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { IdCidade: $('#hdnId').val()},
+                success: function (data) {
+                    setTimeout(function() {
+                            swal({
+                                title: "Good job!",
+                                text: "Ação concluida com sucesso!",
+                                type: "success"
+                            },function(isConfirm) {
+                                if (isConfirm) {
+                                    location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        },
+                        1000);
+                },
+                error: function (xhr) { }
+            });
         });
     });
 
     function notificar() {
 
-       var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
+        var notificacao = @(ViewBag.Notificacao.ToString().ToLower());
+        
         if (notificacao === true) {
 
+            setTimeout(function () {
                 swal({
                     title: "Good job!",
                     text: "Ação concluida com sucesso!",
                     type: "success"
                 });
-
+            },
+                1000);
         }
     }
 
 
     $('.pais').change(function () {
-        carregaEstados($(this).val())
+        carregaEstados($(this).val());
     });
 
     $('.filtrar').click(function () {
@@ -193,22 +217,23 @@
                             'onclick=location.href="@Url.Action("Editar","Cidade")' + "/"+ cidade.IdCidade + '">' +
                             'Editar' +
                             '</button>' +
-                                                    @*|
+                            @*|
                                                         <button type="button"
                                                                 class="btn btn-xs btn-info"
                                                                 data-toggle="modal"
                                                                 data-target="#myModalDetalhes"
                                                                 onclick="Detalhes('@item.IdUnidadeFederacao', '@Url.Action("Detalhes", "Perfil")');">
                                                             Detalhes
-                                                        </button>
-                                                        |
-                                                        <button type="button"
-                                                                class="btn btn-xs btn-danger"
-                                                                data-toggle="modal"
-                                                                data-target="#myModalDelete"
-                                                                onclick="Deletar('@item.IdUnidadeFederacao', '@Url.Action("Excluir", "Perfil")');">
-                                                            Excluir
                                                         </button>*@
+
+                            '|' +
+                            '<button type="button"' +
+                            'class="btn btn-xs btn-danger"' +
+                            'data-toggle="modal"' +
+                            'data-target="#myModalDelete"' +
+                            'onclick="HdnValue(' + cidade.IdCidade + ')">' +
+                            'Excluir' +
+                            '</button>' +
                           '</td>'+
                           '</tr>'+
                           '</tbody>')
@@ -321,5 +346,9 @@
             error: function (xhr) { }
           });
 
+    }
+
+    function HdnValue(value) {
+        $('#hdnId').val(value);
     }
 </script>

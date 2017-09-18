@@ -131,6 +131,25 @@ namespace Exploreh.Web.Controllers
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult Delete(string IdUnidadeFederacao)
+        {
+            var model = new UnidadeFederacaoModel();
+            if (!string.IsNullOrEmpty(IdUnidadeFederacao))
+            {
+                model.IdUnidadeFederacao = Convert.ToInt32(IdUnidadeFederacao);
+                return new JsonResult { Data = _bus.Delete(model) };
+            }
+
+            return new JsonResult { Data = false };
+        }
+
+
         [System.Web.Http.HttpPost]
         public JsonResult ListaFiltro(string pais = "")
         {

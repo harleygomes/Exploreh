@@ -18,7 +18,7 @@
 }
 
 <div class="panel-body list">
-    <h2>Lista de Estados Cadastradas</h2>
+    <h2>Lista de Estados Cadastrados</h2>
 
     <button onclick="location.href='@Url.Action("Cadastrar", "Estado")'" class="btn w-xs btn-primary">Novo <i class="glyphicon glyphicon-plus"></i></button>
 
@@ -104,13 +104,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="color-line"></div>
+            <input type="text" id="hdnId" hidden="hidden"/>
             <div class="modal-header">
-                <h4 class="modal-title">Deletar Perfil</h4>
-                <small class="font-bold">Todos os detalhes cadastrados</small>
+                <h4 class="modal-title">Deletar Estado</h4>
+                <small class="font-bold"></small>
             </div>
             <div class="modal-body">
                 <p>
-
+                    Deseja realmente excluir esse registro?
                 </p>
             </div>
             <div class="modal-footer">
@@ -128,7 +129,8 @@
 @Scripts.Render("~/bundles/toastr/js")
 @Scripts.Render("~/bundles/sweetAlert/js")
 
-<script src="~/Scripts/PerfilAjaxCall.js"></script>
+<script src="~/Scripts/EstadoAjaxCall.js"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -138,16 +140,37 @@
         notificar();
 
         $('#deleteModal').click(function() {
-            var url = '@Url.Action("ExcluirConfirmar", "Perfil")';
-            var model = { Id: $('#Id').val() };
-
-            ExcluirConfirmar(model, url);
+            var url = '@Url.Action("Delete", "Estado")';
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { IdUnidadeFederacao: $('#hdnId').val()},
+                success: function (data) {
+                   
+                    setTimeout(function() {
+                            swal({
+                                title: "Good job!",
+                                text: "Ação concluida com sucesso!",
+                                type: "success"
+                            },function(isConfirm) {
+                                if (isConfirm) {
+                                    location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        },
+                        1000);
+                },
+                error: function (xhr) { }
+            });
         });
     });
 
 
     $('.pais').change(function () {
-        carregaEstados($(this).val())
+        carregaEstados($(this).val());
     });
 
     function notificar() {
@@ -238,6 +261,14 @@
                             'onclick=location.href="@Url.Action("Editar","Estado")' + "/" + pais.IdUnidadeFederacao + '">' +
                             'Editar' +
                             '</button>' +
+                            '|'+
+                            '<button type="button"'+
+                            'class="btn btn-xs btn-danger"'+
+                            'data-toggle="modal"'+
+                            'data-target="#myModalDelete"'+
+                            'onclick="HdnValue(' + pais.IdUnidadeFederacao+')">'+
+                            'Excluir'+
+                            '</button>'+
                             '</td>'+
                             '</tr>'+
                             '</tbody>')
@@ -279,11 +310,16 @@
                             '</td>' +
                             '</tr>' +
                             '</tbody>')
-                    
+
                     );
                 });
             },
             error: function (xhr) { }
         });
-    });
+     });
+
+
+      function HdnValue(value) {
+          $('#hdnId').val(value);
+      }
 </script>
