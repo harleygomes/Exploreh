@@ -25,7 +25,7 @@ namespace Exploreh.Business.Fornecedor
         /// <returns></returns>
         public List<FornecedorModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<FornecedorModel>(x => x);
+            return _rep.Get().Where(a => a.Ativo).OrderByDescending(f=>f.DataCadastro).ToList().ConvertAll<FornecedorModel>(x => x);
         }
 
         /// <summary>
