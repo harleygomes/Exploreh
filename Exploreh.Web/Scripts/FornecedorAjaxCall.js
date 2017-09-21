@@ -52,9 +52,7 @@ function HtmlBuildEditar(data) {
         '<div class="input-group input-fields">'+
         '<span class="input-group-addon">Observações</span>'+
         '<input disabled id="Observacao" type="text" class="form-control" name="observacao" placeholder="Escreva aqui alguma obseervação relacionada ao fornecedor" value="' + data.Observacao + '">' +
-        '</div>'+
-        '<div class="input-group input-fields">'+
-        '<span class="input-group-addon">Ramo de Atividade</span>'
+        '</div>'
 ];
 
 }
