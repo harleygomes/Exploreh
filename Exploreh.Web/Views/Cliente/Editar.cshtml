@@ -82,7 +82,7 @@
                         </div>
                         <div class="input-group input-fields">
                             <span class="input-group-addon">Observações</span>
-                            <input id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Escreva aqui alguma observação sobre o cliente." value="@Model.HomePage">
+                            <textarea id="HomePage" type="text" class="form-control" name="HomePage" placeholder="Observações" style="height:100px;resize: none">@Model.HomePage</textarea>
                         </div>
                     </div>
                 </div>
@@ -529,4 +529,37 @@
         };
 
     $('.telefone').mask(SPMaskBehavior, spOptions);
+
+    $('#DataNascimento').focusout(function() {
+
+        ValidaData($(this));
+    });
+
+    function ValidaData(obj)
+    {
+        var data = obj.val();
+        var dia = data.substring(0, 2);
+        var mes = data.substring(3, 5);
+        var ano = data.substring(6, 10);
+ 
+        var novaData = new Date(ano,(mes-1),dia);
+ 
+        var mesmoDia = parseInt(dia,10) == parseInt(novaData.getDate());
+        var mesmoMes = parseInt(mes,10) == parseInt(novaData.getMonth())+1;
+        var mesmoAno = parseInt(ano) == parseInt(novaData.getFullYear());
+ 
+        if (!((mesmoDia) && (mesmoMes) && (mesmoAno)))
+        {
+            swal({
+                title: "Ops!",
+                text: "Esta data é inválida",
+                type: "warning"
+            }, function () {
+                obj.val('');
+            });
+            
+            return false;
+        }  
+        return true;
+    }
 </script>
