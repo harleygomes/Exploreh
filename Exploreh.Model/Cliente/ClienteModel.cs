@@ -21,6 +21,7 @@ namespace Exploreh.Model.Cliente
         public string DocumentoEst { get; set; }
         public string Documento { get; set; }
         public string Sexo { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> DataNascimento { get; set; }
         public string Ocupacao { get; set; }
         [Required(ErrorMessage = "Ops! O campo E-mail é obrigatório")]
