@@ -176,11 +176,11 @@ function HtmlBuildDelete(data) {
         '</div>' +
         '<div class="input-group input-fields">' +
         '<span class="input-group-addon">' + (data.ClienteTelefone[0].TipoTelefone === "C" ? 'Celular ' : 'Fixo') + '</span>' +
-        '<input disabled id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" value="' + data.ClienteTelefone[1].Ddd + '">' +
+        '<input disabled id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" value="' + data.ClienteTelefone[0].Ddd + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
         '<span class="input-group-addon">Telefone</span>' +
-        '<input disabled id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" value="' + data.ClienteTelefone[1].Telefone + '">' +
+        '<input disabled id="ClienteTelefone[1]_Telefone" type="text" class="form-control" name="ClienteTelefone[1].Telefone" value="' + data.ClienteTelefone[0].Telefone + '">' +
         '</div>' +
         '<div class="input-group input-fields">' +
         '<span class="input-group-addon">Logradouro</span>' +
