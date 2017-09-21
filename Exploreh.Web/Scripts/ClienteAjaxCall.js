@@ -95,7 +95,7 @@ function HtmlBuildEditar(data) {
         '</div>' +
         '<div class="input-group input-fields">' +
         '<span class="input-group-addon">' +
-        (data.ClienteTelefone[0].TipoTelefone === "C" ? 'Celular ' : 'Fixo') +
+        'DDD' +
         '</span>' +
         '<input disabled id="ClienteTelefone[1]_Ddd" type="text" class="form-control" name="ClienteTelefone[1].Ddd" value="' +
         data.ClienteTelefone[0].Ddd +
