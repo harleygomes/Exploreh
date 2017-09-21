@@ -223,6 +223,7 @@
     <Content Include="Images\user_logo.png" />
     <Content Include="Images\venturas_logo.png" />
     <Content Include="Scripts\BuscaCep.js" />
+    <Content Include="Scripts\FornecedorAjaxCall.js" />
     <Content Include="Scripts\Mask\jquery.mask.js" />
     <Content Include="Scripts\Mask\jquery.mask.min.js" />
     <Content Include="Scripts\EstadoAjaxCall.js" />
@@ -2087,7 +2088,9 @@
     <Content Include="Vendor\xeditable\inputs-ext\wysihtml5\bootstrap-wysihtml5-0.0.2\wysihtml5-0.3.0.min.js" />
     <Content Include="Vendor\xeditable\inputs-ext\wysihtml5\bootstrap-wysihtml5-0.0.2\wysiwyg-color.css" />
     <Content Include="Vendor\xeditable\inputs-ext\wysihtml5\wysihtml5.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
