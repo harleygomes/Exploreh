@@ -18,7 +18,7 @@ namespace Exploreh.Business.Cliente
         /// <returns></returns>
         public List<ClienteModel> Get()
         {
-            return _rep.Get().Where(a => a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
+            return _rep.Get().OrderByDescending(c=>c.DataCadastro).Where(a => a.Ativo).ToList().ConvertAll<ClienteModel>(x => x);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Exploreh.Business.Cliente
         /// <returns></returns>
         public List<ClienteModel> FiltroClienteByName(string nome)
         {
-            return _rep.Where(n=>n.Nome.ToLower().Contains(nome.ToLower())).ToList().ConvertAll<ClienteModel>(x=>x);
+            return _rep.Where(n=>n.Nome.ToLower().Contains(nome.ToLower())).OrderByDescending(c=>c.DataCadastro).ToList().ConvertAll<ClienteModel>(x=>x);
         }
 
         /// <summary>
