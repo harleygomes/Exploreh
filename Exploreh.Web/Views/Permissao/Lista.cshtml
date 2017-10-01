@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Exploreh.Model.Permissao.PermissaoModel>
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<Exploreh.Model.Telas.TelaModel>
 
 
 <style>
@@ -63,7 +64,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th style="width: 400px">
                                                     Nome
                                                 </th>
                                                 <th>
@@ -78,49 +79,40 @@
                                                     @Html.DisplayFor(modelItem => tela.Nome)
                                                 </td>
                                                 <td>
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-primary"
-                                                            onclick="location.href = '@Url.Action("Editar", "Permissao", new {id = tela.Id})'">
-                                                        Editar
-                                                    </button>
-                                                    |
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-info"
-                                                            data-toggle="modal"
-                                                            data-target="#myModalDetalhes"
-                                                            onclick="Detalhes('@tela.Id', '@Url.Action("Detalhes", "Permissao")');">
-                                                        Detalhes
-                                                    </button>
-                                                    |
-                                                    <button type="button"
-                                                            class="btn btn-xs btn-danger"
-                                                            data-toggle="modal"
-                                                            data-target="#myModalDelete"
-                                                            onclick="Deletar('@tela.Id', '@Url.Action("Excluir", "Permissao")');">
-                                                        Excluir
-                                                    </button>
+                                                    @foreach (var item in tela.PerfilModel.DistinctBy(n=>n.Id))
+                                                    {
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Nome) <i style="color: green" class="fa fa-check"></i>    
+                                                        </td>
+                                                        
+                                                    }
                                                 </td>
-                                            </tr>
-
-                                        </tbody>
-
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    Perfis Vinculados:
-                                                </th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            @foreach (var item in tela.Perfis)
-                                            {
                                                 <tr>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Nome) <i class="fa fa-check"></i>
+                                                        @*<button type="button"
+                                                                class="btn btn-xs btn-primary"
+                                                                onclick="location.href = '@Url.Action("Editar", "Tela", new {id = tela.Id})'">
+                                                            Editar
+                                                        </button>
+                                                        |*@
+                                                        <button type="button"
+                                                                class="btn btn-xs btn-info"
+                                                                data-toggle="modal"
+                                                                data-target="#myModalDetalhes"
+                                                                onclick="Detalhes('@tela.Id', '@Url.Action("Detalhes", "Tela")');">
+                                                            Detalhes
+                                                        </button>
+                                                        @*|
+                                                        <button type="button"
+                                                                class="btn btn-xs btn-danger"
+                                                                data-toggle="modal"
+                                                                data-target="#myModalDelete"
+                                                                onclick="Deletar('@tela.Id', '@Url.Action("Excluir", "Tela")');">
+                                                            Excluir
+                                                        </button>*@
                                                     </td>
                                                 </tr>
-                                            }
+                                            </tr>
                                         </tbody>
 
                                     </table>

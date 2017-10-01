@@ -11,6 +11,7 @@ using Exploreh.Model.Helper;
 using Exploreh.Model.Perfil;
 using Exploreh.Model.PerfilTela;
 using Exploreh.Model.Telas;
+using Microsoft.Ajax.Utilities;
 
 namespace Exploreh.Web.Controllers
 {
@@ -41,6 +42,8 @@ namespace Exploreh.Web.Controllers
             ViewBag.Notificacao = notificacao;
             notificacao = false;
 
+            #region memoria
+            /*
             #region Join 
             var telasPermissao = _busTela.Get()
                 .Join(
@@ -59,15 +62,36 @@ namespace Exploreh.Web.Controllers
                         Tela = perfilTela.tela.Nome,
                         Ativo = perfilTela.tela.Ativo,
                         Descricao = perfilTela.tela.Descricao,
-                        //Perfil = perfil.Nome
+                        Perfil = perfil.Nome,
                         PerfilId = perfil.Id
                     }
-                ).Where(tela => tela.Ativo).ToList();
+                ).Where(tela => tela.Ativo).ToList();           
+
+            */
+            #endregion
 
             var model = new List<PermissaoModel>();
+            var telaModel = _busTela.Get().ToList().ConvertAll<TelaModel>(x => x);
 
-            #region Comment
-            //foreach (var permissao in telasPermissao)
+            foreach (var tela in telaModel.ToList())
+            {
+                tela.PerfilModel = new List<PerfilModel>();
+
+                foreach (var perfil in tela.PerfilTelaModel.ToList())
+                {
+                    var perfilModel = _busPerfil.Get(perfil.Perfil_Id);
+
+                    tela.PerfilModel.Add(new PerfilModel
+                    {
+                        Id = perfilModel.Id,
+                        Nome = perfilModel.Nome
+                    });
+                }
+
+            }
+
+            #region Memoria
+            //foreach (var permissao in telaModel.ToList())
             //{
             //    model.Add(new PermissaoModel
             //    {
@@ -78,31 +102,33 @@ namespace Exploreh.Web.Controllers
             //        Tela = permissao.Tela
             //    });
             //}
+
+
+            //foreach (var permissao in telasPermissao)
+            //{
+            //    var perfiltela = _busPerfilTela.Get().Where(i => i.Perfil_Id == permissao.PerfilId).ToList();
+
+            //    foreach (var itemPerfil in perfiltela)
+            //    {
+            //        var permi = new PermissaoModel
+            //        {
+            //            Id = permissao.Id,
+            //            Nome = permissao.Tela,
+            //            PerfilId = permissao.PerfilId,
+            //            Perfis = _busPerfil.Get().Where(i => i.Id == itemPerfil.Perfil_Id).Select(n => new PerfilModel() { Id = n.Id, Nome = n.Nome }).ToList()
+            //        };
+
+            //        model.Add(permi);
+            //    }
+
+            //}
+
+
+            //return View(model.OrderByDescending(i => i.Nome));
             #endregion
 
-            foreach (var permissao in telasPermissao)
-            {
-                var perfiltela = _busPerfilTela.Get().Where(i => i.Perfil_Id == permissao.PerfilId).ToList();
-
-                foreach (var itemPerfil in perfiltela)
-                {
-                    var permi = new PermissaoModel
-                    {
-                        Id = permissao.Id,
-                        Nome = permissao.Tela,
-                        PerfilId = permissao.PerfilId,
-                        Perfis = _busPerfil.Get().Where(i => i.Id == itemPerfil.Perfil_Id).Select(n => new PerfilModel() { Id = n.Id, Nome = n.Nome }).ToList()
-                    };
-
-                    model.Add(permi);
-                }
-                
-            }
-            #endregion
-
-          
-             //return View(model.OrderByDescending(i => i.Nome));
-            return View(perm != "" ? model.OrderByDescending(i=>i.Nome).Where(x=>x.Nome.Contains(perm)) : model.OrderByDescending(i => i.Nome));
+            return View(perm != "" ? telaModel.GroupBy(gb => gb.PerfilModel).Select(g => g.FirstOrDefault()).OrderByDescending(i => i.Nome).Where(x => x.Nome.Contains(perm)).DistinctBy(dis => dis.Nome).ToList()
+                                   : telaModel.GroupBy(gb => gb.PerfilModel).Select(g => g.FirstOrDefault()).OrderByDescending(i => i.Nome).DistinctBy(dis => dis.Nome).ToList());
         }
 
         [HttpPost]

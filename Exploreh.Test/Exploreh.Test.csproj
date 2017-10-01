@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Business\Cliente\ClienteTest.cs" />
     <Compile Include="Business\Perfil\PerfilTest.cs" />
+    <Compile Include="Business\Permissao\PermissaoTest.cs" />
     <Compile Include="Business\Tela\TelaTest.cs" />
     <Compile Include="Business\Usuario\UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

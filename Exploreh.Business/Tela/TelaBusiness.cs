@@ -20,7 +20,7 @@ namespace Exploreh.Business.Tela
         /// <returns></returns>
         public List<TelaModel> Get()
         {
-            return _rep.Get().ToList().ConvertAll<TelaModel>(x => x);
+            return _rep.Get().ToList().ToList().ConvertAll<TelaModel>(x => x);
         }
 
         public List<TelaModel> FiltroClienteByName(string nome)
